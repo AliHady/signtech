@@ -1,0 +1,39 @@
+// libs/shared/translations/src/lib/translations/translation.service.ts
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TranslationService {
+  private currentLangSubject = new BehaviorSubject<string>('en');
+  currentLang$ = this.currentLangSubject.asObservable();
+
+  constructor(
+    private translate: TranslateService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    // Check browser language or local storage
+    const savedLang = isPlatformBrowser(this.platformId) 
+      ? localStorage.getItem('preferredLanguage') || 'en'
+      : 'en';
+    this.setLanguage(savedLang);
+  }
+
+  setLanguage(lang: string) {
+    this.translate.use(lang);
+    if (isPlatformBrowser(this.platformId)) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      localStorage.setItem('preferredLanguage', lang);
+    }
+    this.currentLangSubject.next(lang);
+  }
+
+  toggleLanguage() {
+    const current = this.currentLangSubject.value;
+    this.setLanguage(current === 'en' ? 'ar' : 'en');
+  }
+}

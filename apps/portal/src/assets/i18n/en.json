@@ -1,0 +1,13 @@
+{
+    "GENERAL": {
+      "WELCOME": "Welcome",
+      "HOME": "Home",
+      "ABOUT": "About"
+    },
+    "AUTH": {
+      "LOGIN": "Login",
+      "REGISTER": "Register",
+      "EMAIL": "Email",
+      "PASSWORD": "Password"
+    }
+  }

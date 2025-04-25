@@ -1,31 +1,48 @@
 <div class="min-h-screen bg-gray-100 p-8">
+  <!-- Language Switch -->
+  <div class="flex justify-end mb-4">
+    <button 
+      class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
+      (click)="switchLanguage('en')"
+      [class.bg-gray-200]="currentLang === 'en'">
+      English
+    </button>
+    <button 
+      class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
+      (click)="switchLanguage('ar')"
+      [class.bg-gray-200]="currentLang === 'ar'">
+      عربي
+    </button>
+  
+  </div>
+
   <!-- Typography -->
-  <h1 class="text-4xl font-bold text-blue-600 mb-4">Tailwind CSS Test</h1>
-  <p class="text-gray-700 mb-6">This is a test of various Tailwind CSS utilities.</p>
+  <h1 class="text-4xl font-bold text-blue-600 mb-4">{{ 'HEADER.TITLE' | translate }}</h1>
+  <p class="text-gray-700 mb-6">{{ 'HEADER.DESCRIPTION' | translate }}</p>
 
   <!-- Buttons -->
   <div class="space-x-4 mb-6">
     <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-      Primary Button
+      {{ 'BUTTONS.PRIMARY' | translate }}
     </button>
     <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
-      Secondary Button
+      {{ 'BUTTONS.SECONDARY' | translate }}
     </button>
   </div>
 
   <!-- Cards -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-2">Card 1</h2>
-      <p class="text-gray-600">This is a sample card with shadow and rounded corners.</p>
+      <h2 class="text-xl font-semibold mb-2">{{ 'CARDS.CARD1.TITLE' | translate }}</h2>
+      <p class="text-gray-600">{{ 'CARDS.CARD1.DESCRIPTION' | translate }}</p>
     </div>
     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-2">Card 2</h2>
-      <p class="text-gray-600">Another card with the same styling.</p>
+      <h2 class="text-xl font-semibold mb-2">{{ 'CARDS.CARD2.TITLE' | translate }}</h2>
+      <p class="text-gray-600">{{ 'CARDS.CARD2.DESCRIPTION' | translate }}</p>
     </div>
     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-2">Card 3</h2>
-      <p class="text-gray-600">And one more card for good measure.</p>
+      <h2 class="text-xl font-semibold mb-2">{{ 'CARDS.CARD3.TITLE' | translate }}</h2>
+      <p class="text-gray-600">{{ 'CARDS.CARD3.DESCRIPTION' | translate }}</p>
     </div>
   </div>
 
@@ -33,16 +50,16 @@
   <div class="max-w-md mb-6">
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="input">
-        Sample Input
+        {{ 'FORM.LABEL' | translate }}
       </label>
-      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="input" type="text" placeholder="Enter something...">
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="input" type="text" [placeholder]="'FORM.PLACEHOLDER' | translate">
     </div>
   </div>
 
   <!-- Alert -->
   <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
-    <p class="font-bold">Warning!</p>
-    <p>This is a sample alert message using Tailwind CSS.</p>
+    <p class="font-bold">{{ 'ALERT.TITLE' | translate }}</p>
+    <p>{{ 'ALERT.MESSAGE' | translate }}</p>
   </div>
 </div>
 

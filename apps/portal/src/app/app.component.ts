@@ -1,19 +1,26 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { TranslationService } from './../../../../libs/shared/translations/src/lib/translations/translation.service';
+import { TranslationService, TranslationsModule } from '@nimic/translations';
+import { TranslateModule } from '@ngx-translate/core';
 //import { TranslationService } from '@nimic/libs/shared/translations';
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [NxWelcomeComponent, RouterModule, TranslateModule, TranslationsModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'portal';
-  constructor(public translationService: TranslationService) {}
+  currentLang = 'en';
+
+  constructor(public translationService: TranslationService) {
+    this.translationService.currentLang$.subscribe(lang => {
+      this.currentLang = lang;
+    });
+  }
   
-  get currentLang() {
-    return this.translationService.currentLang$;
+  switchLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 }

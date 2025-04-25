@@ -9,5 +9,39 @@
       "REGISTER": "Register",
       "EMAIL": "Email",
       "PASSWORD": "Password"
+    },
+    "LANGUAGE": {
+      "EN": "EN",
+      "AR": "عربي"
+    },
+    "HEADER": {
+      "TITLE": "Tailwind CSS Test",
+      "DESCRIPTION": "This is a test of various Tailwind CSS utilities."
+    },
+    "BUTTONS": {
+      "PRIMARY": "Primary Button",
+      "SECONDARY": "Secondary Button"
+    },
+    "CARDS": {
+      "CARD1": {
+        "TITLE": "Card 1",
+        "DESCRIPTION": "This is a sample card with shadow and rounded corners."
+      },
+      "CARD2": {
+        "TITLE": "Card 2",
+        "DESCRIPTION": "Another card with the same styling."
+      },
+      "CARD3": {
+        "TITLE": "Card 3",
+        "DESCRIPTION": "And one more card for good measure."
+      }
+    },
+    "FORM": {
+      "LABEL": "Sample Input",
+      "PLACEHOLDER": "Enter something..."
+    },
+    "ALERT": {
+      "TITLE": "Warning!",
+      "MESSAGE": "This is a sample alert message using Tailwind CSS."
     }
   }

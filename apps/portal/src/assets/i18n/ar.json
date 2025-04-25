@@ -1,13 +1,47 @@
 {
     "GENERAL": {
-      "WELCOME": "مرحبا",
+      "WELCOME": "مرحباً",
       "HOME": "الرئيسية",
-      "ABOUT": "حول"
+      "ABOUT": "من نحن"
     },
     "AUTH": {
       "LOGIN": "تسجيل الدخول",
       "REGISTER": "تسجيل",
       "EMAIL": "البريد الإلكتروني",
       "PASSWORD": "كلمة المرور"
+    },
+    "LANGUAGE": {
+      "EN": "EN",
+      "AR": "عربي"
+    },
+    "HEADER": {
+      "TITLE": "اختبار Tailwind CSS",
+      "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS"
+    },
+    "BUTTONS": {
+      "PRIMARY": "زر أساسي",
+      "SECONDARY": "زر ثانوي"
+    },
+    "CARDS": {
+      "CARD1": {
+        "TITLE": "البطاقة 1",
+        "DESCRIPTION": "هذه بطاقة عينة مع ظل وزوايا دائرية"
+      },
+      "CARD2": {
+        "TITLE": "البطاقة 2",
+        "DESCRIPTION": "بطاقة أخرى بنفس التصميم"
+      },
+      "CARD3": {
+        "TITLE": "البطاقة 3",
+        "DESCRIPTION": "وبطاقة أخرى للمقارنة"
+      }
+    },
+    "FORM": {
+      "LABEL": "إدخال عينة",
+      "PLACEHOLDER": "أدخل شيئاً..."
+    },
+    "ALERT": {
+      "TITLE": "تحذير!",
+      "MESSAGE": "هذه رسالة تنبيه عينة باستخدام Tailwind CSS"
     }
   }

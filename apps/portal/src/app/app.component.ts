@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { TranslationService, TranslationsModule } from '@nimic/translations';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '@nimic/translations';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 //import { TranslationService } from '@nimic/libs/shared/translations';
 @Component({
@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
     NxWelcomeComponent, 
     RouterModule, 
     TranslateModule, 
-    TranslationsModule,
     CommonModule
   ],
   selector: 'app-root',
@@ -24,12 +23,18 @@ export class AppComponent implements OnInit {
 
   constructor(
     public translationService: TranslationService,
+    private translateService: TranslateService,
     private router: Router,
     private route: ActivatedRoute
   ) {
+    // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
     });
+
+    // Initialize translations
+    this.translateService.setDefaultLang('en');
+    this.translateService.use('en');
   }
 
   ngOnInit() {

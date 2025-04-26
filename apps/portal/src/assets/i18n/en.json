@@ -1,6 +1,6 @@
 {
     "GENERAL": {
-      "WELCOME": "Welcome",
+      "WELCOME": "Welcome1231",
       "HOME": "Home",
       "ABOUT": "About"
     },
@@ -15,7 +15,7 @@
       "AR": "عربي"
     },
     "HEADER": {
-      "TITLE": "Tailwind CSS Test",
+      "TITLE": "Tailwind CSS Test 1",
       "DESCRIPTION": "This is a test of various Tailwind CSS utilities."
     },
     "BUTTONS": {

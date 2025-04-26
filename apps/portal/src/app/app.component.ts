@@ -1,26 +1,50 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { TranslationService, TranslationsModule } from '@nimic/translations';
 import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 //import { TranslationService } from '@nimic/libs/shared/translations';
 @Component({
-  imports: [NxWelcomeComponent, RouterModule, TranslateModule, TranslationsModule],
+  imports: [
+    NxWelcomeComponent, 
+    RouterModule, 
+    TranslateModule, 
+    TranslationsModule,
+    CommonModule
+  ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  standalone: true
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'portal';
   currentLang = 'en';
 
-  constructor(public translationService: TranslationService) {
+  constructor(
+    public translationService: TranslationService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
+    });
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.translationService.setLanguage(lang);
+      }
     });
   }
   
   switchLanguage(lang: string) {
     this.translationService.setLanguage(lang);
+    const currentUrl = this.router.url;
+    const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
+    this.router.navigateByUrl(newUrl);
   }
 }

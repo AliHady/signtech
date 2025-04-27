@@ -11,13 +11,13 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'home',
-        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+        loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'en',
+    redirectTo: 'ar',
     pathMatch: 'full'
   }
 ];

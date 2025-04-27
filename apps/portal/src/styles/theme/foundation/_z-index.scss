@@ -1,0 +1,75 @@
+// Z-index Foundation
+// Defines the z-index layering system
+
+:root {
+  // Base Layers
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-auto: auto;
+
+  // Semantic Layers
+  --z-dropdown: var(--z-10);
+  --z-sticky: var(--z-20);
+  --z-fixed: var(--z-30);
+  --z-modal: var(--z-40);
+  --z-popover: var(--z-50);
+  --z-tooltip: var(--z-50);
+}
+
+// Z-index Mixins
+@mixin z-0 {
+  z-index: var(--z-0);
+}
+
+@mixin z-10 {
+  z-index: var(--z-10);
+}
+
+@mixin z-20 {
+  z-index: var(--z-20);
+}
+
+@mixin z-30 {
+  z-index: var(--z-30);
+}
+
+@mixin z-40 {
+  z-index: var(--z-40);
+}
+
+@mixin z-50 {
+  z-index: var(--z-50);
+}
+
+@mixin z-auto {
+  z-index: var(--z-auto);
+}
+
+// Semantic Layer Mixins
+@mixin z-dropdown {
+  z-index: var(--z-dropdown);
+}
+
+@mixin z-sticky {
+  z-index: var(--z-sticky);
+}
+
+@mixin z-fixed {
+  z-index: var(--z-fixed);
+}
+
+@mixin z-modal {
+  z-index: var(--z-modal);
+}
+
+@mixin z-popover {
+  z-index: var(--z-popover);
+}
+
+@mixin z-tooltip {
+  z-index: var(--z-tooltip);
+} 

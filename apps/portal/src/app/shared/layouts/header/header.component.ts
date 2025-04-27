@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 @Component({
-  imports: [
-    RouterModule, 
-    TranslateModule, 
-    CommonModule
-  ],
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  standalone: true
+  selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'portal';
+export class HeaderComponent {
+  isMenuOpen = false;
   currentLang = 'en';
-
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   constructor(
     public translationService: TranslationService,
     private translateService: TranslateService,
@@ -49,4 +47,4 @@ export class AppComponent implements OnInit {
     const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
     this.router.navigateByUrl(newUrl);
   }
-}
+} 

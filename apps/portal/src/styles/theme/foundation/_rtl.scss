@@ -1,0 +1,81 @@
+// RTL Support
+// This file contains RTL-specific utilities and mixins
+
+// RTL direction mixin
+@mixin rtl {
+  [dir="rtl"] & {
+    @content;
+  }
+}
+
+// RTL property mixin for handling left/right properties
+@mixin rtl-property($property, $ltr-value, $rtl-value) {
+  #{$property}: $ltr-value;
+  
+  [dir="rtl"] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+// RTL margin mixin
+@mixin rtl-margin($top, $right, $bottom, $left) {
+  margin: $top $right $bottom $left;
+  
+  [dir="rtl"] & {
+    margin: $top $left $bottom $right;
+  }
+}
+
+// RTL padding mixin
+@mixin rtl-padding($top, $right, $bottom, $left) {
+  padding: $top $right $bottom $left;
+  
+  [dir="rtl"] & {
+    padding: $top $left $bottom $right;
+  }
+}
+
+// RTL border mixin
+@mixin rtl-border($width, $style, $color) {
+  border: $width $style $color;
+  
+  [dir="rtl"] & {
+    border: $width $style $color;
+  }
+}
+
+// RTL border radius mixin
+@mixin rtl-border-radius($top-left, $top-right, $bottom-right, $bottom-left) {
+  border-radius: $top-left $top-right $bottom-right $bottom-left;
+  
+  [dir="rtl"] & {
+    border-radius: $top-right $top-left $bottom-left $bottom-right;
+  }
+}
+
+// RTL float mixin
+@mixin rtl-float($value) {
+  float: $value;
+  
+  [dir="rtl"] & {
+    float: if($value == left, right, if($value == right, left, $value));
+  }
+}
+
+// RTL text align mixin
+@mixin rtl-text-align($value) {
+  text-align: $value;
+  
+  [dir="rtl"] & {
+    text-align: if($value == left, right, if($value == right, left, $value));
+  }
+}
+
+// RTL transform mixin for flipping elements
+@mixin rtl-transform($value) {
+  transform: $value;
+  
+  [dir="rtl"] & {
+    transform: scaleX(-1) $value;
+  }
+} 

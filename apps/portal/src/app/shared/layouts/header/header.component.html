@@ -1,0 +1,44 @@
+<header class="header">
+  
+
+
+      <button 
+        class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
+        (click)="switchLanguage('en')"
+        [class.bg-gray-200]="currentLang === 'en'">
+        English
+      </button>
+      <button 
+        class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
+        (click)="switchLanguage('ar')"
+        [class.bg-gray-200]="currentLang === 'ar'">
+        عربي
+      </button>
+    
+   
+
+
+  <div class="header-container">
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/images/logo.png" alt="Logo">
+      </a>
+    </div>
+    
+    <nav class="main-nav" [class.active]="isMenuOpen">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/content" routerLinkActive="active">News</a></li>
+        <li><a routerLink="/eservices" routerLinkActive="active">E-Services</a></li>
+      </ul>
+    </nav>
+
+    <div class="mobile-menu-toggle">
+      <button (click)="toggleMenu()" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header> 

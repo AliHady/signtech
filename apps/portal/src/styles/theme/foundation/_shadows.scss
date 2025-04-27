@@ -1,0 +1,55 @@
+// Shadows Foundation
+// Defines the shadow system
+
+:root {
+  // Shadow Values
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-none: 0 0 #0000;
+
+  // Shadow Colors
+  --shadow-color: 0 0 0;
+  --shadow-color-primary: var(--color-primary-500);
+  --shadow-color-success: var(--color-success-500);
+  --shadow-color-warning: var(--color-warning-500);
+  --shadow-color-error: var(--color-error-500);
+  --shadow-color-info: var(--color-info-500);
+}
+
+// Shadow Mixins
+@mixin shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin shadow {
+  box-shadow: var(--shadow);
+}
+
+@mixin shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+@mixin shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+@mixin shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+@mixin shadow-2xl {
+  box-shadow: var(--shadow-2xl);
+}
+
+@mixin shadow-inner {
+  box-shadow: var(--shadow-inner);
+}
+
+@mixin shadow-none {
+  box-shadow: var(--shadow-none);
+} 

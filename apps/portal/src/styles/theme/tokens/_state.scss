@@ -1,0 +1,66 @@
+// State Tokens
+// Defines state-related tokens for interactive elements
+
+:root {
+  // Focus States
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--color-primary-500);
+  --focus-ring-opacity: 0.5;
+
+  // Hover States
+  --hover-bg-opacity: 0.1;
+  --hover-text-opacity: 0.8;
+  --hover-border-opacity: 0.8;
+
+  // Active States
+  --active-bg-opacity: 0.2;
+  --active-text-opacity: 0.9;
+  --active-border-opacity: 0.9;
+
+  // Disabled States
+  --disabled-bg-opacity: 0.3;
+  --disabled-text-opacity: 0.5;
+  --disabled-border-opacity: 0.5;
+  --disabled-cursor: not-allowed;
+
+  // Selected States
+  --selected-bg-color: var(--color-primary-100);
+  --selected-text-color: var(--color-primary-700);
+  --selected-border-color: var(--color-primary-300);
+
+  // Checked States
+  --checked-bg-color: var(--color-primary-500);
+  --checked-text-color: var(--color-neutral-50);
+  --checked-border-color: var(--color-primary-600);
+
+  // Indeterminate States
+  --indeterminate-bg-color: var(--color-neutral-300);
+  --indeterminate-text-color: var(--color-neutral-700);
+  --indeterminate-border-color: var(--color-neutral-400);
+
+  // Loading States
+  --loading-bg-color: var(--color-neutral-100);
+  --loading-text-color: var(--color-neutral-400);
+  --loading-border-color: var(--color-neutral-200);
+
+  // Error States
+  --error-bg-color: var(--color-error-50);
+  --error-text-color: var(--color-error-700);
+  --error-border-color: var(--color-error-300);
+
+  // Success States
+  --success-bg-color: var(--color-success-50);
+  --success-text-color: var(--color-success-700);
+  --success-border-color: var(--color-success-300);
+
+  // Warning States
+  --warning-bg-color: var(--color-warning-50);
+  --warning-text-color: var(--color-warning-700);
+  --warning-border-color: var(--color-warning-300);
+
+  // Info States
+  --info-bg-color: var(--color-info-50);
+  --info-text-color: var(--color-info-700);
+  --info-border-color: var(--color-info-300);
+} 

@@ -47,4 +47,14 @@ export class HeaderComponent {
     const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
     this.router.navigateByUrl(newUrl);
   }
+
+  submenuOpen: { [key: string]: boolean } = {};
+
+  openSubmenu(menuName: string) {
+    this.submenuOpen[menuName] = true;
+  }
+
+  closeSubmenu(menuName: string) {
+    this.submenuOpen[menuName] = false;
+  }
 } 

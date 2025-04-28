@@ -1,44 +1,43 @@
 <header class="header">
-  
-
-
-      <button 
-        class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
-        (click)="switchLanguage('en')"
-        [class.bg-gray-200]="currentLang === 'en'">
-        English
-      </button>
-      <button 
-        class="px-3 py-1 mx-2 text-sm rounded-lg hover:bg-gray-200 transition-colors"
-        (click)="switchLanguage('ar')"
-        [class.bg-gray-200]="currentLang === 'ar'">
-        عربي
-      </button>
-    
-   
-
-
-  <div class="header-container">
-    <div class="logo">
-      <a routerLink="/">
-        <img src="/assets/images/niicLogoColored.png" alt="Logo">
-      </a>
+  <div class="bg-white" dir="rtl">
+    <!-- Top Header Panel -->
+    <div class="bg-gray-100 text-gray-700 text-sm">
+      <div class="container mx-auto flex items-center justify-end gap-4 p-2">
+        <a href="#" class="hover:text-black">تواصل معنا</a>
+        <a href="#" class="hover:text-black">EN</a>
+      </div>
     </div>
-    
-    <nav class="main-nav" [class.active]="isMenuOpen">
-      <ul>
-        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="/content" routerLinkActive="active">News</a></li>
-        <li><a routerLink="/eservices" routerLinkActive="active">E-Services</a></li>
-      </ul>
-    </nav>
-
-    <div class="mobile-menu-toggle">
-      <button (click)="toggleMenu()" [class.active]="isMenuOpen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  
+    <!-- Main Navbar -->
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img src="/assets/images/newLogoGreen.png" alt="المركز الوطني للمعلومات الصناعية والتعدينية" class="h-14" />
+      </div>
+  
+      <!-- Navigation Links -->
+      <div class="flex items-center gap-6 text-gray-700 text-sm">
+        <a href="#" class="hover:text-black">عن المركز</a>
+        <a href="#" class="hover:text-black">المبادرات</a>
+        <a href="#" class="hover:text-black">المنتجات</a>
+        <a href="#" class="hover:text-black">الخدمات الإلكترونية</a>
+        <a href="#" class="hover:text-black">المركز الإعلامي</a>
+      </div>
+  
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3 text-sm">
+        <a href="#" class="px-4 py-2 bg-gray-700 text-white rounded-md flex items-center gap-1">
+          تسجيل الدخول
+          <span>↖</span>
+        </a>
+        <a href="#" class="px-4 py-2 border border-gray-700 text-gray-700 rounded-md flex items-center gap-1">
+          طلب صلاحية
+          <span>↖</span>
+        </a>
+      </div>
     </div>
   </div>
+  
+  
+  
 </header> 

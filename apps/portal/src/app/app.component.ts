@@ -3,11 +3,14 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
+
 @Component({
   imports: [
     RouterModule, 
     TranslateModule, 
-    CommonModule
+    CommonModule,
+    LoadingOverlayComponent
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +20,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'portal';
   currentLang = 'en';
+  isLoading = false;
 
   constructor(
     public translationService: TranslationService,
@@ -32,6 +36,17 @@ export class AppComponent implements OnInit {
     // Initialize translations
     this.translateService.setDefaultLang('en');
     this.translateService.use('en');
+
+    // Subscribe to router events to show/hide loading overlay
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === 'NavigationStart') {
+        this.isLoading = true;
+      } else if (event.constructor.name === 'NavigationEnd' || 
+                 event.constructor.name === 'NavigationError' || 
+                 event.constructor.name === 'NavigationCancel') {
+        this.isLoading = false;
+      }
+    });
   }
 
   ngOnInit() {

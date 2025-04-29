@@ -43,5 +43,8 @@
     "ALERT": {
       "TITLE": "Warning!",
       "MESSAGE": "This is a sample alert message using Tailwind CSS."
+    },
+    "LOADING": {
+      "LOADING": "Loading"
     }
   }

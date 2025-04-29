@@ -43,5 +43,8 @@
     "ALERT": {
       "TITLE": "تحذير!",
       "MESSAGE": "هذه رسالة تنبيه عينة باستخدام Tailwind CSS"
+    },
+    "LOADING": {
+      "LOADING": "جاري التحميل"
     }
   }

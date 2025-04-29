@@ -13,6 +13,10 @@ export const appRoutes: Route[] = [
         path: 'home',
         loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
       },
+      {
+        path: 'news',
+        loadComponent: () => import('./modules/content/news/news/news.component').then(m => m.NewsComponent)
+      },
       // You can add more child routes here as needed
     ]
   },

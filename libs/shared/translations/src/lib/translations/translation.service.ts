@@ -27,7 +27,7 @@ export class TranslationService {
 
     // Check browser language or local storage
     const savedLang = isPlatformBrowser(this.platformId) 
-      ? localStorage.getItem('preferredLanguage') || 'en'
+      ? localStorage.getItem('CurrentLanguage') || 'en'
       : 'en';
     
     // Set initial language
@@ -47,7 +47,7 @@ export class TranslationService {
         if (isPlatformBrowser(this.platformId)) {
           document.documentElement.lang = lang;
           document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-          localStorage.setItem('preferredLanguage', lang);
+          localStorage.setItem('CurrentLanguage', lang);
         }
         this.currentLangSubject.next(lang);
       },

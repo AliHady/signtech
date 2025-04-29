@@ -12,12 +12,17 @@ export const appRoutes: Route[] = [
       {
         path: 'home',
         loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
-      }
+      },
+      // You can add more child routes here as needed
     ]
   },
   {
     path: '',
-    redirectTo: 'ar',
+    redirectTo: 'ar',  // Default redirect if no lang is provided
     pathMatch: 'full'
+  },
+  {
+    path: '**',  // Wildcard route to handle invalid paths (optional)
+    redirectTo: 'ar'
   }
 ];

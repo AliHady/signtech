@@ -46,5 +46,36 @@
     },
     "LOADING": {
       "LOADING": "Loading"
+    },
+    "FEATURED_SERVICES": {
+      "TITLE": "Electronic Services",
+      "SUBTITLE": "Services provided by the National Center for Industrial and Mining Information",
+      "ALL_SERVICES": "All Services",
+      "SERVICES": {
+        "MARKET_PLATFORM": {
+          "TITLE": "Industrial Products Market Platform",
+          "DESCRIPTION": "An electronic service specialized in displaying, marketing, and selling products manufactured in Saudi Arabia locally and globally."
+        },
+        "SANA3I": {
+          "TITLE": "Sana3i Platform",
+          "DESCRIPTION": "A unified electronic services and information platform that supports the investor's journey from idea to export."
+        },
+        "CODING": {
+          "TITLE": "Coding Platform",
+          "DESCRIPTION": "Indexing, classifying, and assigning a unified global code to national industrial products."
+        },
+        "PRODUCTS": {
+          "TITLE": "Products Directory",
+          "DESCRIPTION": "A directory containing information and data about products that enables users to inquire about products."
+        },
+        "FACTORIES": {
+          "TITLE": "Factories Directory",
+          "DESCRIPTION": "A directory containing information and data about factories that enables users to inquire about factories."
+        },
+        "SURVEY": {
+          "TITLE": "Industrial Survey",
+          "DESCRIPTION": "Electronically surveying and collecting factory data easily by entering factory information and data."
+        }
+      }
     }
   }

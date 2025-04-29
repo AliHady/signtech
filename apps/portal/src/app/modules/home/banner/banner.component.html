@@ -1,34 +1,45 @@
-<div class="flex flex-col md:flex-row items-center justify-between container mx-auto p-6">
-  <!-- Image Section -->
-  <div class="relative w-full md:w-1/2 rounded-2xl overflow-hidden border-4 border-gray-300">
-    <img src="your-image-path.jpg" alt="وزارة الصناعة والثروة المعدنية" class="w-full h-full object-cover" />
-    <!-- Arrows -->
-    <div class="absolute bottom-4 right-4 flex space-x-2 space-x-reverse">
-      <button class="bg-gray-700 text-white p-2 rounded-full">
-        <span>&#8592;</span>
-      </button>
-      <button class="bg-white text-gray-700 p-2 rounded-full">
-        <span>&#8594;</span>
-      </button>
-    </div>
-  </div>
+<!-- Import Swiper styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+<div class="flex flex-col md:flex-row items-center justify-between container mx-auto p-6">
   <!-- Text Section -->
   <div class="w-full md:w-1/2 mt-6 md:mt-0 md:pr-12">
     <h2 class="text-3xl font-bold text-gray-900 mb-4">
-      المركز الوطني للمعلومات الصناعية والتعدينية
+      {{ slides[currentSlideIndex].title }}
     </h2>
     <p class="text-gray-700 mb-6 leading-loose">
-      يهدف المركز إلى أن يكون المرجع الموثوق للمعلومات الصناعية والتعدينية في المملكة، من خلال توحيد البيانات، وضبط جودة المنتجات وفق الأنظمة العالمية، وتقديم الإحصائيات والتقارير، وتوطين المنتجات وتسويقها محلياً ودولياً.
+      {{ slides[currentSlideIndex].description }}
     </p>
-    <a href="#" class="inline-block bg-gray-700 text-white px-6 py-3 rounded-md">
+    <a [href]="slides[currentSlideIndex].link" 
+       class="inline-block bg-gray-700 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors duration-300">
       المزيد ↗
     </a>
 
     <!-- Dots -->
     <div class="flex justify-start space-x-2 space-x-reverse mt-6">
-      <span class="w-3 h-3 bg-gray-700 rounded-full"></span>
-      <span class="w-3 h-3 bg-gray-300 rounded-full"></span>
+      <span *ngFor="let slide of slides; let i = index" 
+            class="w-3 h-3 rounded-full cursor-pointer transition-colors duration-300"
+            [ngClass]="{'bg-gray-700': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
+            (click)="swiper?.slideTo(i)">
+      </span>
     </div>
   </div>
+
+  <!-- Image Section -->
+   <div class="relative w-full md:w-1/2 ">
+    <div class="banner-image-container">
+      <div class="swiper banner-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let slide of slides">
+            <img [src]="slide.imageUrl" [alt]="slide.title" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <!-- Arrows -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+   </div>
+  
 </div>

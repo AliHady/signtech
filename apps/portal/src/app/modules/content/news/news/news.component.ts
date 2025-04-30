@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { FooterComponent } from '../../../../shared/layouts/footer/footer.component';
-import { HeaderComponent } from '../../../../shared/layouts/header/header.component';
+
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, RouterModule, FooterComponent, HeaderComponent, TranslateModule],
+  imports: [CommonModule, RouterModule, SharedModule, TranslateModule],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })

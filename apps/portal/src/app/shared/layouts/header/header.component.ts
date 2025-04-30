@@ -13,9 +13,23 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 export class HeaderComponent {
   isMenuOpen = false;
   currentLang = 'en';
+  isMobileMenuOpen = false;
+  mobileSubmenuOpen: { [key: string]: boolean } = {
+    about: false,
+    initiatives: false,
+    products: false,
+    services: false,
+    media: false
+  };
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
   constructor(
     public translationService: TranslationService,
     private translateService: TranslateService,
@@ -56,5 +70,9 @@ export class HeaderComponent {
 
   closeSubmenu(menuName: string) {
     this.submenuOpen[menuName] = false;
+  }
+
+  toggleMobileSubmenu(key: string) {
+    this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
   }
 } 

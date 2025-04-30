@@ -8,7 +8,8 @@ import { NewsComponent } from './news/news/news.component';
   imports: [
     CommonModule,
     RouterModule,
-    NewsComponent
+    NewsComponent,
+    
   ],
   exports: [NewsComponent]
 })

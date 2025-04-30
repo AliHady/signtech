@@ -1,24 +1,24 @@
-
 <section id="breadcrumbs" class="mx-auto mt-6 px-4 py-3">
   <div class="container mx-auto px-4 py-2">
     <h4 class="text-gray-800 font-semibold text-lg">أخبار المركز</h4>
     <nav aria-label="breadcrumb" class="container mx-auto px-4 py-2" dir="rtl">
-      <ol class="flex flex-row-reverse flex-wrap items-center text-gray-600 text-sm space-x-reverse space-x-1">
+      <ol class="breadcrumb">
         <li
-          *ngFor="let item of items; let last = last"
-          class="flex items-center"
-          [class.text-gray-900]="last"
+          *ngFor="let item of items; let last = last; trackBy: trackByLabel"
+          class="breadcrumb-item"
+          [class.active]="last"
         >
-          <ng-container *ngIf="!last && item.url">
-            <a [routerLink]="item.url" class="hover:underline text-gray-600">{{ item.label }}</a>
-            <span class="mx-2 text-lg text-gray-400">&lt;</span>
-          </ng-container>
-          <ng-container *ngIf="last || !item.url">
-            <span class="font-semibold text-gray-800">{{ item.label }}</span>
-          </ng-container>
+          <!-- Link if URL exists and not the last crumb -->
+          <a *ngIf="!last && item.url" [routerLink]="item.url">
+            {{ item.label }}
+          </a>
+    
+          <!-- Plain text otherwise -->
+          <span *ngIf="last || !item.url">
+            {{ item.label }}
+          </span>
         </li>
       </ol>
     </nav>
   </div>
-
-  </section>
+</section>

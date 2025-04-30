@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 export interface BreadcrumbItem {
@@ -13,6 +13,10 @@ export interface BreadcrumbItem {
   standalone: true,
   imports: [RouterModule]
 })
-export class BreadcrumbsComponent {
+export class BreadcrumbsComponent implements OnInit {
   @Input() items: BreadcrumbItem[] = [];
+
+  ngOnInit() {
+    console.log('Breadcrumb Items:', this.items);
+  }
 } 

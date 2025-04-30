@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
 import { TranslationService } from '@nimic/translations';
@@ -57,22 +57,29 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
-  constructor(private translationService: TranslationService) {
-    register();
+  constructor(
+    private translationService: TranslationService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      register();
+    }
     this.languageSubscription = this.translationService.currentLang$.subscribe(() => {
       this.updateSlidesContent();
     });
   }
 
   ngAfterViewInit() {
-    this.initializeSwiper();
+    if (isPlatformBrowser(this.platformId)) {
+      this.initializeSwiper();
+    }
   }
 
   ngOnDestroy() {
     if (this.languageSubscription) {
       this.languageSubscription.unsubscribe();
     }
-    if (this.swiper) {
+    if (isPlatformBrowser(this.platformId) && this.swiper) {
       this.swiper.destroy();
     }
   }
@@ -107,6 +114,10 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
   }
 
   private updateSlidesContent() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     // Destroy the current swiper instance
     if (this.swiper) {
       this.swiper.destroy();
@@ -119,7 +130,9 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
 
     // Reinitialize swiper after content update
     setTimeout(() => {
-      this.initializeSwiper();
+      if (isPlatformBrowser(this.platformId)) {
+        this.initializeSwiper();
+      }
     }, 0);
   }
 } 

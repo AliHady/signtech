@@ -1,17 +1,61 @@
 <app-header></app-header>
 <div class="news-container">
- 
+
   <app-breadcrumbs [items]="[
     { label: 'الرئيسية', url: '/ar/home' },
     { label: 'المركز الإعلامي', url: '/ar/media' },
     { label: 'أخبار المركز' }
   ]"></app-breadcrumbs>
   <main class="news-content bg-white">
-   
-    sdfdsfsd
+    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
+<section dir="rtl" class="container mx-auto px-6 py-16">
+  <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Card —— repeat / *ngFor / v-for etc. -->
+    <article *ngFor="let i of [1,2,3,4,5,6]" class="flex flex-col">
+
+      <!-- Main image -->
+      <img
+        [src]="'https://picsum.photos/800/600?random=' + i"
+        alt="صورة الخبر"
+        class="w-full h-96 object-cover rounded"
+      />
+
+      <!-- Arrow + title row -->
+      <div class="flex items-center">
+        <!-- arrow square -->
+        <button
+          type="button"
+          class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center"
+          aria-label="السابق"
+        ></button>
+
+        <!-- title -->
+        <h3 class="flex-grow px-8 py-4 text-2xl font-semibold leading-snug">
+          دورة التـرمـيـز مـكـتـب الفهـرسـة والـتـرمـيـز السـعـودي<br>
+          الرابعة
+        </h3>
+      </div>
+
+      <!-- description -->
+      <p class="mt-4 text-gray-700 leading-7">
+        من منطلق التعاون ورفع المستوى المعرفي، أنهى مكتب الفهرسة والترميز السعودي
+        التابع للمركز الوطني للمعلومات الصناعية والتعدينية من تقديم الدورة الرابعة
+        بعنوان مفاهيم نظام ترميز النانو وأدوات التمييز.
+      </p>
+
+      <!-- date -->
+      <time class="date mt-6 text-sm text-gray-500 inline-block">
+        الاثنين  25/2/25
+      </time>
+    </article>
+
+  </div>
+</section>
+
   </main>
 
-  
-</div> 
+
+</div>
 
 <app-footer></app-footer>

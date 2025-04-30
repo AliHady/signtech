@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4200',
+  apiUrl: 'https://niic.gov.sa/CMS/',
   version: '1.0.0'
-}; 
+};  

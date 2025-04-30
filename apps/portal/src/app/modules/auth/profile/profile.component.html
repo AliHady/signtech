@@ -1,0 +1,92 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <h2 class="profile-title">الملف الشخصي</h2>
+      <button class="btn btn-edit" (click)="toggleEdit()">
+        {{ isEditing ? 'إلغاء التعديل' : 'تعديل الملف الشخصي' }}
+      </button>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+      <div class="form-group">
+        <label for="name">الاسم الكامل</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [class.is-invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+          <span *ngIf="profileForm.get('name')?.errors?.['required']">الاسم مطلوب</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+          <span *ngIf="profileForm.get('email')?.errors?.['required']">البريد الإلكتروني مطلوب</span>
+          <span *ngIf="profileForm.get('email')?.errors?.['email']">يرجى إدخال بريد إلكتروني صحيح</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">رقم الهاتف</label>
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phone"
+          class="form-control"
+          [class.is-invalid]="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched">
+          <span *ngIf="profileForm.get('phone')?.errors?.['required']">رقم الهاتف مطلوب</span>
+          <span *ngIf="profileForm.get('phone')?.errors?.['pattern']">يرجى إدخال رقم هاتف صحيح (10 أرقام)</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="company">الشركة</label>
+        <input
+          type="text"
+          id="company"
+          formControlName="company"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="position">المنصب</label>
+        <input
+          type="text"
+          id="position"
+          formControlName="position"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="address">العنوان</label>
+        <textarea
+          id="address"
+          formControlName="address"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-actions" *ngIf="isEditing">
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || isLoading">
+          {{ isLoading ? 'جاري الحفظ...' : 'حفظ التغييرات' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div> 

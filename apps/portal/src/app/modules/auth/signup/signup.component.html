@@ -1,0 +1,90 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">إنشاء حساب جديد</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="name">الاسم الكامل</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [class.is-invalid]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+          <span *ngIf="signupForm.get('name')?.errors?.['required']">الاسم مطلوب</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+          <span *ngIf="signupForm.get('email')?.errors?.['required']">البريد الإلكتروني مطلوب</span>
+          <span *ngIf="signupForm.get('email')?.errors?.['email']">يرجى إدخال بريد إلكتروني صحيح</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">رقم الهاتف</label>
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phone"
+          class="form-control"
+          [class.is-invalid]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
+          <span *ngIf="signupForm.get('phone')?.errors?.['required']">رقم الهاتف مطلوب</span>
+          <span *ngIf="signupForm.get('phone')?.errors?.['pattern']">يرجى إدخال رقم هاتف صحيح (10 أرقام)</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+          <span *ngIf="signupForm.get('password')?.errors?.['required']">كلمة المرور مطلوبة</span>
+          <span *ngIf="signupForm.get('password')?.errors?.['minlength']">يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">تأكيد كلمة المرور</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          [class.is-invalid]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+          <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">تأكيد كلمة المرور مطلوب</span>
+          <span *ngIf="signupForm.errors?.['passwordMismatch']">كلمات المرور غير متطابقة</span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || isLoading">
+          {{ isLoading ? 'جاري إنشاء الحساب...' : 'إنشاء حساب' }}
+        </button>
+      </div>
+
+      <div class="auth-links">
+        <a (click)="navigateToLogin()" class="auth-link">لديك حساب بالفعل؟ تسجيل الدخول</a>
+      </div>
+    </form>
+  </div>
+</div> 

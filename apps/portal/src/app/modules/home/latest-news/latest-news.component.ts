@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HomeService } from '../services/home.service';
 import { News } from '../models/news.model';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-latest-news',
   standalone: true,
@@ -15,7 +16,7 @@ export class LatestNewsComponent implements OnInit {
   news: News[] = [];
   loading = true;
   error = '';
-
+  portalUrl = environment.portalUrl;
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {

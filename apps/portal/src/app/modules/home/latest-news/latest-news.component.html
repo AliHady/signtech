@@ -22,7 +22,7 @@
             <div class="news-card">
               @if (item.NewsImage) {
                 <div class="news-image">
-                  <img [src]="item.NewsImage" [alt]="item.Title">
+                  <img [src]="portalUrl + item.NewsImage.replace('/CMS', '')" [alt]="item.Title">
                 </div>
               }
               <div class="news-content">

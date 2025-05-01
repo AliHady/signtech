@@ -19,7 +19,7 @@ export class HomeService {
   getLatestNews(): Observable<NewsResponse> {
     return this.translationService.currentLang$.pipe(
       switchMap(currentLang => {
-        const url = `${this.apiUrl}/${currentLang}`;
+        const url = `${this.apiUrl}/${currentLang}/?pageNumber=1&pageSize=3`;
         return this.http.get<NewsResponse>(url);
       })
     );

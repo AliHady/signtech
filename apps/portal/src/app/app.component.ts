@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   imports: [
@@ -17,10 +18,11 @@ import { LoadingOverlayComponent } from './shared/components/loading-overlay/loa
   styleUrl: './app.component.scss',
   standalone: true
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'portal';
   currentLang = 'en';
   isLoading = false;
+  private paramsSubscription: Subscription | undefined;
 
   constructor(
     public translationService: TranslationService,
@@ -50,12 +52,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.paramsSubscription = this.route.params.subscribe(params => {
       const lang = params['lang'];
       if (lang && (lang === 'en' || lang === 'ar')) {
         this.translationService.setLanguage(lang);
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
   }
   
   switchLanguage(lang: string) {

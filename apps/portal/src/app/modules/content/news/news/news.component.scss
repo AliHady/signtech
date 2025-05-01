@@ -54,30 +54,3 @@
 
 /*  Put this AFTER Tailwind has been processed  -------------------- */
 
-/* 1) arrow inside the dark square */
-@layer utilities {
-  .arrow-square::before {
-    content: '';
-    width: 22px;
-    height: 22px;
-    border: solid #fff;
-    border-width: 0 4px 4px 0;
-    transform: rotate(135deg); /* ◀ points left in RTL */
-    display: block;
-  }
-}
-
-/* 2) little rule under the date */
-@layer utilities {
-  .date {
-    position: relative;
-    &::after {
-      content: '';
-      display: block;
-      width: 120px;      /* tweak to taste */
-      height: 5px;
-      background: #374151;
-      margin-top: 6px;
-    }
-  }
-}

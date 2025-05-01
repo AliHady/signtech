@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://niic.gov.sa/CMS/',
+  portalUrl: 'http://niic.gov.sa',
+  contentUrl: 'https://niic.gov.sa/CMS/api',
   version: '1.0.0'
 };  

@@ -1,25 +1,43 @@
-<!-- <div class="news-details-container" *ngIf="newsItem">
-  <div class="news-header">
-    <h1 class="news-title">{{ newsItem.title }}</h1>
-    <div class="news-meta">
-      <span class="news-date">{{ newsItem.publishedDate | date:'mediumDate' }}</span>
-      <span class="news-author" *ngIf="newsItem.author">By {{ newsItem.author }}</span>
-    </div>
-  </div>
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs [items]="[
+    { label: 'الرئيسية', url: '/ar/home' },
+    { label: 'المركز الإعلامي', url: '/ar/media' },
+    { label: 'أخبار المركز', url: '/ar/news' },
+    { label: newsItem?.Title || 'تفاصيل الخبر' }
+  ]"></app-breadcrumbs>
 
-  <div class="news-content">
-    <div class="news-image" *ngIf="newsItem.imageUrl">
-      <img [src]="newsItem.imageUrl" [alt]="newsItem.title">
-    </div>
-    <div class="news-description">
-      {{ newsItem.description }}
-    </div>
-    <div class="news-body" *ngIf="newsItem.content">
-      {{ newsItem.content }}
-    </div>
-  </div>
+  <main class="news-content bg-white">
+    <div class="container mx-auto px-6 py-16">
+      @if (newsItem) {
+        <article class="max-w-4xl mx-auto">
+          <h1 class="text-4xl font-bold mb-6">{{ newsItem.Title }}</h1>
+          
+          <div class="flex items-center text-gray-500 mb-8">
+            <time class="text-sm">{{ newsItem.NewsHigriDate }}</time>
+          </div>
 
-  <div class="news-footer" *ngIf="newsItem.source">
-    <span class="news-source">Source: {{ newsItem.source }}</span>
-  </div>
-</div>  -->
+          @if (newsItem.NewsImage) {
+            <div class="mb-8">
+              <img 
+                [src]="newsItem.NewsImage" 
+                [alt]="newsItem.Title"
+                class="w-full h-auto rounded-lg"
+              />
+            </div>
+          }
+
+          <div class="prose max-w-none">
+            <p class="text-lg mb-6">{{ newsItem.ContentSummary }}</p>
+            <div class="text-gray-700" [innerHTML]="newsItem.Content"></div>
+          </div>
+        </article>
+      } @else {
+        <div class="text-center py-16">
+          <p class="text-gray-500">جاري تحميل تفاصيل الخبر...</p>
+        </div>
+      }
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

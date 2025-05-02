@@ -107,8 +107,8 @@
             </time>
 
             @if (item.NewsLink) {
-              <a [href]="item.NewsLink" target="_blank" class="read-more mt-4">
-                اقرأ المزيد
+              <a [routerLink]="['/', currentLang, 'news', item.Title]" class="read-more mt-4">
+                اقرأ {{item.Title}}
               </a>
             }
           </article>

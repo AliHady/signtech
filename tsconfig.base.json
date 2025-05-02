@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nimic/translations": ["libs/shared/translations/src/index.ts"]
+      "@nimic/translations": ["libs/shared/translations/src/index.ts"],
+      "@nimic/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

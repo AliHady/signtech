@@ -8,51 +8,87 @@
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-<section dir="rtl" class="container mx-auto px-6 py-16">
-  <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
+    <section  class="container mx-auto px-6 py-16">
+      <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Loading state -->
+        @if (loading) {
+          <div class="col-span-full text-center py-8">
+            <p class="text-gray-600">جاري تحميل الأخبار...</p>
+          </div>
+        }
 
-    <!-- Card —— repeat / *ngFor / v-for etc. -->
-    <article *ngFor="let i of [1,2,3,4,5,6]" class="flex flex-col">
+        <!-- Error state -->
+        @if (error) {
+          <div class="col-span-full text-center py-8">
+            <p class="text-red-600">{{ error }}</p>
+          </div>
+        }
 
-      <!-- Main image -->
-      <img
-        [src]="'https://picsum.photos/800/600?random=' + i"
-        alt="صورة الخبر"
-        class="w-full h-96 object-cover rounded"
-      />
+        <!-- News articles -->
+        @for (item of paginatedNews; track item.Id) {
+          <article class="flex flex-col">
+            <!-- Main image -->
+         <!--    @if (item.NewsImage) {
+              <img
+                [src]="portalUrl + item.NewsImage.replace('/CMS', '')"
+                [alt]="item.Title"
+                class="w-full h-96 object-cover rounded"
+              />
+            } -->
 
-      <!-- Arrow + title row -->
-      <div class="flex items-center">
-        <!-- arrow square -->
-        <button
-          type="button"
-          class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center"
-          aria-label="السابق"
-        ></button>
+            <!-- Arrow + title row -->
+            <div class="flex items-center">
+              <!-- arrow square -->
+              <button
+                type="button"
+                class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center"
+                aria-label="السابق"
+              ></button>
 
-        <!-- title -->
-        <h3 class="flex-grow px-8 py-4 text-2xl font-semibold leading-snug">
-          دورة التـرمـيـز مـكـتـب الفهـرسـة والـتـرمـيـز السـعـودي<br>
-          الرابعة
-        </h3>
+              <!-- title -->
+              <h3 class="flex-grow px-8 py-4 text-2xl font-semibold leading-snug">
+                {{ item.Title }}
+              </h3>
+            </div>
+
+            <!-- description -->
+            <p class="mt-4 text-gray-700 leading-7">
+              {{ item.ContentSummary }}
+            </p>
+
+            <!-- date -->
+            <time class="date mt-6 text-sm text-gray-500 inline-block">
+              {{ item.NewsHigriDate }}
+            </time>
+
+            @if (item.NewsLink) {
+              <a [href]="item.NewsLink" target="_blank" class="read-more mt-4">
+                اقرأ المزيد
+              </a>
+            }
+          </article>
+        }
       </div>
-
-      <!-- description -->
-      <p class="mt-4 text-gray-700 leading-7">
-        من منطلق التعاون ورفع المستوى المعرفي، أنهى مكتب الفهرسة والترميز السعودي
-        التابع للمركز الوطني للمعلومات الصناعية والتعدينية من تقديم الدورة الرابعة
-        بعنوان مفاهيم نظام ترميز النانو وأدوات التمييز.
-      </p>
-
-      <!-- date -->
-      <time class="date mt-6 text-sm text-gray-500 inline-block">
-        الاثنين  25/2/25
-      </time>
-    </article>
-
-  </div>
-</section>
-
+      Pagination here
+      <!-- Pagination Controls -->
+      @if (totalPages > 1) {
+        <div class="flex justify-center mt-8">
+          <nav class="flex items-center space-x-2" aria-label="Pagination">
+            @for (page of getPages(); track page) {
+              <button
+                (click)="onPageChange(page)"
+                [class.bg-[#374151]]="currentPage === page"
+                [class.text-white]="currentPage === page"
+                class="px-4 py-2 rounded-md hover:bg-gray-200"
+                [attr.aria-current]="currentPage === page ? 'page' : null"
+              >
+                {{ page }}
+              </button>
+            }
+          </nav>
+        </div>
+      }
+    </section>
   </main>
 
 

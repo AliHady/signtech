@@ -18,6 +18,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/content/news/news.component').then(m => m.NewsComponent)
       },
       {
+        path: 'news/:id',
+        loadComponent: () => import('./modules/content/news-details/news-details.component').then(m => m.NewsDetailsComponent)
+      },
+
+      {
         path: 'login',
         loadComponent: () => import('./modules/auth/login/login.component').then(m => m.LoginComponent)
       },

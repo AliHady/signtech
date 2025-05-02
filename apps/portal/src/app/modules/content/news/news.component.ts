@@ -6,11 +6,10 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { SharedModule } from '../../../../shared/shared.module';
-import { News } from '../../../home/models/news.model';
-import { environment } from 'apps/portal/src/environments/environment';
-import { ContentService } from '../../services/content.service';
-
+import { SharedModule } from '../../../shared/shared.module';
+import { News } from '../../home/models/news.model';
+import { ContentService } from '../services/content.service';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-news',
   standalone: true,

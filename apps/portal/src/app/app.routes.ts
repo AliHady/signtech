@@ -15,7 +15,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'news',
-        loadComponent: () => import('./modules/content/news/news/news.component').then(m => m.NewsComponent)
+        loadComponent: () => import('./modules/content/news/news.component').then(m => m.NewsComponent)
       },
       {
         path: 'login',

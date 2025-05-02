@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -11,7 +12,15 @@ import { SharedModule } from '../../../../shared/shared.module';
   standalone: true,
   imports: [CommonModule, RouterModule, SharedModule, TranslateModule],
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class NewsComponent implements OnInit {
   currentLang = 'en';

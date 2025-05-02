@@ -9,6 +9,7 @@ import { provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common
 import { importProvidersFrom } from '@angular/core';
 import { TranslationsModule } from '@nimic/translations';
 import { AppHttpInterceptor } from './core/http/http.interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       multi: true 
     },
     importProvidersFrom(TranslationsModule),
+    provideAnimations(),
   ],
 };
  

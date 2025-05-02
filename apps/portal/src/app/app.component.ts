@@ -5,13 +5,15 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 import { Subscription } from 'rxjs';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @Component({
   imports: [
     RouterModule, 
     TranslateModule, 
     CommonModule,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    LoadingBarModule
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

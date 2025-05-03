@@ -15,15 +15,15 @@ export class CmsDataService {
   /**
    * Generic method to fetch CMS data with pagination and language support
    * @param endpoint The CMS API endpoint to fetch data from
-   * @param pageNumber The page number to fetch
-   * @param pageSize The number of items per page
+   * @param pageNumber The page number to fetch (optional)
+   * @param pageSize The number of items per page (optional)
    * @param cache Optional cache to store the response
    * @returns Observable of the paginated CMS response
    */
   getCmsPaginatedData<T>(
     endpoint: string,
-    pageNumber = 1,
-    pageSize = 10,
+    pageNumber?: number,
+    pageSize?: number,
     cache?: BehaviorSubject<T | null>
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
@@ -35,7 +35,20 @@ export class CmsDataService {
           }
         }
         
-        const url = `${endpoint}/${currentLang}/?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+        let url = `${endpoint}/${currentLang}`;
+        const params: string[] = [];
+        
+        if (pageNumber !== undefined) {
+          params.push(`pageNumber=${pageNumber}`);
+        }
+        if (pageSize !== undefined) {
+          params.push(`pageSize=${pageSize}`);
+        }
+        
+        if (params.length > 0) {
+          url += `/?${params.join('&')}`;
+        }
+        
         return this.http.get<T>(url).pipe(
           tap(response => {
             if (cache) {

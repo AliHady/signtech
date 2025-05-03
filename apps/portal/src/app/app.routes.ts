@@ -25,6 +25,10 @@ export const appRoutes: Route[] = [
         path: 'mediacenter/news/:id',
         loadComponent: () => import('./modules/content/news-details/news-details.component').then(m => m.NewsDetailsComponent)
       },
+      {
+        path: 'aboutcenter',
+        loadComponent: () => import('./modules/content/about-center/about-center.component').then(m => m.AboutCenterComponent)
+      },
 
       {
         path: 'login',
@@ -41,7 +45,16 @@ export const appRoutes: Route[] = [
       {
         path: 'profile',
         loadComponent: () => import('./modules/auth/profile/profile.component').then(m => m.ProfileComponent)
-      }
+      },
+      {
+        path: 'eservices',
+        loadComponent: () => import('./modules/eservices/list-of-services/list-of-services.component').then(m => m.ListOfServicesComponent)
+      },
+      {
+        path: 'eservices/:id',
+        loadComponent: () => import('./modules/eservices/service-details/service-details.component').then(m => m.ServiceDetailsComponent)
+      },
+      
       // You can add more child routes here as needed
     ]
   },

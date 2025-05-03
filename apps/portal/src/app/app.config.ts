@@ -5,10 +5,10 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { TranslationsModule } from '@nimic/translations';
-import { AppHttpInterceptor } from './core/http/http.interceptor';
+import { CoreHttpModule } from '@nimic/core/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
@@ -19,13 +19,9 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AppHttpInterceptor, 
-      multi: true 
-    },
     importProvidersFrom(
       TranslationsModule,
+      CoreHttpModule,
       LoadingBarModule,
       LoadingBarRouterModule,
       LoadingBarHttpClientModule

@@ -13,8 +13,6 @@ import { HttpStatusUtil } from '../../utils/http-status.util';
 
 @Injectable()
 export class StatusCodeInterceptor implements HttpInterceptor {
-  constructor(private httpStatusUtil: HttpStatusUtil) {}
-
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
@@ -34,10 +32,10 @@ export class StatusCodeInterceptor implements HttpInterceptor {
 
   private handleSuccessResponse(response: HttpResponse<any>): void {
     const status = response.status;
-    if (this.httpStatusUtil.isSuccess(status)) {
+    if (HttpStatusUtil.isSuccess(status)) {
       // Handle successful responses (2xx)
       console.log(`Request successful: ${status}`);
-    } else if (this.httpStatusUtil.isRedirect(status)) {
+    } else if (HttpStatusUtil.isRedirect(status)) {
       // Handle redirect responses (3xx)
       console.log(`Request redirected: ${status}`);
     }
@@ -45,10 +43,10 @@ export class StatusCodeInterceptor implements HttpInterceptor {
 
   private handleErrorResponse(error: HttpErrorResponse): void {
     const status = error.status;
-    if (this.httpStatusUtil.isClientError(status)) {
+    if (HttpStatusUtil.isClientError(status)) {
       // Handle client errors (4xx)
       console.error(`Client error: ${status}`, error);
-    } else if (this.httpStatusUtil.isServerError(status)) {
+    } else if (HttpStatusUtil.isServerError(status)) {
       // Handle server errors (5xx)
       console.error(`Server error: ${status}`, error);
     }

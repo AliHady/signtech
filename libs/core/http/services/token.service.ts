@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { JwtPayload } from '../models/jwt-payload.model';
 
 @Injectable({
@@ -8,25 +9,34 @@ export class TokenService {
   private readonly TOKEN_KEY = 'auth_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
 
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+
+  private getStorage(): Storage | null {
+    return isPlatformBrowser(this.platformId) ? localStorage : null;
+  }
+
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return this.getStorage()?.getItem(this.TOKEN_KEY) ?? null;
   }
 
   getRefreshToken(): string | null {
-    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
+    return this.getStorage()?.getItem(this.REFRESH_TOKEN_KEY) ?? null;
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    this.getStorage()?.setItem(this.TOKEN_KEY, token);
   }
 
   setRefreshToken(refreshToken: string): void {
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+    this.getStorage()?.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
   }
 
   removeTokens(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    const storage = this.getStorage();
+    if (storage) {
+      storage.removeItem(this.TOKEN_KEY);
+      storage.removeItem(this.REFRESH_TOKEN_KEY);
+    }
   }
 
   decodeToken(token: string): JwtPayload | null {

@@ -19,8 +19,12 @@
 
           @if (newsDetails.NewsImage) {
             <div class="mb-8">
+
+
+       
+
               <img 
-                [src]="newsDetails.NewsImage" 
+                [src]="portalUrl + newsDetails.NewsImage.replace('/CMS', '')" 
                 [alt]="newsDetails.Title"
                 class="w-full h-auto rounded-xl shadow-md object-cover"
               />

@@ -130,4 +130,10 @@ export class HeaderComponent implements OnInit {
   toggleMobileSubmenu(key: string) {
     this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
   }
+
+  getLastSegment(url: string): string {
+    const parts = url.split('/').filter(Boolean);
+    return parts.pop() ?? '';
+  }
+  
 } 

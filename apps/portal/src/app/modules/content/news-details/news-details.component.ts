@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { CmsDataService } from '@nimic/shared/utils';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-news-details',
@@ -21,16 +23,42 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class NewsDetailsComponent implements OnInit {
   @Input() newsItem: any;
+  newsDetails: any;
+  loading = true;
+  error = '';
+  portalUrl = environment.portalUrl;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cmsDataService: CmsDataService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const newsId = history.state.id;
-      console.log('News ID:', newsId);
+      if (newsId) {
+        this.loadNewsDetails(newsId);
+      } else {
+        this.error = 'News ID not found';
+        this.loading = false;
+      }
+    });
+  }
+
+  private loadNewsDetails(newsId: number): void {
+    const endpoint = `${environment.contentUrl}/news/details/${newsId}`;
+    this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
+      next: (response) => {
+        this.newsDetails = response;
+        console.log(response);
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load news details. Please try again later.';
+        this.loading = false;
+        console.error('Error loading news details:', err);
+      }
     });
   }
 } 

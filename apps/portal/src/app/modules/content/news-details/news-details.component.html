@@ -4,32 +4,32 @@
     { label: 'الرئيسية', url: '/ar/home' },
     { label: 'المركز الإعلامي', url: '/ar/media' },
     { label: 'أخبار المركز', url: '/ar/news' },
-    { label: newsItem?.Title || 'تفاصيل الخبر' }
+    { label: newsDetails?.Title || 'تفاصيل الخبر' }
   ]"></app-breadcrumbs>
 
   <main class="news-content bg-white">
     <div class="container mx-auto px-6 py-16">
-      @if (newsItem) {
-        <article class="max-w-4xl mx-auto">
-          <h1 class="text-4xl font-bold mb-6">{{ newsItem.Title }}</h1>
+      @if (newsDetails) {
+        <article class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+          <h1 class="text-4xl font-bold mb-6 text-gray-800 leading-tight">{{ newsDetails.Title }}</h1>
           
-          <div class="flex items-center text-gray-500 mb-8">
-            <time class="text-sm">{{ newsItem.NewsHigriDate }}</time>
+          <div class="flex items-center text-gray-500 mb-8 border-b pb-4">
+            <time class="text-sm font-medium">{{ newsDetails.NewsHigriDate }}</time>
           </div>
 
-          @if (newsItem.NewsImage) {
+          @if (newsDetails.NewsImage) {
             <div class="mb-8">
               <img 
-                [src]="newsItem.NewsImage" 
-                [alt]="newsItem.Title"
-                class="w-full h-auto rounded-lg"
+                [src]="newsDetails.NewsImage" 
+                [alt]="newsDetails.Title"
+                class="w-full h-auto rounded-xl shadow-md object-cover"
               />
             </div>
           }
 
           <div class="prose max-w-none">
-            <p class="text-lg mb-6">{{ newsItem.ContentSummary }}</p>
-            <div class="text-gray-700" [innerHTML]="newsItem.Content"></div>
+            <p class="text-lg mb-6 text-gray-700 leading-relaxed">{{ newsDetails.ContentSummary }}</p>
+            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="newsDetails.Content"></div>
           </div>
         </article>
       } @else {

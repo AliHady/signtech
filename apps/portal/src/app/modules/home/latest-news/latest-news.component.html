@@ -19,23 +19,25 @@
       @if (!loading && !error) {
         <div class="news-grid">
           @for (item of news; track item.Id) {
-            <div class="news-card">
-              @if (item.NewsImage) {
-                <div class="news-image">
-                  <!-- <img [src]="portalUrl + item.NewsImage.replace('/CMS', '')" [alt]="item.Title"> -->
-                </div>
-              }
-              <div class="news-content">
-                <h3>{{ item.Title }}</h3>
-                <p class="date">{{ item.NewsHigriDate }}</p>
-                <p class="content">{{ item.ContentSummary }}</p>
-                @if (item.NewsLink) {
-                  <a [href]="item.NewsLink" target="_blank" class="read-more">
-                    اقرأ المزيد
-                  </a>
+            @if (item.ShowInHome) {
+              <div class="news-card">
+                @if (item.NewsImage) {
+                  <div class="news-image">
+                    <!-- <img [src]="portalUrl + item.NewsImage.replace('/CMS', '')" [alt]="item.Title"> -->
+                  </div>
                 }
+                <div class="news-content">
+                  <h3>{{ item.Title }}</h3>
+                  <p class="date">{{ item.NewsHigriDate }}</p>
+                  <p class="content">{{ item.ContentSummary }}</p>
+                  @if (item.NewsLink) {
+                    <a [href]="item.NewsLink" target="_blank" class="read-more">
+                      اقرأ المزيد
+                    </a>
+                  }
+                </div>
               </div>
-            </div>
+            }
           }
         </div>
       }

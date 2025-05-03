@@ -5,13 +5,14 @@ import { SharedModule } from '../../../shared/shared.module';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CmsDataService } from '@nimic/shared/utils';
 import { environment } from '../../../../environments/environment';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-news-details',
   templateUrl: './news-details.component.html',
   styleUrls: ['./news-details.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, SharedModule],
+  imports: [CommonModule, RouterModule, SharedModule, NgxSkeletonLoaderModule],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [

@@ -107,8 +107,13 @@
             </time>
 
             @if (item.NewsLink) {
-              <a [routerLink]="['/', currentLang, 'news', item.Title]" class="read-more mt-4">
-                اقرأ {{item.Title}}
+              <a 
+                (click)="navigateToNewsDetails(item)"
+                (keyup.enter)="navigateToNewsDetails(item)"
+                tabindex="0"
+                class="read-more mt-4 cursor-pointer"
+              >
+                Read More
               </a>
             }
           </article>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID, Inject } from '@angular/core';
 
 export interface NormalizedError {
   code: string;
@@ -12,8 +14,10 @@ export interface NormalizedError {
   providedIn: 'root'
 })
 export class ErrorHandlingService {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+
   normalizeError(error: HttpErrorResponse): NormalizedError {
-    if (error.error instanceof ErrorEvent) {
+    if (isPlatformBrowser(this.platformId) && error.error instanceof ErrorEvent) {
       // Client-side error
       return {
         code: 'CLIENT_ERROR',

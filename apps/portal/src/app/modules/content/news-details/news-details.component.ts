@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -22,8 +22,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class NewsDetailsComponent implements OnInit {
   @Input() newsItem: any;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const newsId = history.state.id;
+      console.log('News ID:', newsId);
+    });
   }
 } 

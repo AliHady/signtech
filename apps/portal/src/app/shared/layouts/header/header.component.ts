@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '@nimic/translations';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { NavigationMenuResponse } from '../../models/navmen.model';
 import { HeaderService } from '../../services/header.service';
+import { TranslateService } from '@ngx-translate/core';
+import { NavMenu } from '../../models/navmen.model';
 
 interface MenuItem {
   id: number;
@@ -72,12 +72,31 @@ export class HeaderComponent implements OnInit {
   }
 
   private fetchMenuItems() {
+    console.log("fetchMenuItems called");
+  
     this.loading = true;
     this.error = '';
     
     this.headerService.getNavigationMenu().subscribe({
-      next: (response: NavigationMenuResponse) => {
-        this.menuItems = this.transformNavigationItems(response.NavigationItems);
+      next: (response: NavMenu) => {
+      
+        
+        this.menuItems = response.map(item => ({
+          id: item.Id,
+          title: item.Text,
+          url: item.Url,
+          children: item.Items?.map(child => ({
+            id: child.Id,
+            title: child.Text,
+            url: child.Url
+          }))
+        }));
+        console.log(
+          '%c MENU %c %o',
+          'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
+          '',                     
+          this.menuItems       
+        );
         this.loading = false;
       },
       error: (error: Error) => {
@@ -86,22 +105,10 @@ export class HeaderComponent implements OnInit {
         this.loading = false;
       }
     });
-    console.log(
-      '%c MENU %c %o',
-      'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
-      '',                     
-      this.menuItems         
-    );
+    
   }
 
-  private transformNavigationItems(items: any[]): MenuItem[] {
-    return items.map(item => ({
-      id: item.Id,
-      title: item.Text,
-      url: item.Url,
-      children: item.Items ? this.transformNavigationItems(item.Items) : undefined
-    }));
-  }
+
   
   switchLanguage(lang: string) { 
     this.translationService.setLanguage(lang);
@@ -120,11 +127,7 @@ export class HeaderComponent implements OnInit {
     this.submenuOpen[menuName] = false;
   }
 
-  toggleMobileSubmenu(menuId: string) {
-    this.mobileSubmenuOpen[menuId] = !this.mobileSubmenuOpen[menuId];
-  }
-
-  toggleSubmenu(menuId: string) {
-    this.submenuOpen[menuId] = !this.submenuOpen[menuId];
+  toggleMobileSubmenu(key: string) {
+    this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
   }
 } 

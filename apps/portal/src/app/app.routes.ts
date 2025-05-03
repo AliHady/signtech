@@ -14,11 +14,15 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
       },
       {
-        path: 'news',
+        path: 'mediacenter',
+        loadComponent: () => import('./modules/content/media-center/media-center.component').then(m => m.MediaCenterComponent)
+      },
+      {
+        path: 'mediacenter/news',
         loadComponent: () => import('./modules/content/news/news.component').then(m => m.NewsComponent)
       },
       {
-        path: 'news/:id',
+        path: 'mediacenter/news/:id',
         loadComponent: () => import('./modules/content/news-details/news-details.component').then(m => m.NewsDetailsComponent)
       },
 

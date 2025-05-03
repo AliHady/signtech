@@ -131,9 +131,9 @@ export class HeaderComponent implements OnInit {
     this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
   }
 
-  getLastSegment(url: string): string {
+  getLastSegment(url: string): string[] {
     const parts = url.split('/').filter(Boolean);
-    return parts.pop() ?? '';
+    return ['/', this.currentLang, ...parts.slice(-2)];
   }
-  
+
 } 

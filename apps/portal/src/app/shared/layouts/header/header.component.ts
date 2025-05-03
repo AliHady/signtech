@@ -1,8 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { NavigationMenuResponse } from '../../models/navmen.model';
+import { HeaderService } from '../../services/header.service';
+
+interface MenuItem {
+  id: number;
+  title: string;
+  url: string;
+  children?: MenuItem[];
+}
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -10,10 +20,13 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   currentLang = 'en';
   isMobileMenuOpen = false;
+  menuItems: MenuItem[] = [];
+  loading = true;
+  error = '';
   mobileSubmenuOpen: { [key: string]: boolean } = {
     about: false,
     initiatives: false,
@@ -34,11 +47,13 @@ export class HeaderComponent {
     public translationService: TranslationService,
     private translateService: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private headerService: HeaderService
   ) {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
+    //  this.fetchMenuItems();
     });
 
     // Initialize translations
@@ -47,15 +62,48 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const lang = params['lang'];
-      if (lang && (lang === 'en' || lang === 'ar')) {
-        this.translationService.setLanguage(lang);
+    // this.route.params.subscribe(params => {
+    //   const lang = params['lang'];
+    //   if (lang && (lang === 'en' || lang === 'ar')) {
+    //     this.translationService.setLanguage(lang);
+    //   }
+    // });
+    this.fetchMenuItems(); 
+  }
+
+  private fetchMenuItems() {
+    this.loading = true;
+    this.error = '';
+    
+    this.headerService.getNavigationMenu().subscribe({
+      next: (response: NavigationMenuResponse) => {
+        this.menuItems = this.transformNavigationItems(response.NavigationItems);
+        this.loading = false;
+      },
+      error: (error: Error) => {
+        console.error('Error fetching menu items:', error);
+        this.error = 'Failed to load menu items. Please try again later.';
+        this.loading = false;
       }
     });
+    console.log(
+      '%c MENU %c %o',
+      'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
+      '',                     
+      this.menuItems         
+    );
+  }
+
+  private transformNavigationItems(items: any[]): MenuItem[] {
+    return items.map(item => ({
+      id: item.Id,
+      title: item.Text,
+      url: item.Url,
+      children: item.Items ? this.transformNavigationItems(item.Items) : undefined
+    }));
   }
   
-  switchLanguage(lang: string) {
+  switchLanguage(lang: string) { 
     this.translationService.setLanguage(lang);
     const currentUrl = this.router.url;
     const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
@@ -72,7 +120,11 @@ export class HeaderComponent {
     this.submenuOpen[menuName] = false;
   }
 
-  toggleMobileSubmenu(key: string) {
-    this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
+  toggleMobileSubmenu(menuId: string) {
+    this.mobileSubmenuOpen[menuId] = !this.mobileSubmenuOpen[menuId];
+  }
+
+  toggleSubmenu(menuId: string) {
+    this.submenuOpen[menuId] = !this.submenuOpen[menuId];
   }
 } 

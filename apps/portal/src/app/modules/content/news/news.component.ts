@@ -128,9 +128,9 @@ export class NewsComponent implements OnInit {
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-
-  navigateToNewsDetails(newsItem: News): void {
-    this.router.navigate(['/', this.currentLang, 'news', newsItem.Title], {
+  // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
+  navigateToNewsDetails(newsItem: News): void { 
+    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
       state: { id: newsItem.Id }
     });
   }

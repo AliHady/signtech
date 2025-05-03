@@ -35,7 +35,8 @@ export class NewsComponent implements OnInit {
   // Pagination variables
   currentPage = 1;
   itemsPerPage = 9;
-  totalPages = 0;
+  totalPages = 0; 
+  totalItems = 0;
   paginatedNews: News[] = [];
 
   constructor(
@@ -62,10 +63,11 @@ export class NewsComponent implements OnInit {
   }
 
   private loadNews(): void {
-    this.contentService.getAllNews().subscribe({
+    this.contentService.getAllNews(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
         this.news = response.Items;
         this.totalPages = Math.ceil(this.news.length / this.itemsPerPage);
+        this.totalItems = response.TotalItems;
         this.updatePaginatedNews();
         this.loading = false;
       },

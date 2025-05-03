@@ -14,9 +14,11 @@ export class ContentService {
 
   constructor(private cmsDataService: CmsDataService) {}
 
-  getAllNews(): Observable<NewsResponse> {
+  getAllNews(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
     return this.cmsDataService.getCmsPaginatedData<NewsResponse>(
-      this.apiUrl
+      this.apiUrl,
+      pageNumber,
+      pageSize
     );
   }
 } 

@@ -14,10 +14,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           @for (item of [1,2,3,4,5,6]; track item) {
             <div class="bg-gray-100 -lg overflow-hidden">
-              <ngx-skeleton-loader [theme]="{height: '200px', width: '100%'}" appearance="line"></ngx-skeleton-loader>
+              <ngx-skeleton-loader [theme]="{height: '200px', width: '100%', 'background-color': '#f3f4f6'}" appearance="line"></ngx-skeleton-loader>
               <div class="p-4">
-                <ngx-skeleton-loader [theme]="{height: '20px', width: '80%'}" appearance="line"></ngx-skeleton-loader>
-                <ngx-skeleton-loader [theme]="{height: '16px', width: '60%'}" appearance="line" class="mt-2"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{height: '20px', width: '80%', 'background-color': '#f3f4f6'}" appearance="line"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{height: '16px', width: '60%', 'background-color': '#f3f4f6'}" appearance="line" class="mt-2"></ngx-skeleton-loader>
               </div>
             </div>
           }

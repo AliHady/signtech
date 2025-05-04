@@ -7,13 +7,14 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { News } from '../../home/models/news.model';
+
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
+import { VideoItem } from '../../home/models/video.model';
 
-interface NewsCache {
+interface VideoCache {
   [key: number]: {
-    data: News[];
+    data: VideoItem[];
     timestamp: number;
   };
 }
@@ -35,7 +36,7 @@ interface NewsCache {
 })
 export class VideolibraryComponent implements OnInit {
   currentLang = 'en';
-  news: News[] = [];
+  video: VideoItem[] = [];
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
@@ -45,10 +46,10 @@ export class VideolibraryComponent implements OnInit {
   itemsPerPage = 9;
   totalPages = 0; 
   totalItems = 0;
-  paginatedNews: News[] = [];
+  paginatedVideos: VideoItem[] = [];
 
   // Cache variables
-  private newsCache: NewsCache = {};
+  private videoCache: VideoCache = {};
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
   constructor(
@@ -67,7 +68,7 @@ export class VideolibraryComponent implements OnInit {
         this.translationService.setLanguage(lang);
       }
     });
-    this.loadNews();
+    this.loadVideos();
   }
 
   getRoute(route: string): string {
@@ -75,53 +76,53 @@ export class VideolibraryComponent implements OnInit {
   }
 
   private isCacheValid(page: number): boolean {
-    const cachedData = this.newsCache[page];
+    const cachedData = this.videoCache[page];
     if (!cachedData) return false;
     
     const now = Date.now();
     return (now - cachedData.timestamp) < this.CACHE_DURATION;
   }
 
-  private loadNews(): void {
+  private loadVideos(): void {
     if (this.isCacheValid(this.currentPage)) {
-      const cachedData = this.newsCache[this.currentPage];
-      this.news = cachedData.data;
-      this.paginatedNews = this.news;
+      const cachedData = this.videoCache[this.currentPage];
+      this.video = cachedData.data;
+      this.paginatedVideos = this.video;
       this.loading = false;
       return;
     }
 
     this.loading = true;
-    this.contentService.getAllNews(this.currentPage, this.itemsPerPage).subscribe({
+    this.contentService.getAllVideos(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
-        this.news = response.Items;
+        this.video = response.Items;
         this.totalItems = response.TotalItems;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-        this.paginatedNews = this.news;
+        this.paginatedVideos = this.video;
         
         // Cache the fetched data
-        this.newsCache[this.currentPage] = {
-          data: this.news,
+        this.videoCache[this.currentPage] = {
+          data: this.video,
           timestamp: Date.now()
         };
         
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load news. Please try again later.';
+        this.error = 'Failed to load videos. Please try again later.';
         this.loading = false;
-        console.error('Error loading news:', err);
+        console.error('Error loading videos:', err);
       }
     });
   }
 
-  updatePaginatedNews(): void {
-    this.loadNews();
+  updatePaginatedVideos(): void {
+    this.loadVideos();
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.updatePaginatedNews();
+    this.updatePaginatedVideos();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -129,9 +130,9 @@ export class VideolibraryComponent implements OnInit {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
   // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
-  navigateToNewsDetails(newsItem: News): void { 
+  navigateToNewsDetails(newsItem: VideoItem): void { 
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
-      state: { id: newsItem.Id }
+     
     });
   }
 } 

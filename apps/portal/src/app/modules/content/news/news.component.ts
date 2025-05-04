@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations'; 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TranslationService } from '@nimic/translations';

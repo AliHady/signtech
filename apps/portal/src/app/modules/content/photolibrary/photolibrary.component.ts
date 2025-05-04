@@ -7,13 +7,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { News } from '../../home/models/news.model';
+
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
-
-interface NewsCache {
+import { ImageGalleryItem } from '../../home/models/images.model';
+interface ImagesCache {
   [key: number]: {
-    data: News[];
+    data: ImageGalleryItem[];
     timestamp: number;
   };
 }
@@ -35,7 +35,7 @@ interface NewsCache {
 })
 export class PhotolibraryComponent implements OnInit {
   currentLang = 'en';
-  news: News[] = [];
+  images: ImageGalleryItem[] = [];
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
@@ -45,10 +45,10 @@ export class PhotolibraryComponent implements OnInit {
   itemsPerPage = 9;
   totalPages = 0; 
   totalItems = 0;
-  paginatedNews: News[] = [];
+  paginatedImages: ImageGalleryItem[] = [];
 
   // Cache variables
-  private newsCache: NewsCache = {};
+  private newsCache: ImagesCache = {};
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
   constructor(
@@ -67,7 +67,7 @@ export class PhotolibraryComponent implements OnInit {
         this.translationService.setLanguage(lang);
       }
     });
-    this.loadNews();
+    this.loadVideo();
   }
 
   getRoute(route: string): string {
@@ -82,26 +82,26 @@ export class PhotolibraryComponent implements OnInit {
     return (now - cachedData.timestamp) < this.CACHE_DURATION;
   }
 
-  private loadNews(): void {
+  private loadVideo(): void {
     if (this.isCacheValid(this.currentPage)) {
       const cachedData = this.newsCache[this.currentPage];
-      this.news = cachedData.data;
-      this.paginatedNews = this.news;
+      this.images = cachedData.data;
+      this.paginatedImages = this.images;
       this.loading = false;
       return;
     }
 
     this.loading = true;
-    this.contentService.getAllNews(this.currentPage, this.itemsPerPage).subscribe({
+    this.contentService.getAllImages(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
-        this.news = response.Items;
+        this.images = response.Items;
         this.totalItems = response.TotalItems;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-        this.paginatedNews = this.news;
+        this.paginatedImages = this.images;
         
         // Cache the fetched data
         this.newsCache[this.currentPage] = {
-          data: this.news,
+          data: this.images,
           timestamp: Date.now()
         };
         
@@ -116,7 +116,7 @@ export class PhotolibraryComponent implements OnInit {
   }
 
   updatePaginatedNews(): void {
-    this.loadNews();
+    this.loadVideo();
   }
 
   onPageChange(page: number): void {
@@ -129,9 +129,9 @@ export class PhotolibraryComponent implements OnInit {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
   // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
-  navigateToNewsDetails(newsItem: News): void { 
+  navigateToNewsDetails(newsItem: ImageGalleryItem): void { 
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
-      state: { id: newsItem.Id }
+      
     });
   }
 } 

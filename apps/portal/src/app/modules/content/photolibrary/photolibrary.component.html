@@ -69,7 +69,7 @@
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
       <div class="relative w-full max-w-6xl mx-4">
         <!-- Close button -->
-        <button (click)="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
+        <button (click)="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-gray-300 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -78,7 +78,7 @@
         <!-- Navigation buttons -->
         @if (hasMultipleImages()) {
           <button (click)="previousImage()" 
-                  class="absolute left-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
+                  class="absolute left-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
@@ -87,7 +87,7 @@
 
         @if (hasMultipleImages()) {
           <button (click)="nextImage()" 
-                  class="absolute right-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
+                  class="absolute right-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -108,6 +108,34 @@
             </div>
           }
         </div>
+
+        <!-- Thumbnails -->
+        @if (hasMultipleImages() && selectedImage) {
+          <div class="flex justify-center gap-2 mt-4 overflow-x-auto py-2">
+            <!-- Main image thumbnail -->
+            <div class="relative cursor-pointer" (click)="selectImage(0)">
+              <img [src]="portalUrl + selectedImage.AlbumImage.replace('/CMS', '')" 
+                   [alt]="selectedImage.Title"
+                   class="w-20 h-20 object-cover rounded"
+                   [class.border-2]="currentImageIndex === 0"
+                   [class.border-blue-500]="currentImageIndex === 0">
+              <div class="absolute inset-0 bg-black bg-opacity-40 rounded opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <!-- Album images thumbnails -->
+            @if (selectedImage.AlbumImages) {
+              @for (image of selectedImage.AlbumImages; track image; let i = $index) {
+                <div class="relative cursor-pointer" (click)="selectImage(i + 1)">
+                  <img [src]="portalUrl + image.replace('/CMS', '')" 
+                       [alt]="selectedImage.Title + ' - ' + (i + 1)"
+                       class="w-20 h-20 object-cover rounded"
+                       [class.border-2]="currentImageIndex === (i + 1)"
+                       [class.border-blue-500]="currentImageIndex === (i + 1)">
+                  <div class="absolute inset-0 bg-black bg-opacity-40 rounded opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              }
+            }
+          </div>
+        }
       </div>
     </div>
   }

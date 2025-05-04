@@ -188,6 +188,11 @@ export class PhotolibraryComponent implements OnInit {
            this.selectedImage.AlbumImages.length > 0;
   }
 
+  selectImage(index: number): void {
+    if (this.selectedImage) {
+      this.currentImageIndex = index;
+    }
+  }
 
   navigateToImagesDetails(imageItem: ImageGalleryItem): void { 
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'photolibrary', imageItem.Title], {

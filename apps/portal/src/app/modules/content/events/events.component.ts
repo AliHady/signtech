@@ -130,7 +130,7 @@ export class EventsComponent implements OnInit {
   }
   // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
   navigateToNewsDetails(newsItem: News): void { 
-    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
+    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'events', newsItem.Title], {
       state: { id: newsItem.Id }
     });
   }

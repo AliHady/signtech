@@ -73,13 +73,13 @@
         @for (item of paginatedNews; track item.Id) {
           <article class="flex flex-col">
             <!-- Main image -->
-         <!--    @if (item.NewsImage) {
+           @if (item.NewsImage) {
               <img
                 [src]="portalUrl + item.NewsImage.replace('/CMS', '')"
                 [alt]="item.Title"
                 class="w-full h-96 object-cover rounded"
               />
-            } -->
+            } 
 
             <!-- Arrow + title row -->
             <div class="flex items-center">

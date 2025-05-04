@@ -9,13 +9,13 @@
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-6 py-16">
-      <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Loading state -->
         @if (loading) {
           @for (item of [1,2,3,4,5,6]; track item) {
-            <article class="flex flex-col">
+            <article class="flex flex-col bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
               <!-- Arrow + title row skeleton -->
-              <div class="flex items-center">
+              <div class="flex items-center p-4 border-b border-gray-100">
                 <div class="flex-none w-28 h-20">
                   <ngx-skeleton-loader
                     [theme]="{ height: '80px', width: '112px', 'background-color': '#374151' }"
@@ -33,7 +33,7 @@
               </div>
 
               <!-- Description skeleton -->
-              <div class="mt-4">
+              <div class="px-6 py-4">
                 <ngx-skeleton-loader
                   [theme]="{ height: '16px', width: '100%', 'background-color': '#e5e7eb' }"
                   [count]="4"
@@ -42,7 +42,7 @@
               </div>
 
               <!-- Date skeleton -->
-              <div class="mt-6">
+              <div class="px-6 mt-2">
                 <ngx-skeleton-loader
                   [theme]="{ height: '14px', width: '100px', 'background-color': '#e5e7eb' }"
                   [count]="1"
@@ -51,7 +51,7 @@
               </div>
 
               <!-- Read more skeleton -->
-              <div class="mt-4">
+              <div class="px-6 mt-4 mb-6">
                 <ngx-skeleton-loader
                   [theme]="{ height: '20px', width: '100px', 'background-color': '#e5e7eb' }"
                   [count]="1"
@@ -64,72 +64,102 @@
 
         <!-- Error state -->
         @if (error) {
-          <div class="col-span-full text-center py-8">
-            <p class="text-red-600">{{ error }}</p>
+          <div class="col-span-full text-center py-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p class="text-red-600 text-lg font-medium">{{ error }}</p>
           </div>
         }
 
         <!-- News articles -->
         @for (item of paginatedNews; track item.Id) {
-          <article class="flex flex-col">
+          <article class="flex flex-col bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
             <!-- Main image -->
-           @if (item.NewsImage) {
-              <img
-                [src]="portalUrl + item.NewsImage.replace('/CMS', '')"
+           @if (item.RollupImage) {
+              <div class="relative h-64 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+              <!--   <img
+                  [src]="portalUrl + item.RollupImage.replace('/CMS', '')"
+                  [alt]="item.Title"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                /> -->
+                <img
+                src="https://picsum.photos/800/400?random=1"
                 [alt]="item.Title"
-                class="w-full h-96 object-cover rounded"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
+                
+              </div> 
             } 
 
             <!-- Arrow + title row -->
-            <div class="flex items-center">
+            <div class="flex items-center p-4 border-b border-gray-100">
               <!-- arrow square -->
               <button
                 type="button"
-                class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center"
+                class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center hover:bg-[#2d3748] transition-all duration-300 group-hover:scale-105"
                 aria-label="السابق"
-              ></button>
+              >
+                <svg class="w-8 h-8 text-white transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
 
               <!-- title -->
-              <h3 class="flex-grow px-8 py-4 text-2xl font-semibold leading-snug">
+              <h3 class="flex-grow px-8 py-4 text-xl font-semibold leading-snug text-gray-800 group-hover:text-[#374151] transition-colors duration-300">
                 {{ item.Title }}
               </h3>
             </div>
 
             <!-- description -->
-            <p class="mt-4 text-gray-700 leading-7">
-              {{ item.ContentSummary }}
-            </p>
+            <div class="px-6 py-4">
+              <p class="text-gray-600 leading-7 line-clamp-3">
+                {{ item.ContentSummary }}
+              </p>
+            </div>
 
             <!-- date -->
-            <time class="date mt-6 text-sm text-gray-500 inline-block">
-              {{ item.NewsHigriDate }}
-            </time>
+            <div class="px-6 mt-2">
+              <time class="date text-sm text-gray-500 inline-flex items-center">
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ item.NewsHigriDate }}
+              </time>
+            </div>
 
             @if (item.NewsLink) {
-              <a 
-                (click)="navigateToNewsDetails(item)"
-                (keyup.enter)="navigateToNewsDetails(item)"
-                tabindex="0"
-                class="read-more mt-4 cursor-pointer"
-              >
-                Read More
-              </a>
+              <div class="px-6 mt-4 mb-6">
+                <a 
+                  (click)="navigateToNewsDetails(item)"
+                  (keyup.enter)="navigateToNewsDetails(item)"
+                  tabindex="0"
+                  class="read-more cursor-pointer text-[#374151] font-medium hover:text-[#2d3748] transition-colors duration-300 inline-flex items-center group-hover:translate-x-1"
+                >
+                  اقرأ المزيد
+                  <svg class="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
             }
           </article>
         }
       </div>
-      Pagination here
       <!-- Pagination Controls -->
       @if (totalPages > 1) {
-        <div class="flex justify-center mt-8">
+        <div class="flex justify-center mt-12">
           <nav class="flex items-center space-x-2" aria-label="Pagination">
             @for (page of getPages(); track page) {
               <button
                 (click)="onPageChange(page)"
                 [class.bg-[#374151]]="currentPage === page"
                 [class.text-white]="currentPage === page"
-                class="px-4 py-2 rounded-md hover:bg-gray-200"
+                [class.border-[#374151]]="currentPage === page"
+                class="px-4 py-2 rounded-md hover:bg-gray-100 transition-all duration-300 min-w-[40px] border border-transparent"
                 [attr.aria-current]="currentPage === page ? 'page' : null"
               >
                 {{ page }}

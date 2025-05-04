@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 import { Subscription } from 'rxjs';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { ScrollIndicatorComponent } from '@nimic/shared/ui';
 
 @Component({
   imports: [
@@ -13,7 +14,8 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     TranslateModule, 
     CommonModule,
     LoadingOverlayComponent,
-    LoadingBarModule
+    LoadingBarModule,
+    ScrollIndicatorComponent
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

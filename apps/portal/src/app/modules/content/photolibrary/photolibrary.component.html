@@ -10,89 +10,107 @@
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section class="container mx-auto px-6 py-16">
       <!-- Loading State -->
-      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ngx-skeleton-loader *ngFor="let i of [1,2,3,4,5,6]" 
-          [theme]="{ height: '300px', width: '100%' }"
-          animation="pulse">
-        </ngx-skeleton-loader>
-      </div>
+      @if (loading) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (i of [1,2,3,4,5,6]; track i) {
+            <ngx-skeleton-loader 
+              [theme]="{ height: '300px', width: '100%' }"
+              animation="pulse">
+            </ngx-skeleton-loader>
+          }
+        </div>
+      }
 
       <!-- Error State -->
-      <div *ngIf="error" class="text-center text-red-500 p-4">
-        {{ error }}
-      </div>
+      @if (error) {
+        <div class="text-center text-red-500 p-4">
+          {{ error }}
+        </div>
+      }
 
       <!-- Images Grid -->
-      <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div *ngFor="let image of paginatedImages" 
-             class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
-             (click)="openLightbox(image)">
-          <img [src]="portalUrl + image.AlbumImage.replace('/CMS', '')" 
-               [alt]="image.Title"
-               class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
-          <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div class="text-white text-center p-4">
-              <h3 class="text-lg font-semibold mb-2">{{ image.Title }}</h3>
-              <p class="text-sm">{{ image.Details }}</p>
+      @if (!loading && !error) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (image of paginatedImages; track image) {
+            <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                 (click)="openLightbox(image)">
+              <img [src]="portalUrl + image.AlbumImage.replace('/CMS', '')" 
+                   [alt]="image.Title"
+                   class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+              <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div class="text-white text-center p-4">
+                  <h3 class="text-lg font-semibold mb-2">{{ image.Title }}</h3>
+                  <p class="text-sm">{{ image.Details }}</p>
+                </div>
+              </div>
             </div>
-          </div>
+          }
         </div>
-      </div>
+      }
 
       <!-- Pagination -->
-      <div *ngIf="totalPages > 1" class="mt-8 flex justify-center gap-2">
-        <button *ngFor="let page of getPages()" 
-                (click)="onPageChange(page)"
-                [class.bg-blue-600]="currentPage === page"
-                [class.bg-gray-200]="currentPage !== page"
-                class="px-4 py-2 rounded text-white">
-          {{ page }}
-        </button>
-      </div>
+      @if (totalPages > 1) {
+        <div class="mt-8 flex justify-center gap-2">
+          @for (page of getPages(); track page) {
+            <button (click)="onPageChange(page)"
+                    [class.bg-blue-600]="currentPage === page"
+                    [class.bg-gray-200]="currentPage !== page"
+                    class="px-4 py-2 rounded text-white">
+              {{ page }}
+            </button>
+          }
+        </div>
+      }
     </section>
   </main>
 
   <!-- Lightbox Modal -->
-  <div *ngIf="showLightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
-    <div class="relative w-full max-w-6xl mx-4">
-      <!-- Close button -->
-      <button (click)="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+  @if (showLightbox) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+      <div class="relative w-full max-w-6xl mx-4">
+        <!-- Close button -->
+        <button (click)="closeLightbox()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
-      <!-- Navigation buttons -->
-      <button *ngIf="hasMultipleImages()" 
-              (click)="previousImage()" 
-              class="absolute left-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+        <!-- Navigation buttons -->
+        @if (hasMultipleImages()) {
+          <button (click)="previousImage()" 
+                  class="absolute left-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        }
 
-      <button *ngIf="hasMultipleImages()" 
-              (click)="nextImage()" 
-              class="absolute right-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+        @if (hasMultipleImages()) {
+          <button (click)="nextImage()" 
+                  class="absolute right-0 top-1/2 -translate-y-1/2 text-white hover:text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        }
 
-      <!-- Image container -->
-      <div class="relative">
-        <img [src]="getCurrentImageUrl()" 
-             [alt]="selectedImage?.Title" 
-             class="w-full max-h-[80vh] object-contain">
-        
-        <!-- Image info -->
-        <div *ngIf="selectedImage" class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-          <h3 class="text-xl font-semibold">{{ selectedImage.Title }}</h3>
-          <p class="text-sm mt-2">{{ selectedImage.Details }}</p>
+        <!-- Image container -->
+        <div class="relative">
+          <img [src]="getCurrentImageUrl()" 
+               [alt]="selectedImage?.Title" 
+               class="w-full max-h-[80vh] object-contain">
+          
+          <!-- Image info -->
+          @if (selectedImage) {
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+              <h3 class="text-xl font-semibold">{{ selectedImage.Title }}</h3>
+              <p class="text-sm mt-2">{{ selectedImage.Details }}</p>
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
+  }
 </div>
 
 <app-footer></app-footer>

@@ -10,70 +10,82 @@
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-6 py-16">
       <!-- Loading skeleton -->
-      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div *ngFor="let item of [1,2,3,4,5,6]" class="bg-gray-100 rounded-lg overflow-hidden">
-          <ngx-skeleton-loader [theme]="{height: '200px', width: '100%'}" appearance="line"></ngx-skeleton-loader>
-          <div class="p-4">
-            <ngx-skeleton-loader [theme]="{height: '20px', width: '80%'}" appearance="line"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{height: '16px', width: '60%'}" appearance="line" class="mt-2"></ngx-skeleton-loader>
-          </div>
+      @if (loading) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (item of [1,2,3,4,5,6]; track item) {
+            <div class="bg-gray-100 rounded-lg overflow-hidden">
+              <ngx-skeleton-loader [theme]="{height: '200px', width: '100%'}" appearance="line"></ngx-skeleton-loader>
+              <div class="p-4">
+                <ngx-skeleton-loader [theme]="{height: '20px', width: '80%'}" appearance="line"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{height: '16px', width: '60%'}" appearance="line" class="mt-2"></ngx-skeleton-loader>
+              </div>
+            </div>
+          }
         </div>
-      </div>
+      }
 
       <!-- Video Grid -->
-      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div *ngFor="let video of paginatedVideos" 
-             class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-             (click)="showVideo(video)">
-          <div class="relative">
-            <img [src]="portalUrl + video.VideoImage.replace('/CMS', '')" [alt]="video.Title" class="w-full h-48 object-cover"> 
-             <!-- <img [src]="portalUrl + item.NewsImage.replace('/CMS', '')" [alt]="item.Title"> -->
-            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
-              <span class="text-sm">{{ video.CreateDate | date:'mediumDate' }}</span>
+      @if (!loading) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (video of paginatedVideos; track video) {
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                 (click)="showVideo(video)">
+              <div class="relative">
+                <img [src]="portalUrl + video.VideoImage.replace('/CMS', '')" [alt]="video.Title" class="w-full h-48 object-cover"> 
+                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                  <span class="text-sm">{{ video.CreateDate | date:'mediumDate' }}</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ video.Title }}</h3>
+              </div>
             </div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ video.Title }}</h3>
-          </div>
+          }
         </div>
-      </div>
+      }
 
       <!-- Pagination -->
-      <div *ngIf="!loading && totalPages > 1" class="mt-8 flex justify-center">
-        <div class="flex space-x-2">
-          <button *ngFor="let page of getPages()" 
-                  [class.bg-blue-600]="page === currentPage"
-                  [class.text-white]="page === currentPage"
-                  [class.bg-gray-200]="page !== currentPage"
-                  [class.text-gray-700]="page !== currentPage"
-                  class="px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
-                  (click)="onPageChange(page)">
-            {{ page }}
-          </button>
+      @if (!loading && totalPages > 1) {
+        <div class="mt-8 flex justify-center">
+          <div class="flex space-x-2">
+            @for (page of getPages(); track page) {
+              <button [class.bg-blue-600]="page === currentPage"
+                      [class.text-white]="page === currentPage"
+                      [class.bg-gray-200]="page !== currentPage"
+                      [class.text-gray-700]="page !== currentPage"
+                      class="px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-colors"
+                      (click)="onPageChange(page)">
+                {{ page }}
+              </button>
+            }
+          </div>
         </div>
-      </div>
+      }
     </section>
   </main>
 
   <!-- Video Modal -->
-  <div *ngIf="showVideoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-    <div class="relative w-full max-w-4xl mx-4">
-      <button (click)="closeVideoModal()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <div class="bg-black rounded-lg overflow-hidden">
-        <video *ngIf="selectedVideo" 
-               class="w-full" 
-               controls 
-               autoplay
-               [src]="portalUrl + selectedVideo.VideoFile.replace('/CMS', '')">
-          Your browser does not support the video tag.
-        </video>
+  @if (showVideoModal) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+      <div class="relative w-full max-w-4xl mx-4">
+        <button (click)="closeVideoModal()" class="absolute -top-10 right-0 text-white hover:text-gray-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="bg-black rounded-lg overflow-hidden">
+          @if (selectedVideo) {
+            <video class="w-full" 
+                   controls 
+                   autoplay
+                   [src]="portalUrl + selectedVideo.VideoFile.replace('/CMS', '')">
+              Your browser does not support the video tag.
+            </video>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>
 
 <app-footer></app-footer>

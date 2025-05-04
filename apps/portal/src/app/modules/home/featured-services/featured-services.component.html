@@ -6,20 +6,21 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-white p-6 rounded-md relative" *ngFor="let serviceKey of getServiceKeys()">
-        <div class="absolute top-4 left-4 bg-gray-300 p-1 rounded">
-          <!-- Icon -->
-          <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M4 7V4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3h3V4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3h1a1 1 0 0 1 1 1v2H2V8a1 1 0 0 1 1-1h1zm-1 5v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8H3z"/>
-          </svg>
+      @for (serviceKey of getServiceKeys(); track serviceKey) {
+        <div class="bg-white p-6 rounded-md relative">
+          <div class="absolute top-4 left-4 bg-gray-300 p-1 rounded">
+            <!-- Icon -->
+            <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4 7V4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3h3V4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3h1a1 1 0 0 1 1 1v2H2V8a1 1 0 0 1 1-1h1zm-1 5v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8H3z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{{ 'FEATURED_SERVICES.SERVICES.' + serviceKey + '.TITLE' | translate }}</h3>
+          <p class="text-gray-700 mb-4 text-sm">{{ 'FEATURED_SERVICES.SERVICES.' + serviceKey + '.DESCRIPTION' | translate }}</p>
+          <button class="bg-gray-300 text-gray-700 p-2 rounded-md">
+            →
+          </button>
         </div>
-        <h3 class="text-lg font-bold mb-2">{{ 'FEATURED_SERVICES.SERVICES.' + serviceKey + '.TITLE' | translate }}</h3>
-        <p class="text-gray-700 mb-4 text-sm">{{ 'FEATURED_SERVICES.SERVICES.' + serviceKey + '.DESCRIPTION' | translate }}</p>
-        <button class="bg-gray-300 text-gray-700 p-2 rounded-md">
-          →
-        </button>
-      </div>
+      }
     </div>
 
     <div class="text-center mt-8">

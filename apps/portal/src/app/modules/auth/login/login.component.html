@@ -11,10 +11,16 @@
           class="form-control"
           [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
         />
-        <div class="invalid-feedback" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">البريد الإلكتروني مطلوب</span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">يرجى إدخال بريد إلكتروني صحيح</span>
-        </div>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <div class="invalid-feedback">
+            @if (loginForm.get('email')?.errors?.['required']) {
+              <span>البريد الإلكتروني مطلوب</span>
+            }
+            @if (loginForm.get('email')?.errors?.['email']) {
+              <span>يرجى إدخال بريد إلكتروني صحيح</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-group">
@@ -26,15 +32,25 @@
           class="form-control"
           [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
         />
-        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <span *ngIf="loginForm.get('password')?.errors?.['required']">كلمة المرور مطلوبة</span>
-          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
-        </div>
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="invalid-feedback">
+            @if (loginForm.get('password')?.errors?.['required']) {
+              <span>كلمة المرور مطلوبة</span>
+            }
+            @if (loginForm.get('password')?.errors?.['minlength']) {
+              <span>يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-actions">
         <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || isLoading">
-          {{ isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول' }}
+          @if (isLoading) {
+            جاري تسجيل الدخول...
+          } @else {
+            تسجيل الدخول
+          }
         </button>
       </div>
 

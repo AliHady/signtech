@@ -130,6 +130,7 @@ export class NewsComponent implements OnInit {
   }
   // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
   navigateToNewsDetails(newsItem: News): void { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
       state: { id: newsItem.Id }
     });

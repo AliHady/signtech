@@ -41,6 +41,10 @@ export class VideolibraryComponent implements OnInit {
   error = '';
   portalUrl = environment.portalUrl;
   
+  // Video modal properties
+  selectedVideo: VideoItem | null = null;
+  showVideoModal = false;
+  
   // Pagination variables
   currentPage = 1;
   itemsPerPage = 9;
@@ -134,5 +138,15 @@ export class VideolibraryComponent implements OnInit {
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
      
     });
+  }
+
+  showVideo(video: VideoItem): void {
+    this.selectedVideo = video;
+    this.showVideoModal = true;
+  }
+
+  closeVideoModal(): void {
+    this.selectedVideo = null;
+    this.showVideoModal = false;
   }
 } 

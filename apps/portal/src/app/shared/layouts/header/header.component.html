@@ -22,10 +22,10 @@
      
 
       <!-- Navigation Links -->
-      <div class="hidden lg:flex items-center gap-8 text-gray-700 text-sm relative mainMenuItems">
+      <div class="hidden lg:flex items-center gap-8 text-[#1A1A1A] text-sm relative mainMenuItems">
         @for (menuItem of menuItems; track menuItem) {
           <div class="relative" (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)">
-            <div class="flex items-center gap-1 hover:text-black cursor-pointer">
+            <div class="flex items-center gap-1 hover:text-[#1A1A1A] cursor-pointer">
               {{ menuItem.title }}
               @if (menuItem.children?.length) {
                 <svg class="w-3 h-3 transition-transform duration-300" [ngClass]="{'rotate-180': submenuOpen[menuItem.title]}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,17 +34,21 @@
               }
             </div>
             @if (menuItem.children?.length) {
-              <div class="subMenuContainer z-[7] absolute right-0 mt-4 w-48 bg-white border -xl shadow-lg overflow-hidden transition-all duration-300 ease-out"
+              <div class="subMenuContainer z-[7] absolute right-0 mt-4 bg-white shadow-lg overflow-hidden transition-all duration-300 ease-out border-b border-gray-200"
                    [ngClass]="{
                      'opacity-100 scale-100 visible': submenuOpen[menuItem.title],
-                     'opacity-0 scale-95 invisible': !submenuOpen[menuItem.title]
+                     'opacity-0 scale-95 invisible': !submenuOpen[menuItem.title],
+                     'w-96': menuItem.children && menuItem.children.length > 5,
+                     'w-48': menuItem.children && menuItem.children.length <= 5
                    }">
                 <div class="absolute top-0 right-5 -translate-y-1/2 w-3 h-3 bg-white rotate-45 border-t border-r"></div>
-                @for (child of menuItem.children; track child) {
-                  <a [routerLink]="getLastSegment(child.url)" class="block px-4 py-2 hover:bg-gray-100">
-                    {{ child.title }}
-                  </a>
-                }
+                <div [ngClass]="menuItem.children && menuItem.children.length > 5 ? 'grid grid-cols-2 gap-2 pb-2 p-2' : 'pb-2 p-2'">
+                  @for (child of menuItem.children; track child) {
+                    <a [routerLink]="getLastSegment(child.url)" class="block px-4 py-2 text-[#1A1A1A] hover:bg-gray-100 no-underline border-b border-gray-100 last:border-b-0">
+                      {{ child.title }}
+                    </a>
+                  }
+                </div>
               </div>
             }
           </div>

@@ -34,7 +34,7 @@ interface EventsCache{
   ]
 })
 export class EventsComponent implements OnInit {
-  currentLang = 'en';
+  currentLang = 'ar';
   event: EventItem[] = [];
   loading = true;
   error = '';

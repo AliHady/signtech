@@ -35,7 +35,7 @@ interface ImagesCache {
   ]
 })
 export class PhotolibraryComponent implements OnInit {
-  currentLang = 'en';
+  currentLang = 'ar';
   images: ImageGalleryItem[] = [];
   loading = true;
   error = '';

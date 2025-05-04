@@ -23,11 +23,11 @@ export class TranslationService {
     this.translate.addLangs(['en', 'ar']);
     
     // Set default language
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('ar');
 
     // Check browser language or local storage
     const savedLang = isPlatformBrowser(this.platformId) 
-      ? localStorage.getItem('CurrentLanguage') || 'en'
+      ? localStorage.getItem('CurrentLanguage') || 'ar'
       : 'en';
     
     // Set initial language
@@ -54,8 +54,8 @@ export class TranslationService {
       error: (error) => {
         console.error('Error switching language:', error);
         // Fallback to default language on error
-        this.translate.use('en');
-        this.currentLangSubject.next('en');
+        this.translate.use('ar');
+        this.currentLangSubject.next('ar');
       }
     });
   }

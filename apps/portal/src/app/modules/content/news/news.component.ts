@@ -34,7 +34,7 @@ interface NewsCache {
   ]
 })
 export class NewsComponent implements OnInit {
-  currentLang = 'en';
+  currentLang = 'ar';
   news: News[] = [];
   loading = true;
   error = '';

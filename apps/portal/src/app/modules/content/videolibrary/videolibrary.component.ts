@@ -35,7 +35,7 @@ interface VideoCache {
   ]
 })
 export class VideolibraryComponent implements OnInit {
-  currentLang = 'en';
+  currentLang = 'ar';
   video: VideoItem[] = [];
   loading = true;
   error = '';

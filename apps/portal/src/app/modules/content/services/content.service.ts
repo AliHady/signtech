@@ -9,14 +9,22 @@ import { NewsResponse } from '../../home/models/news.model';
   providedIn: 'root'
 })
 export class ContentService {
-  private apiUrl = `${environment.contentUrl}/news`;
+  private apiUrlNews = `${environment.contentUrl}/news`;
+  private apiUrlEvents = `${environment.contentUrl}/events`;
   private latestNewsCache = new BehaviorSubject<NewsResponse | null>(null);
 
   constructor(private cmsDataService: CmsDataService) {}
 
   getAllNews(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
     return this.cmsDataService.getCmsPaginatedData<NewsResponse>(
-      this.apiUrl,
+      this.apiUrlNews,
+      pageNumber,
+      pageSize
+    );
+  }
+  getAllEvents(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
+    return this.cmsDataService.getCmsPaginatedData<NewsResponse>(
+      this.apiUrlEvents,
       pageNumber,
       pageSize
     );

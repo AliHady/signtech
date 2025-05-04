@@ -67,7 +67,7 @@ export class EventsComponent implements OnInit {
         this.translationService.setLanguage(lang);
       }
     });
-    this.loadNews();
+    this.loadEvents();
   }
 
   getRoute(route: string): string {
@@ -82,7 +82,7 @@ export class EventsComponent implements OnInit {
     return (now - cachedData.timestamp) < this.CACHE_DURATION;
   }
 
-  private loadNews(): void {
+  private loadEvents(): void {
     if (this.isCacheValid(this.currentPage)) {
       const cachedData = this.newsCache[this.currentPage];
       this.news = cachedData.data;
@@ -92,7 +92,7 @@ export class EventsComponent implements OnInit {
     }
 
     this.loading = true;
-    this.contentService.getAllNews(this.currentPage, this.itemsPerPage).subscribe({
+    this.contentService.getAllEvents(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
         this.news = response.Items;
         this.totalItems = response.TotalItems;
@@ -116,7 +116,7 @@ export class EventsComponent implements OnInit {
   }
 
   updatePaginatedNews(): void {
-    this.loadNews();
+    this.loadEvents();
   }
 
   onPageChange(page: number): void {

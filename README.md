@@ -1,5 +1,58 @@
 # Nimic
 
+<div align="center">
+  <h2>👋 About Me</h2>
+  <p>Welcome to my project repository! I'm a passionate Front-End Tech Lead and UX/UI Specialist with a love for creating intuitive, elegant, and impactful digital experiences.</p>
+</div>
+
+<div align="center">
+  <h3>📬 Get in Touch</h3>
+  <p>
+    <a href="mailto:a.nemreen@gmail.com">
+      <img src="https://img.shields.io/badge/Email-a.nemreen@gmail.com-blue?style=flat&logo=gmail" alt="Email">
+    </a>
+    <a href="https://www.nemreen.info" target="_blank">
+      <img src="https://img.shields.io/badge/Website-www.nemreen.info-green?style=flat" alt="Website">
+    </a>
+  </p>
+</div>
+
+<div align="center">
+  <h3>💼 Areas of Expertise</h3>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://img.shields.io/badge/Web%20Design%20&%20Development-🌐-blue" alt="Web Design">
+        <br>Web Design & Development
+      </td>
+      <td align="center">
+        <img src="https://img.shields.io/badge/Mobile%20App%20Design-📱-purple" alt="Mobile App">
+        <br>Mobile App Design
+      </td>
+      <td align="center">
+        <img src="https://img.shields.io/badge/UX/UI%20Design-🎨-orange" alt="UX/UI">
+        <br>UX/UI Design
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://img.shields.io/badge/Front%20End%20Engineering-⚙️-yellow" alt="Front End">
+        <br>Front-End Engineering
+      </td>
+      <td align="center">
+        <img src="https://img.shields.io/badge/E-commerce%20&%20Portals-🛒-red" alt="E-commerce">
+        <br>E-commerce & Portals
+      </td>
+      <td align="center">
+        <img src="https://img.shields.io/badge/SEO%20&%20Performance-🚀-green" alt="SEO">
+        <br>SEO & Performance
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.

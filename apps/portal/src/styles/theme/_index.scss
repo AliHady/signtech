@@ -1,0 +1,18 @@
+// Theme Index
+// This file imports all theme partials in the correct order
+
+@import './foundation/colors';
+@import './foundation/fonts';
+@import './foundation/typography';
+@import './foundation/spacing';
+@import './foundation/breakpoints';
+@import './foundation/shadows';
+@import './foundation/border-radius';
+@import './foundation/z-index';
+@import './foundation/rtl';
+
+// Theme tokens that depend on foundation
+@import './tokens/background';
+@import './tokens/text';
+@import './tokens/border';
+@import './tokens/state'; 

@@ -1,0 +1,48 @@
+<!-- Import Swiper styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="flex flex-col md:flex-row items-center justify-between container mx-auto p-6">
+  <!-- Text Section -->
+  <div class="w-full md:w-1/2 mt-6 md:mt-0 md:pr-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">
+      {{ slides[currentSlideIndex].title }}
+    </h2>
+    <p class="text-gray-700 mb-6 leading-loose">
+      {{ slides[currentSlideIndex].description }}
+    </p>
+    <a [href]="slides[currentSlideIndex].link" 
+       class="inline-block bg-gray-700 text-white px-6 py-3 -md hover:bg-gray-800 transition-colors duration-300">
+      المزيد ↗
+    </a>
+
+    <!-- Dots -->
+    <div class="flex justify-start space-x-2 space-x-reverse mt-6">
+      @for (slide of slides; track slide; let i = $index) {
+        <span class="w-3 h-3 -full cursor-pointer transition-colors duration-300"
+              [ngClass]="{'bg-gray-700': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
+              (click)="swiper?.slideTo(i)">
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- Image Section -->
+   <div class="relative w-full md:w-1/2 ">
+    <div class="banner-image-container py-3 ">
+      <div class="swiper banner-swiper">
+        <div class="swiper-wrapper">
+          @for (slide of slides; track slide) {
+            <div class="swiper-slide">
+              <img [src]="slide.imageUrl" [alt]="slide.title" class="w-full h-full object-cover" />
+            </div>
+          }
+        </div>
+        <!-- Arrows -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+   </div>
+  
+</div>

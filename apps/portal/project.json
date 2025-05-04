@@ -16,12 +16,18 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/portal/public"
-          }
-        ],
+       "assets": [
+  {
+    "glob": "**/*",
+    "input": "apps/portal/src/assets",
+    "output": "assets"
+  },
+  {
+    "glob": "favicon.ico",
+    "input": "apps/portal/src",
+    "output": ""
+  }
+],
         "styles": ["apps/portal/src/styles.scss"],
         "scripts": [],
         "server": "apps/portal/src/main.server.ts",

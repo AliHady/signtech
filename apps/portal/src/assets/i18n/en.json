@@ -1,0 +1,81 @@
+{
+    "GENERAL": {
+      "WELCOME": "Welcome1231",
+      "HOME": "Home",
+      "ABOUT": "About"
+    },
+    "AUTH": {
+      "LOGIN": "Login",
+      "REGISTER": "Register",
+      "EMAIL": "Email",
+      "PASSWORD": "Password"
+    },
+    "LANGUAGE": {
+      "EN": "EN",
+      "AR": "عربي"
+    },
+    "HEADER": {
+      "TITLE": "Tailwind CSS Test 1",
+      "DESCRIPTION": "This is a test of various Tailwind CSS utilities."
+    },
+    "BUTTONS": {
+      "PRIMARY": "Primary Button",
+      "SECONDARY": "Secondary Button"
+    },
+    "CARDS": {
+      "CARD1": {
+        "TITLE": "Card 1",
+        "DESCRIPTION": "This is a sample card with shadow and rounded corners."
+      },
+      "CARD2": {
+        "TITLE": "Card 2",
+        "DESCRIPTION": "Another card with the same styling."
+      },
+      "CARD3": {
+        "TITLE": "Card 3",
+        "DESCRIPTION": "And one more card for good measure."
+      }
+    },
+    "FORM": {
+      "LABEL": "Sample Input",
+      "PLACEHOLDER": "Enter something..."
+    },
+    "ALERT": {
+      "TITLE": "Warning!",
+      "MESSAGE": "This is a sample alert message using Tailwind CSS."
+    },
+    "LOADING": {
+      "LOADING": "Loading"
+    },
+    "FEATURED_SERVICES": {
+      "TITLE": "Electronic Services",
+      "SUBTITLE": "Services provided by the National Center for Industrial and Mining Information",
+      "ALL_SERVICES": "All Services",
+      "SERVICES": {
+        "MARKET_PLATFORM": {
+          "TITLE": "Industrial Products Market Platform",
+          "DESCRIPTION": "An electronic service specialized in displaying, marketing, and selling products manufactured in Saudi Arabia locally and globally."
+        },
+        "SANA3I": {
+          "TITLE": "Sana3i Platform",
+          "DESCRIPTION": "A unified electronic services and information platform that supports the investor's journey from idea to export."
+        },
+        "CODING": {
+          "TITLE": "Coding Platform",
+          "DESCRIPTION": "Indexing, classifying, and assigning a unified global code to national industrial products."
+        },
+        "PRODUCTS": {
+          "TITLE": "Products Directory",
+          "DESCRIPTION": "A directory containing information and data about products that enables users to inquire about products."
+        },
+        "FACTORIES": {
+          "TITLE": "Factories Directory",
+          "DESCRIPTION": "A directory containing information and data about factories that enables users to inquire about factories."
+        },
+        "SURVEY": {
+          "TITLE": "Industrial Survey",
+          "DESCRIPTION": "Electronically surveying and collecting factory data easily by entering factory information and data."
+        }
+      }
+    }
+  }

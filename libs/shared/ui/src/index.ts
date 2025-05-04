@@ -1,0 +1,1 @@
+export * from './lib/scroll-indicator.component/scroll-indicator.component';

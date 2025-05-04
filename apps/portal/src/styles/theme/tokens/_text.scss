@@ -1,0 +1,45 @@
+// Text Tokens
+// Defines text-related tokens that depend on foundation colors and typography
+
+:root {
+  // Text Colors
+  --text-primary: var(--color-neutral-900);
+  --text-secondary: var(--color-neutral-700);
+  --text-tertiary: var(--color-neutral-500);
+  --text-inverse: var(--color-neutral-50);
+  --text-primary-on-primary: var(--color-neutral-50);
+  --text-secondary-on-primary: var(--color-neutral-200);
+  --text-tertiary-on-primary: var(--color-neutral-300);
+
+  // Text Opacity
+  --text-opacity-0: 0;
+  --text-opacity-5: 0.05;
+  --text-opacity-10: 0.1;
+  --text-opacity-20: 0.2;
+  --text-opacity-25: 0.25;
+  --text-opacity-30: 0.3;
+  --text-opacity-40: 0.4;
+  --text-opacity-50: 0.5;
+  --text-opacity-60: 0.6;
+  --text-opacity-70: 0.7;
+  --text-opacity-75: 0.75;
+  --text-opacity-80: 0.8;
+  --text-opacity-90: 0.9;
+  --text-opacity-95: 0.95;
+  --text-opacity-100: 1;
+
+  // Text Decoration
+  --text-decoration-none: none;
+  --text-decoration-underline: underline;
+  --text-decoration-line-through: line-through;
+
+  // Text Transform
+  --text-transform-none: none;
+  --text-transform-uppercase: uppercase;
+  --text-transform-lowercase: lowercase;
+  --text-transform-capitalize: capitalize;
+
+  // Text Overflow
+  --text-overflow-clip: clip;
+  --text-overflow-ellipsis: ellipsis;
+} 

@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://uat-api.example.com',
+  portalUrl: 'http://niic.gov.sa',
+  contentUrl: 'https://niic.gov.sa/CMS/api',
   version: '1.0.0'
 }; 

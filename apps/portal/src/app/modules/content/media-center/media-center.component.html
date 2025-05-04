@@ -1,0 +1,89 @@
+<app-header></app-header>
+<div class="mediaCenter-container">
+
+  <app-breadcrumbs [items]="[
+    { label: 'الرئيسية', url: '/ar/home' },
+    { label: 'المركز الإعلامي', url: '/ar/mediacenter' }
+  ]"></app-breadcrumbs>
+  <main class="news-content bg-white" [@routeAnimations]>
+    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
+    <section  class="container mx-auto px-6 py-16">
+      
+<!-- Grid wrapper -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+
+  <!-- Card 1 -->
+  <article class="flex flex-col items-center text-center -2xl shadow-lg bg-white p-6">
+    <!-- Icon wrapper -->
+    <div class="mb-4 flex items-center justify-center h-16 w-16 -full bg-indigo-100 text-indigo-600">
+      <!-- Academic Cap icon (Heroicons outline) -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 14v7m6.16-13.68L12 3 5.84 7.32A2 2 0 005 9.72l7 4 7-4a2 2 0 00-1.84-2.04z" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold mb-2">Card Title 1</h3>
+    <p class="text-gray-600 text-sm mb-4">Short description goes here.</p>
+    <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
+      Action
+    </a>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="flex flex-col items-center text-center -2xl shadow-lg bg-white p-6">
+    <div class="mb-4 flex items-center justify-center h-16 w-16 -full bg-green-100 text-green-600">
+      <!-- Chart Bar icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M18 15V9M13 15V5M8 15v-3" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold mb-2">Card Title 2</h3>
+    <p class="text-gray-600 text-sm mb-4">Another short description here.</p>
+    <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
+      Action
+    </a>
+  </article>
+
+  <!-- Card 3 -->
+  <article class="flex flex-col items-center text-center -2xl shadow-lg bg-white p-6">
+    <div class="mb-4 flex items-center justify-center h-16 w-16 -full bg-amber-100 text-amber-600">
+      <!-- Cog icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 15a3 3 0 100-6 3 3 0 000 6zM2 12a10 10 0 011.11-4.63l1.42.82a8 8 0 000 7.63l-1.42.82A10 10 0 012 12zm20 0a10 10 0 01-1.11 4.63l-1.42-.82a8 8 0 000-7.63l1.42-.82A10 10 0 0122 12z" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold mb-2">Card Title 3</h3>
+    <p class="text-gray-600 text-sm mb-4">Brief details go here.</p>
+    <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
+      Action
+    </a>
+  </article>
+
+  <!-- Card 4 -->
+  <article class="flex flex-col items-center text-center -2xl shadow-lg bg-white p-6">
+    <div class="mb-4 flex items-center justify-center h-16 w-16 -full hover:bg-[#1A1A1A] text-rose-600">
+      <!-- Shield Check icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9.5 11.5l1.5 1.5 3.5-3.5" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold mb-2">Card Title 4</h3>
+    <p class="text-gray-600 text-sm mb-4">Final card description.</p>
+    <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
+      Action
+    </a>
+  </article>
+
+</div>
+
+
+    </section>
+    </main>
+</div>  
+<app-footer></app-footer>

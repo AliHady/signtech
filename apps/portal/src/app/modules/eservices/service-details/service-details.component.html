@@ -1,6 +1,13 @@
-<div class="service-details">
-  <h2>Service Details</h2>
-  <div class="content">
-    <!-- Service details content will go here -->
-  </div>
-</div> 
+<app-header></app-header>
+<div class="news-container">
+
+  <app-breadcrumbs [items]="[
+    { label: 'الرئيسية', url: '/ar/home' },
+    { label: 'المركز الإعلامي', url: '/ar/mediacenter' }
+  ]"></app-breadcrumbs>
+  <main class="news-content bg-white" [@routeAnimations]>
+    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
+    <section  class="container mx-auto px-6 py-16">services details</section>
+    </main>
+</div>  
+<app-footer></app-footer>

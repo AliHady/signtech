@@ -29,7 +29,18 @@ export const appRoutes: Route[] = [
         path: 'aboutcenter',
         loadComponent: () => import('./modules/content/about-center/about-center.component').then(m => m.AboutCenterComponent)
       },
-
+      {
+        path: 'mediacenter/photolibrary',
+        loadComponent: () => import('./modules/content/photolibrary/photolibrary.component').then(m => m.PhotolibraryComponent)
+      }, 
+      {
+        path: 'mediacenter/videolibrary',
+        loadComponent: () => import('./modules/content/videolibrary/videolibrary.component').then(m => m.VideolibraryComponent)
+      },
+      {
+        path: 'mediacenter/events',
+        loadComponent: () => import('./modules/content/events/events.component').then(m => m.EventsComponent)
+      },
       {
         path: 'login',
         loadComponent: () => import('./modules/auth/login/login.component').then(m => m.LoginComponent)
@@ -53,6 +64,10 @@ export const appRoutes: Route[] = [
       {
         path: 'eservices/:id',
         loadComponent: () => import('./modules/eservices/service-details/service-details.component').then(m => m.ServiceDetailsComponent)
+      },
+      {
+        path: 'marsad',
+        loadComponent: () => import('./modules/marsad/marsad-home/marsad-home.component').then(m => m.MarsadHomeComponent)
       },
       
       // You can add more child routes here as needed

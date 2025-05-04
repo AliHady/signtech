@@ -5,10 +5,10 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 
 @Component({
-  selector: 'app-list-of-services',
+  selector: 'app-marsad-home',
   standalone: true,
   imports: [CommonModule, HeaderComponent, BreadcrumbsComponent, FooterComponent],
-  templateUrl: './list-of-services.component.html',
-  styleUrls: ['./list-of-services.component.scss']
+  templateUrl: './marsad-home.component.html',
+  styleUrls: ['./marsad-home.component.scss']
 })
-export class ListOfServicesComponent { } 
+export class MarsadHomeComponent { } 

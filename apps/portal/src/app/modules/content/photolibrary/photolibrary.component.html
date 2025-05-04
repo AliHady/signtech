@@ -8,8 +8,45 @@
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-    <section  class="container mx-auto px-6 py-16">
-        
+    <section class="container mx-auto px-6 py-16">
+      <!-- Loading State -->
+      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ngx-skeleton-loader *ngFor="let i of [1,2,3,4,5,6]" 
+          [theme]="{ height: '300px', width: '100%' }"
+          animation="pulse">
+        </ngx-skeleton-loader>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="text-center text-red-500 p-4">
+        {{ error }}
+      </div>
+
+      <!-- Images Grid -->
+      <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let image of paginatedImages" class="group relative overflow-hidden rounded-lg shadow-lg">
+          <img [src]="portalUrl + image.AlbumImage.replace('/CMS', '')" 
+               [alt]="image.Title"
+               class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+          <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div class="text-white text-center p-4">
+              <h3 class="text-lg font-semibold mb-2">{{ image.Title }}</h3>
+              <p class="text-sm">{{ image.Details }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div *ngIf="totalPages > 1" class="mt-8 flex justify-center gap-2">
+        <button *ngFor="let page of getPages()" 
+                (click)="onPageChange(page)"
+                [class.bg-blue-600]="currentPage === page"
+                [class.bg-gray-200]="currentPage !== page"
+                class="px-4 py-2 rounded text-white">
+          {{ page }}
+        </button>
+      </div>
     </section>
   </main>
 

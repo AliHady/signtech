@@ -22,13 +22,13 @@
       <!-- Events Grid -->
       <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div *ngFor="let event of paginatedEvents" 
-             class="event-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+             class="event-card bg-white -lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
              (click)="navigateToEventsDetails(event)">
           <div class="relative">
             <img [src]="portalUrl + event.EventImage" 
                  [alt]="event.Title"
                  class="w-full h-48 object-cover">
-            <div class="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm">
+            <div class="absolute top-2 right-2 bg-primary text-white px-3 py-1 -full text-sm">
               {{ event.EventStart | date:'dd/MM/yyyy' }}
             </div>
           </div>
@@ -46,7 +46,7 @@
                   (click)="onPageChange(page)"
                   [class.bg-primary]="currentPage === page"
                   [class.text-white]="currentPage === page"
-                  class="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100">
+                  class="px-4 py-2 -md border border-gray-300 hover:bg-gray-100">
             {{ page }}
           </button>
         </div>

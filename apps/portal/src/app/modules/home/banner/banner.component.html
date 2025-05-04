@@ -11,14 +11,14 @@
       {{ slides[currentSlideIndex].description }}
     </p>
     <a [href]="slides[currentSlideIndex].link" 
-       class="inline-block bg-gray-700 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors duration-300">
+       class="inline-block bg-gray-700 text-white px-6 py-3 -md hover:bg-gray-800 transition-colors duration-300">
       المزيد ↗
     </a>
 
     <!-- Dots -->
     <div class="flex justify-start space-x-2 space-x-reverse mt-6">
       @for (slide of slides; track slide; let i = $index) {
-        <span class="w-3 h-3 rounded-full cursor-pointer transition-colors duration-300"
+        <span class="w-3 h-3 -full cursor-pointer transition-colors duration-300"
               [ngClass]="{'bg-gray-700': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
               (click)="swiper?.slideTo(i)">
         </span>

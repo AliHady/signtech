@@ -32,7 +32,7 @@
       @if (!loading && !error) {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           @for (image of paginatedImages; track image) {
-            <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+            <div class="group relative overflow-hidden -lg shadow-lg cursor-pointer"
                  (click)="openLightbox(image)">
               <img [src]="portalUrl + image.AlbumImage.replace('/CMS', '')" 
                    [alt]="image.Title"
@@ -55,7 +55,7 @@
             <button (click)="onPageChange(page)"
                     [class.bg-blue-600]="currentPage === page"
                     [class.bg-gray-200]="currentPage !== page"
-                    class="px-4 py-2 rounded text-white">
+                    class="px-4 py-2  text-white">
               {{ page }}
             </button>
           }
@@ -116,10 +116,10 @@
             <div class="relative cursor-pointer" (click)="selectImage(0)">
               <img [src]="portalUrl + selectedImage.AlbumImage.replace('/CMS', '')" 
                    [alt]="selectedImage.Title"
-                   class="w-20 h-20 object-cover rounded"
+                   class="w-20 h-20 object-cover "
                    [class.border-2]="currentImageIndex === 0"
                    [class.border-blue-500]="currentImageIndex === 0">
-              <div class="absolute inset-0 bg-black bg-opacity-40 rounded opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 bg-black bg-opacity-40  opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <!-- Album images thumbnails -->
             @if (selectedImage.AlbumImages) {
@@ -127,10 +127,10 @@
                 <div class="relative cursor-pointer" (click)="selectImage(i + 1)">
                   <img [src]="portalUrl + image.replace('/CMS', '')" 
                        [alt]="selectedImage.Title + ' - ' + (i + 1)"
-                       class="w-20 h-20 object-cover rounded"
+                       class="w-20 h-20 object-cover "
                        [class.border-2]="currentImageIndex === (i + 1)"
                        [class.border-blue-500]="currentImageIndex === (i + 1)">
-                  <div class="absolute inset-0 bg-black bg-opacity-40 rounded opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="absolute inset-0 bg-black bg-opacity-40  opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               }
             }

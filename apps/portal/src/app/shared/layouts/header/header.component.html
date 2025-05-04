@@ -34,7 +34,7 @@
               }
             </div>
             @if (menuItem.children?.length) {
-              <div class="subMenuContainer z-[7] absolute right-0 mt-4 w-48 bg-white border rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-out"
+              <div class="subMenuContainer z-[7] absolute right-0 mt-4 w-48 bg-white border -xl shadow-lg overflow-hidden transition-all duration-300 ease-out"
                    [ngClass]="{
                      'opacity-100 scale-100 visible': submenuOpen[menuItem.title],
                      'opacity-0 scale-95 invisible': !submenuOpen[menuItem.title]
@@ -113,10 +113,10 @@
 
           <!-- Mobile Action Buttons -->
           <div class="pt-4 space-y-2">
-            <a href="#" class="block w-full px-4 py-2 bg-gray-700 text-white rounded-md text-center">
+            <a href="#" class="block w-full px-4 py-2 bg-gray-700 text-white -md text-center">
               تسجيل الدخول
             </a>
-            <a href="#" class="block w-full px-4 py-2 border border-gray-700 text-gray-700 rounded-md text-center">
+            <a href="#" class="block w-full px-4 py-2 border border-gray-700 text-gray-700 -md text-center">
               طلب صلاحية
             </a>
           </div>
@@ -125,7 +125,7 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3 text-sm">
-        <a href="#" class="px-4 py-2 bg-gray-700 text-white rounded-md flex items-center gap-1">
+        <a href="#" class="px-4 py-2 bg-gray-700 text-white -md flex items-center gap-1">
           تسجيل الدخول
           <span>↖</span>
         </a>

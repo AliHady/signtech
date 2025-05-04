@@ -13,7 +13,7 @@
         <!-- Loading state -->
         @if (loading) {
           @for (item of [1,2,3,4,5,6]; track item) {
-            <article class="flex flex-col bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            <article class="flex flex-col bg-white -lg shadow-sm hover:shadow-md transition-all duration-300">
               <!-- Arrow + title row skeleton -->
               <div class="flex items-center p-4 border-b border-gray-100">
                 <div class="flex-none w-28 h-20">
@@ -65,7 +65,7 @@
         <!-- Error state -->
         @if (error) {
           <div class="col-span-full text-center py-12">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
+            <div class="inline-flex items-center justify-center w-16 h-16 -full bg-red-100 mb-4">
               <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -76,7 +76,7 @@
 
         <!-- News articles -->
         @for (item of paginatedNews; track item.Id) {
-          <article class="flex flex-col bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+          <article class="flex flex-col bg-white -lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
             <!-- Main image -->
            @if (item.RollupImage) {
               <div class="relative h-64 overflow-hidden">
@@ -159,7 +159,7 @@
                 [class.bg-[#374151]]="currentPage === page"
                 [class.text-white]="currentPage === page"
                 [class.border-[#374151]]="currentPage === page"
-                class="px-4 py-2 rounded-md hover:bg-gray-100 transition-all duration-300 min-w-[40px] border border-transparent"
+                class="px-4 py-2 -md hover:bg-gray-100 transition-all duration-300 min-w-[40px] border border-transparent"
                 [attr.aria-current]="currentPage === page ? 'page' : null"
               >
                 {{ page }}

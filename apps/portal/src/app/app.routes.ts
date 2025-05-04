@@ -14,6 +14,22 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
       },
       {
+        path: 'aboutus/aboutcenter',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'aboutus/strategicobjectives',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'aboutus/executivecommittee',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'aboutus/organizationstructure',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
         path: 'mediacenter',
         loadComponent: () => import('./modules/content/media-center/media-center.component').then(m => m.MediaCenterComponent)
       },

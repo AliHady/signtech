@@ -7,6 +7,7 @@ import { MediaCenterComponent } from './media-center/media-center.component';
 import { PhotolibraryComponent } from './photolibrary/photolibrary.component';
 import { VideolibraryComponent } from './videolibrary/videolibrary.component';
 import { EventsComponent } from './events/events.component';
+import { CMSDataComponent } from './cms-data/cms-data.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -14,6 +15,7 @@ import { EventsComponent } from './events/events.component';
     RouterModule,
     NewsComponent,
     NewsDetailsComponent,
+    CMSDataComponent,
     MediaCenterComponent,
     PhotolibraryComponent,
     VideolibraryComponent,

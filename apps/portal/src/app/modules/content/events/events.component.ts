@@ -108,29 +108,29 @@ export class EventsComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load news. Please try again later.';
+        this.error = 'Failed to load Events. Please try again later.';
         this.loading = false;
-        console.error('Error loading news:', err);
+        console.error('Error loading Events:', err);
       }
     });
   }
 
-  updatePaginatedNews(): void {
+  updatePaginatedEvents(): void {
     this.loadEvents();
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.updatePaginatedNews();
+    this.updatePaginatedEvents();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-  // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
-  navigateToNewsDetails(newsItem: EventItem): void { 
-    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'events', newsItem.Title], {
+ 
+  navigateToEventsDetails(eventItem: EventItem): void { 
+    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'events', eventItem.Title], {
   
     });
   }

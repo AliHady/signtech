@@ -105,23 +105,28 @@
                   </svg>
                 }
               </div>
-              <div class="pr-4 mt-2 space-y-2" [ngClass]="{'hidden': !mobileSubmenuOpen[menuItem.title]}">
-                @for (child of menuItem.children; track child) {
-                  <a [routerLink]="[currentLang, child.url.split('/').pop()]" 
-                     class="block hover:text-black">
-                    {{ child.title }}
-                  </a>
-                }
-              </div>
+              @if (menuItem.children?.length) {
+                <div class="pr-4 mt-2 space-y-2" 
+                     [ngClass]="{'hidden': !mobileSubmenuOpen[menuItem.title]}"
+                     (click)="$event.stopPropagation()">
+                  @for (child of menuItem.children; track child) {
+                    <a [routerLink]="getLastSegment(child.url)" 
+                       class="block px-4 py-2 text-[#1A1A1A] hover:bg-gray-100 no-underline border-b border-gray-100 last:border-b-0"
+                       (click)="toggleMobileMenu()">
+                      {{ child.title }}
+                    </a>
+                  }
+                </div>
+              }
             </div>
           }
 
           <!-- Mobile Action Buttons -->
           <div class="pt-4 space-y-2">
-            <a href="#" class="block w-full px-4 py-2 bg-gray-700 text-white -md text-center">
+            <a href="#" class="block w-full px-4 py-2 bg-gray-700 text-white rounded-md text-center">
               تسجيل الدخول
             </a>
-            <a href="#" class="block w-full px-4 py-2 border border-gray-700 text-gray-700 -md text-center">
+            <a href="#" class="block w-full px-4 py-2 border border-gray-700 text-gray-700 rounded-md text-center">
               طلب صلاحية
             </a>
           </div>

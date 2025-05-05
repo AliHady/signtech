@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations'; 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TranslationService } from '@nimic/translations';
@@ -130,6 +130,7 @@ export class NewsComponent implements OnInit {
   }
   // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
   navigateToNewsDetails(newsItem: News): void { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
       state: { id: newsItem.Id }
     });

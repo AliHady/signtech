@@ -7,13 +7,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { News } from '../../home/models/news.model';
+import { EventItem } from '../../home/models/events.model';
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
 
-interface NewsCache {
+interface EventsCache{
   [key: number]: {
-    data: News[];
+    data: EventItem[];
     timestamp: number;
   };
 }
@@ -35,7 +35,7 @@ interface NewsCache {
 })
 export class EventsComponent implements OnInit {
   currentLang = 'en';
-  news: News[] = [];
+  event: EventItem[] = [];
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
@@ -45,10 +45,10 @@ export class EventsComponent implements OnInit {
   itemsPerPage = 9;
   totalPages = 0; 
   totalItems = 0;
-  paginatedNews: News[] = [];
+  paginatedEvents: EventItem[] = [];
 
   // Cache variables
-  private newsCache: NewsCache = {};
+  private eventsCache: EventsCache = {};
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
   constructor(
@@ -67,7 +67,7 @@ export class EventsComponent implements OnInit {
         this.translationService.setLanguage(lang);
       }
     });
-    this.loadNews();
+    this.loadEvents();
   }
 
   getRoute(route: string): string {
@@ -75,63 +75,63 @@ export class EventsComponent implements OnInit {
   }
 
   private isCacheValid(page: number): boolean {
-    const cachedData = this.newsCache[page];
+    const cachedData = this.eventsCache[page];
     if (!cachedData) return false;
     
     const now = Date.now();
     return (now - cachedData.timestamp) < this.CACHE_DURATION;
   }
 
-  private loadNews(): void {
+  private loadEvents(): void {
     if (this.isCacheValid(this.currentPage)) {
-      const cachedData = this.newsCache[this.currentPage];
-      this.news = cachedData.data;
-      this.paginatedNews = this.news;
+      const cachedData = this.eventsCache[this.currentPage];
+      this.event = cachedData.data;
+      this.paginatedEvents = this.event;
       this.loading = false;
       return;
     }
 
     this.loading = true;
-    this.contentService.getAllNews(this.currentPage, this.itemsPerPage).subscribe({
+    this.contentService.getAllEvents(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
-        this.news = response.Items;
+        this.event = response.Items;
         this.totalItems = response.TotalItems;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-        this.paginatedNews = this.news;
+        this.paginatedEvents = this.event;
         
         // Cache the fetched data
-        this.newsCache[this.currentPage] = {
-          data: this.news,
+        this.eventsCache[this.currentPage] = {
+          data: this.event,
           timestamp: Date.now()
         };
         
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load news. Please try again later.';
+        this.error = 'Failed to load Events. Please try again later.';
         this.loading = false;
-        console.error('Error loading news:', err);
+        console.error('Error loading Events:', err);
       }
     });
   }
 
-  updatePaginatedNews(): void {
-    this.loadNews();
+  updatePaginatedEvents(): void {
+    this.loadEvents();
   }
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.updatePaginatedNews();
+    this.updatePaginatedEvents();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-  // <a [routerLink]="['/', currentLang, 'mediacenter', 'news']">News</a>
-  navigateToNewsDetails(newsItem: News): void { 
-    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
-      state: { id: newsItem.Id }
+ 
+  navigateToEventsDetails(eventItem: EventItem): void { 
+    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'events', eventItem.Title], {
+  
     });
   }
 } 

@@ -4,138 +4,72 @@
   <app-breadcrumbs [items]="[
     { label: 'الرئيسية', url: '/ar/home' },
     { label: 'المركز الإعلامي', url: '/ar/mediacenter' },
-    { label: 'أخبار المركز' }
+    { label:'الأحداث والفعاليات' }
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-6 py-16">
-      <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Loading state -->
-        @if (loading) {
-          @for (item of [1,2,3,4,5,6]; track item) {
-            <article class="flex flex-col">
-              <!-- Arrow + title row skeleton -->
-              <div class="flex items-center">
-                <div class="flex-none w-28 h-20">
-                  <ngx-skeleton-loader
-                    [theme]="{ height: '80px', width: '112px', 'background-color': '#374151' }"
-                    [count]="1"
-                    [animation]="'progress'">
-                  </ngx-skeleton-loader>
-                </div>
-                <div class="flex-grow px-8 py-4">
-                  <ngx-skeleton-loader
-                    [theme]="{ height: '24px', width: '100%', 'background-color': '#e5e7eb' }"
-                    [count]="2"
-                    [animation]="'progress'">
-                  </ngx-skeleton-loader>
-                </div>
-              </div>
-
-              <!-- Description skeleton -->
-              <div class="mt-4">
-                <ngx-skeleton-loader
-                  [theme]="{ height: '16px', width: '100%', 'background-color': '#e5e7eb' }"
-                  [count]="4"
-                  [animation]="'progress'">
-                </ngx-skeleton-loader>
-              </div>
-
-              <!-- Date skeleton -->
-              <div class="mt-6">
-                <ngx-skeleton-loader
-                  [theme]="{ height: '14px', width: '100px', 'background-color': '#e5e7eb' }"
-                  [count]="1"
-                  [animation]="'progress'">
-                </ngx-skeleton-loader>
-              </div>
-
-              <!-- Read more skeleton -->
-              <div class="mt-4">
-                <ngx-skeleton-loader
-                  [theme]="{ height: '20px', width: '100px', 'background-color': '#e5e7eb' }"
-                  [count]="1"
-                  [animation]="'progress'">
-                </ngx-skeleton-loader>
-              </div>
-            </article>
+      <!-- Loading Skeleton -->
+      @if (loading) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          @for (i of [1,2,3,4,5,6]; track i) {
+            <ngx-skeleton-loader
+              [theme]="{ height: '300px', 'border-radius': '8px' }"
+              [count]="1"
+              [animation]="'pulse'">
+            </ngx-skeleton-loader>
           }
-        }
+        </div>
+      }
 
-        <!-- Error state -->
-        @if (error) {
-          <div class="col-span-full text-center py-8">
-            <p class="text-red-600">{{ error }}</p>
-          </div>
-        }
-
-        <!-- News articles -->
-        @for (item of paginatedNews; track item.Id) {
-          <article class="flex flex-col">
-            <!-- Main image -->
-         <!--    @if (item.NewsImage) {
-              <img
-                [src]="portalUrl + item.NewsImage.replace('/CMS', '')"
-                [alt]="item.Title"
-                class="w-full h-96 object-cover rounded"
-              />
-            } -->
-
-            <!-- Arrow + title row -->
-            <div class="flex items-center">
-              <!-- arrow square -->
-              <button
-                type="button"
-                class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center"
-                aria-label="السابق"
-              ></button>
-
-              <!-- title -->
-              <h3 class="flex-grow px-8 py-4 text-2xl font-semibold leading-snug">
-                {{ item.Title }}
-              </h3>
+      <!-- Events Grid -->
+      @if (!loading) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          @for (event of paginatedEvents; track event) {
+            <div class="event-card bg-white -lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                 (click)="navigateToEventsDetails(event)">
+              <div class="relative">
+                <img [src]="portalUrl + event.EventImage" 
+                     [alt]="event.Title"
+                     class="w-full h-48 object-cover">
+                <div class="absolute top-2 right-2 bg-primary text-white px-3 py-1 -full text-sm">
+                  {{ event.EventStart | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-semibold mb-2">{{ event.Title }}</h3>
+                <p class="text-gray-600 line-clamp-2">{{ event.ContentSummary }}</p>
+              </div>
             </div>
+          }
+        </div>
+      }
 
-            <!-- description -->
-            <p class="mt-4 text-gray-700 leading-7">
-              {{ item.ContentSummary }}
-            </p>
-
-            <!-- date -->
-            <time class="date mt-6 text-sm text-gray-500 inline-block">
-              {{ item.NewsHigriDate }}
-            </time>
-
-            @if (item.NewsLink) {
-              <a 
-                (click)="navigateToNewsDetails(item)"
-                (keyup.enter)="navigateToNewsDetails(item)"
-                tabindex="0"
-                class="read-more mt-4 cursor-pointer"
-              >
-                Read More
-              </a>
-            }
-          </article>
-        }
-      </div>
-      Pagination here
-      <!-- Pagination Controls -->
-      @if (totalPages > 1) {
-        <div class="flex justify-center mt-8">
-          <nav class="flex items-center space-x-2" aria-label="Pagination">
+      <!-- Pagination -->
+      @if (!loading && totalPages > 1) {
+        <div class="flex justify-center mt-12">
+          <nav class="flex items-center" aria-label="Pagination">
             @for (page of getPages(); track page) {
               <button
                 (click)="onPageChange(page)"
-                [class.bg-[#374151]]="currentPage === page"
+                [class.bg-[#344549]]="currentPage === page"
                 [class.text-white]="currentPage === page"
-                class="px-4 py-2 rounded-md hover:bg-gray-200"
+                [class.border-[#344549]]="currentPage === page"
+                [class.pointer-events-none]="currentPage === page"
+                class="px-4 py-2 hover:bg-gray-100 transition-all duration-300 min-w-[40px] border border-transparent mx-1.5 cursor-pointer"
                 [attr.aria-current]="currentPage === page ? 'page' : null"
               >
                 {{ page }}
               </button>
             }
           </nav>
+        </div>
+      }
+
+      <!-- Error Message -->
+      @if (error) {
+        <div class="text-center text-red-500 mt-4">
+          {{ error }}
         </div>
       }
     </section>

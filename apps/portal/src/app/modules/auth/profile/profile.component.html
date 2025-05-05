@@ -3,7 +3,11 @@
     <div class="profile-header">
       <h2 class="profile-title">الملف الشخصي</h2>
       <button class="btn btn-edit" (click)="toggleEdit()">
-        {{ isEditing ? 'إلغاء التعديل' : 'تعديل الملف الشخصي' }}
+        @if (isEditing) {
+          إلغاء التعديل
+        } @else {
+          تعديل الملف الشخصي
+        }
       </button>
     </div>
 
@@ -17,9 +21,13 @@
           class="form-control"
           [class.is-invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
         />
-        <div class="invalid-feedback" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
-          <span *ngIf="profileForm.get('name')?.errors?.['required']">الاسم مطلوب</span>
-        </div>
+        @if (profileForm.get('name')?.invalid && profileForm.get('name')?.touched) {
+          <div class="invalid-feedback">
+            @if (profileForm.get('name')?.errors?.['required']) {
+              <span>الاسم مطلوب</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-group">
@@ -31,10 +39,16 @@
           class="form-control"
           [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
         />
-        <div class="invalid-feedback" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
-          <span *ngIf="profileForm.get('email')?.errors?.['required']">البريد الإلكتروني مطلوب</span>
-          <span *ngIf="profileForm.get('email')?.errors?.['email']">يرجى إدخال بريد إلكتروني صحيح</span>
-        </div>
+        @if (profileForm.get('email')?.invalid && profileForm.get('email')?.touched) {
+          <div class="invalid-feedback">
+            @if (profileForm.get('email')?.errors?.['required']) {
+              <span>البريد الإلكتروني مطلوب</span>
+            }
+            @if (profileForm.get('email')?.errors?.['email']) {
+              <span>يرجى إدخال بريد إلكتروني صحيح</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-group">
@@ -46,10 +60,16 @@
           class="form-control"
           [class.is-invalid]="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched"
         />
-        <div class="invalid-feedback" *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched">
-          <span *ngIf="profileForm.get('phone')?.errors?.['required']">رقم الهاتف مطلوب</span>
-          <span *ngIf="profileForm.get('phone')?.errors?.['pattern']">يرجى إدخال رقم هاتف صحيح (10 أرقام)</span>
-        </div>
+        @if (profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched) {
+          <div class="invalid-feedback">
+            @if (profileForm.get('phone')?.errors?.['required']) {
+              <span>رقم الهاتف مطلوب</span>
+            }
+            @if (profileForm.get('phone')?.errors?.['pattern']) {
+              <span>يرجى إدخال رقم هاتف صحيح (10 أرقام)</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-group">
@@ -82,11 +102,17 @@
         ></textarea>
       </div>
 
-      <div class="form-actions" *ngIf="isEditing">
-        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || isLoading">
-          {{ isLoading ? 'جاري الحفظ...' : 'حفظ التغييرات' }}
-        </button>
-      </div>
+      @if (isEditing) {
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || isLoading">
+            @if (isLoading) {
+              جاري الحفظ...
+            } @else {
+              حفظ التغييرات
+            }
+          </button>
+        </div>
+      }
     </form>
   </div>
 </div> 

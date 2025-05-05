@@ -22,7 +22,7 @@ interface MenuItem {
 })
 export class HeaderComponent implements OnInit {
   isMenuOpen = false;
-  currentLang = 'en';
+  currentLang = 'ar';
   isMobileMenuOpen = false;
   menuItems: MenuItem[] = [];
   loading = true;

@@ -24,7 +24,7 @@ import { ScrollIndicatorComponent } from '@nimic/shared/ui';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'portal';
-  currentLang = 'en';
+  currentLang = 'ar';
   isLoading = false;
   private paramsSubscription: Subscription | undefined;
 

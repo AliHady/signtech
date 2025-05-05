@@ -3,11 +3,62 @@
 
   <app-breadcrumbs [items]="[
     { label: 'الرئيسية', url: '/ar/home' },
-    { label: 'المركز الإعلامي', url: '/ar/eservices' }
+    { label: 'قائمة الخدمات', url: '/ar/eservices' }
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-    <section  class="container mx-auto px-6 py-16">list of services</section>
-    </main>
+    <section class="container mx-auto px-6 py-16">
+      <div class="list-of-services">
+        <h2 class="text-2xl font-bold mb-8 text-right">قائمة الخدمات</h2>
+        
+        <!-- Loading skeleton -->
+        <div *ngIf="loading" class="services-grid">
+          <div *ngFor="let i of [1,2,3,4,5,6]" class="service-card skeleton">
+            <div class="skeleton-image"></div>
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+          </div>
+        </div>
+
+        <!-- Error message -->
+        <div *ngIf="error" class="error-message text-red-500 text-center p-4">
+          {{ error }}
+        </div>
+
+        <!-- Services grid -->
+        <div *ngIf="!loading && !error" class="services-grid">
+          <div *ngFor="let service of paginatedServices" 
+               class="service-card cursor-pointer"
+               (click)="navigateToNewsDetails(service)">
+            <div class="service-image">
+              <img *ngIf="service.Image" [src]="portalUrl + service.Image" [alt]="service.Title">
+              <div *ngIf="!service.Image" class="image-placeholder">
+                <i class="fas fa-cogs"></i>
+              </div>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">{{ service.Title }}</h3>
+              <p class="service-description" *ngIf="service.ContentSummary">
+                {{ service.ContentSummary }}
+              </p>
+              <div class="service-footer">
+                <span class="service-link">View Details <i class="fas fa-arrow-left"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div *ngIf="totalPages > 1" class="pagination mt-8 flex justify-center gap-2">
+          <button *ngFor="let page of getPages()"
+                  [class.active]="currentPage === page"
+                  (click)="onPageChange(page)"
+                  class="px-4 py-2 rounded-md border hover:bg-gray-100">
+            {{ page }}
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>  
 <app-footer></app-footer>

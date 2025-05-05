@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
-    //  this.fetchMenuItems();
+     this.fetchMenuItems();
     });
 
     // Initialize translations
@@ -68,11 +68,11 @@ export class HeaderComponent implements OnInit {
     //     this.translationService.setLanguage(lang);
     //   }
     // });
-    this.fetchMenuItems(); 
+    //this.fetchMenuItems(); 
   }
 
   private fetchMenuItems() {
-    console.log("fetchMenuItems called");
+    //console.log("fetchMenuItems called");
   
     this.loading = true;
     this.error = '';
@@ -91,12 +91,12 @@ export class HeaderComponent implements OnInit {
             url: child.Url
           }))
         }));
-        console.log(
+      /*   console.log(
           '%c MENU %c %o',
           'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
           '',                     
           this.menuItems       
-        );
+        ); */
         this.loading = false;
       },
       error: (error: Error) => {

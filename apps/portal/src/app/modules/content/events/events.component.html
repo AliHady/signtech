@@ -8,7 +8,7 @@
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-    <section  class="container mx-auto px-6 py-16">
+    <section  class="container mx-auto px-1 py-8">
       <!-- Loading Skeleton -->
       @if (loading) {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -33,7 +33,7 @@
                      [alt]="event.Title"
                      class="w-full h-48 object-cover">
                 <div class="absolute top-2 right-2 bg-primary text-white px-3 py-1 -full text-sm">
-                  {{ event.EventStart | date:'dd/MM/yyyy' }}
+                  {{ event.EventStart }}
                 </div>
               </div>
               <div class="p-4">

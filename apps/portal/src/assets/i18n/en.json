@@ -77,5 +77,36 @@
           "DESCRIPTION": "Electronically surveying and collecting factory data easily by entering factory information and data."
         }
       }
+    },
+    "MEDIA_CENTER": {
+      "TITLE": "Media Center",
+      "CARDS": {
+        "CARD1": {
+          "TITLE": "Card Title 1",
+          "DESCRIPTION": "Short description goes here",
+          "ACTION": "Action"
+        },
+        "CARD2": {
+          "TITLE": "Card Title 2",
+          "DESCRIPTION": "Another short description here",
+          "ACTION": "Action"
+        },
+        "CARD3": {
+          "TITLE": "Card Title 3",
+          "DESCRIPTION": "Brief details go here",
+          "ACTION": "Action"
+        },
+        "CARD4": {
+          "TITLE": "Card Title 4",
+          "DESCRIPTION": "Final card description",
+          "ACTION": "Action"
+        }
+      }
+    },
+    "FOOTER": {
+      "PARTNERS": "Partners",
+      "IMPORTANT_LINKS": "Important Links",
+      "MIM_COPYRIGHT": "One of the initiatives of the Ministry of Industry and Mineral Resources",
+      "COPYRIGHT": "© 2025 All rights reserved to the National Center for Industrial and Mining Information"
     }
   }

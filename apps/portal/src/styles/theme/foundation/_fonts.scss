@@ -91,15 +91,31 @@
   font-display: swap;
 } 
 
+
+
+
 @font-face {
-  font-family: 'Lyon';
-  src: url('/assets/fonts/Lyon/Lyon.eot');
-  src: url('/assets/fonts/Lyon/Lyon.eot?#iefix') format('embedded-opentype'),
-      url('/assets/fonts/Lyon/Lyon.woff2') format('woff2'),
-      url('/assets/fonts/Lyon/Lyon.woff') format('woff'),
-      url('/assets/fonts/Lyon/Lyon.ttf') format('truetype'),
-      url('/assets/fonts/Lyon/Lyon.svg#Lyon') format('svg');
+  font-family: 'Lyon Arabic Text';
+  src: uurl('/assets/fonts/Lyon/LyonArabicText-Regular.eot');
+  src: url('/assets/fonts/Lyon/LyonArabicText-Regular.eot?#iefix') format('embedded-opentype'),
+      url('/assets/fonts/Lyon/LyonArabicText-Regular.woff2') format('woff2'),
+      url('/assets/fonts/Lyon/LyonArabicText-Regular.woff') format('woff'),
+      url('/assets/fonts/Lyon/LyonArabicText-Regular.ttf') format('truetype'),
+      url('/assets/fonts/Lyon/LyonArabicText-Regular.svg#LyonArabicText-Regular') format('svg');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lyon Arabic Text';
+  src: url('/assets/fonts/Lyon/LyonArabicText-Semibold.eot');
+  src: url('/assets/fonts/Lyon/LyonArabicText-Semibold.eot?#iefix') format('embedded-opentype'),
+      url('/assets/fonts/Lyon/LyonArabicText-Semibold.woff2') format('woff2'),
+      url('/assets/fonts/Lyon/LyonArabicText-Semibold.woff') format('woff'),
+      url('/assets/fonts/Lyon/LyonArabicText-Semibold.ttf') format('truetype'),
+      url('/assets/fonts/Lyon/LyonArabicText-Semibold.svg#LyonArabicText-Semibold') format('svg');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }

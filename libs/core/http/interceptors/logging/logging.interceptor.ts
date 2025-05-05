@@ -17,35 +17,35 @@ export class LoggingInterceptor implements HttpInterceptor {
     const startTime = Date.now();
     const requestId = Math.random().toString(36).substring(7);
 
-    console.log(`[${requestId}] Request: ${request.method} ${request.url}`, {
+  /*   console.log(`[${requestId}] Request: ${request.method} ${request.url}`, {
       headers: request.headers,
       body: request.body
-    });
+    }); */
 
     return next.handle(request).pipe(
       tap(
         (event) => {
           if (event instanceof HttpResponse) {
             const elapsedTime = Date.now() - startTime;
-            console.log(
+         /*    console.log(
               `[${requestId}] Response: ${request.method} ${request.url}`,
               {
                 status: event.status,
                 elapsedTime: `${elapsedTime}ms`,
                 body: event.body
               }
-            );
+            ); */
           }
         },
         (error) => {
           const elapsedTime = Date.now() - startTime;
-          console.error(
+         /*  console.error(
             `[${requestId}] Error: ${request.method} ${request.url}`,
             {
               error,
               elapsedTime: `${elapsedTime}ms`
             }
-          );
+          ); */
         }
       )
     );

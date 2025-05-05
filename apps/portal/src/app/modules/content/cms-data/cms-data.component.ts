@@ -8,6 +8,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
 import { Content } from '../models/content.model';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface ContentCache {
   [route: string]: {
@@ -21,7 +22,15 @@ interface ContentCache {
   standalone: true,
   imports: [CommonModule, RouterModule, SharedModule, TranslateModule, NgxSkeletonLoaderModule],
   templateUrl: './cms-data.component.html',
-  styleUrls: ['./cms-data.component.scss']
+  styleUrls: ['./cms-data.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('0.3s ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class CMSDataComponent implements OnInit {
   currentLang = 'ar';
@@ -75,9 +84,11 @@ export class CMSDataComponent implements OnInit {
     this.contentService.getContent(route).subscribe({
       next: (response) => {
         this.content = response;
-        this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
+        if (this.content?.Content) {
+          this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
+        }
 
-        console.log(this.content.Content)
+        //console.log(this.content.Content)
 
         // Cache the fetched data
         this.contentCache[route] = {

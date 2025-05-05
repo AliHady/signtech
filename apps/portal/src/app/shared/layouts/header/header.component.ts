@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private fetchMenuItems() {
-    console.log("fetchMenuItems called");
+    //console.log("fetchMenuItems called");
   
     this.loading = true;
     this.error = '';

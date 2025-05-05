@@ -17,10 +17,10 @@ export class ContentService {
   private apiUrlEvents = `${environment.contentUrl}/events`;
   private apiUrlVideos = `${environment.contentUrl}/videolibrary`;
   private apiUrlPhotos = `${environment.contentUrl}/photolibrary`;
+  private apiUrlContent = `${environment.contentUrl}/content`;
 
   private latestNewsCache = new BehaviorSubject<NewsResponse | null>(null);
 
-  constructor(private cmsDataService: CmsDataService) { }
   constructor(private cmsDataService: CmsDataService) { }
 
   getAllNews(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
@@ -53,9 +53,8 @@ export class ContentService {
   }
 
   getContent(route: string): Observable<Content> {
-    let apiUrl = `${environment.contentUrl}/content`;
     return this.cmsDataService.getPageContent<Content>(
-      apiUrl,
+      this.apiUrlContent,
       route
     );
   }

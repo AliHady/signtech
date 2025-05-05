@@ -8,6 +8,7 @@ import { VideoResponse } from '../../home/models/video.model';
 import { EventsResponse } from '../../home/models/events.model';
 import { ImageGalleryResponse } from '../../home/models/images.model';
 import { Content } from '../models/content.model';
+import { Partners } from '../../../shared/models/partners.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class ContentService {
       pageSize
     );
   }
+  
   getAllEvents(pageNumber = 1, pageSize = 9): Observable<EventsResponse> {
     return this.cmsDataService.getCmsPaginatedData<EventsResponse>(
       this.apiUrlEvents,
@@ -37,6 +39,7 @@ export class ContentService {
       pageSize
     );
   }
+  
   getAllVideos(pageNumber = 1, pageSize = 9): Observable<VideoResponse> {
     return this.cmsDataService.getCmsPaginatedData<VideoResponse>(
       this.apiUrlVideos,
@@ -44,6 +47,7 @@ export class ContentService {
       pageSize
     );
   }
+
   getAllImages(pageNumber = 1, pageSize = 9): Observable<ImageGalleryResponse> {
     return this.cmsDataService.getCmsPaginatedData<ImageGalleryResponse>(
       this.apiUrlPhotos,

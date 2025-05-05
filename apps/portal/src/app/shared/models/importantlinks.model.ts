@@ -7,6 +7,4 @@ export interface ImportantLink {
     ShowInHome: boolean;
 }
 
-export interface ImportantLinks {
-    links: ImportantLink[];
-}
+export type ImportantLinks = ImportantLink[];

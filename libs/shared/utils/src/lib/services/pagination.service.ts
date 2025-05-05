@@ -67,12 +67,12 @@ export class CmsDataService {
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
       switchMap(currentLang => {
-        // if (cache) {
-        //   const cachedData = cache.value;
-        //   if (cachedData) {
-        //     return of(cachedData);
-        //   }
-        // }
+        if (cache) {
+          const cachedData = cache.value;
+          if (cachedData) {
+            return of(cachedData);
+          }
+        }
 
         let url = `${endpoint}`;
         const params: string[] = [];

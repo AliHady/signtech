@@ -13,11 +13,9 @@
         </p>
       </div>
 
-
-      <!-- الشركاء -->
       <div class="flex-1">
-        <h2 class="text-xl font-bold mb-4 text-right">{{ 'FOOTER.PARTNERS' | translate }}</h2>
-        <ul class="space-y-2 text-right">
+        <h2 class="text-xl font-bold mb-4">{{ 'FOOTER.PARTNERS' | translate }}</h2>
+        <ul class="space-y-2">
           @for (partner of partners; track partner) {
           <li><a href="{{partner.PartnerLink}}"
               class="text-white no-underline hover:text-[#BD9F9D] transition-colors duration-300">{{partner.Title}}</a>
@@ -26,10 +24,9 @@
         </ul>
       </div>
 
-      <!-- روابط تهمك -->
       <div class="flex-1">
-        <h2 class="text-xl font-bold mb-4 text-right">{{ 'FOOTER.IMPORTANT_LINKS' | translate }}</h2>
-        <ul class="space-y-2 text-right">
+        <h2 class="text-xl font-bold mb-4">{{ 'FOOTER.IMPORTANT_LINKS' | translate }}</h2>
+        <ul class="space-y-2">
           @for (importantLink of importantLinks; track importantLink) {
           <li><a href="{{importantLink.Link}}"
               class="text-white no-underline hover:text-[#BD9F9D] transition-colors duration-300">{{importantLink.Title}}</a>
@@ -40,7 +37,6 @@
 
     </div>
 
-    <!-- الفاصل -->
     <div
       class="border-t border-solid border-l-0 border-r-0 border-b-0 border-t-[#41595f] mt-8 pt-4 text-center text-sm">
       {{ 'FOOTER.COPYRIGHT' | translate }}

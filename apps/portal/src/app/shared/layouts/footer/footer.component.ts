@@ -5,11 +5,12 @@ import { Partner } from '../../models/partners.model';
 import { FooterService } from '../../services/footer.service';
 import { ImportantLink } from '../../models/importantlinks.model';
 import { LanguageService } from '../../services/language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

@@ -91,12 +91,12 @@ export class HeaderComponent implements OnInit {
             url: child.Url
           }))
         }));
-        console.log(
+      /*   console.log(
           '%c MENU %c %o',
           'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
           '',                     
           this.menuItems       
-        );
+        ); */
         this.loading = false;
       },
       error: (error: Error) => {

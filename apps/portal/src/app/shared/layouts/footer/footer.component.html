@@ -1,20 +1,22 @@
 <footer class="bg-[#344549] text-white py-8">
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row justify-between gap-8">
-      <!-- شعار الوزارة -->
+      {{currentLanguage}}
       <div class="flex-1 flex flex-col items-center justify-center text-center">
         @if (currentLanguage === 'ar') {
-          <img src="/assets/images/MOI_Gray_ Flat version_AR.svg" alt="MIM Logo">
-        } @else {
-          <img src="/assets/images/MOI_Gray_ Flat version_EN.svg" alt="MIM Logo">
+          <img class="mimFooterLogo" src="/assets/images/MOI_Gray_ Flat version_AR.svg" alt="MIM Logo">
+        } @else if (currentLanguage === 'en') {
+          <img class="mimFooterLogo" src="/assets/images/MOI_Gray_ Flat version_EN.svg" alt="MIM Logo">
         }
-        <p class="text-xs mt-2">إحدى مبادرات الوزارة لتمكين الصناعة والثروة المعدنية</p>
+        <p class="text-xs mt-2">
+          {{ 'FOOTER.MIM_COPYRIGHT' | translate }}
+        </p>
       </div>
 
 
       <!-- الشركاء -->
       <div class="flex-1">
-        <h2 class="text-xl font-bold mb-4 text-right">الشركاء</h2>
+        <h2 class="text-xl font-bold mb-4 text-right">{{ 'FOOTER.PARTNERS' | translate }}</h2>
         <ul class="space-y-2 text-right">
           @for (partner of partners; track partner) {
           <li><a href="{{partner.PartnerLink}}"
@@ -26,7 +28,7 @@
 
       <!-- روابط تهمك -->
       <div class="flex-1">
-        <h2 class="text-xl font-bold mb-4 text-right">روابط تهمك</h2>
+        <h2 class="text-xl font-bold mb-4 text-right">{{ 'FOOTER.IMPORTANT_LINKS' | translate }}</h2>
         <ul class="space-y-2 text-right">
           @for (importantLink of importantLinks; track importantLink) {
           <li><a href="{{importantLink.Link}}"
@@ -41,7 +43,7 @@
     <!-- الفاصل -->
     <div
       class="border-t border-solid border-l-0 border-r-0 border-b-0 border-t-[#41595f] mt-8 pt-4 text-center text-sm">
-      جميع الحقوق محفوظة المركز الوطني للمعلومات الصناعية والتعدينية
+      {{ 'FOOTER.COPYRIGHT' | translate }}
     </div>
   </div>
 </footer>

@@ -102,5 +102,12 @@
           "ACTION": "Action"
         }
       }
+    },
+    "FOOTER": {
+      "PARTNERS": "Partners",
+      "IMPORTANT_LINKS": "Important Links",
+      "MIM_COPYRIGHT": "One of the initiatives of the Ministry of Industry and Mineral Resources",
+      "COPYRIGHT": "All rights reserved to the National Center for Industrial and Mining Information"
+
     }
   }

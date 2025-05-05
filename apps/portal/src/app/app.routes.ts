@@ -54,6 +54,86 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
       },
       {
+        path: 'products/periodicreports',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/indicators',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/indicators/industryindicators',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/indicators/miningindicators',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/report',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/bulletin',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/studiesandresearch',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/consulting',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/cognitiveactivities',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/nationalcodingoffice',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/senai',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/industrialproductsmarket',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/factorydataupdate',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/datarequest',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/factorydirectory',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/productdirectory',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/applytotarmeez',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/searchforncage',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/hs10hs12',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'eservices/requestcode',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
         path: 'mediacenter',
         loadComponent: () => import('./modules/content/media-center/media-center.component').then(m => m.MediaCenterComponent)
       },
@@ -72,7 +152,7 @@ export const appRoutes: Route[] = [
       {
         path: 'mediacenter/photolibrary',
         loadComponent: () => import('./modules/content/photolibrary/photolibrary.component').then(m => m.PhotolibraryComponent)
-      }, 
+      },
       {
         path: 'mediacenter/videolibrary',
         loadComponent: () => import('./modules/content/videolibrary/videolibrary.component').then(m => m.VideolibraryComponent)
@@ -109,7 +189,7 @@ export const appRoutes: Route[] = [
         path: 'marsad',
         loadComponent: () => import('./modules/marsad/marsad-home/marsad-home.component').then(m => m.MarsadHomeComponent)
       },
-      
+
       // You can add more child routes here as needed
     ]
   },

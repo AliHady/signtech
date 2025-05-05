@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NewsResponse } from '../models/news.model';
+import { NewsResponse } from '../../content/models/news.model';
 import { environment } from '../../../../environments/environment';
 import { CmsDataService } from '@nimic/shared/utils';
 

@@ -7,7 +7,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslationService } from '@nimic/translations';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { News } from '../../home/models/news.model';
+import { News } from '../../content/models/news.model';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';

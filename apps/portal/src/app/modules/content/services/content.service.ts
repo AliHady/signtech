@@ -3,10 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { CmsDataService } from '@nimic/shared/utils';
-import { NewsResponse } from '../../home/models/news.model';
-import { VideoResponse } from '../../home/models/video.model';
-import { EventsResponse } from '../../home/models/events.model';
-import { ImageGalleryResponse } from '../../home/models/images.model';
+import { NewsResponse } from '../models/news.model';
+import { VideoResponse } from '../models/video.model';
+import { EventsResponse } from '../models/events.model';
+import { ImageGalleryResponse } from '../models/images.model';
 import { EServiceLinksResponse } from '../../eservices/models/eserviceslinks.model';
 import { Content } from '../models/content.model';
 

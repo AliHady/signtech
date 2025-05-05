@@ -7,7 +7,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { EventItem } from '../../home/models/events.model';
+import { EventItem } from '../models/events.model';
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
 

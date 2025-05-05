@@ -10,7 +10,7 @@ import { SharedModule } from '../../../shared/shared.module';
 
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
-import { ImageGalleryItem } from '../../home/models/images.model';
+import { ImageGalleryItem } from '../models/images.model';
 
 interface ImagesCache {
   [key: number]: {

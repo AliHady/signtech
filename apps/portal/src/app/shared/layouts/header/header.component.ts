@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
-    //  this.fetchMenuItems();
+     this.fetchMenuItems();
     });
 
     // Initialize translations
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
     //     this.translationService.setLanguage(lang);
     //   }
     // });
-    this.fetchMenuItems(); 
+    //this.fetchMenuItems(); 
   }
 
   private fetchMenuItems() {

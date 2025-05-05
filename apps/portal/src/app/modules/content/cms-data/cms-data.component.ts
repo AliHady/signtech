@@ -24,7 +24,7 @@ interface ContentCache {
   styleUrls: ['./cms-data.component.scss']
 })
 export class CMSDataComponent implements OnInit {
-  currentLang = 'en';
+  currentLang = 'ar';
   content: Content | undefined;
   loading = true;
   error = '';

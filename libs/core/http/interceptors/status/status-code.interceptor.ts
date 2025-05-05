@@ -34,10 +34,10 @@ export class StatusCodeInterceptor implements HttpInterceptor {
     const status = response.status;
     if (HttpStatusUtil.isSuccess(status)) {
       // Handle successful responses (2xx)
-      console.log(`Request successful: ${status}`);
+      //console.log(`Request successful: ${status}`);
     } else if (HttpStatusUtil.isRedirect(status)) {
       // Handle redirect responses (3xx)
-      console.log(`Request redirected: ${status}`);
+      //console.log(`Request redirected: ${status}`);
     }
   }
 

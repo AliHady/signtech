@@ -28,11 +28,9 @@ export class CmsDataService {
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
       switchMap(currentLang => {
+        // Clear cache when language changes
         if (cache) {
-          const cachedData = cache.value;
-          if (cachedData) {
-            return of(cachedData);
-          }
+          cache.next(null);
         }
 
         let url = `${endpoint}/${currentLang}`;

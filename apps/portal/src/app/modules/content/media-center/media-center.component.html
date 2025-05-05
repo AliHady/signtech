@@ -2,8 +2,8 @@
 <div class="mediaCenter-container">
 
   <app-breadcrumbs [items]="[
-    { label: 'الرئيسية', url: '/ar/home' },
-    { label: 'المركز الإعلامي', url: '/ar/mediacenter' }
+    { label: 'GENERAL.HOME' | translate, url: '/ar/home' },
+    { label: 'MEDIA_CENTER.TITLE' | translate, url: '/ar/mediacenter' }
   ]"></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
@@ -23,10 +23,10 @@
               d="M12 14v7m6.16-13.68L12 3 5.84 7.32A2 2 0 005 9.72l7 4 7-4a2 2 0 00-1.84-2.04z" />
       </svg>
     </div>
-    <h3 class="text-lg font-semibold mb-2">Card Title 1</h3>
-    <p class="text-gray-600 text-sm mb-4">Short description goes here.</p>
+    <h3 class="text-lg font-semibold mb-2">{{ 'MEDIA_CENTER.CARDS.CARD1.TITLE' | translate }}</h3>
+    <p class="text-gray-600 text-sm mb-4">{{ 'MEDIA_CENTER.CARDS.CARD1.DESCRIPTION' | translate }}</p>
     <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
-      Action
+      {{ 'MEDIA_CENTER.CARDS.CARD1.ACTION' | translate }}
     </a>
   </article>
 
@@ -39,10 +39,10 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M18 15V9M13 15V5M8 15v-3" />
       </svg>
     </div>
-    <h3 class="text-lg font-semibold mb-2">Card Title 2</h3>
-    <p class="text-gray-600 text-sm mb-4">Another short description here.</p>
+    <h3 class="text-lg font-semibold mb-2">{{ 'MEDIA_CENTER.CARDS.CARD2.TITLE' | translate }}</h3>
+    <p class="text-gray-600 text-sm mb-4">{{ 'MEDIA_CENTER.CARDS.CARD2.DESCRIPTION' | translate }}</p>
     <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
-      Action
+      {{ 'MEDIA_CENTER.CARDS.CARD2.ACTION' | translate }}
     </a>
   </article>
 
@@ -56,10 +56,10 @@
               d="M12 15a3 3 0 100-6 3 3 0 000 6zM2 12a10 10 0 011.11-4.63l1.42.82a8 8 0 000 7.63l-1.42.82A10 10 0 012 12zm20 0a10 10 0 01-1.11 4.63l-1.42-.82a8 8 0 000-7.63l1.42-.82A10 10 0 0122 12z" />
       </svg>
     </div>
-    <h3 class="text-lg font-semibold mb-2">Card Title 3</h3>
-    <p class="text-gray-600 text-sm mb-4">Brief details go here.</p>
+    <h3 class="text-lg font-semibold mb-2">{{ 'MEDIA_CENTER.CARDS.CARD3.TITLE' | translate }}</h3>
+    <p class="text-gray-600 text-sm mb-4">{{ 'MEDIA_CENTER.CARDS.CARD3.DESCRIPTION' | translate }}</p>
     <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
-      Action
+      {{ 'MEDIA_CENTER.CARDS.CARD3.ACTION' | translate }}
     </a>
   </article>
 
@@ -73,10 +73,10 @@
               d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9.5 11.5l1.5 1.5 3.5-3.5" />
       </svg>
     </div>
-    <h3 class="text-lg font-semibold mb-2">Card Title 4</h3>
-    <p class="text-gray-600 text-sm mb-4">Final card description.</p>
+    <h3 class="text-lg font-semibold mb-2">{{ 'MEDIA_CENTER.CARDS.CARD4.TITLE' | translate }}</h3>
+    <p class="text-gray-600 text-sm mb-4">{{ 'MEDIA_CENTER.CARDS.CARD4.DESCRIPTION' | translate }}</p>
     <a href="#" class="mt-auto inline-block text-white bg-[#BD9F9D] hover:bg-[#1A1A1A] px-4 py-2 -lg transition">
-      Action
+      {{ 'MEDIA_CENTER.CARDS.CARD4.ACTION' | translate }}
     </a>
   </article>
 

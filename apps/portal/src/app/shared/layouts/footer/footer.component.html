@@ -17,7 +17,7 @@
         <h2 class="text-xl font-bold mb-4">{{ 'FOOTER.PARTNERS' | translate }}</h2>
         <ul class="space-y-2">
           @for (partner of partners; track partner) {
-          <li><a href="{{partner.PartnerLink}}"
+          <li><a href="{{partner.Link}}"
               class="text-white no-underline hover:text-[#BD9F9D] transition-colors duration-300">{{partner.Title}}</a>
           </li>
           }

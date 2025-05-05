@@ -1,7 +1,7 @@
 export interface Partner {
     Title: string;
-    PartnerImage: string | null;
-    PartnerLink: string;
+    Image: string | null;
+    Link: string;
     LinkTarget: string;
     SortOrder: number;
     ShowInHome: boolean;

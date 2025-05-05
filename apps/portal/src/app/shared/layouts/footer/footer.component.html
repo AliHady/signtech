@@ -3,7 +3,11 @@
     <div class="flex flex-col lg:flex-row justify-between gap-8">
       <!-- شعار الوزارة -->
       <div class="flex-1 flex flex-col items-center justify-center text-center">
-        <img src="/assets/images/mimLogoWhite.png" alt="MIM Logo">
+        @if (currentLanguage === 'ar') {
+          <img src="/assets/images/MOI_Gray_ Flat version_AR.svg" alt="MIM Logo">
+        } @else {
+          <img src="/assets/images/MOI_Gray_ Flat version_EN.svg" alt="MIM Logo">
+        }
         <p class="text-xs mt-2">إحدى مبادرات الوزارة لتمكين الصناعة والثروة المعدنية</p>
       </div>
 

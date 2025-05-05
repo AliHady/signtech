@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Partner } from '../../models/partners.model';
 import { FooterService } from '../../services/footer.service';
 import { ImportantLink } from '../../models/importantlinks.model';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-footer',
@@ -17,12 +18,19 @@ export class FooterComponent implements OnInit {
   importantLinks: ImportantLink[] = [];
   loading = true;
   error = '';
+  currentLanguage: string = 'ar';
 
-  constructor(private footerService: FooterService) { }
+  constructor(
+    private footerService: FooterService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
     this.loadPartners();
     this.getImportantLinks();
+    this.languageService.currentLanguage$.subscribe((lang: string) => {
+      this.currentLanguage = lang;
+    });
   }
 
   private loadPartners(): void {

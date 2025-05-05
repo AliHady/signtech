@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../../shared/layouts/header/header.component
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-media-center',
@@ -12,7 +13,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
     CommonModule,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    TranslateModule
   ],
   templateUrl: './media-center.component.html',
   styleUrls: ['./media-center.component.scss'],

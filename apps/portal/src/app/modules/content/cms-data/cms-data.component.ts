@@ -14,7 +14,7 @@ interface ContentCache {
   [route: string]: {
     data: Content;
     timestamp: number;
-  }; 
+  };
 }
 
 @Component({
@@ -52,7 +52,7 @@ export class CMSDataComponent implements OnInit {
     const fullUrl = this.router.url.split('?')[0];
     const parts = fullUrl.split('/').filter(Boolean);
     const result = "CMS/" + parts.slice(1).join('/');
-  
+
     this.route.params.subscribe(params => {
       const lang = params['lang'];
       if (lang && (lang === 'en' || lang === 'ar')) {
@@ -82,19 +82,18 @@ export class CMSDataComponent implements OnInit {
 
     this.loading = true;
     this.contentService.getContent(route).subscribe({
-      next: (response) => { 
+      next: (response) => {
         this.content = response;
         if (this.content?.Content) {
           this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
+          this.content.Content = this.content.Content.replace(/href="\/CMS\/media/g, `href="${this.portalUrl}/media`);
         }
-        this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
-        this.content.Content = this.content.Content.replace(/href="\/CMS\/media/g, `href="${this.portalUrl}/media`);
 
         // const pattern = /href="(\/CMS\/media\/[^"]+)"/g;     
         // this.content.Content = this.content.Content.replace(pattern, (match, p1) => {
         //   return `href="${this.portalUrl}${p1}"`;
         // });
-     
+
         // Cache the fetched data
         this.contentCache[route] = {
           data: this.content,

@@ -30,6 +30,30 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
       },
       {
+        path: 'initiatives/initiativetoestablishandoperatenationalindustrialinformationcenter',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'initiatives/industrialinformationanalysisinitiative',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'initiatives/digitalservicesplatforminitiative',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'initiatives/emarketplaceinitiative',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'initiatives/codingofficeinitiative',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'initiatives/nationalproductregistryinitiative',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
         path: 'mediacenter',
         loadComponent: () => import('./modules/content/media-center/media-center.component').then(m => m.MediaCenterComponent)
       },

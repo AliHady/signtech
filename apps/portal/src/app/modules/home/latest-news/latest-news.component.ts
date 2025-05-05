@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DatePipe } from '@angular/common';
 import { HomeService } from '../services/home.service';
-import { News } from '../models/news.model';
+import { News } from '../../content/models/news.model';
 import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-latest-news',

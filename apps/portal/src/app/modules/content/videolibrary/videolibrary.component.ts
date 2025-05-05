@@ -10,7 +10,7 @@ import { SharedModule } from '../../../shared/shared.module';
 
 import { ContentService } from '../services/content.service';
 import { environment } from '../../../../environments/environment';
-import { VideoItem } from '../../home/models/video.model';
+import { VideoItem } from '../models/video.model';
 
 interface VideoCache {
   [key: number]: {

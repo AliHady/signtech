@@ -52,7 +52,7 @@ export class NewsDetailsComponent implements OnInit {
     this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
       next: (response) => {
         this.newsDetails = response;
-        console.log(response);
+       // console.log(response);
         this.loading = false;
       },
       error: (err) => {

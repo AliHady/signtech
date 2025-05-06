@@ -17,6 +17,6 @@ export class BreadcrumbsComponent implements OnInit {
   @Input() items: BreadcrumbItem[] = [];
 
   ngOnInit() {
-    console.log('Breadcrumb Items:', this.items);
+    //console.log('Breadcrumb Items:', this.items);
   }
 } 

@@ -51,7 +51,7 @@ export class ServiceDetailsComponent implements OnInit {
     this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
       next: (response) => {
         this.serviceDetails = response;
-        console.log(response);
+        //console.log(response);
         this.loading = false;
       },
       error: (err) => {

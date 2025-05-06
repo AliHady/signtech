@@ -13,6 +13,13 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +31,15 @@ export const appConfig: ApplicationConfig = {
       CoreHttpModule,
       LoadingBarModule,
       LoadingBarRouterModule,
-      LoadingBarHttpClientModule
+      LoadingBarHttpClientModule,
+      TranslateModule.forRoot({
+        defaultLanguage: 'ar',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
     ),
     provideAnimations(),
   ],

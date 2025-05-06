@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslationService } from '@nimic/translations';
+import { TranslationService, TranslationsModule } from '@nimic/translations';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
-import { TranslateService } from '@ngx-translate/core';
 import { NavMenu } from '../../models/navmen.model';
 
 interface MenuItem {
@@ -16,7 +15,7 @@ interface MenuItem {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslationsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -45,7 +44,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public translationService: TranslationService,
-    private translateService: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
     private headerService: HeaderService
@@ -53,12 +51,8 @@ export class HeaderComponent implements OnInit {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
-     this.fetchMenuItems();
+      this.fetchMenuItems();
     });
-
-    // Initialize translations
-    this.translateService.setDefaultLang('en');
-    this.translateService.use('en');
   }
 
   ngOnInit() {

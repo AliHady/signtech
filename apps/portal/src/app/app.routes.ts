@@ -9,6 +9,11 @@ export const appRoutes: Route[] = [
   {
     path: ':lang',
     children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
       ...homeRoutes,
       ...contentRoutes,
       ...eservicesRoutes,

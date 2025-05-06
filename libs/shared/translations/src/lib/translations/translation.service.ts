@@ -8,7 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class TranslationService {
-  private currentLangSubject = new BehaviorSubject<string>('en');
+  private currentLangSubject = new BehaviorSubject<string>('ar');
   currentLang$ = this.currentLangSubject.asObservable();
 
   constructor(
@@ -23,12 +23,12 @@ export class TranslationService {
     this.translate.addLangs(['en', 'ar']);
     
     // Set default language
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('ar');
 
     // Check browser language or local storage
     const savedLang = isPlatformBrowser(this.platformId) 
-      ? localStorage.getItem('CurrentLanguage') || 'en'
-      : 'en';
+      ? localStorage.getItem('CurrentLanguage') || 'ar'
+      : 'ar';
     
     // Set initial language
     this.setLanguage(savedLang);
@@ -38,7 +38,7 @@ export class TranslationService {
     // Ensure the language is supported
     if (!this.translate.getLangs().includes(lang)) {
       console.warn(`Language ${lang} is not supported. Falling back to default language.`);
-      lang = 'en';
+      lang = 'ar';
     }
 
     // Store current language for fallback

@@ -23,11 +23,11 @@ export class TranslationService {
     this.translate.addLangs(['en', 'ar']);
     
     // Set default language
-    this.translate.setDefaultLang('ar');
+    this.translate.setDefaultLang('en');
 
     // Check browser language or local storage
     const savedLang = isPlatformBrowser(this.platformId) 
-      ? localStorage.getItem('CurrentLanguage') || 'ar'
+      ? localStorage.getItem('CurrentLanguage') || 'en'
       : 'en';
     
     // Set initial language
@@ -41,6 +41,9 @@ export class TranslationService {
       lang = 'en';
     }
 
+    // Store current language for fallback
+    const previousLang = this.currentLangSubject.value;
+
     // Set the language
     this.translate.use(lang).subscribe({
       next: () => {
@@ -53,9 +56,9 @@ export class TranslationService {
       },
       error: (error) => {
         console.error('Error switching language:', error);
-        // Fallback to default language on error
-        this.translate.use('ar');
-        this.currentLangSubject.next('ar');
+        // Fallback to previous language on error
+        this.translate.use(previousLang);
+        this.currentLangSubject.next(previousLang);
       }
     });
   }

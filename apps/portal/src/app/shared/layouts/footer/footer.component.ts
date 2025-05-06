@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Partner } from '../../models/partners.model';
 import { FooterService } from '../../services/footer.service';
 import { ImportantLink } from '../../models/importantlinks.model';
-import { LanguageService } from '../../services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '@nimic/translations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -14,24 +15,31 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   partners: Partner[] = [];
   importantLinks: ImportantLink[] = [];
   loading = true;
   error = '';
   currentLanguage: string = 'ar';
+  private langSubscription: Subscription = new Subscription();
 
   constructor(
     private footerService: FooterService,
-    private languageService: LanguageService
+    private translationService: TranslationService
   ) { }
 
   ngOnInit() {
     this.loadPartners();
     this.getImportantLinks();
-    this.languageService.currentLanguage$.subscribe((lang: string) => {
+    this.langSubscription = this.translationService.currentLang$.subscribe(lang => {
       this.currentLanguage = lang;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.langSubscription) {
+      this.langSubscription.unsubscribe();
+    }
   }
 
   private loadPartners(): void {

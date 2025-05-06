@@ -1,1 +1,1 @@
-export * from './lib/services/pagination.service'; 
+export * from './lib/services/cmsdata.service'; 

@@ -69,6 +69,14 @@ export const contentRoutes: Route[] = [
     loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
   },
   {
+    path: 'products/periodicreports/bulletin/monthlybulletin',
+    loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
+    path: 'products/periodicreports/bulletin/quarterlybulletin',
+    loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
     path: 'products/studiesandresearch',
     loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
   },

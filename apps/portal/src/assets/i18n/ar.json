@@ -111,6 +111,12 @@
     "COPYRIGHT": "© 2025 جميع الحقوق محفوظة المركز الوطني للمعلومات الصناعية والتعدينية"
   },
   "PRODUCTS": {
-    "INDICATORS": "المؤشرات"
+    "INDICATORS": "المؤشرات",
+    "MININGINDICATORS": "المؤشرات التعدينية",
+    "INDUSTRYINDICATORS": "المؤشرات الصناعية",
+    "BULLETIN": "النشرات",
+    "MONTHLYBULLETIN": "النشرة الشهرية",
+    "QUARTERLYBULLETIN": "النشرة الربعية",
+    "REPORT": "التقارير"
   }
 }

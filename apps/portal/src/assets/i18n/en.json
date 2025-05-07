@@ -111,6 +111,12 @@
     "COPYRIGHT": "© 2025 All rights reserved to the National Center for Industrial and Mining Information"
   },
   "PRODUCTS": {
-    "INDICATORS": "Indicators"
+    "INDICATORS": "Indicators",
+    "MININGINDICATORS": "Mining Indicators",
+    "INDUSTRYINDICATORS": "Industry Indicators",
+    "BULLETIN": "Bulletin",
+    "MONTHLYBULLETIN": "Monthly Bulletin",
+    "QUARTERLYBULLETIN": "Quarterly Bulletin",
+    "REPORT": "Report"
   }
 }

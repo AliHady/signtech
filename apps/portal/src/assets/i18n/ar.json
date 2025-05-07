@@ -3,7 +3,8 @@
     "WELCOME": "مرحباً",
     "HOME": "الرئيسية",
     "ABOUT": "من نحن",
-    "CLOSE": "إغلاق"
+    "CLOSE": "إغلاق",
+    "NIMIC": "المركز الوطني للمعلومات الصناعية والتعدينية"
   },
   "AUTH": {
     "LOGIN": "تسجيل الدخول",
@@ -17,7 +18,8 @@
   },
   "HEADER": {
     "TITLE": "اختبار Tailwind CSS",
-    "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS"
+    "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS",
+    "CONTACT_US": "تواصل معنا"
   },
   "BUTTONS": {
     "PRIMARY": "زر أساسي",
@@ -118,5 +120,15 @@
     "MONTHLYBULLETIN": "النشرة الشهرية",
     "QUARTERLYBULLETIN": "النشرة الربعية",
     "REPORT": "التقارير"
+  },
+  "SITE_MAP": {
+    "TITLE": "خريطة الموقع",
+    "COMMUNICATION_HELP": "التواصل والمساعدة"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404",
+    "HEADING": "الصفحة غير موجودة",
+    "DESCRIPTION": "الصفحة التي تبحث عنها قد تكون تمت إزالتها أو تغيير اسمها أو غير متاحة مؤقتاً.",
+    "HOME_BUTTON": "العودة للرئيسية"
   }
 }

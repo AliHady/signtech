@@ -3,7 +3,8 @@
     "WELCOME": "Welcome",
     "HOME": "Home",
     "ABOUT": "About",
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "NIMIC": "National Center for Industrial and Mining Information"
   },
   "AUTH": {
     "LOGIN": "Login",
@@ -17,7 +18,8 @@
   },
   "HEADER": {
     "TITLE": "Tailwind CSS Test 1",
-    "DESCRIPTION": "This is a test of various Tailwind CSS utilities."
+    "DESCRIPTION": "This is a test of various Tailwind CSS utilities.",
+    "CONTACT_US": "Contact Us"
   },
   "BUTTONS": {
     "PRIMARY": "Primary Button",
@@ -118,5 +120,15 @@
     "MONTHLYBULLETIN": "Monthly Bulletin",
     "QUARTERLYBULLETIN": "Quarterly Bulletin",
     "REPORT": "Report"
+  },
+  "SITE_MAP": {
+    "TITLE": "Site Map",
+    "COMMUNICATION_HELP": "Communication & Help"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404",
+    "HEADING": "Page Not Found",
+    "DESCRIPTION": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "HOME_BUTTON": "Return Home"
   }
 }

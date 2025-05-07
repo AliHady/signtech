@@ -4,6 +4,7 @@ import { contentRoutes } from './modules/content/content.routes';
 import { eservicesRoutes } from './modules/eservices/eservices.routes';
 import { authRoutes } from './modules/auth/auth.routes';
 import { marsadRoutes } from './modules/marsad/marsad.routes';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 export const appRoutes: Route[] = [
   {
@@ -18,16 +19,20 @@ export const appRoutes: Route[] = [
       ...contentRoutes,
       ...eservicesRoutes,
       ...authRoutes,
-      ...marsadRoutes
+      ...marsadRoutes,
+      {
+        path: '**',
+        component: NotFoundComponent
+      }
     ]
   },
   {
     path: '',
-    redirectTo: 'ar',  // Default redirect if no lang is provided
+    redirectTo: 'ar/home',  // Default redirect if no lang is provided
     pathMatch: 'full'
   },
   {
-    path: '**',  // Wildcard route to handle invalid paths (optional)
-    redirectTo: 'ar'
+    path: '**',
+    redirectTo: 'ar/404'  // Redirect to 404 with default language
   }
 ];

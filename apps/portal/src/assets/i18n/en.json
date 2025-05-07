@@ -130,5 +130,12 @@
     "HEADING": "Page Not Found",
     "DESCRIPTION": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
     "HOME_BUTTON": "Return Home"
+  },
+  "SERVER_DOWN": {
+    "TITLE": "500",
+    "HEADING": "Server Error",
+    "DESCRIPTION": "We're experiencing technical difficulties. Our team has been notified and is working to resolve the issue.",
+    "RETRY_BUTTON": "Try Again",
+    "HOME_BUTTON": "Return Home"
   }
 }

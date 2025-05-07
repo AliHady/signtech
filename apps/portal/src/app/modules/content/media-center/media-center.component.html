@@ -1,10 +1,7 @@
 <app-header></app-header>
 <div class="mediaCenter-container">
 
-  <app-breadcrumbs [items]="[
-    { label: 'GENERAL.HOME' | translate, url: '/ar/home' },
-    { label: 'MEDIA_CENTER.TITLE' | translate, url: '/ar/mediacenter' }
-  ]"></app-breadcrumbs>
+  <app-breadcrumbs></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-1 py-8">

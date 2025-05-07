@@ -1,11 +1,7 @@
 <app-header></app-header>
 <div class="news-container">
 
-  <app-breadcrumbs [items]="[
-    { label: 'الرئيسية', url: '/ar/home' },
-    { label: 'المركز الإعلامي', url: '/ar/mediacenter' },
-    { label: 'أخبار المركز' }
-  ]"></app-breadcrumbs>
+  <app-breadcrumbs></app-breadcrumbs>
   <main class="news-content bg-white" [@routeAnimations]>
     <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-1 py-8">

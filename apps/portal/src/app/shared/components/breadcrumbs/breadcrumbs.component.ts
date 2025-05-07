@@ -18,7 +18,6 @@ export interface BreadcrumbItem {
   imports: [RouterModule]
 })
 export class BreadcrumbsComponent implements OnInit {
-  @Input() items: BreadcrumbItem[] = [];
   list: BreadcrumbItem[] = [];
   currentLang = 'ar';
   currentPath = '';

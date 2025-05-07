@@ -1,11 +1,6 @@
 <app-header></app-header>
 <div class="news-details-container" [@routeAnimations]>
-  <app-breadcrumbs [items]="[
-    { label: 'الرئيسية', url: '/ar/home' },
-    { label: 'المركز الإعلامي', url: '/ar/mediacenter' },
-    { label: 'أخبار المركز', url: '/ar/mediacenter/news' },
-    { label: newsDetails?.Title || 'تفاصيل الخبر' }
-  ]"></app-breadcrumbs>
+  <app-breadcrumbs></app-breadcrumbs>
 
   <main class="news-content bg-white">
     <div class="container mx-auto px-1 py-8">

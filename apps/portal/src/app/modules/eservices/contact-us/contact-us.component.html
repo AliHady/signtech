@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs [items]="[
+    { label: 'الرئيسية', url: '/ar/home' },
+    { label: 'المركز الإعلامي', url: '/ar/mediacenter' },
+    { label: 'أخبار المركز', url: '/ar/mediacenter/news' }
+  ]"></app-breadcrumbs>
+
+  <main class="news-content bg-white overflow-hidden">
+    <div class="container mx-auto px-1 py-8"> 
+
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div *ngIf="formSubmitted" class="form-group has-success">
+          <label class="control-label">تم استلام طلبك بنجاح</label>
+        </div>
+       
+       
+        <div class="col-md-12">
+          <label class="control-label radio-label">نوع التواصل</label>
+          <div class="form-row">
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" formControlName="contactType" [value]="1" id="suggest">
+              <label class="form-check-label" for="suggest">اقتراح</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" formControlName="contactType" [value]="2" id="complaint">
+              <label class="form-check-label" for="complaint">شكوى</label>
+            </div>
+          </div>
+          <div *ngIf="contactForm.get('contactType')?.invalid && contactForm.get('contactType')?.touched" class="text-danger">
+            اختر نوع التواصل
+          </div>
+        </div>
+       
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <input type="text" maxlength="200" formControlName="subject" class="input" placeholder="الموضوع">
+          <div *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="text-danger">
+            الموضوع مطلوب
+          </div>
+        </div>
+       
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <input type="text" maxlength="200" formControlName="fullName" class="input" placeholder="الاسم الكامل">
+          <div *ngIf="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched" class="text-danger">
+            الاسم الكامل مطلوب
+          </div>
+        </div>
+       
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <input type="email" maxlength="250" formControlName="email" class="input" placeholder="البريد الإلكتروني">
+          <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-danger">
+            بريد إلكتروني صالح مطلوب
+          </div>
+        </div>
+       
+        <div class="col-md-12 clearfix">
+          <textarea maxlength="400" formControlName="message" class="required valid" rows="6" placeholder="الرسالة"></textarea>
+          <div *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="text-danger">
+            الرسالة مطلوبة
+          </div>
+        </div>
+       
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <button type="submit" class="btn btn-primary" [disabled]="contactForm?.invalid">إرسال</button>
+          <button type="button" class="btn btn-primary" (click)="onClear()">مسح</button>
+        </div>
+      </form>
+
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

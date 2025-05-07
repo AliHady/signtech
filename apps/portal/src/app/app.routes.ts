@@ -78,6 +78,14 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
       },
       {
+        path: 'products/periodicreports/bulletin/monthlybulletin',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
+        path: 'products/periodicreports/bulletin/quarterlybulletin',
+        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+      },
+      {
         path: 'products/studiesandresearch',
         loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
       },
@@ -184,6 +192,10 @@ export const appRoutes: Route[] = [
       {
         path: 'eservices/:id',
         loadComponent: () => import('./modules/eservices/service-details/service-details.component').then(m => m.ServiceDetailsComponent)
+      },
+      {
+        path: 'help/contactus',
+        loadComponent: () => import('./modules/eservices/contact-us/contact-us.component').then(m => m.ContactUsComponent)
       },
       {
         path: 'marsad',

@@ -114,5 +114,11 @@
   },
   "PRODUCTS": {
     "INDICATORS": "Indicators"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404",
+    "HEADING": "Page Not Found",
+    "DESCRIPTION": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "HOME_BUTTON": "Return Home"
   }
 }

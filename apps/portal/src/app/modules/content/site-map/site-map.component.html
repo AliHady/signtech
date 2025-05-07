@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="news-container">
+
+  <app-breadcrumbs [items]="[
+    { label: 'GENERAL.HOME' | translate, url: '/ar/home' },
+    { label: 'SITE_MAP.COMMUNICATION_HELP' | translate, url: '/ar/contact' },
+    { label: 'SITE_MAP.TITLE' | translate }
+  ]"></app-breadcrumbs>
+  <main class="news-content bg-white" [@routeAnimations]>
+    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
+    <section class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+   
+        <!-- Loading State -->
+        <div *ngIf="loading" class="text-center py-8">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+          <p class="mt-4 text-gray-600">{{ 'LOADING.LOADING' | translate }}</p>
+        </div>
+
+        <!-- Error State -->
+        <div *ngIf="error" class="text-center py-8 text-red-600">
+          {{ error }}
+        </div>
+
+        <!-- Main Sections -->
+        <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let item of menuItems" class="bg-white border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-300">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 text-right border-b border-gray-100 pb-2">{{ item.title }}</h2>
+            <ul class="space-y-3 text-right">
+              <li *ngIf="item.url">
+                <a [routerLink]="item.url" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">{{ item.title }}</a>
+              </li>
+              <li *ngFor="let child of item.children">
+                <a [routerLink]="child.url" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">{{ child.title }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+</div>
+
+<app-footer></app-footer>

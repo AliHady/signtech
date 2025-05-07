@@ -116,5 +116,9 @@ export const contentRoutes: Route[] = [
   {
     path: 'mediacenter/events',
     loadComponent: () => import('./events/events.component').then(m => m.EventsComponent)
+  },
+  {
+    path: 'sitemap',
+    loadComponent: () => import('./site-map/site-map.component').then(m => m.SiteMapComponent)
   }
 ]; 

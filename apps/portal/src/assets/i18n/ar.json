@@ -115,6 +115,10 @@
   "PRODUCTS": {
     "INDICATORS": "المؤشرات"
   },
+  "SITE_MAP": {
+    "TITLE": "خريطة الموقع",
+    "COMMUNICATION_HELP": "التواصل والمساعدة"
+  },
   "NOT_FOUND": {
     "TITLE": "404",
     "HEADING": "الصفحة غير موجودة",

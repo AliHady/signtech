@@ -115,6 +115,10 @@
   "PRODUCTS": {
     "INDICATORS": "Indicators"
   },
+  "SITE_MAP": {
+    "TITLE": "Site Map",
+    "COMMUNICATION_HELP": "Communication & Help"
+  },
   "NOT_FOUND": {
     "TITLE": "404",
     "HEADING": "Page Not Found",

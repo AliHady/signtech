@@ -13,7 +13,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

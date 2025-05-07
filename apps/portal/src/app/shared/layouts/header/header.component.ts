@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { NavMenu } from '../../models/navmen.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface MenuItem {
   id: number;
@@ -15,7 +16,7 @@ interface MenuItem {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslationsModule],
+  imports: [CommonModule, RouterModule, TranslationsModule, TranslateModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -105,10 +106,17 @@ export class HeaderComponent implements OnInit {
 
   
   switchLanguage(lang: string) { 
+    console.log("switchLanguage called with lang:", lang);
+    
+    // Set the language
     this.translationService.setLanguage(lang);
-    const currentUrl = this.router.url;
-    const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
-    this.router.navigateByUrl(newUrl);
+    
+    // Update the URL after a small delay to ensure language is set
+    setTimeout(() => {
+      const currentUrl = this.router.url;
+      const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
+      this.router.navigateByUrl(newUrl);
+    }, 100);
   }
 
   submenuOpen: { [key: string]: boolean } = {};

@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TranslationService {
+export class TranslationService { 
   private currentLangSubject = new BehaviorSubject<string>('ar');
   currentLang$ = this.currentLangSubject.asObservable();
 

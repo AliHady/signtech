@@ -7,11 +7,12 @@ import { ImportantLink } from '../../models/importantlinks.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '@nimic/translations';
 import { Subscription } from 'rxjs';
+import { TranslationsModule } from '@nimic/translations';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
+  imports: [CommonModule, RouterModule, TranslateModule, TranslationsModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

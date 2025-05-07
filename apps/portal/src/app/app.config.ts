@@ -18,7 +18,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 export const appConfig: ApplicationConfig = {
@@ -27,18 +27,18 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
     importProvidersFrom(
-      TranslationsModule,
       CoreHttpModule,
       LoadingBarModule,
       LoadingBarRouterModule,
       LoadingBarHttpClientModule,
       TranslateModule.forRoot({
-        defaultLanguage: 'ar',
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
-        }
+        },
+        defaultLanguage: 'ar',
+        useDefaultLang: true
       })
     ),
     provideAnimations(),

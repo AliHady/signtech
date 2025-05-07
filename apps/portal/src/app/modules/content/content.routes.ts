@@ -118,7 +118,11 @@ export const contentRoutes: Route[] = [
     loadComponent: () => import('./events/events.component').then(m => m.EventsComponent)
   },
   {
-    path: 'sitemap',
+    path: 'help/sitemap',
     loadComponent: () => import('./site-map/site-map.component').then(m => m.SiteMapComponent)
+  },
+  {
+    path: 'help/faq',
+    loadComponent: () => import('./faq/faq.component').then(m => m.FaqComponent)
   }
 ]; 

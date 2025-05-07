@@ -1,4 +1,9 @@
 import { Route } from '@angular/router';
+import { homeRoutes } from './modules/home/home.routes';
+import { contentRoutes } from './modules/content/content.routes';
+import { eservicesRoutes } from './modules/eservices/eservices.routes';
+import { authRoutes } from './modules/auth/auth.routes';
+import { marsadRoutes } from './modules/marsad/marsad.routes';
 
 export const appRoutes: Route[] = [
   {
@@ -9,200 +14,11 @@ export const appRoutes: Route[] = [
         redirectTo: 'home',
         pathMatch: 'full'
       },
-      {
-        path: 'home',
-        loadComponent: () => import('./modules/home/home.component').then(m => m.HomeComponent)
-      },
-      {
-        path: 'aboutus/aboutcenter',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'aboutus/strategicobjectives',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'aboutus/executivecommittee',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'aboutus/organizationstructure',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/initiativetoestablishandoperatenationalindustrialinformationcenter',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/industrialinformationanalysisinitiative',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/digitalservicesplatforminitiative',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/emarketplaceinitiative',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/codingofficeinitiative',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'initiatives/nationalproductregistryinitiative',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/indicators',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/indicators/industryindicators',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/indicators/miningindicators',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/report',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/bulletin',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/bulletin/monthlybulletin',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/periodicreports/bulletin/quarterlybulletin',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/studiesandresearch',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/consulting',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'products/cognitiveactivities',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/nationalcodingoffice',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/senai',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/industrialproductsmarket',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/factorydataupdate',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/datarequest',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/factorydirectory',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/productdirectory',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/applytotarmeez',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/searchforncage',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/hs10hs12',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'eservices/requestcode',
-        loadComponent: () => import('./modules/content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
-      },
-      {
-        path: 'mediacenter',
-        loadComponent: () => import('./modules/content/media-center/media-center.component').then(m => m.MediaCenterComponent)
-      },
-      {
-        path: 'mediacenter/news',
-        loadComponent: () => import('./modules/content/news/news.component').then(m => m.NewsComponent)
-      },
-      {
-        path: 'mediacenter/news/:id',
-        loadComponent: () => import('./modules/content/news-details/news-details.component').then(m => m.NewsDetailsComponent)
-      },
-      {
-        path: 'aboutcenter',
-        loadComponent: () => import('./modules/content/about-center/about-center.component').then(m => m.AboutCenterComponent)
-      },
-      {
-        path: 'mediacenter/photolibrary',
-        loadComponent: () => import('./modules/content/photolibrary/photolibrary.component').then(m => m.PhotolibraryComponent)
-      },
-      {
-        path: 'mediacenter/videolibrary',
-        loadComponent: () => import('./modules/content/videolibrary/videolibrary.component').then(m => m.VideolibraryComponent)
-      },
-      {
-        path: 'mediacenter/events',
-        loadComponent: () => import('./modules/content/events/events.component').then(m => m.EventsComponent)
-      },
-      {
-        path: 'login',
-        loadComponent: () => import('./modules/auth/login/login.component').then(m => m.LoginComponent)
-      },
-      {
-        path: 'signup',
-        loadComponent: () => import('./modules/auth/signup/signup.component').then(m => m.SignupComponent)
-      },
-      {
-        path: 'password-reset',
-        loadComponent: () => import('./modules/auth/password-reset/password-reset.component').then(m => m.PasswordResetComponent)
-      },
-      {
-        path: 'profile',
-        loadComponent: () => import('./modules/auth/profile/profile.component').then(m => m.ProfileComponent)
-      },
-      {
-        path: 'eservices',
-        loadComponent: () => import('./modules/eservices/list-of-services/list-of-services.component').then(m => m.ListOfServicesComponent)
-      },
-      {
-        path: 'eservices/:id',
-        loadComponent: () => import('./modules/eservices/service-details/service-details.component').then(m => m.ServiceDetailsComponent)
-      },
-      {
-        path: 'help/contactus',
-        loadComponent: () => import('./modules/eservices/contact-us/contact-us.component').then(m => m.ContactUsComponent)
-      },
-      {
-        path: 'marsad',
-        loadComponent: () => import('./modules/marsad/marsad-home/marsad-home.component').then(m => m.MarsadHomeComponent)
-      },
-
-      // You can add more child routes here as needed
+      ...homeRoutes,
+      ...contentRoutes,
+      ...eservicesRoutes,
+      ...authRoutes,
+      ...marsadRoutes
     ]
   },
   {

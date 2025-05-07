@@ -13,13 +13,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'en',
+      defaultLanguage: 'ar',
       useDefaultLang: true,
       isolate: false,
       extend: true

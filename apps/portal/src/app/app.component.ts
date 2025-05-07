@@ -40,8 +40,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     // Initialize translations
-    this.translateService.setDefaultLang('en');
-    this.translateService.use('en');
+    this.translateService.setDefaultLang('ar');
+    this.translateService.use('ar');
 
     // Subscribe to router events to show/hide loading overlay
     this.router.events.subscribe(event => {

@@ -18,7 +18,8 @@
   },
   "HEADER": {
     "TITLE": "اختبار Tailwind CSS",
-    "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS"
+    "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS",
+    "CONTACT_US": "تواصل معنا"
   },
   "BUTTONS": {
     "PRIMARY": "زر أساسي",

@@ -18,7 +18,8 @@
   },
   "HEADER": {
     "TITLE": "Tailwind CSS Test 1",
-    "DESCRIPTION": "This is a test of various Tailwind CSS utilities."
+    "DESCRIPTION": "This is a test of various Tailwind CSS utilities.",
+    "CONTACT_US": "Contact Us"
   },
   "BUTTONS": {
     "PRIMARY": "Primary Button",

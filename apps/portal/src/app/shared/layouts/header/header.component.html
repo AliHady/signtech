@@ -8,8 +8,8 @@
     <!-- Top Header Panel -->
     <div class="text-gray-700 text-sm">
       <div class="container mx-auto flex items-center justify-end gap-4 p-2">
-        <a href="#" class="hover:text-black">تواصل معنا</a>
-        <a  class="hover:text-black cursor-pointer" (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
+        <a href="#" class="text-[#344549] hover:text-[#413258] transition-colors duration-300 no-underline mt-2 font-[500]">{{ 'HEADER.CONTACT_US' | translate }}</a>
+        <a class="text-[#344549] hover:text-[#413258] transition-colors duration-300 no-underline cursor-pointer mt-2 font-[500]" (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
           {{ currentLang === 'en' ? 'عربي' : 'EN' }}
         </a>
       </div>

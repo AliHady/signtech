@@ -22,7 +22,7 @@
         <!-- Logo -->
         <div class="flex items-center">
           <a routerLink="/">
-            <img src="/assets/images/newLogoGreen.png" alt="المركز الوطني للمعلومات الصناعية والتعدينية" class="h-14" />
+            <img src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="h-16" />
           </a>
         </div>
 
@@ -30,8 +30,8 @@
         <div class="hidden lg:flex items-center gap-8 text-[#1A1A1A] text-base relative mainMenuItems">
           <ul class="flex items-center gap-2 mainNav">
             @for (menuItem of menuItems; track menuItem) {
-              <li class="relative hover:bg-white" (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)">
-                <a class="mainMenuItem flex items-center gap-1 hover:text-[#1A1A1A] cursor-pointer">
+              <li class="relative hover:bg-white transition-all duration-800 ease-out " (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)">
+                <a class="mainMenuItem flex items-center transition-all duration-300 ease-out  gap-1 hover:text-[#1A1A1A] cursor-pointer">
                   {{ menuItem.title }}
                   @if (menuItem.children?.length) {
                     <svg class="w-3 h-3 transition-transform duration-300" [ngClass]="{'rotate-180': submenuOpen[menuItem.title]}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +93,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
-          <img src="/assets/images/newLogoGreen.png" alt="المركز الوطني للمعلومات الصناعية والتعدينية" class="h-10" />
+          <img src="/assets/images/newLogoGreen.png" alt="National Center for Industrial and Mining Information" class="h-10" />
         </div>
 
         <!-- Mobile Menu Content -->

@@ -13,9 +13,10 @@ import { Component, HostListener, ChangeDetectionStrategy } from '@angular/core'
       top: 0;
       left: 0;
       width: 100%;
-      height: 6px;              
+      height: 0.6rem;              
       background: rgba(0,0,0,.1);
       z-index: 9999;
+          opacity: 0.9;
     }
     .progress-bar {
       height: 100%;

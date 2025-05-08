@@ -4,7 +4,10 @@
     "HOME": "Home",
     "ABOUT": "About",
     "CLOSE": "Close",
-    "NIMIC": "National Center for Industrial and Mining Information"
+    "NIMIC": "National Center for Industrial and Mining Information",
+    "READ_MORE": "Read More",
+    "ALL_NEWS": "All News",
+    "NEWS": "News"
   },
   "AUTH": {
     "LOGIN": "Login",

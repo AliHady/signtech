@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslationService } from '@nimic/translations';
-import { FooterComponent } from '../../layouts/footer/footer.component';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-server-down',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FooterComponent],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './server-down.component.html',
   styles: []
 })

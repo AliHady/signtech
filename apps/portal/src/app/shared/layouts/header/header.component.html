@@ -74,7 +74,7 @@
       <!-- Mobile Menu Button -->
       <div class="lg:hidden">
         <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0">
-          <svg fill="#344549" width="48px" height=".progress-container" viewBox="-5.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <svg fill="#344549" width="48px" height="48px" viewBox="-5.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <title>Mobile Menu</title>
             <path d="M1.375 9.156h18.063c0.781 0 1.375-0.594 1.375-1.375 0-0.75-0.594-1.344-1.375-1.344h-18.063c-0.781 0-1.375 0.594-1.375 1.344 0 0.781 0.594 1.375 1.375 1.375zM1.375 14.625h18.063c0.781 0 1.375-0.594 1.375-1.375 0-0.75-0.594-1.344-1.375-1.344h-18.063c-0.781 0-1.375 0.594-1.375 1.344 0 0.781 0.594 1.375 1.375 1.375zM1.375 20.094h18.063c0.781 0 1.375-0.594 1.375-1.344 0-0.781-0.594-1.375-1.375-1.375h-18.063c-0.781 0-1.375 0.594-1.375 1.375 0 0.75 0.594 1.344 1.375 1.344zM1.375 25.563h18.063c0.781 0 1.375-0.594 1.375-1.344 0-0.781-0.594-1.375-1.375-1.375h-18.063c-0.781 0-1.375 0.594-1.375 1.375 0 0.75 0.594 1.344 1.375 1.344z"></path>
           </svg>
@@ -152,8 +152,8 @@
 
       <!-- Action Buttons -->
       <div class="hidden lg:flex items-center gap-3 text-sm">
-        <a [routerLink]="['/', currentLang, 'login']">
-          <button class="bg-[#344549] text-white px-6 py-3 text-lg hover:bg-[#413258] transition border-0 font-inherit cursor-pointer">{{ 'AUTH.LOGIN' | translate }}</button>
+        <a [routerLink]="['/', currentLang, 'login']" class="bg-[#344549] text-white px-6 py-3 text-base hover:bg-[#413258] transition border-0 font-inherit cursor-pointer no-underline">
+          {{ 'AUTH.LOGIN' | translate }}
         </a>
       </div>
 

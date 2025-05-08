@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HomeService } from '../services/home.service';
 import { News } from '../../content/models/news.model';
 import { environment } from '../../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '@nimic/translations';
+
 @Component({
   selector: 'app-latest-news',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, TranslateModule, RouterModule],
   templateUrl: './latest-news.component.html',
   styleUrls: ['./latest-news.component.scss']
 })
@@ -17,7 +19,18 @@ export class LatestNewsComponent implements OnInit {
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
-  constructor(private homeService: HomeService) {}
+  currentLang = 'ar';
+
+  constructor(
+    private homeService: HomeService,
+    public translationService: TranslationService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+    this.translationService.currentLang$.subscribe(lang => {
+      this.currentLang = lang;
+    });
+  }
 
   ngOnInit(): void {
     this.loadNews();
@@ -35,5 +48,17 @@ export class LatestNewsComponent implements OnInit {
         console.error('Error loading news:', err);
       }
     });
+  }
+
+
+  navigateToNewsDetails(newsItem: News): void { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
+      state: { id: newsItem.Id }
+    });
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 } 

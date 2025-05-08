@@ -53,7 +53,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, 
     public translationService: TranslationService,
     private translateService: TranslateService,
     private contentService: ContentService

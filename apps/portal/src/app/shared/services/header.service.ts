@@ -14,6 +14,7 @@ export class HeaderService {
   constructor(private cmsDataService: CmsDataService) {}
 
   getNavigationMenu(): Observable<NavMenu> {
+   // console.log("getNavigationMenu");
     return this.cmsDataService.getCmsPaginatedData<NavMenu>(
       this.apiUrl,
       undefined,

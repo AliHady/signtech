@@ -79,34 +79,9 @@ export class FaqComponent {
   }
 
   ngOnInit() {
-    this.fetchMenuItems();
   }
 
-  private fetchMenuItems() {
-    this.loading = true;
-    this.error = '';
-    
-    this.headerService.getNavigationMenu().subscribe({
-      next: (response: NavMenu) => {
-        this.menuItems = response.map(item => ({
-          id: item.Id,
-          title: item.Text,
-          url: item.Url,
-          children: item.Items?.map(child => ({
-            id: child.Id,
-            title: child.Text,
-            url: child.Url
-          }))
-        }));
-        this.loading = false;
-      },
-      error: (error: Error) => {
-        console.error('Error fetching menu items:', error);
-        this.error = 'Failed to load menu items. Please try again later.';
-        this.loading = false;
-      }
-    });
-  }
+  
 
   toggleFaq(index: number): void {
     this.openFaqs[index] = !this.openFaqs[index];

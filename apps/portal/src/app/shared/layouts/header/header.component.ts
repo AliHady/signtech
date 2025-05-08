@@ -51,19 +51,16 @@ export class HeaderComponent implements OnInit {
   ) {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
-      this.currentLang = lang;
-      this.fetchMenuItems();
+      if (this.currentLang !== lang) {
+        this.currentLang = lang;
+       // console.log("currentLang changed to:", this.currentLang);
+        this.fetchMenuItems();
+      }
     });
   }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   const lang = params['lang'];
-    //   if (lang && (lang === 'en' || lang === 'ar')) {
-    //     this.translationService.setLanguage(lang);
-    //   }
-    // });
-    //this.fetchMenuItems(); 
+    this.fetchMenuItems();
   }
 
   private fetchMenuItems() {

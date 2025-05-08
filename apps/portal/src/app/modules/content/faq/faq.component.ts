@@ -9,6 +9,7 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationsModule } from '@nimic/translations';
 import { FormsModule } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface MenuItem {
   id: number;
@@ -37,7 +38,15 @@ interface FAQItem {
     FormsModule
   ],
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+  styleUrls: ['./faq.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('0.3s ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class FaqComponent {
   menuItems: MenuItem[] = [];

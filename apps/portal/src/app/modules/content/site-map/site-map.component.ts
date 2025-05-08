@@ -8,6 +8,7 @@ import { FooterComponent } from '../../../shared/layouts/footer/footer.component
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationsModule } from '@nimic/translations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface MenuItem {
   id: number;
@@ -29,7 +30,15 @@ interface MenuItem {
     TranslationsModule
   ],
   templateUrl: './site-map.component.html',
-  styleUrls: ['./site-map.component.scss']
+  styleUrls: ['./site-map.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('0.3s ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class SiteMapComponent implements OnInit {
   menuItems: MenuItem[] = [];

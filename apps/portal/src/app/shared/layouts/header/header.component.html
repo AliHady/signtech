@@ -6,8 +6,8 @@
   </div> -->
   <div>
     <!-- Top Header Panel -->
-    <div class="text-gray-700 text-sm">
-      <div class="container mx-auto flex items-center justify-end gap-4 p-2">
+    <div class="text-gray-700 text-sm ">
+      <div class="container mx-auto flex items-center justify-end gap-4 p-4">
         <a href="#" class="text-[#344549] hover:text-[#413258] transition-colors duration-300 no-underline mt-3 font-[500]">{{ 'HEADER.CONTACT_US' | translate }}</a>
         <a class="text-[#344549] hover:text-[#413258] transition-colors duration-300 no-underline cursor-pointer mt-3 font-[500]" (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
           {{ currentLang === 'en' ? 'عربي' : 'EN' }}
@@ -149,10 +149,11 @@
       </div>
 
       <!-- Action Buttons -->
+     
+
       <div class="flex items-center gap-3 text-sm">
-        <a href="#" class="px-4 py-2 bg-gray-700 text-white -md flex items-center gap-1">
-          تسجيل الدخول
-          <span>↖</span>
+        <a [routerLink]="['/', currentLang, 'login']">
+          <button class="bg-[#344549] text-white px-6 py-3 text-lg hover:bg-[#413258] transition border-0 font-inherit cursor-pointer">{{ 'AUTH.LOGIN' | translate }}</button>
         </a>
       </div>
 

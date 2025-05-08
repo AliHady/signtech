@@ -7,6 +7,7 @@ import { LoadingOverlayComponent } from './shared/components/loading-overlay/loa
 import { Subscription } from 'rxjs';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ScrollIndicatorComponent } from '@nimic/shared/ui';
+import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
 
 @Component({
   imports: [
@@ -15,7 +16,8 @@ import { ScrollIndicatorComponent } from '@nimic/shared/ui';
     CommonModule,
     LoadingOverlayComponent,
     LoadingBarModule,
-    ScrollIndicatorComponent
+    ScrollIndicatorComponent,
+    CookieConsentComponent
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -159,5 +159,10 @@
     "MESSAGE_REQUIRED": "Message Required",
     "SUBMIT": "Submit",
     "CLEAR": "Clear"
+  },
+  "COOKIE_CONSENT": {
+    "MESSAGE": "We use cookies to enhance your experience on our website. By continuing to use our site, you agree to our use of cookies.",
+    "ACCEPT": "Accept",
+    "DECLINE": "Decline"
   }
 }

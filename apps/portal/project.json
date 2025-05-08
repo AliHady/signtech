@@ -3,36 +3,36 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/portal/src",
+  "sourceRoot": "apps/Portal/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/portal",
-        "index": "apps/portal/src/index.html",
-        "browser": "apps/portal/src/main.ts",
+        "outputPath": "dist/apps/Portal",
+        "index": "apps/Portal/src/index.html",
+        "browser": "apps/Portal/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/portal/tsconfig.app.json",
+        "tsConfig": "apps/Portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
        "assets": [
   {
     "glob": "**/*",
-    "input": "apps/portal/src/assets",
+    "input": "apps/Portal/src/assets",
     "output": "assets"
   },
   {
     "glob": "favicon.ico",
-    "input": "apps/portal/src",
+    "input": "apps/Portal/src",
     "output": ""
   }
 ],
-        "styles": ["apps/portal/src/styles.scss"],
+        "styles": ["apps/Portal/src/styles.scss"],
         "scripts": [],
-        "server": "apps/portal/src/main.server.ts",
+        "server": "apps/Portal/src/main.server.ts",
         "ssr": {
-          "entry": "apps/portal/src/server.ts"
+          "entry": "apps/Portal/src/server.ts"
         },
         "outputMode": "server"
       },
@@ -53,8 +53,8 @@
           "outputHashing": "all",
           "fileReplacements": [
             {
-              "replace": "apps/portal/src/environments/environment.ts",
-              "with": "apps/portal/src/environments/environment.prod.ts"
+              "replace": "apps/Portal/src/environments/environment.ts",
+              "with": "apps/Portal/src/environments/environment.prod.ts"
             }
           ]
         },
@@ -64,8 +64,8 @@
           "sourceMap": true,
           "fileReplacements": [
             {
-              "replace": "apps/portal/src/environments/environment.ts",
-              "with": "apps/portal/src/environments/environment.dev.ts"
+              "replace": "apps/Portal/src/environments/environment.ts",
+              "with": "apps/Portal/src/environments/environment.dev.ts"
             }
           ]
         },
@@ -75,8 +75,8 @@
           "sourceMap": true,
           "fileReplacements": [
             {
-              "replace": "apps/portal/src/environments/environment.ts",
-              "with": "apps/portal/src/environments/environment.qa.ts"
+              "replace": "apps/Portal/src/environments/environment.ts",
+              "with": "apps/Portal/src/environments/environment.qa.ts"
             }
           ]
         },
@@ -86,8 +86,8 @@
           "sourceMap": false,
           "fileReplacements": [
             {
-              "replace": "apps/portal/src/environments/environment.ts",
-              "with": "apps/portal/src/environments/environment.uat.ts"
+              "replace": "apps/Portal/src/environments/environment.ts",
+              "with": "apps/Portal/src/environments/environment.uat.ts"
             }
           ]
         }
@@ -125,7 +125,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/portal/jest.config.ts"
+        "jestConfig": "apps/Portal/jest.config.ts"
       }
     },
     "serve-static": {
@@ -133,7 +133,7 @@
       "options": {
         "buildTarget": "portal:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/portal/browser",
+        "staticFilePath": "dist/apps/Portal/browser",
         "spa": true
       }
     }

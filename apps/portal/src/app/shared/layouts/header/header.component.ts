@@ -106,7 +106,7 @@ export class HeaderComponent implements OnInit {
 
   
   switchLanguage(lang: string) { 
-    console.log("switchLanguage called with lang:", lang);
+    //console.log("switchLanguage called with lang:", lang);
     
     // Set the language
     this.translationService.setLanguage(lang);

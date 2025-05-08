@@ -6,13 +6,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { CmsDataService } from '@nimic/shared/utils';
 import { environment } from '../../../../environments/environment';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
+import { ContentService } from '../../content/services/content.service';
+import { Content } from '../../content/models/content.model';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-service-details',
   templateUrl: './service-details.component.html',
   styleUrls: ['./service-details.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, SharedModule, NgxSkeletonLoaderModule],
+  imports: [CommonModule, RouterModule, SharedModule, NgxSkeletonLoaderModule,TranslateModule],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -27,38 +29,41 @@ export class ServiceDetailsComponent implements OnInit {
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
-
+  content: Content | undefined;
+  imageToDisplay: string | null = null;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private cmsDataService: CmsDataService
+    private cmsDataService: CmsDataService,
+    private contentService: ContentService,
   ) { }
 
   ngOnInit(): void {
+    const fullUrl = this.router.url.split('?')[0];
+    const parts = fullUrl.split('/').filter(Boolean);
     this.route.paramMap.subscribe(params => {
       const serviceTitle = history.state.title;
-      if (serviceTitle) {
-        this.loadServiceDetails(serviceTitle);
-      } else {
-        this.error = 'Service title not found';
-        this.loading = false;
-      }
+      this.loadServiceDetails("/CMS/" + parts.slice(1).join('/') + "/");
     });
   }
 
   private loadServiceDetails(serviceTitle: string): void {
-    const endpoint = `${environment.contentUrl}/services/details/${encodeURIComponent(serviceTitle)}`;
-    this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
+    this.loading = true;
+    this.contentService.getContent(serviceTitle).subscribe({
       next: (response) => {
-        this.serviceDetails = response;
-        console.log(response);
+        this.content = response;
+        if (this.content?.Content) {
+          this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
+          //  this.content.Content = this.content.Content.replace(/href="\/CMS/g, `href="${this.currentLang}`);
+        }
+
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load service details. Please try again later.';
+        this.error = 'Failed to load content. Please try again later.';
         this.loading = false;
-        console.error('Error loading service details:', err);
+        console.error('Error loading content:', err);
       }
     });
   }
-} 
+}

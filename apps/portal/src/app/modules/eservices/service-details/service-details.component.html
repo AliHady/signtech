@@ -2,64 +2,50 @@
 <div class="service-details-container" [@routeAnimations]>
   <app-breadcrumbs></app-breadcrumbs>
 
-  <main class="service-content bg-white">
-    <div class="container mx-auto px-1 py-8">
-      @if (serviceDetails) {
-        <article class="p-8">
-          
-          <div class="flex items-center text-gray-500 mb-8 border-b pb-4">
-            <time class="text-sm font-medium">{{ serviceDetails.CreatedDate }}</time>
+  <main class="news-content bg-white overflow-hidden">
+    <div #contentContainer class="container mx-auto px-1 py-8">
+
+      @if (imageToDisplay) {
+        <div class="image-modal">
+          <div class="overlay" (click)="imageToDisplay = null"></div>
+          <div class="image-container">
+            <img [src]="imageToDisplay" alt="Preview" />
+            <button (click)="imageToDisplay = null">{{'GENERAL.CLOSE' | translate}}</button>
           </div>
+        </div>
+      }
 
-          @if (serviceDetails.ServiceImage) {
-            <div class="mb-8">
-              <img 
-                [src]="portalUrl + serviceDetails.ServiceImage.replace('/CMS', '')" 
-                [alt]="serviceDetails.Title"
-                class="w-full h-auto -xl shadow-md object-cover"
-              />
-            </div>
-          }
-
+      @if (content) {
+        <article class="p-8">
           <div class="prose max-w-none">
-            <p class="text-lg mb-6 text-gray-700 leading-relaxed">{{ serviceDetails.Description }}</p>
-            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="serviceDetails.Content"></div>
+            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="content.Content"></div>
           </div>
         </article>
       } @else {
         <div class="space-y-8">
           <!-- Title Skeleton -->
-          <ngx-skeleton-loader
-            [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem', 'background-color': '#f3f4f6' }"
-            [count]="1"
+          <ngx-skeleton-loader [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem' }" [count]="1"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Date Skeleton -->
-          <ngx-skeleton-loader
-            [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem', 'background-color': '#f3f4f6' }"
-            [count]="1"
+          <ngx-skeleton-loader [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem' }" [count]="1"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Image Skeleton -->
           <ngx-skeleton-loader
-            [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem', 'background-color': '#f3f4f6' }"
-            [count]="1"
+            [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem' }" [count]="1"
             appearance="line">
           </ngx-skeleton-loader>
 
-          <!-- Description Skeleton -->
-          <ngx-skeleton-loader
-            [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem', 'background-color': '#f3f4f6' }"
-            [count]="3"
+          <!-- Content Summary Skeleton -->
+          <ngx-skeleton-loader [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem' }" [count]="3"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Content Skeleton -->
-          <ngx-skeleton-loader
-            [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem', 'background-color': '#f3f4f6' }"
-            [count]="8"
+          <ngx-skeleton-loader [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem' }" [count]="8"
             appearance="line">
           </ngx-skeleton-loader>
         </div>

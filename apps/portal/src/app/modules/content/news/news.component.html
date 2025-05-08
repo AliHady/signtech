@@ -9,7 +9,7 @@
         <!-- Loading state -->
         @if (loading) {
           @for (item of [1,2,3,4,5,6]; track item) {
-            <article class="flex flex-col bg-white -lg shadow-sm hover:shadow-md transition-all duration-300">
+            <article class="flex flex-col bg-white -lg shadow-sm hover:shadow-md transition-all duration-300 p-8">
               <!-- Arrow + title row skeleton -->
               <div class="flex items-center p-4 border-b border-gray-100">
                 <div class="flex-none w-28 h-20">
@@ -72,7 +72,7 @@
 
         <!-- News articles -->
         @for (item of paginatedNews; track item.Id) {
-          <article class="flex flex-col bg-white -lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+          <article class="flex p-8 flex-col bg-white -lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
             <!-- Main image -->
            @if (item.RollupImage) {
               <div class="relative h-64 overflow-hidden">

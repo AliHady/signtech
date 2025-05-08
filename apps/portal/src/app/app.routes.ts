@@ -5,6 +5,7 @@ import { eservicesRoutes } from './modules/eservices/eservices.routes';
 import { authRoutes } from './modules/auth/auth.routes';
 import { marsadRoutes } from './modules/marsad/marsad.routes';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { ServerDownComponent } from './shared/components/server-down/server-down.component';
 
 export const appRoutes: Route[] = [
   {
@@ -20,6 +21,10 @@ export const appRoutes: Route[] = [
       ...eservicesRoutes,
       ...authRoutes,
       ...marsadRoutes,
+      {
+        path: 'server-down',
+        component: ServerDownComponent
+      },
       {
         path: '**',
         component: NotFoundComponent

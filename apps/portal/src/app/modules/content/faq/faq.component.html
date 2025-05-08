@@ -1,0 +1,144 @@
+<app-header></app-header>
+<div class="news-container">
+
+  <app-breadcrumbs ></app-breadcrumbs>
+  <main class="news-content bg-white" [@routeAnimations]>
+    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
+    <section class="container mx-auto px-4 py-16 bg-gradient-to-b from-[#344549]/5 to-white">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-[#344549]/70 text-lg">اكتشف إجابات على الأسئلة الأكثر شيوعاً</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="mb-12">
+          <div class="relative">
+            <input 
+              type="text" 
+              [(ngModel)]="searchQuery" 
+              (input)="filterFAQs()"
+              placeholder="ابحث عن سؤال..." 
+              class="w-full p-4 pr-12 text-right border border-[#344549]/20 focus:outline-none focus:border-[#344549] transition-colors duration-200"
+            >
+            <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+              <svg class="w-5 h-5 text-[#344549]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div *ngIf="searchQuery" class="mt-2 text-right text-sm text-[#344549]/70">
+            {{ filteredFAQs.length }} نتيجة
+          </div>
+        </div>
+        
+        <div class="space-y-8">
+          <!-- FAQ Item 1 -->
+          <div class="group" *ngIf="isVisible(0)">
+            <button 
+              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+              (click)="toggleFaq(0)"
+            >
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">1</span>
+                </div>
+                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني إنشاء حساب جديد؟</span>
+              </div>
+              <svg 
+                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                [class.rotate-180]="openFaqs[0]" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div 
+              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
+              [class.hidden]="!openFaqs[0]"
+              [class.opacity-0]="!openFaqs[0]"
+              [class.opacity-100]="openFaqs[0]"
+              [class.translate-y-[-10px]="!openFaqs[0]"
+              [class.translate-y-0]="openFaqs[0]"
+            >
+              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك إنشاء حساب جديد من خلال النقر على زر "تسجيل" في أعلى الصفحة واتباع الخطوات المطلوبة.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="group" *ngIf="isVisible(1)">
+            <button 
+              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+              (click)="toggleFaq(1)"
+            >
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">2</span>
+                </div>
+                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني استعادة كلمة المرور؟</span>
+              </div>
+              <svg 
+                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                [class.rotate-180]="openFaqs[1]" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div 
+              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
+              [class.hidden]="!openFaqs[1]"
+              [class.opacity-0]="!openFaqs[1]"
+              [class.opacity-100]="openFaqs[1]"
+              [class.translate-y-[-10px]="!openFaqs[1]"
+              [class.translate-y-0]="openFaqs[1]"
+            >
+              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك النقر على "نسيت كلمة المرور" في صفحة تسجيل الدخول واتباع التعليمات لإعادة تعيين كلمة المرور الخاصة بك.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="group" *ngIf="isVisible(2)">
+            <button 
+              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+              (click)="toggleFaq(2)"
+            >
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">3</span>
+                </div>
+                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني التواصل مع الدعم الفني؟</span>
+              </div>
+              <svg 
+                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                [class.rotate-180]="openFaqs[2]" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div 
+              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
+              [class.hidden]="!openFaqs[2]"
+              [class.opacity-0]="!openFaqs[2]"
+              [class.opacity-100]="openFaqs[2]"
+              [class.translate-y-[-10px]="!openFaqs[2]"
+              [class.translate-y-0]="openFaqs[2]"
+            >
+              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك التواصل مع فريق الدعم الفني من خلال نموذج الاتصال في صفحة "اتصل بنا" أو عبر البريد الإلكتروني للدعم.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+</div>
+
+<app-footer></app-footer>

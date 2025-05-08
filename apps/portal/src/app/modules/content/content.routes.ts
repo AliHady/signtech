@@ -3,6 +3,10 @@ import { Route } from '@angular/router';
 export const contentRoutes: Route[] = [
   // About Us Routes
   {
+    path: 'aboutus',
+    loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
     path: 'aboutus/aboutcenter',
     loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
   },
@@ -19,6 +23,10 @@ export const contentRoutes: Route[] = [
     loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
   },
   // Initiatives Routes
+  {
+    path: 'initiatives',
+    loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
   {
     path: 'initiatives/initiativetoestablishandoperatenationalindustrialinformationcenter',
     loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)

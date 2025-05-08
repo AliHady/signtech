@@ -26,113 +26,106 @@
               </svg>
             </div>
           </div>
-          <div *ngIf="searchQuery" class="mt-2 text-right text-sm text-[#344549]/70">
-            {{ filteredFAQs.length }} نتيجة
-          </div>
+          @if (searchQuery) {
+            <div class="mt-2 text-right text-sm text-[#344549]/70">
+              {{ filteredFAQs.length }} نتيجة
+            </div>
+          }
         </div>
         
         <div class="space-y-8">
           <!-- FAQ Item 1 -->
-          <div class="group" *ngIf="isVisible(0)">
-            <button 
-              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
-              (click)="toggleFaq(0)"
-            >
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
-                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">1</span>
-                </div>
-                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني إنشاء حساب جديد؟</span>
-              </div>
-              <svg 
-                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
-                [class.rotate-180]="openFaqs[0]" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
+          @if (isVisible(0)) {
+            <div class="group">
+              <button 
+                class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+                (click)="toggleFaq(0)"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div 
-              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
-              [class.hidden]="!openFaqs[0]"
-              [class.opacity-0]="!openFaqs[0]"
-              [class.opacity-100]="openFaqs[0]"
-              [class.translate-y-[-10px]="!openFaqs[0]"
-              [class.translate-y-0]="openFaqs[0]"
-            >
-              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك إنشاء حساب جديد من خلال النقر على زر "تسجيل" في أعلى الصفحة واتباع الخطوات المطلوبة.</p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                    <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">1</span>
+                  </div>
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني إنشاء حساب جديد؟</span>
+                </div>
+                <svg 
+                  class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                  [class.rotate-180]="openFaqs[0]" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              @if (openFaqs[0]) {
+                <div class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out">
+                  <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك إنشاء حساب جديد من خلال النقر على زر "تسجيل" في أعلى الصفحة واتباع الخطوات المطلوبة.</p>
+                </div>
+              }
             </div>
-          </div>
+          }
 
           <!-- FAQ Item 2 -->
-          <div class="group" *ngIf="isVisible(1)">
-            <button 
-              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
-              (click)="toggleFaq(1)"
-            >
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
-                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">2</span>
-                </div>
-                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني استعادة كلمة المرور؟</span>
-              </div>
-              <svg 
-                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
-                [class.rotate-180]="openFaqs[1]" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
+          @if (isVisible(1)) {
+            <div class="group">
+              <button 
+                class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+                (click)="toggleFaq(1)"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div 
-              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
-              [class.hidden]="!openFaqs[1]"
-              [class.opacity-0]="!openFaqs[1]"
-              [class.opacity-100]="openFaqs[1]"
-              [class.translate-y-[-10px]="!openFaqs[1]"
-              [class.translate-y-0]="openFaqs[1]"
-            >
-              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك النقر على "نسيت كلمة المرور" في صفحة تسجيل الدخول واتباع التعليمات لإعادة تعيين كلمة المرور الخاصة بك.</p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                    <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">2</span>
+                  </div>
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني استعادة كلمة المرور؟</span>
+                </div>
+                <svg 
+                  class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                  [class.rotate-180]="openFaqs[1]" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              @if (openFaqs[1]) {
+                <div class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out">
+                  <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك النقر على "نسيت كلمة المرور" في صفحة تسجيل الدخول واتباع التعليمات لإعادة تعيين كلمة المرور الخاصة بك.</p>
+                </div>
+              }
             </div>
-          </div>
+          }
 
           <!-- FAQ Item 3 -->
-          <div class="group" *ngIf="isVisible(2)">
-            <button 
-              class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
-              (click)="toggleFaq(2)"
-            >
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
-                  <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">3</span>
-                </div>
-                <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني التواصل مع الدعم الفني؟</span>
-              </div>
-              <svg 
-                class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
-                [class.rotate-180]="openFaqs[2]" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
+          @if (isVisible(2)) {
+            <div class="group">
+              <button 
+                class="w-full bg-white p-6 text-right flex justify-between items-center focus:outline-none transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow border border-[#344549]/20" 
+                (click)="toggleFaq(2)"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div 
-              class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out" 
-              [class.hidden]="!openFaqs[2]"
-              [class.opacity-0]="!openFaqs[2]"
-              [class.opacity-100]="openFaqs[2]"
-              [class.translate-y-[-10px]="!openFaqs[2]"
-              [class.translate-y-0]="openFaqs[2]"
-            >
-              <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك التواصل مع فريق الدعم الفني من خلال نموذج الاتصال في صفحة "اتصل بنا" أو عبر البريد الإلكتروني للدعم.</p>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-[#344549]/10 flex items-center justify-center group-hover:bg-[#344549] transition-colors duration-300">
+                    <span class="text-xl font-bold text-[#344549] group-hover:text-white transition-colors duration-300">3</span>
+                  </div>
+                  <span class="text-xl font-bold text-[#344549] group-hover:text-[#344549] transition-colors duration-300">كيف يمكنني التواصل مع الدعم الفني؟</span>
+                </div>
+                <svg 
+                  class="w-6 h-6 text-[#344549]/50 transform transition-transform duration-300 group-hover:text-[#344549]" 
+                  [class.rotate-180]="openFaqs[2]" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              @if (openFaqs[2]) {
+                <div class="mt-4 bg-white p-6 shadow border border-[#344549]/20 transform transition-all duration-300 ease-in-out">
+                  <p class="text-[#344549]/70 leading-relaxed text-lg">يمكنك التواصل مع فريق الدعم الفني من خلال نموذج الاتصال في صفحة "اتصل بنا" أو عبر البريد الإلكتروني للدعم.</p>
+                </div>
+              }
             </div>
-          </div>
+          }
         </div>
       </div>
     </section>

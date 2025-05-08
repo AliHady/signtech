@@ -7,19 +7,21 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   template: `
-    <div *ngIf="!hasConsent" class="cookie-consent">
-      <div class="cookie-content">
-        <p>{{ 'COOKIE_CONSENT.MESSAGE' | translate }}</p>
-        <div class="cookie-buttons">
-          <button (click)="acceptCookies()" class="accept-btn">
-            {{ 'COOKIE_CONSENT.ACCEPT' | translate }}
-          </button>
-          <button (click)="declineCookies()" class="decline-btn">
-            {{ 'COOKIE_CONSENT.DECLINE' | translate }}
-          </button>
+    @if (!hasConsent) {
+      <div class="cookie-consent">
+        <div class="cookie-content">
+          <p>{{ 'COOKIE_CONSENT.MESSAGE' | translate }}</p>
+          <div class="cookie-buttons">
+            <button (click)="acceptCookies()" class="accept-btn">
+              {{ 'COOKIE_CONSENT.ACCEPT' | translate }}
+            </button>
+            <button (click)="declineCookies()" class="decline-btn">
+              {{ 'COOKIE_CONSENT.DECLINE' | translate }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    }
   `,
   styles: [`
     .cookie-consent {

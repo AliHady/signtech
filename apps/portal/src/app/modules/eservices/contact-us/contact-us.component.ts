@@ -3,12 +3,22 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-contact-us',
+  standalone: true,
   imports: [CommonModule, SharedModule, TranslateModule, ReactiveFormsModule],
   templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.scss']
+  styleUrls: ['./contact-us.component.scss'],
+  animations: [
+    trigger('routeAnimations', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('0.3s ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class ContactUsComponent {
   contactForm: FormGroup;

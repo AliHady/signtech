@@ -23,6 +23,7 @@ export class BreadcrumbsComponent implements OnInit {
   currentPath = '';
   loading = true;
   error = '';
+  isRTL = false;
 
   constructor(
     private router: Router,
@@ -30,8 +31,8 @@ export class BreadcrumbsComponent implements OnInit {
     public translate: TranslateService,
     private headerService: HeaderService) { }
 
-
   ngOnInit() {
+    this.isRTL = document.dir === 'rtl';
     const fullUrl = this.router.url.split('?')[0];
     const parts = fullUrl.split('/').filter(Boolean);
     const lang = parts[0];

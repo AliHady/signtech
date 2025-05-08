@@ -137,5 +137,24 @@
     "DESCRIPTION": "We're experiencing technical difficulties. Our team has been notified and is working to resolve the issue.",
     "RETRY_BUTTON": "Try Again",
     "HOME_BUTTON": "Return Home"
+  },
+  "CONTACT_US": {
+    "HINT": "If you have any suggestions or inquiries, please contact the portal team using the form below.",
+    "REQUEST_RECEIVED": "Your request has been successfully received",
+    "CONTACT_TYPE": "Contact Type",
+    "SUGGESTION": "Suggestion",
+    "COMPLAINT": "Complaint",
+    "CHOOSE_CONTACT_TYPE": "Choose Contact Type",
+    "SUBJECT": "Subject",
+    "SUBJECT_REQUIRED": "Subject Required",
+    "FULL_NAME": "Full Name",
+    "FULL_NAME_REQUIRED": "Full Name Required",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email Required",
+    "EMAIL_INVALID": "Invalid email format",
+    "MESSAGE": "Message",
+    "MESSAGE_REQUIRED": "Message Required",
+    "SUBMIT": "Submit",
+    "CLEAR": "Clear"
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../../shared/services/header.service';
 import { NavMenu } from '../../../shared/models/navmen.model';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
@@ -20,9 +20,9 @@ interface MenuItem {
   selector: 'app-site-map',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    HeaderComponent, 
+    CommonModule,
+    RouterModule,
+    HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
     TranslateModule,
@@ -35,27 +35,34 @@ export class SiteMapComponent implements OnInit {
   menuItems: MenuItem[] = [];
   loading = true;
   error = '';
+  currentLang = 'ar';
 
-  constructor(private headerService: HeaderService) {}
+  constructor(private router: Router, private headerService: HeaderService) { }
 
   ngOnInit() {
-    this.fetchMenuItems();
+    const fullUrl = this.router.url.split('?')[0];
+    const parts = fullUrl.split('/').filter(Boolean);
+    const lang = parts[0];
+    if (lang && (lang === 'en' || lang === 'ar')) {
+      this.currentLang = lang;
+      this.fetchMenuItems();
+    }
   }
 
   private fetchMenuItems() {
     this.loading = true;
     this.error = '';
-    
+
     this.headerService.getNavigationMenu().subscribe({
       next: (response: NavMenu) => {
         this.menuItems = response.map(item => ({
           id: item.Id,
           title: item.Text,
-          url: item.Url,
+          url: "/" + this.currentLang + item.Url,
           children: item.Items?.map(child => ({
             id: child.Id,
             title: child.Text,
-            url: child.Url
+            url: "/" + this.currentLang + child.Url
           }))
         }));
         this.loading = false;

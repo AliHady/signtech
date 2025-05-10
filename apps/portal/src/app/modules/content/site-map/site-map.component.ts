@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../../shared/services/header.service';
-import { NavMenu } from '../../../shared/models/navmen.model';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
@@ -46,7 +45,10 @@ export class SiteMapComponent implements OnInit {
   error = '';
   currentLang = 'ar';
 
-  constructor(private router: Router, private headerService: HeaderService) { }
+  constructor(
+    private router: Router,
+    private headerService: HeaderService
+  ) { }
 
   ngOnInit() {
     const fullUrl = this.router.url.split('?')[0];
@@ -55,7 +57,18 @@ export class SiteMapComponent implements OnInit {
     if (lang && (lang === 'en' || lang === 'ar')) {
       this.currentLang = lang;
     }
+
+   // Subscribe to menu items from HeaderService to prevent multi calls :D
+    this.headerService.getMenuItems().subscribe({
+      next: (items) => {
+        this.menuItems = items;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error getting menu items:', error);
+        this.error = 'Failed to load menu items. Please try again later.';
+        this.loading = false;
+      }
+    });
   }
-
-
 } 

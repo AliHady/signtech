@@ -40,20 +40,20 @@ export class BreadcrumbsComponent implements OnInit {
       this.currentLang = lang;
       this.currentPath = decodeURIComponent(fullUrl.replace('/' + lang, ''));
       this.translationService.setLanguage(lang);
-      this.fetchMenuItems();
+      this.subscribeToMenuItems();
     }
   }
 
-  private fetchMenuItems() {
+  private subscribeToMenuItems() {
     this.loading = true;
     this.error = '';
-    this.headerService.getNavigationMenu().subscribe({
-      next: (response: NavMenu) => {
-        this.buildBreadcrumbs(response);
+    this.headerService.getMenuItems().subscribe({
+      next: (items) => {
+        this.buildBreadcrumbs(items);
         this.loading = false;
       },
       error: (error: Error) => {
-        console.error('Error fetching menu items:', error);
+        console.error('Error getting menu items:', error);
         this.error = 'Failed to load menu items. Please try again later.';
         this.loading = false;
       }
@@ -71,10 +71,10 @@ export class BreadcrumbsComponent implements OnInit {
     const isPathFound = this.findPath(data);
     if (!isPathFound) {
       const lastMatch = this.findNearestMatch(data, this.currentPath);
-      if (lastMatch && !this.list.some(x => x.url === lastMatch.Url)) {
+      if (lastMatch && !this.list.some(x => x.url === lastMatch.url)) {
         this.list.push({
-          url: lastMatch.Url,
-          label: lastMatch.Text
+          url: lastMatch.url,
+          label: lastMatch.title
         });
       }
     }
@@ -117,11 +117,11 @@ export class BreadcrumbsComponent implements OnInit {
 
   private findNearestMatch(nodes: any[], path: string): any {
     for (const node of nodes) {
-      if (path.startsWith(node.Url)) {
+      if (path.startsWith(node.url)) {
         return node;
       }
-      if (node.Items && node.Items.length) {
-        const result = this.findNearestMatch(node.Items, path);
+      if (node.children && node.children.length) {
+        const result = this.findNearestMatch(node.children, path);
         if (result) return result;
       }
     }
@@ -130,19 +130,19 @@ export class BreadcrumbsComponent implements OnInit {
 
   private findPath(nodes: any[]): boolean {
     for (const node of nodes) {
-      if (this.currentPath.startsWith(node.Url)) {
+      if (this.currentPath.startsWith(node.url)) {
         this.list.push({
-          url: node.Url,
-          label: node.Text
+          url: node.url,
+          label: node.title
         });
 
-        if (node.Url === this.currentPath) {
+        if (node.url === this.currentPath) {
           return true;
         }
       }
 
-      if (node.Items && node.Items.length) {
-        if (this.findPath(node.Items)) {
+      if (node.children && node.children.length) {
+        if (this.findPath(node.children)) {
           return true;
         }
       }

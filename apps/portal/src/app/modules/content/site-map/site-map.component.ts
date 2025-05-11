@@ -71,4 +71,13 @@ export class SiteMapComponent implements OnInit {
       }
     });
   }
+
+  scrollToTop(): void {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100); // Small delay to ensure navigation has started
+  }
 } 

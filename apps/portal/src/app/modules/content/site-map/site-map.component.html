@@ -27,7 +27,7 @@
                 <ul class="space-y-3 text-right">
                   @for (child of item.children; track child) {
                     <li>
-                      <a [routerLink]="['/' + currentLang + child.url]" (click)="scrollToTop()" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                      <a [routerLink]="['/' + currentLang + child.url]" (click)="scrollToTop()" class="text-[#344549] hover:text-[#4a5d63] transition-colors duration-200">
                         {{ child.title }}
                       </a>
                     </li>

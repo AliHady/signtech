@@ -15,7 +15,7 @@ import { ContentService } from '../../content/services/content.service';
 import { environment } from '../../../../environments/environment';
 import { EServiceLink } from '../models/eserviceslinks.model';
 
-interface EServiceCache {
+interface EServiceCache { 
   [key: number]: {
     data: EServiceLink[];
     timestamp: number;

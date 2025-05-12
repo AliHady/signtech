@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <main class="news-content bg-white overflow-hidden">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="clearfix">
+          <!-- Organization Name -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+              formControlName="organizationName" />
+            <div *ngIf="applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched"
+              class="text-danger">
+              {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+            </div>
+          </div>
+
+          <!-- Communication Supervisor Name -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="text" class="form-control"
+              [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+              formControlName="communicationSupervisorName" />
+            <div
+              *ngIf="applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched"
+              class="text-danger">
+              {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
+            </div>
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+              formControlName="mobileNumber" />
+            <div *ngIf="applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched"
+              class="text-danger">
+              {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="email" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+              formControlName="email" />
+            <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="text-danger">
+              {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
+            </div>
+          </div>
+        </div>
+
+        <!-- File Inputs -->
+        <div class="col-md-12" *ngFor="let fileField of [
+          'CR-FILE',
+          'TAX-FILE',
+          'GOSI-FILE',
+          'FINANCIAL-STATEMENTS-FILE',
+          'INVESTMENT-LICENSE-FILE',
+          'CHAMBER-OF-COMMERCE-CERTIFICATE-FILE',
+          'BUSINESS-CLASSIFICATION-CERTIFICATE-FILE',
+          'CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE',
+          'CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE',
+          'CERTIFICATE-OF-EXPERIENCE-FILE',
+          'PRICE-OFFER'
+        ]">
+          <label [for]="fileField">{{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}</label>
+          <input type="file" class="form-control" [id]="fileField" (change)="onFileChange($event, fileField)" />
+          <div *ngIf="applyForm.get(fileField)?.invalid && applyForm.get(fileField)?.touched" class="text-danger">
+            {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
+          </div>
+        </div>
+
+        <!-- Submit and Clear Buttons -->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <button type="submit" class="btn btn-primary" [disabled]="applyForm.invalid">
+            {{ 'APPLY-TO-TARMEEZ.SUBMIT' | translate }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="applyForm.reset()">
+            {{ 'APPLY-TO-TARMEEZ.CLEAR' | translate }}
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

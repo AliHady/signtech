@@ -7,7 +7,8 @@
     "NIMIC": "National Center for Industrial and Mining Information",
     "READ_MORE": "Read More",
     "ALL_NEWS": "All News",
-    "NEWS": "News"
+    "NEWS": "News",
+    "IS_REQUIRED": "مطلوب"
   },
   "AUTH": {
     "LOGIN": "Login",
@@ -157,6 +158,25 @@
     "EMAIL_INVALID": "Invalid email format",
     "MESSAGE": "Message",
     "MESSAGE_REQUIRED": "Message Required",
+    "SUBMIT": "Submit",
+    "CLEAR": "Clear"
+  },
+  "APPLY-TO-TARMEEZ": {
+    "ORGANIZATION-NAME": "Organization Name",
+    "COMMUNICATION-SUPERVISOR-NAME": "Communication Supervisor Name",
+    "MOBILE-NUMBER": "Mobile Number",
+    "EMAIL": "Email",
+    "CR-FILE": "Commercial Registration File",
+    "TAX-FILE": "Tax File",
+    "GOSI-FILE": "GOSI File",
+    "FINANCIAL-STATEMENTS-FILE": "Financial Statements File",
+    "INVESTMENT-LICENSE-FILE": "Investment License File",
+    "CHAMBER-OF-COMMERCE-CERTIFICATE-FILE": "Chamber of Commerce Certificate File",
+    "BUSINESS-CLASSIFICATION-CERTIFICATE-FILE": "Business Classification Certificate File",
+    "CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE": "Certificate to the Saudi Council of Engineers File",
+    "CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE": "Certificate of Achieving the Regular Percentage File",
+    "CERTIFICATE-OF-EXPERIENCE-FILE": "Certificate of Experience File",
+    "PRICE-OFFER": "Price Offer",
     "SUBMIT": "Submit",
     "CLEAR": "Clear"
   },

@@ -5,6 +5,8 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 import { ListOfServicesComponent } from './list-of-services/list-of-services.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ApplyToTarmeezComponent } from './apply-to-tarmeez/apply-to-tarmeez.component';
+import { RequestCodeComponent } from './request-code/request-code.component';
 
 @NgModule({
   declarations: [],
@@ -14,12 +16,16 @@ import { SharedModule } from '../../shared/shared.module';
     RouterModule,
     ServiceDetailsComponent,
     ListOfServicesComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ApplyToTarmeezComponent,
+    RequestCodeComponent
   ],
   exports: [
     ServiceDetailsComponent,
     ListOfServicesComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ApplyToTarmeezComponent,
+    RequestCodeComponent
   ]
 })
 export class EservicesModule { } 

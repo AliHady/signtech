@@ -1,92 +1,140 @@
 <app-header></app-header>
-<div class="news-details-container" [@routeAnimations]>
+<div class="min-h-screen bg-gray-50" [@routeAnimations]>
   <app-breadcrumbs></app-breadcrumbs>
 
   <main class="news-content bg-white overflow-hidden">
     <div class="container mx-auto px-4 py-8 max-w-3xl">
-      <div *ngIf="successMessage" class="alert alert-success">
-        {{ successMessage }}
+      <!-- Alert Messages -->
+      @if (successMessage) {
+        <div class="mb-6 p-4 rounded-lg bg-green-50 text-green-700 border border-green-200">
+          {{ successMessage }}
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="mb-6 p-4 rounded-lg bg-red-50 text-red-700 border border-red-200">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Form Container -->
+      <div class="">
+        <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          <!-- Organization Name -->
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }}
+            </label>
+            <input type="text" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+                   formControlName="organizationName" />
+            @if (applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched) {
+              <div class="text-sm text-red-600">
+                {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+              </div>
+            }
+          </div>
+
+          <!-- Communication Supervisor Name -->
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }}
+            </label>
+            <input type="text" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+                   formControlName="communicationSupervisorName" />
+            @if (applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched) {
+              <div class="text-sm text-red-600">
+                {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+              </div>
+            }
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }}
+            </label>
+            <input type="text" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+                   formControlName="mobileNumber" />
+            @if (applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched) {
+              <div class="text-sm text-red-600">
+                {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+              </div>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }}
+            </label>
+            <input type="email" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+                   formControlName="email" />
+            @if (applyForm.get('email')?.invalid && applyForm.get('email')?.touched) {
+              <div class="text-sm text-red-600">
+                {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+              </div>
+            }
+          </div>
+
+          <!-- File Inputs -->
+          <div class="space-y-6">
+            @for (fileField of [
+              'CR-FILE',
+              'TAX-FILE',
+              'GOSI-FILE',
+              'FINANCIAL-STATEMENTS-FILE',
+              'INVESTMENT-LICENSE-FILE',
+              'CHAMBER-OF-COMMERCE-CERTIFICATE-FILE',
+              'BUSINESS-CLASSIFICATION-CERTIFICATE-FILE',
+              'CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE',
+              'CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE',
+              'CERTIFICATE-OF-EXPERIENCE-FILE',
+              'PRICE-OFFER'
+            ]; track fileField) {
+              <div class="space-y-2">
+                <label [for]="fileField" class="block text-sm font-medium text-gray-700">
+                  {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}
+                </label>
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div class="space-y-1 text-center">
+                    <input type="file" 
+                           class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                           [id]="fileField" 
+                           (change)="onFileChange($event, fileField)" />
+                  </div>
+                </div>
+                @if (applyForm.get(fileField)?.invalid && applyForm.get(fileField)?.touched) {
+                  <div class="text-sm text-red-600">
+                    {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Submit and Clear Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+            <button type="submit" 
+                    [disabled]="applyForm.invalid"
+                    class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+              {{ 'APPLY-TO-TARMEEZ.SUBMIT' | translate }}
+            </button>
+            <button type="button" 
+                    (click)="applyForm.reset()"
+                    class="w-full sm:w-auto px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+              {{ 'APPLY-TO-TARMEEZ.CLEAR' | translate }}
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-
-      <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
-
-        <!-- Organization Name -->
-        <div class="space-y-2">
-          <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
-            formControlName="organizationName" />
-          <div *ngIf="applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched"
-            class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-          </div>
-        </div>
-
-        <!-- Communication Supervisor Name -->
-        <div class="space-y-2">
-          <input type="text" class="form-control"
-            [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
-            formControlName="communicationSupervisorName" />
-          <div
-            *ngIf="applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched"
-            class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-          </div>
-        </div>
-
-        <!-- Mobile Number -->
-        <div class="space-y-2">
-          <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
-            formControlName="mobileNumber" />
-          <div *ngIf="applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched"
-            class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div class="space-y-2">
-          <input type="email" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
-            formControlName="email" />
-          <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-          </div>
-        </div>
-
-        <!-- File Inputs -->
-        <div class="col-md-12" *ngFor="let fileField of [
-          'CR-FILE',
-          'TAX-FILE',
-          'GOSI-FILE',
-          'FINANCIAL-STATEMENTS-FILE',
-          'INVESTMENT-LICENSE-FILE',
-          'CHAMBER-OF-COMMERCE-CERTIFICATE-FILE',
-          'BUSINESS-CLASSIFICATION-CERTIFICATE-FILE',
-          'CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE',
-          'CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE',
-          'CERTIFICATE-OF-EXPERIENCE-FILE',
-          'PRICE-OFFER'
-        ]">
-          <label [for]="fileField">{{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}</label>
-          <input type="file" class="form-control" [id]="fileField" (change)="onFileChange($event, fileField)" />
-          <div *ngIf="applyForm.get(fileField)?.invalid && applyForm.get(fileField)?.touched" class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-          </div>
-        </div>
-
-        <!-- Submit and Clear Buttons -->
-        <div class="space-y-2">
-          <button type="submit" class="btn btn-primary" [disabled]="applyForm.invalid">
-            {{ 'APPLY-TO-TARMEEZ.SUBMIT' | translate }}
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="applyForm.reset()">
-            {{ 'APPLY-TO-TARMEEZ.CLEAR' | translate }}
-          </button>
-        </div>
-      </form>
-
     </div>
   </main>
 </div>

@@ -13,46 +13,45 @@
       </div>
 
       <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <div class="clearfix">
-          <!-- Organization Name -->
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
-              formControlName="organizationName" />
-            <div *ngIf="applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched"
-              class="text-danger">
-              {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-            </div>
-          </div>
 
-          <!-- Communication Supervisor Name -->
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="text" class="form-control"
-              [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
-              formControlName="communicationSupervisorName" />
-            <div
-              *ngIf="applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched"
-              class="text-danger">
-              {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
-            </div>
+        <!-- Organization Name -->
+        <div class="space-y-2">
+          <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+            formControlName="organizationName" />
+          <div *ngIf="applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched"
+            class="text-danger">
+            {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
           </div>
+        </div>
 
-          <!-- Mobile Number -->
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
-              formControlName="mobileNumber" />
-            <div *ngIf="applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched"
-              class="text-danger">
-              {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
-            </div>
+        <!-- Communication Supervisor Name -->
+        <div class="space-y-2">
+          <input type="text" class="form-control"
+            [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+            formControlName="communicationSupervisorName" />
+          <div
+            *ngIf="applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched"
+            class="text-danger">
+            {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
           </div>
+        </div>
 
-          <!-- Email -->
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="email" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
-              formControlName="email" />
-            <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="text-danger">
-              {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
-            </div>
+        <!-- Mobile Number -->
+        <div class="space-y-2">
+          <input type="text" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+            formControlName="mobileNumber" />
+          <div *ngIf="applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched"
+            class="text-danger">
+            {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="space-y-2">
+          <input type="email" class="form-control" [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+            formControlName="email" />
+          <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="text-danger">
+            {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
           </div>
         </div>
 
@@ -73,12 +72,12 @@
           <label [for]="fileField">{{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}</label>
           <input type="file" class="form-control" [id]="fileField" (change)="onFileChange($event, fileField)" />
           <div *ngIf="applyForm.get(fileField)?.invalid && applyForm.get(fileField)?.touched" class="text-danger">
-            {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}  {{'GENERAL.IS_REQUIRED' | translate}}
+            {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
           </div>
         </div>
 
         <!-- Submit and Clear Buttons -->
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="space-y-2">
           <button type="submit" class="btn btn-primary" [disabled]="applyForm.invalid">
             {{ 'APPLY-TO-TARMEEZ.SUBMIT' | translate }}
           </button>

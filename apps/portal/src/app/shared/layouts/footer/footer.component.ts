@@ -62,7 +62,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.footerService.getImportantLinks().subscribe({
       next: (response) => {
-        this.importantLinks = response;
+        this.importantLinks = response.Items;
         this.loading = false;
       },
       error: (err) => {

@@ -7,4 +7,10 @@ export interface ImportantLink {
     ShowInHome: boolean;
 }
 
-export type ImportantLinks = ImportantLink[];
+export interface ImportantLinks {
+    TotalItems: number;
+    TotalPages: number;
+    CurrentPage: number;
+    PageSize: number;
+    Items: ImportantLink[];
+}

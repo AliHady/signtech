@@ -119,11 +119,48 @@ h6 {
 .container ul {
   list-style-position: inside;
 
- 
+
 }
+
 article {
   img {
     max-width: 100%;
     height: auto;
+  }
+}
+
+.whiteLogo {
+  display: none;
+}
+
+.marsadTheme {
+
+  a,
+  a.mainMenuItem {
+    color: #fff !important;
+  }
+
+  .greenLogo {
+    display: none;
+  }
+
+  .whiteLogo {
+    display: block;
+  }
+
+  .mainNav {
+    li {
+      a:hover {
+        color: #413258 !important;
+      }
+    }
+
+    ul {
+      li {
+        a {
+          color: #413258 !important;
+        }
+      }
+    }
   }
 }

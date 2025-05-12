@@ -5,7 +5,7 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { TranslationsModule } from '@nimic/translations';
 import { CoreHttpModule } from '@nimic/core/http';
@@ -25,7 +25,23 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideClientHydration(withEventReplay()),
     provideRouter(appRoutes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        (req, next) => {
+          // Only modify requests to specific domains that need SSL handling
+          if (req.url.includes('your-api-domain.com')) {
+            const modifiedReq = req.clone({
+              setParams: {
+                rejectUnauthorized: 'false'
+              }
+            });
+            return next(modifiedReq);
+          }
+          return next(req);
+        }
+      ])
+    ),
     importProvidersFrom(
       CoreHttpModule,
       LoadingBarModule,

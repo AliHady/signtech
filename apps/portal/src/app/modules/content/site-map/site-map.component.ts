@@ -79,5 +79,5 @@ export class SiteMapComponent implements OnInit {
         behavior: 'smooth'
       });
     }, 100); // Small delay to ensure navigation has started
-  }
+  } 
 } 

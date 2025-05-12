@@ -14,7 +14,7 @@
           {{ 'MARSAD.SUBTITLE' | translate }}
         </h2>
 
-        <a [routerLink]="'/marsad'"
+        <a [routerLink]="['/', currentLang, 'marsad']" (click)="scrollToTop()" 
           class="marsadLink inline-block bg-white font-semibold px-6 py-3 -md shadow hover:bg-gray-50 transition">
           {{ 'MARSAD.MORE' | translate }}
         </a>

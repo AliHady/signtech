@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from '@nimic/translations';
 import { HeaderService } from '../../services/header.service';
 import { NavMenu } from '../../models/navmen.model';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface BreadcrumbItem {
   label: string;
@@ -29,10 +30,13 @@ export class BreadcrumbsComponent implements OnInit {
     private router: Router,
     public translationService: TranslationService,
     public translate: TranslateService,
-    private headerService: HeaderService) { }
+    private headerService: HeaderService,
+    @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
-    this.isRTL = document.dir === 'rtl';
+    if (isPlatformBrowser(this.platformId)) {
+      this.isRTL = document.dir === 'rtl';
+    }
     const fullUrl = this.router.url.split('?')[0];
     const parts = fullUrl.split('/').filter(Boolean);
     const lang = parts[0];

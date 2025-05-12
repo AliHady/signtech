@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { EServicesService } from '../services/e-services.service';
+import { ContactUs } from '../models/contact-us';
 
 @Component({
   selector: 'app-contact-us',
@@ -13,8 +15,10 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ContactUsComponent {
   contactForm: FormGroup;
   formSubmitted = false;
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private eServicesService: EServicesService) {
     this.contactForm = this.fb.group({
       contactType: [null, Validators.required],
       subject: ['', [Validators.required, Validators.maxLength(200)]],
@@ -26,12 +30,18 @@ export class ContactUsComponent {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
-      // TODO: call API to submit form data
-      this.formSubmitted = true;
-      this.contactForm.reset();
-    } else {
-      this.contactForm.markAllAsTouched();
+      const formData: ContactUs = this.contactForm.value;
+      this.eServicesService.submitContactUs(formData).subscribe({
+        next: (res) => {
+          this.successMessage = res.message;
+          this.errorMessage = '';
+          this.contactForm.reset();
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          this.successMessage = '';
+        }
+      });
     }
   }
 

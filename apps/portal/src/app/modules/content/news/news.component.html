@@ -72,7 +72,7 @@
 
         <!-- News articles -->
         @for (item of paginatedNews; track item.Id) {
-          <article class="flex p-8 flex-col bg-white -lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+          <article class="flex flex-col h-full bg-white -lg shadow-sm hover:shadow-md transition-all duration-300">
             <!-- Main image -->
            @if (item.RollupImage) {
               <div class="relative h-64 overflow-hidden">
@@ -92,33 +92,37 @@
             } 
 
             <!-- Arrow + title row -->
-            <div class="flex items-center p-4 border-b border-gray-100">
+            <div class="flex border-b border-gray-100">
               <!-- arrow square -->
-              <button
-                type="button"
-                class="arrow-square flex-none w-28 h-20 bg-[#374151] flex items-center justify-center hover:bg-[#2d3748] transition-all duration-300 group-hover:scale-105"
-                aria-label="السابق"
-              >
-                <svg class="w-8 h-8 text-white transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+             
 
               <!-- title -->
-              <h3 class="flex-grow px-8 py-4 text-xl font-semibold leading-snug text-gray-800 group-hover:text-[#374151] transition-colors duration-300">
+              <h3 class="flex-grow px-4 py-4 text-xl font-semibold leading-snug text-[#344549] group-hover:text-[#413258] transition-colors duration-300">
                 {{ item.Title }}
               </h3>
+              <button
+              type="button"
+              class="cursor-pointer arrow-square flex-none w-16 h-16 bg-[#344549] flex items-center justify-center hover:bg-[#413258] transition-all duration-300 group-hover:scale-105 border-none outline-none focus:outline-none"
+              aria-label="السابق"
+              (click)="navigateToNewsDetails(item)"
+                  (keyup.enter)="navigateToNewsDetails(item)"
+                  tabindex="0"
+            >
+              <svg class="w-8 h-8 text-white transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
             </div>
 
             <!-- description -->
-            <div class="px-6 py-4">
+            <div class="px-6 py-4 flex-grow">
               <p class="text-gray-600 leading-7 line-clamp-3">
                 {{ item.ContentSummary }}
               </p>
             </div>
 
             <!-- date -->
-            <div class="px-6 mt-2">
+            <div class="p-2 flex justify-end">
               <time class="date text-sm text-gray-500 inline-flex items-center">
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -127,21 +131,7 @@
               </time>
             </div>
 
-            @if (item.NewsLink) {
-              <div class="px-6 mt-4 mb-6">
-                <a 
-                  (click)="navigateToNewsDetails(item)"
-                  (keyup.enter)="navigateToNewsDetails(item)"
-                  tabindex="0"
-                  class="read-more cursor-pointer text-[#374151] font-medium hover:text-[#2d3748] transition-colors duration-300 inline-flex items-center group-hover:translate-x-1"
-                >
-                  اقرأ المزيد
-                  <svg class="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            }
+    
           </article>
         }
       </div>

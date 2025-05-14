@@ -3,7 +3,7 @@
     <h2 class="text-3xl font-bold mb-6 text-center">أحدث أخبار المركز</h2>
     <p class="text-center mb-10 text-gray-600">المركز الإعلامي للمركز الوطني للمعلومات الصناعية والتعدينية</p>
 
-    <div class="latest-news-container">
+    <div class="latest-main-container">
       @if (loading) {
         <div class="loading">
           {{ 'GENERAL.LOADING' | translate }}
@@ -26,7 +26,7 @@
                    <!--  <img [src]="portalUrl + item.NewsImage.replace('/CMS', '')" [alt]="item.Title"> -->
                   </div>
                 }
-                <div class="news-content">
+                <div class="main-content">
                   <h3>{{ item.Title }}</h3>
                   <p class="date">{{ item.NewsHigriDate }}</p>
                   <p class="content">{{ item.ContentSummary }}</p>

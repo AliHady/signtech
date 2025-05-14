@@ -1,4 +1,4 @@
-.news-container {
+.main-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -35,7 +35,7 @@
   }
 }
 
-.news-content {
+.main-content {
   flex: 1;
   padding: 2rem;
 }

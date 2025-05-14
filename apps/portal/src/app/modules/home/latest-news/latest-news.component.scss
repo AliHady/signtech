@@ -1,4 +1,4 @@
-.latest-news-container {
+.latest-main-container {
 
   
   h2 {
@@ -57,7 +57,7 @@
       }
     }
 
-    .news-content {
+    .main-content {
       padding: 1.5rem;
       flex-grow: 1;
       display: flex;
@@ -100,7 +100,7 @@
 
 // Responsive adjustments
 @media (max-width: 768px) {
-  .latest-news-container {
+  .latest-main-container {
     padding: 1rem;
     
     .news-grid {

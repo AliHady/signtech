@@ -5,11 +5,20 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { TextInputComponent } from '@nimic/shared/ui';
+import { EmailInputComponent } from '@nimic/shared/ui';
 
 @Component({
   selector: 'app-apply-to-tarmeez',
   standalone: true,
-  imports: [CommonModule, SharedModule, TranslateModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    SharedModule, 
+    TranslateModule, 
+    ReactiveFormsModule,
+    TextInputComponent,
+    EmailInputComponent
+  ],
   templateUrl: './apply-to-tarmeez.component.html',
   styleUrls: ['./apply-to-tarmeez.component.scss'],
   animations: [
@@ -24,8 +33,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class ApplyToTarmeezComponent {
   applyForm: FormGroup;
   formSubmitted = false;
-  successMessage: string = '';
-  errorMessage: string = '';
+  successMessage = '';
+  errorMessage = '';
 
   constructor(private fb: FormBuilder, private eServicesService: EServicesService) {
     this.applyForm = this.fb.group({

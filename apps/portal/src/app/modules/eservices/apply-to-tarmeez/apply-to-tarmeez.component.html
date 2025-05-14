@@ -21,68 +21,44 @@
       <div class="">
         <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
           <!-- Organization Name -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-gray-700">
-              {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }}
-            </label>
-            <input type="text" 
-                   class="w-full px-4 py-2 border border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
-                   formControlName="organizationName" />
-            @if (applyForm.get('organizationName')?.invalid && applyForm.get('organizationName')?.touched) {
-              <div class="text-sm text-red-600">
-                {{ 'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-              </div>
-            }
-          </div>
+          <app-text-input
+            [label]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+            [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+            [control]="applyForm.get('organizationName')"
+            [formSubmitted]="formSubmitted"
+            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+            formControlName="organizationName">
+          </app-text-input>
 
           <!-- Communication Supervisor Name -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-gray-700">
-              {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }}
-            </label>
-            <input type="text" 
-                   class="w-full px-4 py-2 border border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
-                   formControlName="communicationSupervisorName" />
-            @if (applyForm.get('communicationSupervisorName')?.invalid && applyForm.get('communicationSupervisorName')?.touched) {
-              <div class="text-sm text-red-600">
-                {{ 'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-              </div>
-            }
-          </div>
+          <app-text-input
+            [label]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+            [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+            [control]="applyForm.get('communicationSupervisorName')"
+            [formSubmitted]="formSubmitted"
+            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+            formControlName="communicationSupervisorName">
+          </app-text-input>
 
           <!-- Mobile Number -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-gray-700">
-              {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }}
-            </label>
-            <input type="text" 
-                   class="w-full px-4 py-2 border border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
-                   formControlName="mobileNumber" />
-            @if (applyForm.get('mobileNumber')?.invalid && applyForm.get('mobileNumber')?.touched) {
-              <div class="text-sm text-red-600">
-                {{ 'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-              </div>
-            }
-          </div>
+          <app-text-input
+            [label]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+            [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+            [control]="applyForm.get('mobileNumber')"
+            [formSubmitted]="formSubmitted"
+            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+            formControlName="mobileNumber">
+          </app-text-input>
 
           <!-- Email -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-gray-700">
-              {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }}
-            </label>
-            <input type="email" 
-                   class="w-full px-4 py-2 border border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
-                   formControlName="email" />
-            @if (applyForm.get('email')?.invalid && applyForm.get('email')?.touched) {
-              <div class="text-sm text-red-600">
-                {{ 'APPLY-TO-TARMEEZ.EMAIL' | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-              </div>
-            }
-          </div>
+          <app-email-input
+            [label]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+            [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+            [control]="applyForm.get('email')"
+            [formSubmitted]="formSubmitted"
+            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+            formControlName="email">
+          </app-email-input>
 
           <!-- File Inputs -->
           <div class="space-y-6">
@@ -124,12 +100,12 @@
           <div class="flex flex-col sm:flex-row gap-4 pt-6">
             <button type="submit" 
                     [disabled]="applyForm.invalid"
-                    class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                    class="px-8 py-3 text-white bg-[#344549] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit">
               {{ 'APPLY-TO-TARMEEZ.SUBMIT' | translate }}
             </button>
             <button type="button" 
                     (click)="applyForm.reset()"
-                    class="w-full sm:w-auto px-6 py-3 bg-gray-100 text-gray-700 font-medium  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    class="px-8 py-3 text-[#344549] bg-transparent hover:bg-[#413258] hover:text-white border border-[#344549] font-medium font-inherit">
               {{ 'APPLY-TO-TARMEEZ.CLEAR' | translate }}
             </button>
           </div>

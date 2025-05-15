@@ -27,6 +27,7 @@
             [control]="applyForm.get('organizationName')"
             [formSubmitted]="formSubmitted"
             [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+            [required]="true"
             formControlName="organizationName">
           </app-text-input>
 
@@ -36,6 +37,7 @@
             [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
             [control]="applyForm.get('communicationSupervisorName')"
             [formSubmitted]="formSubmitted"
+            [required]="true"
             [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
             formControlName="communicationSupervisorName">
           </app-text-input>
@@ -46,6 +48,7 @@
             [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
             [control]="applyForm.get('mobileNumber')"
             [formSubmitted]="formSubmitted"
+            [required]="true"
             [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
             formControlName="mobileNumber">
           </app-text-input>
@@ -78,6 +81,7 @@
               <app-file-upload
                 [label]="'APPLY-TO-TARMEEZ.' + fileField.label | translate"
                 [control]="applyForm.get(fileField.key)"
+                [required]="true"
                 [formSubmitted]="formSubmitted"
                 [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
                 [acceptedFileTypes]="'.pdf,.doc,.docx,.jpg,.jpeg,.png'"

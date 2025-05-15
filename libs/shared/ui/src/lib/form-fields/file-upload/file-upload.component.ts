@@ -10,8 +10,13 @@ import { TranslateModule } from '@ngx-translate/core';
   template: `
     <div class="space-y-2 mb-6" [ngStyle]="{'font-family': 'inherit'}">
       <label *ngIf="label" class="block text-sm font-medium text-gray-700">
+        <ng-container *ngIf="required && requiredIndicatorPosition === 'before'">
+          <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
+        </ng-container>
         {{ label | translate }}
-        <span *ngIf="required" class="text-red-500">*</span>
+        <ng-container *ngIf="required && requiredIndicatorPosition === 'after'">
+          <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
+        </ng-container>
       </label>
       
       <!-- File Upload Area -->
@@ -121,6 +126,9 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   @Input() acceptedFileTypes = 'image/*,.pdf';
   @Input() maxFileSize = 10 * 1024 * 1024; // 10MB default
   @Input() required = false;
+  @Input() requiredIndicatorColor = 'text-red-500';
+  @Input() requiredIndicatorSize = 'text-sm';
+  @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
 
   file: File | null = null;
   previewUrl: string | null = null;

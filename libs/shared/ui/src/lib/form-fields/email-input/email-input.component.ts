@@ -10,7 +10,15 @@ import { TranslateModule } from '@ngx-translate/core';
   template: `
     <div class="space-y-2 mb-6">
       @if (label) {
-        <label class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
+        <label class="block text-sm font-medium text-gray-700">
+          <ng-container *ngIf="required && requiredIndicatorPosition === 'before'">
+            <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
+          </ng-container>
+          {{ label | translate }}
+          <ng-container *ngIf="required && requiredIndicatorPosition === 'after'">
+            <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
+          </ng-container>
+        </label>
       }
       <input
         type="email"
@@ -50,6 +58,10 @@ export class EmailInputComponent implements ControlValueAccessor, Validator {
   @Input() errorMessage = '';
   @Input() control: AbstractControl | null = null;
   @Input() formSubmitted = false;
+  @Input() required = false;
+  @Input() requiredIndicatorColor = 'text-red-500';
+  @Input() requiredIndicatorSize = 'text-sm';
+  @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
 
   value = '';
   disabled = false;

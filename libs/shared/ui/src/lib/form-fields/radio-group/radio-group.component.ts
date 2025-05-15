@@ -17,17 +17,20 @@ export interface RadioOption {
       <label *ngIf="label" class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
       <div class="flex gap-4" [ngStyle]="{'border': '1px solid #d1d5db', 'border-radius': '0', 'padding': '0.75rem 1rem'}">
         <div *ngFor="let option of options" class="flex items-center">
-          <input
-            type="radio"
-            [name]="name"
-            [value]="option.value"
-            [checked]="value === option.value"
-            (change)="onChange(option.value)"
-            class="w-4 h-4 text-[#1AD9C7] border-gray-300 focus:ring-[#1AD9C7]"
-            [id]="option.label"
-          >
-          <label [for]="option.label" class="mr-2 text-sm font-medium text-gray-700">
-            {{ option.label | translate }}
+          <label class="custom-radio-label">
+            <input
+              type="radio"
+              [name]="name"
+              [value]="option.value"
+              [checked]="value === option.value"
+              (change)="onChange(option.value)"
+              class="custom-radio-input"
+              [id]="option.label"
+            >
+            <span class="custom-radio"></span>
+            <span class="ml-2 text-sm font-medium text-gray-700">
+              {{ option.label | translate }}
+            </span>
           </label>
         </div>
       </div>
@@ -35,6 +38,52 @@ export interface RadioOption {
         {{ errorMessage | translate }}
       </div>
     </div>
+    <style>
+      .custom-radio-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+      }
+      .custom-radio-input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      .custom-radio {
+        height: 16px;
+        width: 16px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 2px #1AD9C7;
+        transition: box-shadow 0.2s;
+        display: inline-block;
+        position: relative;
+        margin-right: 0;
+        margin-left: 8px;
+      }
+      .custom-radio-label .custom-radio-input:checked ~ .custom-radio {
+        background: #1AD9C7;
+        box-shadow: 0 0 0 2px #1AD9C7;
+      }
+      .custom-radio-label .custom-radio-input:checked ~ .custom-radio::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #fff;
+      }
+      .custom-radio-label .custom-radio-input:focus ~ .custom-radio {
+        box-shadow: 0 0 0 4px #1AD9C755;
+      }
+    </style>
   `,
   providers: [
     {

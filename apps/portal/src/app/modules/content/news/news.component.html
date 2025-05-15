@@ -3,7 +3,6 @@
 
   <app-breadcrumbs></app-breadcrumbs>
   <main class="main-content bg-white" [@routeAnimations]>
-    <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
     <section  class="container mx-auto px-1 py-8">
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Loading state -->
@@ -85,13 +84,8 @@
                 <img
                   [src]="portalUrl + item.RollupImage.replace('/CMS', '')"
                   [alt]="item.Title"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                /> 
-                <!-- <img
-                src="https://picsum.photos/800/400?random=1"
-                [alt]="item.Title"
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              /> -->
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" /> 
+          
                 
               </div> 
             } 

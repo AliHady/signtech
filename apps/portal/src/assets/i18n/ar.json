@@ -8,7 +8,13 @@
     "READ_MORE": "اقرأ المزيد",
     "ALL_NEWS": "جميع الأخبار",
     "NEWS": "الأخبار",
-    "IS_REQUIRED": "مطلوب"
+    "UPLOAD-FILE": "تحميل ملف",
+    "OR-DRAG-DROP": "أو اسحب وأفلت",
+    "FILE-TYPES": "PNG، JPG، PDF حتى 10 ميجابايت",
+    "FILE-SIZE-ERROR": "حجم الملف يتجاوز الحد الأقصى",
+    "FILE-TYPE-ERROR": "نوع الملف غير صالح",
+    "IS_REQUIRED": "هذا الحقل مطلوب",
+    "REMOVE": "حذف"
   },
   "AUTH": {
     "LOGIN": "تسجيل الدخول",
@@ -21,35 +27,7 @@
     "AR": "عربي"
   },
   "HEADER": {
-    "TITLE": "اختبار Tailwind CSS",
-    "DESCRIPTION": "هذا اختبار لمختلف أدوات Tailwind CSS",
     "CONTACT_US": "تواصل معنا"
-  },
-  "BUTTONS": {
-    "PRIMARY": "زر أساسي",
-    "SECONDARY": "زر ثانوي"
-  },
-  "CARDS": {
-    "CARD1": {
-      "TITLE": "البطاقة 1",
-      "DESCRIPTION": "هذه بطاقة عينة مع ظل وزوايا دائرية"
-    },
-    "CARD2": {
-      "TITLE": "البطاقة 2",
-      "DESCRIPTION": "بطاقة أخرى بنفس التصميم"
-    },
-    "CARD3": {
-      "TITLE": "البطاقة 3",
-      "DESCRIPTION": "وبطاقة أخرى للمقارنة"
-    }
-  },
-  "FORM": {
-    "LABEL": "إدخال عينة",
-    "PLACEHOLDER": "أدخل شيئاً..."
-  },
-  "ALERT": {
-    "TITLE": "تحذير!",
-    "MESSAGE": "هذه رسالة تنبيه عينة باستخدام Tailwind CSS"
   },
   "LOADING": {
     "LOADING": "جاري التحميل"
@@ -86,7 +64,6 @@
     }
   },
   "MEDIA_CENTER": {
-    "TITLE": "المركز الإعلامي",
     "CARDS": {
       "CARD1": {
         "TITLE": "عنوان البطاقة 1",
@@ -115,15 +92,6 @@
     "IMPORTANT_LINKS": "الروابط المهمة",
     "MIM_COPYRIGHT": "إحدى مبادرات الوزارة لتمكين الصناعة والثروة المعدنية",
     "COPYRIGHT": "© 2025 جميع الحقوق محفوظة المركز الوطني للمعلومات الصناعية والتعدينية"
-  },
-  "PRODUCTS": {
-    "INDICATORS": "المؤشرات",
-    "MININGINDICATORS": "المؤشرات التعدينية",
-    "INDUSTRYINDICATORS": "المؤشرات الصناعية",
-    "BULLETIN": "النشرات",
-    "MONTHLYBULLETIN": "النشرة الشهرية",
-    "QUARTERLYBULLETIN": "النشرة الربعية",
-    "REPORT": "التقارير"
   },
   "SITE_MAP": {
     "TITLE": "خريطة الموقع",
@@ -162,7 +130,6 @@
     "CLEAR": "مسح"
   },
   "APPLY-TO-TARMEEZ": {
-    "TITLE":"طلب تأهيل منشآت الترميز",
     "ORGANIZATION-NAME": "اسم الجهة",
     "COMMUNICATION-SUPERVISOR-NAME": "اسم مسؤول التواصل",
     "MOBILE-NUMBER": "رقم التواصل",

@@ -63,36 +63,27 @@
           <!-- File Inputs -->
           <div class="space-y-6">
             @for (fileField of [
-              'CR-FILE',
-              'TAX-FILE',
-              'GOSI-FILE',
-              'FINANCIAL-STATEMENTS-FILE',
-              'INVESTMENT-LICENSE-FILE',
-              'CHAMBER-OF-COMMERCE-CERTIFICATE-FILE',
-              'BUSINESS-CLASSIFICATION-CERTIFICATE-FILE',
-              'CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE',
-              'CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE',
-              'CERTIFICATE-OF-EXPERIENCE-FILE',
-              'PRICE-OFFER'
-            ]; track fileField) {
-              <div class="space-y-2">
-                <label [for]="fileField" class="block text-sm font-medium text-gray-700">
-                  {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }}
-                </label>
-                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed ">
-                  <div class="space-y-1 text-center">
-                    <input type="file" 
-                           class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file: file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                           [id]="fileField" 
-                           (change)="onFileChange($event, fileField)" />
-                  </div>
-                </div>
-                @if (applyForm.get(fileField)?.invalid && applyForm.get(fileField)?.touched) {
-                  <div class="text-sm text-red-600">
-                    {{ 'APPLY-TO-TARMEEZ.' + fileField | translate }} {{'GENERAL.IS_REQUIRED' | translate}}
-                  </div>
-                }
-              </div>
+              { key: 'crFile', label: 'CR-FILE' },
+              { key: 'taxFile', label: 'TAX-FILE' },
+              { key: 'gosiFile', label: 'GOSI-FILE' },
+              { key: 'financialStatementsFile', label: 'FINANCIAL-STATEMENTS-FILE' },
+              { key: 'investmentLicenseFile', label: 'INVESTMENT-LICENSE-FILE' },
+              { key: 'chamberOfCommerceCertificateFile', label: 'CHAMBER-OF-COMMERCE-CERTIFICATE-FILE' },
+              { key: 'businessClassificationCertificateFile', label: 'BUSINESS-CLASSIFICATION-CERTIFICATE-FILE' },
+              { key: 'certificateToTheSaudiCouncilOfEngineersFile', label: 'CERTIFICATE-TO-THE-SAUDI-COUNCIL-OF-ENGINEERS-FILE' },
+              { key: 'certificateOfAchievingTheRegularPercentageFile', label: 'CERTIFICATE-OF-ACHIEVING-THE-REGULAR-PERCENTAGE-FILE' },
+              { key: 'certificateOfExperienceFile', label: 'CERTIFICATE-OF-EXPERIENCE-FILE' },
+              { key: 'priceOffer', label: 'PRICE-OFFER' }
+            ]; track fileField.key) {
+              <app-file-upload
+                [label]="'APPLY-TO-TARMEEZ.' + fileField.label | translate"
+                [control]="applyForm.get(fileField.key)"
+                [formSubmitted]="formSubmitted"
+                [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+                [acceptedFileTypes]="'.pdf,.doc,.docx,.jpg,.jpeg,.png'"
+                [maxFileSize]="10485760"
+                [formControlName]="fileField.key">
+              </app-file-upload>
             }
           </div>
 

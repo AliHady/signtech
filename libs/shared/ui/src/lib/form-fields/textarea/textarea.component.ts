@@ -9,7 +9,9 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   template: `
     <div class="space-y-2 mb-6">
-      <label *ngIf="label" class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
+      @if (label) {
+        <label class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
+      }
       <textarea
         [value]="value"
         (input)="onInput($event)"
@@ -21,9 +23,11 @@ import { TranslateModule } from '@ngx-translate/core';
         [ngStyle]="{'font-family': 'inherit', 'border-radius': '0', 'border': '1px solid #d1d5db', 'padding': '0.75rem 1rem'}"
         [disabled]="disabled"
       ></textarea>
-      <div *ngIf="control && control.invalid && (control.touched || formSubmitted)" class="text-sm text-red-600">
-        {{ errorMessage | translate }}
-      </div>
+      @if (control && control.invalid && (control.touched || formSubmitted)) {
+        <div class="text-sm text-red-600">
+          {{ errorMessage | translate }}
+        </div>
+      }
     </div>
   `,
   providers: [

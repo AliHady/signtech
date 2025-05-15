@@ -7,6 +7,7 @@ import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { TextInputComponent } from '@nimic/shared/ui';
 import { EmailInputComponent } from '@nimic/shared/ui';
+import { FileUploadComponent } from '@nimic/shared/ui';
 
 @Component({
   selector: 'app-apply-to-tarmeez',
@@ -17,7 +18,8 @@ import { EmailInputComponent } from '@nimic/shared/ui';
     TranslateModule, 
     ReactiveFormsModule,
     TextInputComponent,
-    EmailInputComponent
+    EmailInputComponent,
+    FileUploadComponent
   ],
   templateUrl: './apply-to-tarmeez.component.html',
   styleUrls: ['./apply-to-tarmeez.component.scss'],
@@ -64,6 +66,7 @@ export class ApplyToTarmeezComponent {
   }
 
   onSubmit() {
+    this.formSubmitted = true;
     if (this.applyForm.valid) {
       const formData: any = this.applyForm.value;
       this.eServicesService.submitApplyToTarmeez(formData).subscribe({
@@ -71,6 +74,7 @@ export class ApplyToTarmeezComponent {
           this.successMessage = res.message;
           this.errorMessage = '';
           this.applyForm.reset();
+          this.formSubmitted = false;
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -82,5 +86,6 @@ export class ApplyToTarmeezComponent {
 
   onClear() {
     this.applyForm.reset();
+    this.formSubmitted = false;
   }
 }

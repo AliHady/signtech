@@ -8,7 +8,13 @@
     "READ_MORE": "Read More",
     "ALL_NEWS": "All News",
     "NEWS": "News",
-    "IS_REQUIRED": "مطلوب"
+    "IS_REQUIRED": "This field is required",
+    "UPLOAD-FILE": "Upload a file",
+    "OR-DRAG-DROP": "or drag and drop",
+    "FILE-TYPES": "PNG, JPG, PDF up to 10MB",
+    "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
+    "FILE-TYPE-ERROR": "Invalid file type",
+    "REMOVE": "Remove"
   },
   "AUTH": {
     "LOGIN": "Login",
@@ -21,35 +27,7 @@
     "AR": "عربي"
   },
   "HEADER": {
-    "TITLE": "Tailwind CSS Test 1",
-    "DESCRIPTION": "This is a test of various Tailwind CSS utilities.",
     "CONTACT_US": "Contact Us"
-  },
-  "BUTTONS": {
-    "PRIMARY": "Primary Button",
-    "SECONDARY": "Secondary Button"
-  },
-  "CARDS": {
-    "CARD1": {
-      "TITLE": "Card 1",
-      "DESCRIPTION": "This is a sample card with shadow and rounded corners."
-    },
-    "CARD2": {
-      "TITLE": "Card 2",
-      "DESCRIPTION": "Another card with the same styling."
-    },
-    "CARD3": {
-      "TITLE": "Card 3",
-      "DESCRIPTION": "And one more card for good measure."
-    }
-  },
-  "FORM": {
-    "LABEL": "Sample Input",
-    "PLACEHOLDER": "Enter something..."
-  },
-  "ALERT": {
-    "TITLE": "Warning!",
-    "MESSAGE": "This is a sample alert message using Tailwind CSS."
   },
   "LOADING": {
     "LOADING": "Loading"
@@ -86,7 +64,6 @@
     }
   },
   "MEDIA_CENTER": {
-    "TITLE": "Media Center",
     "CARDS": {
       "CARD1": {
         "TITLE": "Card Title 1",
@@ -115,15 +92,6 @@
     "IMPORTANT_LINKS": "Important Links",
     "MIM_COPYRIGHT": "One of the initiatives of the Ministry of Industry and Mineral Resources",
     "COPYRIGHT": "© 2025 All rights reserved to the National Center for Industrial and Mining Information"
-  },
-  "PRODUCTS": {
-    "INDICATORS": "Indicators",
-    "MININGINDICATORS": "Mining Indicators",
-    "INDUSTRYINDICATORS": "Industry Indicators",
-    "BULLETIN": "Bulletin",
-    "MONTHLYBULLETIN": "Monthly Bulletin",
-    "QUARTERLYBULLETIN": "Quarterly Bulletin",
-    "REPORT": "Report"
   },
   "SITE_MAP": {
     "TITLE": "Site Map",

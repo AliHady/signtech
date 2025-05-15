@@ -14,29 +14,35 @@ export interface CheckboxOption {
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   template: `
     <div class="space-y-2 mb-6" [ngStyle]="{'font-family': 'inherit'}">
-      <label *ngIf="label" class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
+      @if (label) {
+        <label class="block text-sm font-medium text-gray-700">{{ label | translate }}</label>
+      }
       <div class="flex flex-col gap-2" [ngStyle]="{'border': '1px solid #d1d5db', 'border-radius': '0', 'padding': '0.75rem 1rem'}">
-        <div *ngFor="let option of options" class="flex items-center">
-          <label class="custom-checkbox-label">
-            <input
-              type="checkbox"
-              [name]="name"
-              [value]="option.value"
-              [checked]="isChecked(option.value)"
-              (change)="onCheckboxChange(option.value, $event)"
-              class="custom-checkbox-input"
-              [id]="option.label"
-            >
-            <span class="custom-checkbox"></span>
-            <span class="ml-2 text-sm font-medium text-gray-700">
-              {{ option.label | translate }}
-            </span>
-          </label>
+        @for (option of options; track option.value) {
+          <div class="flex items-center">
+            <label class="custom-checkbox-label">
+              <input
+                type="checkbox"
+                [name]="name"
+                [value]="option.value"
+                [checked]="isChecked(option.value)"
+                (change)="onCheckboxChange(option.value, $event)"
+                class="custom-checkbox-input"
+                [id]="option.label"
+              >
+              <span class="custom-checkbox"></span>
+              <span class="ml-2 text-sm font-medium text-gray-700">
+                {{ option.label | translate }}
+              </span>
+            </label>
+          </div>
+        }
+      </div>
+      @if (control && control.invalid && (control.touched || formSubmitted)) {
+        <div class="text-sm text-red-600">
+          {{ errorMessage | translate }}
         </div>
-      </div>
-      <div *ngIf="control && control.invalid && (control.touched || formSubmitted)" class="text-sm text-red-600">
-        {{ errorMessage | translate }}
-      </div>
+      }
     </div>
     <style>
       .custom-checkbox-label {

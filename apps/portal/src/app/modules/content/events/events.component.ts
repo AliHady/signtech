@@ -129,9 +129,13 @@ export class EventsComponent implements OnInit {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
  
+
+
+
   navigateToEventsDetails(eventItem: EventItem): void { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/' ,this.currentLang,'mediacenter', 'events', eventItem.Title], {
-  
+      state: { id: eventItem.Id }
     });
   }
 

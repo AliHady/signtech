@@ -48,11 +48,12 @@ export class EventDetailsComponent implements OnInit {
   }
 
   private loadEventDetails(eventId: number): void {
+    console.log(eventId);
     const endpoint = `${environment.contentUrl}/events/details/${eventId}`;
     this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
       next: (response) => {
         this.eventDetails = response;
-       // console.log(response);
+        //console.log(response);
         this.loading = false;
       },
       error: (err) => {

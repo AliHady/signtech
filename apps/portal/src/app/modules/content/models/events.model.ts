@@ -1,4 +1,5 @@
 export interface EventItem {
+  Id: number;
   Title: string;
   URL: string;
   SortOrder: number;

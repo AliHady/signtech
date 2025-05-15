@@ -30,15 +30,17 @@
         <div class="space-y-8">
           <!-- Title Skeleton -->
           <ngx-skeleton-loader
-            [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem', 'background-color': '#f3f4f6' }"
+            [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem', 'background-color': '#f3f4f6', 'border-radius': '0.25rem' }"
             [count]="1"
+            [animation]="'progress'"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Date Skeleton -->
           <ngx-skeleton-loader
-            [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem', 'background-color': '#f3f4f6' }"
+            [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem', 'background-color': '#f3f4f6', 'border-radius': '0.25rem' }"
             [count]="1"
+            [animation]="'progress'"
             appearance="line">
           </ngx-skeleton-loader>
 
@@ -46,20 +48,23 @@
           <ngx-skeleton-loader
             [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem', 'background-color': '#f3f4f6' }"
             [count]="1"
+            [animation]="'progress'"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Content Summary Skeleton -->
           <ngx-skeleton-loader
-            [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem', 'background-color': '#f3f4f6' }"
+            [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem', 'background-color': '#f3f4f6', 'border-radius': '0.25rem' }"
             [count]="3"
+            [animation]="'progress'"
             appearance="line">
           </ngx-skeleton-loader>
 
           <!-- Content Skeleton -->
           <ngx-skeleton-loader
-            [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem', 'background-color': '#f3f4f6' }"
+            [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem', 'background-color': '#f3f4f6', 'border-radius': '0.25rem' }"
             [count]="8"
+            [animation]="'progress'"
             appearance="line">
           </ngx-skeleton-loader>
         </div>

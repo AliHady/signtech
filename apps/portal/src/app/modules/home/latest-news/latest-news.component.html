@@ -33,12 +33,12 @@
                 }
                 
                 <div class="flex border-b border-gray-100">
-                  <h3 class="flex-grow px-4 py-4 text-xl font-semibold leading-snug text-[#344549] group-hover:text-[#413258] transition-colors duration-300 text-start">
+                  <h3 class="flex-grow px-4 py-4 text-xl font-semibold leading-snug text-[var(--color-nimicgreen)] group-hover:text-[#413258] transition-colors duration-300 text-start">
                     {{ item.Title }}
                   </h3>
                   <button
                     type="button"
-                    class="cursor-pointer arrow-square flex-none w-16 h-16 bg-[#344549] flex items-center justify-center hover:bg-[#413258] transition-all duration-300 group-hover:scale-105 border-none outline-none focus:outline-none"
+                    class="cursor-pointer arrow-square flex-none w-16 h-16 bg-[var(--color-nimicgreen)] flex items-center justify-center hover:bg-[#413258] transition-all duration-300 group-hover:scale-105 border-none outline-none focus:outline-none"
                     (click)="navigateToNewsDetails(item)"
                     (keyup.enter)="navigateToNewsDetails(item)"
                     tabindex="0"
@@ -71,7 +71,7 @@
     </div>
 
     <div class="text-end mt-10">
-      <a [routerLink]="['/', currentLang, 'mediacenter', 'news']" (click)="scrollToTop()" class="bg-[#344549] text-white px-6 py-3 text-base hover:bg-[#413258] transition border-0 font-inherit cursor-pointer no-underline">
+      <a [routerLink]="['/', currentLang, 'mediacenter', 'news']" (click)="scrollToTop()" class="bg-[var(--color-nimicgreen)] text-white px-6 py-3 text-base hover:bg-[#413258] transition border-0 font-inherit cursor-pointer no-underline">
         {{ 'GENERAL.ALL_NEWS' | translate }}
       </a>
     </div>

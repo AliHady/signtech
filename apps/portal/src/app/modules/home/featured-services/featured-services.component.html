@@ -1,4 +1,4 @@
-<section class="bg-[#324348] py-12" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
+<section class="bg-[var(--color-nimicgreen)] py-12" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
   <div class="container mx-auto px-4">
     <div class="mb-8 text-start">
       <h2 class="text-3xl font-bold text-white inline-block bg-gray-300 px-4 py-2">{{ 'FEATURED_SERVICES.TITLE' | translate }}</h2>
@@ -15,7 +15,7 @@
             <div class="flex justify-end">
               <button
                 type="button"
-                class="cursor-pointer arrow-square flex-none w-12 h-12 bg-[#344549] flex items-center justify-center hover:bg-[#413258] transition-all duration-300 group-hover:scale-105 border-none outline-none focus:outline-none"
+                class="cursor-pointer arrow-square flex-none w-12 h-12 bg-[var(--color-nimicgreen)] flex items-center justify-center hover:bg-[#413258] transition-all duration-300 group-hover:scale-105 border-none outline-none focus:outline-none"
                 [routerLink]="service.Link" (click)="scrollToTop()"
                 tabindex="0"
               >
@@ -31,7 +31,7 @@
 
     <div class="mt-8 flex justify-end">
       <button
-        class="bg-transparent border-[1px] border-solid border-white text-white px-6 py-3 text-base hover:bg-white hover:text-[#324348] transition font-inherit cursor-pointer no-underline"
+        class="bg-transparent border-[1px] border-solid border-white text-white px-6 py-3 text-base hover:bg-white hover:text-[var(--color-nimicgreen)] transition font-inherit cursor-pointer no-underline"
         [routerLink]="['/ar/eservices']"
         (click)="scrollToTop()"
       >

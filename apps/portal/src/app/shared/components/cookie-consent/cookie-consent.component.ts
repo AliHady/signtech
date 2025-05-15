@@ -30,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
       left: 50%;
       transform: translateX(-50%);
       background: white;
-      color: #344549;
+      color: var(--color-nimicgreen);
       padding: 1.5rem;
       z-index: 1000;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
@@ -76,7 +76,7 @@ import { TranslateModule } from '@ngx-translate/core';
       margin: 0;
       font-size: 0.95rem;
       line-height: 1.5;
-      color: #344549;
+      color: var(--color-nimicgreen);
       font-family: inherit;
     }
 
@@ -120,7 +120,7 @@ import { TranslateModule } from '@ngx-translate/core';
     }
 
     .accept-btn {
-      background: #344549;
+      background: var(--color-nimicgreen);
       color: white;
     }
 
@@ -132,8 +132,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
     .decline-btn {
       background: transparent;
-      border: 2px solid #344549;
-      color: #344549;
+      border: 2px solid var(--color-nimicgreen);
+      color: var(--color-nimicgreen);
     }
 
     .decline-btn:hover {

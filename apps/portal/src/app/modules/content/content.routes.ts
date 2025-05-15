@@ -110,6 +110,10 @@ export const contentRoutes: Route[] = [
     loadComponent: () => import('./news-details/news-details.component').then(m => m.NewsDetailsComponent)
   },
   {
+    path: 'mediacenter/events/:id',
+    loadComponent: () => import('./event-details/event-details.component').then(m => m.EventDetailsComponent)
+  },
+  {
     path: 'aboutcenter',
     loadComponent: () => import('./about-center/about-center.component').then(m => m.AboutCenterComponent)
   },

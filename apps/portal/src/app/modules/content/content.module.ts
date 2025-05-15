@@ -8,6 +8,7 @@ import { PhotolibraryComponent } from './photolibrary/photolibrary.component';
 import { VideolibraryComponent } from './videolibrary/videolibrary.component';
 import { EventsComponent } from './events/events.component';
 import { CMSDataComponent } from './cms-data/cms-data.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,7 +20,8 @@ import { CMSDataComponent } from './cms-data/cms-data.component';
     MediaCenterComponent,
     PhotolibraryComponent,
     VideolibraryComponent,
-    EventsComponent
+    EventsComponent,
+    EventDetailsComponent
   ],
   exports: [NewsComponent, MediaCenterComponent, PhotolibraryComponent, VideolibraryComponent, EventsComponent]
 })

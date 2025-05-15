@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <main class="main-content bg-white">
+    <div class="container mx-auto px-1 py-8">
+      @if (eventDetails) {
+        <article class="p-8">
+          
+          <div class="flex items-center text-gray-500 mb-8 border-b pb-4">
+            <time class="text-sm font-medium">{{ eventDetails.NewsHigriDate }}</time>
+          </div>
+
+          @if (eventDetails.NewsImage) {
+            <div class="mb-8">
+              <img 
+                [src]="portalUrl + eventDetails.NewsImage.replace('/CMS', '')" 
+                [alt]="eventDetails.Title"
+                class="w-full h-auto -xl shadow-md object-cover"
+              />
+            </div>
+          }
+
+          <div class="prose max-w-none">
+            <p class="text-lg mb-6 text-gray-700 leading-relaxed">{{ eventDetails.ContentSummary }}</p>
+            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="eventDetails.Content"></div>
+          </div>
+        </article>
+      } @else {
+        <div class="space-y-8">
+          <!-- Title Skeleton -->
+          <ngx-skeleton-loader
+            [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem', 'background-color': '#f3f4f6' }"
+            [count]="1"
+            appearance="line">
+          </ngx-skeleton-loader>
+
+          <!-- Date Skeleton -->
+          <ngx-skeleton-loader
+            [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem', 'background-color': '#f3f4f6' }"
+            [count]="1"
+            appearance="line">
+          </ngx-skeleton-loader>
+
+          <!-- Image Skeleton -->
+          <ngx-skeleton-loader
+            [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem', 'background-color': '#f3f4f6' }"
+            [count]="1"
+            appearance="line">
+          </ngx-skeleton-loader>
+
+          <!-- Content Summary Skeleton -->
+          <ngx-skeleton-loader
+            [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem', 'background-color': '#f3f4f6' }"
+            [count]="3"
+            appearance="line">
+          </ngx-skeleton-loader>
+
+          <!-- Content Skeleton -->
+          <ngx-skeleton-loader
+            [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem', 'background-color': '#f3f4f6' }"
+            [count]="8"
+            appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+      }
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

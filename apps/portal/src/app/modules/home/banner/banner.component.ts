@@ -2,7 +2,7 @@ import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject } from '@angul
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
-import { TranslationService } from '@nimic/translations';
+import { TranslationService, TranslationsModule } from '@nimic/translations';
 import { Subscription } from 'rxjs';
 
 interface Slide {
@@ -15,7 +15,7 @@ interface Slide {
 @Component({
   selector: 'app-banner',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslationsModule],
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })

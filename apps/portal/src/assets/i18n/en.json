@@ -14,7 +14,8 @@
     "FILE-TYPES": "PNG, JPG, PDF up to 10MB",
     "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
     "FILE-TYPE-ERROR": "Invalid file type",
-    "REMOVE": "Remove"
+    "REMOVE": "Remove",
+    "MORE": "More"
   },
   "AUTH": {
     "LOGIN": "Login",

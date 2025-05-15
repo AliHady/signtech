@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { ContentService } from '../../content/services/content.service';
 import { EServiceLink } from '../../eservices/models/eserviceslinks.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-featured-services',
@@ -12,24 +13,31 @@ import { EServiceLink } from '../../eservices/models/eserviceslinks.model';
   templateUrl: './featured-services.component.html',
   styleUrls: ['./featured-services.component.scss']
 })
-export class FeaturedServicesComponent implements OnInit {
+export class FeaturedServicesComponent implements OnInit, OnDestroy {
   services: EServiceLink[] = [];
   loading = true;
   error = '';
   currentLang: string = 'en';
+  private langSubscription: Subscription;
 
   constructor(
     private translate: TranslateService,
     private contentService: ContentService
-  ) {}
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+    this.langSubscription = this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit() {
-    // Set default language if not set
-    if (!this.translate.currentLang) {
-      this.translate.use('en');
-    }
-    this.currentLang = this.translate.currentLang || 'en';
     this.loadFeaturedServices();
+  }
+
+  ngOnDestroy() {
+    if (this.langSubscription) {
+      this.langSubscription.unsubscribe();
+    }
   }
 
   private loadFeaturedServices(): void {
@@ -48,7 +56,6 @@ export class FeaturedServicesComponent implements OnInit {
       }
     });
   }
-
 
   scrollToTop(): void {
     setTimeout(() => {

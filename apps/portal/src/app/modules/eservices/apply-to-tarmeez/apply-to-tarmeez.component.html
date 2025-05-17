@@ -3,7 +3,7 @@
   <app-breadcrumbs></app-breadcrumbs>
 
   <main class="main-content bg-white overflow-hidden">
-    <div class="container mx-auto px-4 py-8 max-w-3xl">
+    <div class="container mx-auto px-4 py-8 max-w-1xl">
       <!-- Alert Messages -->
       @if (successMessage) {
         <div class="mb-6 p-4  bg-green-50 text-green-700 border border-green-200">
@@ -20,51 +20,54 @@
       <!-- Form Container -->
       <div class="">
         <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-6">
-          <!-- Organization Name -->
-          <app-text-input
-            [label]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
-            [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
-            [control]="applyForm.get('organizationName')"
-            [formSubmitted]="formSubmitted"
-            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
-            [required]="true"
-            formControlName="organizationName">
-          </app-text-input>
+          <!-- Grid Container for Form Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Organization Name -->
+            <app-text-input
+              [label]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+              [placeholder]="'APPLY-TO-TARMEEZ.ORGANIZATION-NAME' | translate"
+              [control]="applyForm.get('organizationName')"
+              [formSubmitted]="formSubmitted"
+              [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+              [required]="true"
+              formControlName="organizationName">
+            </app-text-input>
 
-          <!-- Communication Supervisor Name -->
-          <app-text-input
-            [label]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
-            [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
-            [control]="applyForm.get('communicationSupervisorName')"
-            [formSubmitted]="formSubmitted"
-            [required]="true"
-            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
-            formControlName="communicationSupervisorName">
-          </app-text-input>
+            <!-- Communication Supervisor Name -->
+            <app-text-input
+              [label]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+              [placeholder]="'APPLY-TO-TARMEEZ.COMMUNICATION-SUPERVISOR-NAME' | translate"
+              [control]="applyForm.get('communicationSupervisorName')"
+              [formSubmitted]="formSubmitted"
+              [required]="true"
+              [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+              formControlName="communicationSupervisorName">
+            </app-text-input>
 
-          <!-- Mobile Number -->
-          <app-text-input
-            [label]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
-            [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
-            [control]="applyForm.get('mobileNumber')"
-            [formSubmitted]="formSubmitted"
-            [required]="true"
-            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
-            formControlName="mobileNumber">
-          </app-text-input>
+            <!-- Mobile Number -->
+            <app-text-input
+              [label]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+              [placeholder]="'APPLY-TO-TARMEEZ.MOBILE-NUMBER' | translate"
+              [control]="applyForm.get('mobileNumber')"
+              [formSubmitted]="formSubmitted"
+              [required]="true"
+              [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+              formControlName="mobileNumber">
+            </app-text-input>
 
-          <!-- Email -->
-          <app-email-input
-            [label]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
-            [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
-            [control]="applyForm.get('email')"
-            [formSubmitted]="formSubmitted"
-            [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
-            formControlName="email">
-          </app-email-input>
+            <!-- Email -->
+            <app-email-input
+              [label]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+              [placeholder]="'APPLY-TO-TARMEEZ.EMAIL' | translate"
+              [control]="applyForm.get('email')"
+              [formSubmitted]="formSubmitted"
+              [errorMessage]="'GENERAL.IS_REQUIRED' | translate"
+              formControlName="email">
+            </app-email-input>
+          </div>
 
           <!-- File Inputs -->
-          <div class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @for (fileField of [
               { key: 'crFile', label: 'CR-FILE' },
               { key: 'taxFile', label: 'TAX-FILE' },
@@ -92,7 +95,7 @@
           </div>
 
           <!-- Submit and Clear Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+          <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-end">
             <button type="submit" 
                     [disabled]="applyForm.invalid"
                     class="px-8 py-3 text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']">

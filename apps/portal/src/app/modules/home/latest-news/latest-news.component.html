@@ -20,7 +20,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           @for (item of news; track item.Id) {
             @if (item.ShowInHome) {
-              <article class="flex flex-col h-full bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
+              <article class="flex flex-col h-full bg-white  shadow-sm hover:shadow-md transition-all duration-300 group">
                 @if (item.NewsImage) {
                   <div class="relative h-64 overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>

@@ -61,7 +61,7 @@
             @for (page of getPages(); track page) {
               <button [class.active]="currentPage === page"
                       (click)="onPageChange(page)"
-                      class="px-4 py-2 rounded-md border hover:bg-gray-100">
+                      class="px-4 py-2  border hover:bg-gray-100">
                 {{ page }}
               </button>
             }

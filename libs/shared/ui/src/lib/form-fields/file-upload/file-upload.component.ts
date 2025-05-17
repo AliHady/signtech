@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
       
       <!-- File Upload Area -->
       <div 
-        class="relative border-2 border-dashed border-gray-300 rounded-lg p-6"
+        class="relative border-2 border-dashed border-gray-300 p-6"
         [class.border-[#1AD9C7]]="isDragging"
         [class.bg-gray-50]="isDragging"
         (dragover)="onDragOver($event)"
@@ -35,7 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
             <path d="M12 16V3M12 3L16 7.375M12 3L8 7.375" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <div class="mt-4 flex text-sm text-gray-600 items-center justify-center">
-            <label class="relative cursor-pointer bg-white rounded-md font-medium text-[#1AD9C7] hover:text-[#1AD9C7]/80 focus-within:outline-none">
+            <label class="relative cursor-pointer bg-white  font-medium text-[#1AD9C7] hover:text-[#1AD9C7]/80 focus-within:outline-none">
               <span class="me-2">{{ 'GENERAL.UPLOAD-FILE' | translate }}</span>
               <input 
                 #fileInput
@@ -57,12 +57,12 @@ import { TranslateModule } from '@ngx-translate/core';
         <div *ngIf="file" class="flex flex-col items-center justify-center">
           <div class="relative w-full max-w-md">
             <!-- Preview Container -->
-            <div class="relative rounded-lg overflow-hidden bg-gray-50 p-4">
+            <div class="relative  overflow-hidden bg-gray-50 p-4">
               <!-- Image Preview -->
               <div *ngIf="isImage" class="relative">
                 <img [src]="previewUrl" 
                      [alt]="file.name" 
-                     class="w-full h-48 object-contain rounded-lg">
+                     class="w-full h-48 object-contain ">
                 <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-200"></div>
               </div>
               
@@ -76,7 +76,7 @@ import { TranslateModule } from '@ngx-translate/core';
             </div>
 
             <!-- File Info and Remove Button -->
-            <div class="mt-4 flex flex-col bg-white rounded-lg p-3 border border-gray-200">
+            <div class="mt-4 flex flex-col bg-white  p-3 border border-gray-200">
               <div class="space-y-2 w-full">
                 <div class="text-sm font-medium text-gray-900 truncate">{{ file.name }}</div>
                 <div class="text-sm text-gray-500">{{ formatFileSize(file.size) }}</div>
@@ -84,7 +84,7 @@ import { TranslateModule } from '@ngx-translate/core';
               </div>
               <button 
                 type="button"
-                class="mt-3 w-full inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 font-['DiodrumArabic']"
+                class="mt-3 w-full inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 font-['DiodrumArabic']"
                 (click)="removeFile()"
                 [disabled]="disabled"
               >

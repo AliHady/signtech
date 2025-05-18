@@ -17,10 +17,7 @@ export const eservicesRoutes: Route[] = [
     path: 'eservices/:id',
     loadComponent: () => import('./service-details/service-details.component').then(m => m.ServiceDetailsComponent)
   },
-  {
-    path: 'help/contactus',
-    loadComponent: () => import('./contact-us/contact-us.component').then(m => m.ContactUsComponent)
-  },
+  
   {
     path: 'eservices/senai',
     loadComponent: () => import('./senai/senai.component').then(m => m.SenaiComponent)

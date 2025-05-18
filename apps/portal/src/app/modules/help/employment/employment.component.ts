@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../services/e-services.service';
+import { EServicesService } from '../../eservices/services/e-services.service';
 import { ContactUs } from '../models/contact-us';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaComponent } from '@nimic/shared/ui';
 
 @Component({
-  selector: 'app-contact-us',
+  selector: 'app-employment',
   standalone: true,
   imports: [
     CommonModule,
@@ -21,8 +21,8 @@ import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaC
     EmailInputComponent,
     TextareaComponent
   ],
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.scss'],
+  templateUrl: './employment.component.html',
+  styleUrls: ['./employment.component.scss'],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -32,7 +32,7 @@ import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaC
     ])
   ]
 })
-export class ContactUsComponent {
+export class EmploymentComponent {
   contactForm: FormGroup;
   formSubmitted = false;
   successMessage = '';

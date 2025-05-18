@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="mediaCenter-container">
+<div class="help-container">
 
   <app-breadcrumbs></app-breadcrumbs>
   <main class="main-content bg-white" [@routeAnimations]>
@@ -23,7 +23,7 @@
           @for (item of submenuItems; track item) {
             <div class="bg-white border border-gray-200 shadow p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#413258] group h-full flex items-center justify-center">
               <a [routerLink]="['/' + currentLang + item.url]" class="block w-full">
-                <h2 class="text-lg font-semibold text-gray-800 mb-4 text-center border-b border-gray-200 pb-3 group-hover:text-white group-hover:border-gray-400 transition-colors duration-300">{{ item.title }}</h2>
+                <h2 class="text-lg font-semibold text-gray-800 text-center border-b border-gray-200 pb-3 group-hover:text-white group-hover:border-gray-400 transition-colors duration-300">{{ item.title }}</h2>
               </a>
             </div>
           }

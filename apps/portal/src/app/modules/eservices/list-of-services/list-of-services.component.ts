@@ -104,6 +104,7 @@ export class ListOfServicesComponent {
     this.loading = true;
     this.contentService.getAllEservices(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
+        console.log(response);
         this.services = response.Items;
         this.totalItems = response.TotalItems;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
@@ -136,10 +137,19 @@ export class ListOfServicesComponent {
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+
+  getServicePath(link: string): string {
+    const parts = link.split('/').filter(part => part);
+    return parts[parts.length - 1];
+  }
+
   navigateToServiceDetails(serviceItem: EServiceLink): void { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.router.navigate(['/' ,this.currentLang,'eservices', serviceItem.Title], {
+    const servicePath = this.getServicePath(serviceItem.Link);
+    this.router.navigate(['/' ,this.currentLang,'eservices', servicePath], {
       state: { id: serviceItem.Title }
     });
   }
  } 
+
+ // this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {

@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApplyToTarmeezComponent } from './apply-to-tarmeez/apply-to-tarmeez.component';
 import { RequestCodeComponent } from './request-code/request-code.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { SenaiComponent } from './senai/senai.component';
 
 @NgModule({
   declarations: [],
@@ -20,14 +21,16 @@ import { TranslateModule } from '@ngx-translate/core';
     ListOfServicesComponent,
     ContactUsComponent,
     ApplyToTarmeezComponent,
-    RequestCodeComponent
+    RequestCodeComponent,
+    SenaiComponent
   ],
   exports: [
     ServiceDetailsComponent,
     ListOfServicesComponent,
     ContactUsComponent,
     ApplyToTarmeezComponent,
-    RequestCodeComponent
+    RequestCodeComponent,
+    SenaiComponent
   ]
 })
 export class EservicesModule { } 

@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationsModule } from '@nimic/translations';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { TextInputComponent } from '@nimic/shared/ui';
 
 interface MenuItem {
   id: number;
@@ -35,7 +36,8 @@ interface FAQItem {
     BreadcrumbsComponent,
     TranslateModule,
     TranslationsModule,
-    FormsModule
+    FormsModule,
+    TextInputComponent
   ],
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss'],

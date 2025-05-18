@@ -9,6 +9,8 @@ import { VideolibraryComponent } from './videolibrary/videolibrary.component';
 import { EventsComponent } from './events/events.component';
 import { CMSDataComponent } from './cms-data/cms-data.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { HelpComponent } from './help/help.component';
+import { ProductsComponent } from './products/products.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -18,11 +20,13 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     NewsDetailsComponent,
     CMSDataComponent,
     MediaCenterComponent,
+    HelpComponent,
     PhotolibraryComponent,
     VideolibraryComponent,
     EventsComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    ProductsComponent
   ],
-  exports: [NewsComponent, MediaCenterComponent, PhotolibraryComponent, VideolibraryComponent, EventsComponent]
+  exports: [NewsComponent, MediaCenterComponent, PhotolibraryComponent, VideolibraryComponent, EventsComponent, HelpComponent, ProductsComponent]
 })
 export class ContentModule { } 

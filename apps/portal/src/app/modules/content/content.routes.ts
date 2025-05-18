@@ -136,5 +136,13 @@ export const contentRoutes: Route[] = [
   {
     path: 'help/faq',
     loadComponent: () => import('./faq/faq.component').then(m => m.FaqComponent)
+  },
+  {
+    path: 'help',
+    loadComponent: () => import('./help/help.component').then(m => m.HelpComponent)
+  },
+  {
+    path: 'products',
+    loadComponent: () => import('./products/products.component').then(m => m.ProductsComponent)
   }
 ]; 

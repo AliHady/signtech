@@ -5,7 +5,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { TranslationService } from '@nimic/translations';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { News } from '../../content/models/news.model';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
@@ -30,7 +30,8 @@ interface EServiceCache {
     CommonModule,
     HeaderComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    TranslateModule
   ],
   templateUrl: './list-of-services.component.html',
   styleUrls: ['./list-of-services.component.scss'],
@@ -135,9 +136,9 @@ export class ListOfServicesComponent {
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-  navigateToNewsDetails(serviceItem: EServiceLink): void { 
+  navigateToServiceDetails(serviceItem: EServiceLink): void { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.router.navigate(['/' ,this.currentLang,'eservices', 'news', serviceItem.Title], {
+    this.router.navigate(['/' ,this.currentLang,'eservices', serviceItem.Title], {
       state: { id: serviceItem.Title }
     });
   }

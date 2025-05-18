@@ -7,6 +7,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ApplyToTarmeezComponent } from './apply-to-tarmeez/apply-to-tarmeez.component';
 import { RequestCodeComponent } from './request-code/request-code.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { RequestCodeComponent } from './request-code/request-code.component';
     CommonModule,
     SharedModule,
     RouterModule,
+    TranslateModule,
     ServiceDetailsComponent,
     ListOfServicesComponent,
     ContactUsComponent,

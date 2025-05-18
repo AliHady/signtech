@@ -17,17 +17,17 @@
         "tsConfig": "apps/Portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
        "assets": [
-  {
-    "glob": "**/*",
-    "input": "apps/Portal/src/assets",
-    "output": "assets"
-  },
-  {
-    "glob": "favicon.ico",
-    "input": "apps/Portal/src",
-    "output": ""
-  }
-],
+          {
+            "glob": "**/*",
+            "input": "apps/Portal/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/Portal/public",
+            "output": "."
+          }
+        ],
         "styles": ["apps/Portal/src/styles.scss"],
         "scripts": [],
         "server": "apps/Portal/src/main.server.ts",

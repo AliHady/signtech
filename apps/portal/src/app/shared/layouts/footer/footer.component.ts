@@ -71,5 +71,5 @@ export class FooterComponent implements OnInit, OnDestroy {
         console.error('Error loading partners:', err);
       }
     });
-  }
+  } 
 } 

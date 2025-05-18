@@ -10,5 +10,10 @@ export const helpRoutes: Route[] = [
   {
     path: 'help/employment',
     loadComponent: () => import('../help/employment/employment.component').then(m => m.EmploymentComponent)
+  },
+
+  {
+    path: 'help/importantlinks',
+    loadComponent: () => import('./important-links/important-links.component').then(m => m.ImportantLinksComponent)
   }
 ]; 

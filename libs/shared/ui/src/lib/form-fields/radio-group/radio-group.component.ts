@@ -48,7 +48,7 @@ export interface RadioOption {
       </div>
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
-          {{ errorMessage | translate }}
+          {{ errorMessage }}
         </div>
       }
     </div>
@@ -146,9 +146,9 @@ export class RadioGroupComponent implements ControlValueAccessor, Validator {
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) {
+    if (this.required && control.value === null) {
       return { required: true };
     }
     return null;
   }
-} 
+}

@@ -1,0 +1,143 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form">
+  <div class="form-fields grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (field of config.fields; track field.name) {
+      <!-- Text Input -->
+      @if (field.type === 'text') {
+        <app-text-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-text-input>
+      }
+
+      <!-- Email Input -->
+      @if (field.type === 'email') {
+        <app-email-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-email-input>
+      }
+
+      <!-- Radio Group -->
+      @if (field.type === 'radio') {
+        <app-radio-group
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [options]="field.options ? transformToRadioOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-radio-group>
+      }
+      
+
+      <!-- Textarea -->
+      @if (field.type === 'textarea') {
+        <app-textarea
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-textarea>
+      }
+
+      <!-- Phone Input -->
+      @if (field.type === 'phone') {
+        <app-phone-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-phone-input>
+      }
+
+      <!-- File Upload -->
+      @if (field.type === 'file') {
+        <app-file-upload
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-file-upload>
+      }
+
+      <!-- Checkbox Group -->
+      @if (field.type === 'checkbox') {
+        <app-checkbox-group
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [options]="field.options ? transformToCheckboxOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-checkbox-group>
+      }
+
+      <!-- Select Search -->
+      @if (field.type === 'select') {
+        <app-select-search
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [options]="field.options ? transformToSelectOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-select-search>
+      }
+    }
+  </div>
+
+  <div class="form-actions mt-6 flex gap-4 justify-end">
+    <button type="submit" class="px-8 py-3 text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']" [disabled]="isSubmitting || !form.valid">
+      {{ config.submitButtonLabel ? getTranslationKey(config.submitButtonLabel) : ('GENERAL.SUBMIT' | translate) }}
+    </button>
+    <button type="button"  class="px-8 py-3 text-[var(--color-nimicgreen)] bg-transparent hover:bg-[#413258] hover:text-white border border-[var(--color-nimicgreen)] font-medium font-inherit font-['DiodrumArabic']" (click)="onClear()">
+      {{ config.clearButtonLabel ? getTranslationKey(config.clearButtonLabel) : ('GENERAL.CLEAR' | translate) }}
+    </button>
+  </div>
+
+  @if (successMessage) {
+    <div class="success-message mt-4 text-green-600">
+      {{ successMessage | translate }}
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-message mt-4 text-red-600">
+      {{ errorMessage | translate }}
+    </div>
+  }
+</form>

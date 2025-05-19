@@ -130,6 +130,21 @@
     "SUBMIT": "Submit",
     "CLEAR": "Clear"
   },
+  "CONTACTTYPE": {
+    "REQUIRED": "Please select a contact type"
+  },
+  "SUBJECT": {
+    "REQUIRED": "Subject is required"
+  },
+  "FULLNAME": {
+    "REQUIRED": "Full name is required"
+  },
+  "EMAIL": {
+    "REQUIRED": "Email is required"
+  },
+  "MESSAGE": {
+    "REQUIRED": "Message is required"
+  },
   "APPLY-TO-TARMEEZ": {
     "ORGANIZATION-NAME": "Organization Name",
     "COMMUNICATION-SUPERVISOR-NAME": "Communication Supervisor Name",

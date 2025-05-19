@@ -27,13 +27,14 @@ import { TranslateModule } from '@ngx-translate/core';
         (blur)="onTouched()"
         [placeholder]="placeholder"
         [attr.maxlength]="maxLength"
+        [name]="name"
         class="w-full px-4 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-[#1AD9C7] focus:ring-1 focus:ring-[#1AD9C7]"
         [ngStyle]="{'font-family': 'inherit', 'border-radius': '0', 'border': '1px solid #d1d5db', 'padding': '0.75rem 1rem'}"
         [disabled]="disabled"
       >
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
-          {{ errorMessage | translate }}
+          {{ errorMessage }}
         </div>
       }
     </div>
@@ -62,6 +63,7 @@ export class EmailInputComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
+  @Input() name = '';
 
   value = '';
   disabled = false;

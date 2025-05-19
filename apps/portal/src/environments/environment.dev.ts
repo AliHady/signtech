@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  portalUrl: 'http://localhost:52110',
-  contentUrl: 'http://localhost:52110/api',
+  portalUrl: 'http://niic.gov.sa',
+  contentUrl: 'https://niic.gov.sa/CMS/api',
   version: '1.0.0',
   recaptchaSiteKey: '6LfMoD8rAAAAAMlpf-XZj1yJL7JfQncwdQ3djtnc'
 }; 

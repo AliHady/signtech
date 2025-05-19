@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
-import { TextInputComponent, EmailInputComponent, FileUploadComponent } from '@nimic/shared/ui';
 
 @Component({
   selector: 'app-apply-to-tarmeez',
@@ -15,9 +14,7 @@ import { TextInputComponent, EmailInputComponent, FileUploadComponent } from '@n
     SharedModule,
     TranslateModule,
     DynamicFormComponent,
-    TextInputComponent,
-    EmailInputComponent,
-    FileUploadComponent
+   
   ],
   templateUrl: './apply-to-tarmeez.component.html',
   styleUrls: ['./apply-to-tarmeez.component.scss'],

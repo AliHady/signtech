@@ -14,6 +14,8 @@ import { CheckboxGroupComponent } from '../form-fields/checkbox-group/checkbox-g
 import { SelectSearchComponent } from '../form-fields/select-search/select-search.component';
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -29,7 +31,16 @@ import { SelectOption } from '../form-fields/select-search/select-search.compone
     FileUploadComponent,
     PhoneInputComponent,
     CheckboxGroupComponent,
-    SelectSearchComponent
+    SelectSearchComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule
+  ],
+  providers: [
+    ReCaptchaV3Service,
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptchaSiteKey
+    }
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
@@ -39,6 +50,9 @@ export class DynamicFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
   @Output() formError = new EventEmitter<any>();
 
+  captchaToken: string | null = null;
+  recaptchaSiteKey = environment.recaptchaSiteKey;
+
   form!: FormGroup;
   isSubmitting = false;
   errorMessage = '';
@@ -47,8 +61,8 @@ export class DynamicFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formService: DynamicFormService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private recaptchaV3Service: ReCaptchaV3Service) { }
 
   ngOnInit() {
     this.initForm();
@@ -59,6 +73,11 @@ export class DynamicFormComponent implements OnInit {
       return key;
     }
     return key[this.translate.currentLang as 'en' | 'ar'] || key.en;
+  }
+
+  onCaptchaResolved(token: string | null): void {
+    console.log(token)
+    this.captchaToken = token;
   }
 
   getErrorMessage(field: FormField, control: AbstractControl | null): string {
@@ -138,25 +157,25 @@ export class DynamicFormComponent implements OnInit {
 
     this.config.fields.forEach(field => {
       const validators: ValidatorFn[] = [];
-      
+
       const validation = field.validation || {};
-      
+
       if (validation.required || field.required) {
         validators.push(Validators.required);
       }
-      
+
       if (validation.pattern) {
         validators.push(Validators.pattern(validation.pattern));
       }
-      
+
       if (validation.minLength) {
         validators.push(Validators.minLength(validation.minLength));
       }
-      
+
       if (validation.maxLength) {
         validators.push(Validators.maxLength(validation.maxLength));
       }
-      
+
       if (field.type === 'email') {
         validators.push(Validators.email);
       }
@@ -169,27 +188,35 @@ export class DynamicFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.isSubmitting = true;
-      this.errorMessage = '';
-      this.successMessage = '';
+      this.recaptchaV3Service.execute('your_action_name').subscribe(
+        (token) => {
+          console.log(token)
+          this.isSubmitting = true;
+          this.errorMessage = '';
+          this.successMessage = '';
 
-      this.formService.submitForm(this.config, this.form.value).subscribe({
-        next: (response) => {
-          this.isSubmitting = false;
-          this.formSubmitted.emit(response);
-          this.successMessage = this.config.successMessage 
-            ? this.getTranslationKey(this.config.successMessage)
-            : this.translate.instant('GENERAL.FORM_SUBMIT_SUCCESS');
-          this.form.reset();
+          this.formService.submitForm(this.config, this.form.value, token).subscribe({
+            next: (response) => {
+              this.isSubmitting = false;
+              this.formSubmitted.emit(response);
+              this.successMessage = this.config.successMessage
+                ? this.getTranslationKey(this.config.successMessage)
+                : this.translate.instant('GENERAL.FORM_SUBMIT_SUCCESS');
+              this.form.reset();
+            },
+            error: (error) => {
+              this.isSubmitting = false;
+              this.errorMessage = this.config.errorMessage
+                ? this.getTranslationKey(this.config.errorMessage)
+                : (error.error?.message || this.translate.instant('GENERAL.FORM_SUBMIT_ERROR'));
+              this.formError.emit(error);
+            }
+          });
         },
-        error: (error) => {
-          this.isSubmitting = false;
-          this.errorMessage = this.config.errorMessage
-            ? this.getTranslationKey(this.config.errorMessage)
-            : (error.error?.message || this.translate.instant('GENERAL.FORM_SUBMIT_ERROR'));
-          this.formError.emit(error);
+        (error) => {
+          console.error('reCAPTCHA error:', error);
         }
-      });
+      );
     } else {
       // Mark all fields as touched to trigger validation messages
       Object.keys(this.form.controls).forEach(key => {

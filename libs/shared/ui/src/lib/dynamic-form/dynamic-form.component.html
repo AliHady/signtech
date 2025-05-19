@@ -80,7 +80,6 @@
       @if (field.type === 'file') {
         <app-file-upload
           [formControlName]="field.name"
-          [name]="field.name"
           [label]="getTranslationKey(field.label)"
           [required]="field.required || false"
           [control]="form.get(field.name)"

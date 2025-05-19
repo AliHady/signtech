@@ -17,7 +17,7 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-cms-header-menu',
   standalone: true,
   imports: [
     CommonModule,
@@ -28,8 +28,8 @@ interface MenuItem {
     TranslateModule,
     TranslationsModule
   ],
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
+  templateUrl: './cms-header-menu.component.html',
+  styleUrls: ['./cms-header-menu.component.scss'],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -39,7 +39,7 @@ interface MenuItem {
     ])
   ]
 })
-export class ProductsComponent implements OnInit {
+export class CMSHeaderMenuComponent implements OnInit {
   submenuItems: MenuItem[] = [];
   loading = true;
   error = '';
@@ -47,8 +47,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private headerService: HeaderService
-  ) { }
+    private headerService: HeaderService) { }
 
   ngOnInit() {
     const fullUrl = this.router.url.split('?')[0];
@@ -60,10 +59,11 @@ export class ProductsComponent implements OnInit {
 
     this.headerService.getMenuItems().subscribe({
       next: (items) => {
-        const productsMenu = items.find(item => item.id === 1144);
-        if (productsMenu && productsMenu.children) {
-          this.submenuItems = productsMenu.children;
+        const headerMenu = items.find(item => item.url === '/' + parts.slice(1));
+        if (headerMenu && headerMenu.children) {
+          this.submenuItems = headerMenu.children;
         }
+        
         this.loading = false;
       },
       error: (error) => {

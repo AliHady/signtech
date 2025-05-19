@@ -25,7 +25,7 @@ export const contentRoutes: Route[] = [
   // Initiatives Routes
   {
     path: 'initiatives',
-    loadComponent: () => import('./cms-data/cms-data.component').then(m => m.CMSDataComponent)
+    loadComponent: () => import('./cms-header-menu/cms-header-menu.component').then(m => m.CMSHeaderMenuComponent)
   },
   {
     path: 'initiatives/initiativetoestablishandoperatenationalindustrialinformationcenter',
@@ -99,7 +99,7 @@ export const contentRoutes: Route[] = [
   // Media Center Routes
   {
     path: 'mediacenter',
-    loadComponent: () => import('./media-center/media-center.component').then(m => m.MediaCenterComponent)
+    loadComponent: () => import('./cms-header-menu/cms-header-menu.component').then(m => m.CMSHeaderMenuComponent)
   },
   {
     path: 'mediacenter/news',
@@ -139,10 +139,10 @@ export const contentRoutes: Route[] = [
   },
   {
     path: 'help',
-    loadComponent: () => import('./help/help.component').then(m => m.HelpComponent)
+    loadComponent: () => import('./cms-header-menu/cms-header-menu.component').then(m => m.CMSHeaderMenuComponent)
   },
   {
     path: 'products',
-    loadComponent: () => import('./products/products.component').then(m => m.ProductsComponent)
+    loadComponent: () => import('./cms-header-menu/cms-header-menu.component').then(m => m.CMSHeaderMenuComponent)
   }
 ]; 

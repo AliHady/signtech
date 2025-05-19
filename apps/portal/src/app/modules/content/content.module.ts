@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NewsComponent } from './news/news.component';
 import { NewsDetailsComponent } from './news-details/news-details.component';
-import { MediaCenterComponent } from './media-center/media-center.component';
+import { CMSHeaderMenuComponent } from './cms-header-menu/cms-header-menu.component';
 import { PhotolibraryComponent } from './photolibrary/photolibrary.component';
 import { VideolibraryComponent } from './videolibrary/videolibrary.component';
 import { EventsComponent } from './events/events.component';
 import { CMSDataComponent } from './cms-data/cms-data.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
-import { HelpComponent } from './help/help.component';
-import { ProductsComponent } from './products/products.component';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -19,14 +18,12 @@ import { ProductsComponent } from './products/products.component';
     NewsComponent,
     NewsDetailsComponent,
     CMSDataComponent,
-    MediaCenterComponent,
-    HelpComponent,
+    CMSHeaderMenuComponent,
     PhotolibraryComponent,
     VideolibraryComponent,
     EventsComponent,
-    EventDetailsComponent,
-    ProductsComponent
+    EventDetailsComponent
   ],
-  exports: [NewsComponent, MediaCenterComponent, PhotolibraryComponent, VideolibraryComponent, EventsComponent, HelpComponent, ProductsComponent]
+  exports: [NewsComponent, CMSHeaderMenuComponent, PhotolibraryComponent, VideolibraryComponent, EventsComponent]
 })
 export class ContentModule { } 

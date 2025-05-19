@@ -6,6 +6,8 @@
     "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
     "FILE-TYPE-ERROR": "Invalid file type",
     "IS_REQUIRED": "This field is required",
-    "REMOVE": "Remove"
+    "REMOVE": "Remove",
+    "SUBMIT": "Submit",
+    "CLEAR": "Clear"
   }
 } 

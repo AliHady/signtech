@@ -89,7 +89,7 @@ interface SelectOption {
 
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
-          {{ errorMessage | translate }}
+           {{ errorMessage }}
         </div>
       }
     </div>

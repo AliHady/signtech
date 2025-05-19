@@ -22,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
       }
       <textarea
         [value]="value"
+        [name]="name"
         (input)="onInput($event)"
         (blur)="onTouched()"
         [placeholder]="placeholder"
@@ -33,7 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
       ></textarea>
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
-          {{ errorMessage | translate }}
+          {{ errorMessage }}
         </div>
       }
     </div>
@@ -63,6 +64,7 @@ export class TextareaComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
+  @Input() name = '';
 
   value = '';
   disabled = false;

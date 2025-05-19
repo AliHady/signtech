@@ -130,6 +130,21 @@
     "SUBMIT": "إرسال",
     "CLEAR": "مسح"
   },
+  "CONTACTTYPE": {
+    "REQUIRED": "يرجى اختيار نوع التواصل"
+  },
+  "SUBJECT": {
+    "REQUIRED": "الموضوع مطلوب"
+  },
+  "FULLNAME": {
+    "REQUIRED": "الاسم الكامل مطلوب"
+  },
+  "EMAIL": {
+    "REQUIRED": "البريد الإلكتروني مطلوب"
+  },
+  "MESSAGE": {
+    "REQUIRED": "الرسالة مطلوبة"
+  },
   "APPLY-TO-TARMEEZ": {
     "ORGANIZATION-NAME": "اسم الجهة",
     "COMMUNICATION-SUPERVISOR-NAME": "اسم مسؤول التواصل",

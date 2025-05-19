@@ -74,6 +74,7 @@ export class PhoneInputComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
+  @Input() name = '';
 
   value = '';
   disabled = false;

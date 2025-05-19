@@ -100,7 +100,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
       <!-- Error Message -->
       <div *ngIf="control && control.invalid && (control.touched || formSubmitted)" class="text-sm text-red-600 text-center">
-        {{ errorMessage | translate }}
+        {{ errorMessage }}
       </div>
     </div>
   `,

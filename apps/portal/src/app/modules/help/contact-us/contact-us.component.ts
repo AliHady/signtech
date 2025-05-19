@@ -6,6 +6,10 @@ import { EServicesService } from '../../eservices/services/e-services.service';
 import { ContactUs } from '../models/contact-us';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
+import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaComponent } from '@nimic/shared/ui';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { environment } from '../../../../environments/environment';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-us',
@@ -14,7 +18,14 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
     CommonModule,
     SharedModule,
     TranslateModule,
-    DynamicFormComponent
+    DynamicFormComponent,
+    ReactiveFormsModule,
+    RadioGroupComponent,
+    TextInputComponent,
+    EmailInputComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    TextareaComponent
   ],
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
@@ -129,12 +140,10 @@ export class ContactUsComponent {
   constructor(private eServicesService: EServicesService) {}
 
   onFormSubmitted(response: any) {
-    // Handle successful form submission
     console.log('Form submitted successfully:', response);
   }
 
   onFormError(error: any) {
-    // Handle form submission error
     console.error('Form submission failed:', error);
   }
 }

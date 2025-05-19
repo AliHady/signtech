@@ -120,6 +120,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class FileUploadComponent implements ControlValueAccessor, Validator {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Input() label = '';
+  @Input() name = '';
   @Input() errorMessage = '';
   @Input() control: AbstractControl | null = null;
   @Input() formSubmitted = false;

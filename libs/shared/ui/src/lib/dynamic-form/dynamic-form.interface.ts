@@ -16,6 +16,8 @@ export interface FormField {
   options?: FormFieldOption[];
   maxLength?: number;
   placeholder?: FormFieldLabel;
+  acceptedFileTypes?: string;
+  maxFileSize?: number;
   validation?: {
     pattern?: string;
     minLength?: number;

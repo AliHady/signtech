@@ -77,7 +77,7 @@ export class ApplyToTarmeezComponent {
       },
       {
         name: 'mobileNumber',
-        type: 'text',
+        type: 'phone',
         label: { en: 'Mobile Number', ar: 'رقم الجوال' },
         required: true,
         maxLength: 200,

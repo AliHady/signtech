@@ -7,73 +7,49 @@
       <h4 class=" mb-6">{{'CONTACT_US.HINT' | translate}}</h4>
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate class="space-y-6">
         @if (formSubmitted && successMessage) {
-          <div class="p-4 mb-4 text-sm text-green-700 bg-green-100">
-            <span class="font-medium">{{successMessage | translate}}</span>
-          </div>
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100">
+          <span class="font-medium">{{successMessage | translate}}</span>
+        </div>
         }
 
         @if (errorMessage) {
-          <div class="p-4 mb-4 text-sm text-red-700 bg-red-100">
-            <span class="font-medium">{{errorMessage | translate}}</span>
-          </div>
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100">
+          <span class="font-medium">{{errorMessage | translate}}</span>
+        </div>
         }
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <app-radio-group
-            formControlName="contactType"
-            [options]="contactTypeOptions"
+          <app-radio-group formControlName="contactType" [options]="contactTypeOptions"
             [label]="'CONTACT_US.CONTACT_TYPE' | translate"
-            [errorMessage]="'CONTACT_US.CHOOSE_CONTACT_TYPE' | translate"
-            [control]="contactForm.get('contactType')"
-            [formSubmitted]="formSubmitted"
-            name="contactType"
-          ></app-radio-group>
+            [errorMessage]="'CONTACT_US.CHOOSE_CONTACT_TYPE' | translate" [control]="contactForm.get('contactType')"
+            [formSubmitted]="formSubmitted" name="contactType"></app-radio-group>
 
-          <app-text-input
-            formControlName="subject"
-            [label]="'CONTACT_US.SUBJECT' | translate"
-            [placeholder]="'CONTACT_US.SUBJECT' | translate"
-            [maxLength]="200"
-            [errorMessage]="'CONTACT_US.SUBJECT_REQUIRED' | translate"
-            [control]="contactForm.get('subject')"
-            [formSubmitted]="formSubmitted"
-          ></app-text-input>
+          <app-text-input formControlName="subject" [label]="'CONTACT_US.SUBJECT' | translate"
+            [placeholder]="'CONTACT_US.SUBJECT' | translate" [maxLength]="200"
+            [errorMessage]="'CONTACT_US.SUBJECT_REQUIRED' | translate" [control]="contactForm.get('subject')"
+            [formSubmitted]="formSubmitted"></app-text-input>
 
-          <app-text-input
-            formControlName="fullName"
-            [label]="'CONTACT_US.FULL_NAME' | translate"
-            [placeholder]="'CONTACT_US.FULL_NAME' | translate"
-            [maxLength]="200"
-            [errorMessage]="'CONTACT_US.FULL_NAME_REQUIRED' | translate"
-            [control]="contactForm.get('fullName')"
-            [formSubmitted]="formSubmitted"
-          ></app-text-input>
+          <app-text-input formControlName="fullName" [label]="'CONTACT_US.FULL_NAME' | translate"
+            [placeholder]="'CONTACT_US.FULL_NAME' | translate" [maxLength]="200"
+            [errorMessage]="'CONTACT_US.FULL_NAME_REQUIRED' | translate" [control]="contactForm.get('fullName')"
+            [formSubmitted]="formSubmitted"></app-text-input>
 
-          <app-email-input
-            formControlName="email"
-            [label]="'CONTACT_US.EMAIL' | translate"
-            [placeholder]="'CONTACT_US.EMAIL' | translate"
-            [maxLength]="250"
-            [errorMessage]="'CONTACT_US.EMAIL_REQUIRED' | translate"
-            [control]="contactForm.get('email')"
-            [formSubmitted]="formSubmitted"
-          ></app-email-input>
+          <app-email-input formControlName="email" [label]="'CONTACT_US.EMAIL' | translate"
+            [placeholder]="'CONTACT_US.EMAIL' | translate" [maxLength]="250"
+            [errorMessage]="'CONTACT_US.EMAIL_REQUIRED' | translate" [control]="contactForm.get('email')"
+            [formSubmitted]="formSubmitted"></app-email-input>
 
-          <app-textarea
-            formControlName="message"
-            [label]="'CONTACT_US.MESSAGE' | translate"
-            [placeholder]="'CONTACT_US.MESSAGE' | translate"
-            [maxLength]="400"
-            [rows]="6"
-            [errorMessage]="'CONTACT_US.MESSAGE_REQUIRED' | translate"
-            [control]="contactForm.get('message')"
-            [formSubmitted]="formSubmitted"
-          ></app-textarea>
+          <app-textarea formControlName="message" [label]="'CONTACT_US.MESSAGE' | translate"
+            [placeholder]="'CONTACT_US.MESSAGE' | translate" [maxLength]="400" [rows]="6"
+            [errorMessage]="'CONTACT_US.MESSAGE_REQUIRED' | translate" [control]="contactForm.get('message')"
+            [formSubmitted]="formSubmitted"></app-textarea>
+
+          <re-captcha [siteKey]="recaptchaSiteKey" (resolved)="onCaptchaResolved($event)">
+          </re-captcha>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4 pt-6 justify-end">
-          <button type="submit"
-            [disabled]="contactForm.invalid"
+          <button type="submit" [disabled]="contactForm.invalid"
             class="px-8 py-3 text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']">
             {{'CONTACT_US.SUBMIT' | translate}}
           </button>

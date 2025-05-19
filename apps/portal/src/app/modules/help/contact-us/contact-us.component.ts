@@ -4,9 +4,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { EServicesService } from '../../eservices/services/e-services.service';
-import { ContactUs } from '../models/contact-us';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaComponent } from '@nimic/shared/ui';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { environment } from 'apps/portal/src/environments/environment';
 
 @Component({
   selector: 'app-contact-us',
@@ -19,6 +20,8 @@ import { RadioGroupComponent, TextInputComponent, EmailInputComponent, TextareaC
     RadioGroupComponent,
     TextInputComponent,
     EmailInputComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     TextareaComponent
   ],
   templateUrl: './contact-us.component.html',
@@ -37,7 +40,9 @@ export class ContactUsComponent {
   formSubmitted = false;
   successMessage = '';
   errorMessage = '';
-
+  captchaToken: string | null = null;
+  recaptchaSiteKey = environment.recaptchaSiteKey;
+  
   contactTypeOptions = [
     { value: 1, label: 'CONTACT_US.SUGGESTION' },
     { value: 2, label: 'CONTACT_US.COMPLAINT' }
@@ -53,11 +58,16 @@ export class ContactUsComponent {
     });
   }
 
+  onCaptchaResolved(token: string | null): void {
+    this.captchaToken = token;
+  }
+
   onSubmit() {
     this.formSubmitted = true;
-    
-    if (this.contactForm.valid) {
-      const formData: ContactUs = this.contactForm.value;
+
+    if (this.contactForm.valid && this.captchaToken) {
+      //const formData: ContactUs = this.contactForm.value;
+      const formData = { ...this.contactForm.value, captchaToken: this.captchaToken };
       this.eServicesService.submitContactUs(formData).subscribe({
         next: (res) => {
           this.successMessage = res.message;

@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validator
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
-interface SelectOption {
+export interface SelectOption {
   value: string | number;
   label: string;
 }
@@ -108,6 +108,7 @@ interface SelectOption {
   ]
 })
 export class SelectSearchComponent implements ControlValueAccessor, Validator {
+  @Input() name!: string;
   @Input() label = '';
   @Input() placeholder = '';
   @Input() options: SelectOption[] = [];
@@ -195,4 +196,4 @@ export class SelectSearchComponent implements ControlValueAccessor, Validator {
     }
     return null;
   }
-} 
+}

@@ -60,6 +60,63 @@
           [errorMessage]="getErrorMessage(field, form.get(field.name))">
         </app-textarea>
       }
+
+      <!-- Phone Input -->
+      @if (field.type === 'phone') {
+        <app-phone-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-phone-input>
+      }
+
+      <!-- File Upload -->
+      @if (field.type === 'file') {
+        <app-file-upload
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-file-upload>
+      }
+
+      <!-- Checkbox Group -->
+      @if (field.type === 'checkbox') {
+        <app-checkbox-group
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [options]="field.options ? transformToCheckboxOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-checkbox-group>
+      }
+
+      <!-- Select Search -->
+      @if (field.type === 'select') {
+        <app-select-search
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [options]="field.options ? transformToSelectOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-select-search>
+      }
     }
   </div>
 

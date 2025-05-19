@@ -8,6 +8,12 @@ import { TextInputComponent } from '../form-fields/text-input/text-input.compone
 import { EmailInputComponent } from '../form-fields/email-input/email-input.component';
 import { RadioGroupComponent, RadioOption } from '../form-fields/radio-group/radio-group.component';
 import { TextareaComponent } from '../form-fields/textarea/textarea.component';
+import { FileUploadComponent } from '../form-fields/file-upload/file-upload.component';
+import { PhoneInputComponent } from '../form-fields/phone-input/phone-input.component';
+import { CheckboxGroupComponent } from '../form-fields/checkbox-group/checkbox-group.component';
+import { SelectSearchComponent } from '../form-fields/select-search/select-search.component';
+import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
+import { SelectOption } from '../form-fields/select-search/select-search.component';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -19,7 +25,11 @@ import { TextareaComponent } from '../form-fields/textarea/textarea.component';
     TextInputComponent,
     EmailInputComponent,
     RadioGroupComponent,
-    TextareaComponent
+    TextareaComponent,
+    FileUploadComponent,
+    PhoneInputComponent,
+    CheckboxGroupComponent,
+    SelectSearchComponent
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
@@ -102,6 +112,21 @@ export class DynamicFormComponent implements OnInit {
   }
 
   transformToRadioOptions(options: FormFieldOption[]): RadioOption[] {
+    return options.map(option => ({
+      value: option.value,
+      label: this.getTranslationKey(option.label)
+    }));
+  }
+
+  // Add these methods alongside other transform methods
+  transformToCheckboxOptions(options: FormFieldOption[]): CheckboxOption[] {
+    return options.map(option => ({
+      value: option.value,
+      label: this.getTranslationKey(option.label)
+    }));
+  }
+
+  transformToSelectOptions(options: FormFieldOption[]): SelectOption[] {
     return options.map(option => ({
       value: option.value,
       label: this.getTranslationKey(option.label)

@@ -10,7 +10,7 @@ import { RequestCodeComponent } from './request-code/request-code.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SenaiComponent } from './senai/senai.component';
 import { EmploymentComponent } from '../help/employment/employment.component';
-
+import { SearchForNcageComponent } from './search-for-ncage/search-for-ncage.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -24,7 +24,8 @@ import { EmploymentComponent } from '../help/employment/employment.component';
     ApplyToTarmeezComponent,
     RequestCodeComponent,
     SenaiComponent,
-    EmploymentComponent
+    EmploymentComponent,
+    SearchForNcageComponent
   ],
   exports: [
     ServiceDetailsComponent,
@@ -33,7 +34,8 @@ import { EmploymentComponent } from '../help/employment/employment.component';
     ApplyToTarmeezComponent,
     RequestCodeComponent,
     SenaiComponent,
-    EmploymentComponent
+    EmploymentComponent,
+    SearchForNcageComponent
   ]
 })
 export class EservicesModule { } 

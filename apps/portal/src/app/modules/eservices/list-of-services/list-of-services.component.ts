@@ -104,7 +104,7 @@ export class ListOfServicesComponent {
     this.loading = true;
     this.contentService.getAllEservices(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
-        console.log(response);
+        //console.log(response);
         this.services = response.Items;
         this.totalItems = response.TotalItems;
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);

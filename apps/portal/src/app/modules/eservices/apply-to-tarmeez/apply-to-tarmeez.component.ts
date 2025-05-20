@@ -261,7 +261,7 @@ export class ApplyToTarmeezComponent {
       }
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
-    clearButtonLabel: { en: 'Clear', ar: 'مسح' }
+    clearButtonLabel: { en: 'Clear', ar: 'مسح' } 
   };
 
   successMessage: string = '';

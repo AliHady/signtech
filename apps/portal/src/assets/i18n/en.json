@@ -179,5 +179,8 @@
     "TITLE": "List of Services",
     "VIEW_DETAILS": "View Details",
     "ERROR_MESSAGE": "An error occurred while loading services. Please try again later."
+  },
+  "SEARCH_FOR_NCAGE": {
+    "DESCRIPTION": "This service provides the investor with the ability to inquire about the global establishment code, enabling them to benefit from the services of the Saudi Indexing and Coding Office"
   }
 }

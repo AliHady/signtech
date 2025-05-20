@@ -134,7 +134,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   private findPath(nodes: any[]): boolean {
     for (const node of nodes) {
-      if (this.currentPath.startsWith(node.url)) {
+      if (this.currentPath.startsWith(node.url)) { 
         this.list.push({
           url: node.url,
           label: node.title

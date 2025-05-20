@@ -64,6 +64,15 @@
       }
     }
   },
+  "PRODUCTS": {
+    "INDICATORS": "المؤشرات",
+    "MININGINDICATORS": "المؤشرات التعدينية",
+    "INDUSTRYINDICATORS": "المؤشرات الصناعية",
+    "BULLETIN": "النشرات",
+    "MONTHLYBULLETIN": "النشرة الشهرية",
+    "QUARTERLYBULLETIN": "النشرة الربعية",
+    "REPORT": "التقارير"
+  },
   "MEDIA_CENTER": {
     "CARDS": {
       "CARD1": {

@@ -64,6 +64,14 @@
       }
     }
   },
+  "PRODUCTS": {
+    "INDICATORS": "Indicators",
+    "MININGINDICATORS": "Mining Indicators",
+    "INDUSTRYINDICATORS": "Industry Indicators",
+    "BULLETIN": "Bulletins",
+    "MONTHLYBULLETIN": "Monthly Bulletin"
+  },
+  
   "MEDIA_CENTER": {
     "CARDS": {
       "CARD1": {

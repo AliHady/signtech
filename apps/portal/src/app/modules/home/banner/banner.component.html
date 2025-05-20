@@ -16,11 +16,15 @@
     </a>
 
     <!-- Dots -->
-    <div class="flex justify-start space-x-2 space-x-reverse mt-6">
+    <div class="flex justify-start space-x-4 space-x-reverse mt-6">
       @for (slide of slides; track slide; let i = $index) {
-        <span class="w-3 h-3 -full cursor-pointer transition-colors duration-300"
+        <span class="w-4 h-4 -full cursor-pointer transition-colors duration-300 p-2"
               [ngClass]="{'bg-gray-700': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
-              (click)="swiper?.slideTo(i)">
+              (click)="swiper?.slideTo(i)"
+              role="button"
+              [attr.aria-label]="'Go to slide ' + (i + 1)"
+              tabindex="0"
+              (keyup.enter)="swiper?.slideTo(i)">
         </span>
       }
     </div>
@@ -30,7 +34,7 @@
    <div class="relative w-full md:w-1/2 ">
     <div class="banner-image-container py-3 h-[20rem] md:h-[30rem]">
       <div class="swiper banner-swiper">
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-prev p-4" role="button" aria-label="Previous slide" tabindex="0"></div>
         <div class="swiper-wrapper">
           @for (slide of slides; track slide) {
             <div class="swiper-slide">
@@ -38,7 +42,7 @@
             </div>
           }
         </div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-next p-4" role="button" aria-label="Next slide" tabindex="0"></div>
       </div>
     </div>
 

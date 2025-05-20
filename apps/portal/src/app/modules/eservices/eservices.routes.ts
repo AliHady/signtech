@@ -19,6 +19,10 @@ export const eservicesRoutes: Route[] = [
     loadComponent: () => import('./request-code/request-code.component').then(m => m.RequestCodeComponent)
   },
   {
+    path: 'eservices/datarequest',
+    loadComponent: () => import('./data-request/data-request.component').then(m => m.DataRequestComponent)
+  },
+  {
     path: 'eservices/senai',
     loadComponent: () => import('./senai/senai.component').then(m => m.SenaiComponent)
   },

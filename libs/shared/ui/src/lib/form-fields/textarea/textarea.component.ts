@@ -11,13 +11,13 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="space-y-2 mb-6">
       @if (label) {
         <label class="block text-sm font-medium text-gray-700">
-          <ng-container *ngIf="required && requiredIndicatorPosition === 'before'">
+          @if (required && requiredIndicatorPosition === 'before') {
             <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
-          </ng-container>
+          }
           {{ label | translate }}
-          <ng-container *ngIf="required && requiredIndicatorPosition === 'after'">
+          @if (required && requiredIndicatorPosition === 'after') {
             <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
-          </ng-container>
+          }
         </label>
       }
       <textarea

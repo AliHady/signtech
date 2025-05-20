@@ -18,6 +18,7 @@ export interface FormField {
   placeholder?: FormFieldLabel;
   acceptedFileTypes?: string;
   maxFileSize?: number;
+  rows?: number;
   validation?: {
     pattern?: string;
     minLength?: number;

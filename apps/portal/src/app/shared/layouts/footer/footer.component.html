@@ -5,9 +5,31 @@
 
       <div class="flex-1 flex flex-col items-center justify-center text-center">
         @if (currentLanguage === 'ar') {
-          <img class="mimFooterLogo" src="/assets/images/MOI_Gray_ Flat version_AR.svg" alt="MIM Logo">
+          <a href="https://mim.gov.sa/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Ministry of Interior - Saudi Arabia"
+             title="Visit Ministry of Interior Website">
+            <img class="mimFooterLogo" 
+                 src="/assets/images/MOI_Gray_ Flat version_AR.svg" 
+                 alt="Ministry of Interior Logo - Arabic"
+                 loading="lazy"
+                 width="200"
+                 height="60">
+          </a>
         } @else if (currentLanguage === 'en') {
-          <img class="mimFooterLogo" src="/assets/images/MOI_Gray_ Flat version_EN.svg" alt="MIM Logo">
+          <a href="https://mim.gov.sa/en" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Ministry of Interior - Saudi Arabia"
+             title="Visit Ministry of Interior Website">
+            <img class="mimFooterLogo" 
+                 src="/assets/images/MOI_Gray_ Flat version_EN.svg" 
+                 alt="Ministry of Interior Logo - English"
+                 loading="lazy"
+                 width="200"
+                 height="60">
+          </a>
         }
         <p class="text-xs mt-2">
           {{ 'FOOTER.MIM_COPYRIGHT' | translate }}

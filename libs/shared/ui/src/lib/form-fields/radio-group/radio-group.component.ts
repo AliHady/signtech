@@ -16,16 +16,16 @@ export interface RadioOption {
     <div class="space-y-2 mb-6" [ngStyle]="{'font-family': 'inherit'}">
       @if (label) {
         <label class="block text-sm font-medium text-gray-700">
-          <ng-container *ngIf="required && requiredIndicatorPosition === 'before'">
+          @if (required && requiredIndicatorPosition === 'before') {
             <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
-          </ng-container>
+          }
           {{ label | translate }}
-          <ng-container *ngIf="required && requiredIndicatorPosition === 'after'">
+          @if (required && requiredIndicatorPosition === 'after') {
             <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
-          </ng-container>
+          }
         </label>
       }
-      <div class="flex gap-4" [ngStyle]="{'border': '1px solid #d1d5db', 'border-radius': '0', 'padding': '0.75rem 1rem'}">
+      <div class="flex flex-col md:flex-row md:flex-wrap gap-4" [ngStyle]="{'border': '1px solid #d1d5db', 'border-radius': '0', 'padding': '0.75rem 1rem'}">
         @for (option of options; track option.value) {
           <div class="flex items-center">
             <label class="custom-radio-label">

@@ -75,7 +75,7 @@
 
       <!-- Mobile Menu Button -->
       <div class="lg:hidden">
-        <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0">
+        <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0 p-3" aria-label="Toggle mobile menu" aria-expanded="false" [attr.aria-expanded]="isMobileMenuOpen">
           <svg fill="var(--color-nimicgreen)" width="48px" height="48px" viewBox="-5.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <title>Mobile Menu</title>
             <path d="M1.375 9.156h18.063c0.781 0 1.375-0.594 1.375-1.375 0-0.75-0.594-1.344-1.375-1.344h-18.063c-0.781 0-1.375 0.594-1.375 1.344 0 0.781 0.594 1.375 1.375 1.375zM1.375 14.625h18.063c0.781 0 1.375-0.594 1.375-1.375 0-0.75-0.594-1.344-1.375-1.344h-18.063c-0.781 0-1.375 0.594-1.375 1.344 0 0.781 0.594 1.375 1.375 1.375zM1.375 20.094h18.063c0.781 0 1.375-0.594 1.375-1.344 0-0.781-0.594-1.375-1.375-1.375h-18.063c-0.781 0-1.375 0.594-1.375 1.375 0 0.75 0.594 1.344 1.375 1.344zM1.375 25.563h18.063c0.781 0 1.375-0.594 1.375-1.344 0-0.781-0.594-1.375-1.375-1.375h-18.063c-0.781 0-1.375 0.594-1.375 1.375 0 0.75 0.594 1.344 1.375 1.344z"></path>
@@ -96,24 +96,24 @@
         <!-- Mobile Menu Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-100">
           <img src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" class="h-10" />
-          <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0 relative w-12 h-12">
+          <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0 p-3" aria-label="Toggle mobile menu" aria-expanded="false" [attr.aria-expanded]="isMobileMenuOpen">
             <span class="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[var(--color-nimicgreen)] transform -translate-x-1/2 -translate-y-1/2 rotate-45"></span>
             <span class="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[var(--color-nimicgreen)] transform -translate-x-1/2 -translate-y-1/2 -rotate-45"></span>
           </button>
         </div>
 
         <!-- Mobile Menu Content -->
-        <div class="p-4 space-y-2 overflow-y-auto h-[calc(100vh-80px)]">
+        <div class="p-4 space-y-4 overflow-y-auto h-[calc(100vh-80px)]">
           @for (menuItem of menuItems; track menuItem) {
             <div class="relative">
-              <div class="flex items-center justify-between p-3 hover:bg-gray-50 cursor-pointer text-base font-medium transition-colors duration-200" 
+              <div class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer text-base font-medium transition-colors duration-200" 
                    (click)="toggleMobileSubmenu(menuItem.title)"
                    (keyup.enter)="toggleMobileSubmenu(menuItem.title)"
                    tabindex="0"
                    role="button">
                 {{ menuItem.title }}
                 @if (menuItem.children?.length) {
-                  <svg class="w-4 h-4 transition-transform duration-300" 
+                  <svg class="w-5 h-5 transition-transform duration-300" 
                        [ngClass]="{'rotate-180': mobileSubmenuOpen[menuItem.title]}" 
                        fill="none" 
                        stroke="currentColor" 
@@ -123,12 +123,12 @@
                 }
               </div>
               @if (menuItem.children?.length) {
-                <div class="pl-4 mt-1 space-y-1" 
+                <div class="pl-4 mt-2 space-y-2" 
                      [ngClass]="{'hidden': !mobileSubmenuOpen[menuItem.title]}"
                      (click)="$event.stopPropagation()">
                   @for (child of menuItem.children; track child) {
                     <a [routerLink]="getLastSegment(child.url)" [href]="getLastSegment(child.url)" 
-                       class="block px-4 py-2.5 text-[#1A1A1A] hover:bg-gray-50 no-underline text-sm transition-colors duration-200"
+                       class="block px-4 py-3 text-[#1A1A1A] hover:bg-gray-50 no-underline text-sm transition-colors duration-200"
                        (click)="toggleMobileMenu()">
                       {{ child.title }}
                     </a>
@@ -139,13 +139,13 @@
           }
 
           <!-- Mobile Action Buttons -->
-          <div class="pt-6 space-y-3 mt-4 border-t border-gray-100">
+          <div class="pt-6 space-y-4 mt-6 border-t border-gray-100">
             <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'"
-               class="block w-full px-4 py-3 bg-[var(--color-nimicgreen)] text-white text-center no-underline font-medium hover:bg-[#413258] transition-colors duration-200">
+               class="block w-full px-4 py-4 bg-[var(--color-nimicgreen)] text-white text-center no-underline font-medium hover:bg-[#413258] transition-colors duration-200">
               {{ 'AUTH.LOGIN' | translate }}
             </a>
             <a [routerLink]="['/', currentLang, 'signup']" [href]="'/' + currentLang + '/signup'"
-               class="block w-full px-4 py-3 border border-gray-700 text-gray-700 text-center no-underline font-medium hover:bg-gray-50 transition-colors duration-200">
+               class="block w-full px-4 py-4 border border-gray-700 text-gray-700 text-center no-underline font-medium hover:bg-gray-50 transition-colors duration-200">
               {{ 'AUTH.REGISTER' | translate }}
             </a>
           </div>

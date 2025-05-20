@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../../eservices/services/e-services.service';
+import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 
 @Component({
-  selector: 'app-employment',
+  selector: 'app-data-request',
   standalone: true,
   imports: [
     CommonModule,
@@ -15,8 +15,8 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
     TranslateModule,
     DynamicFormComponent
   ],
-  templateUrl: './employment.component.html',
-  styleUrls: ['./employment.component.scss'],
+  templateUrl: './data-request.component.html',
+  styleUrls: ['./data-request.component.scss'],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -26,9 +26,9 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
     ])
   ]
 })
-export class EmploymentComponent {
+export class DataRequestComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/employment',
+    endpoint: '/CMS/api/data-request',
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',
@@ -45,7 +45,6 @@ export class EmploymentComponent {
         label: { en: 'Full Name', ar: 'الاسم' },
         required: true,
         maxLength: 200,
-        placeholder: { en: 'Full Name', ar: 'الاسم' },
         validation: {
           required: true,
           errorMessages: {
@@ -59,23 +58,34 @@ export class EmploymentComponent {
         label: { en: 'Identity Number', ar: 'رقم الهوية' },
         required: true,
         maxLength: 10,
-        placeholder: { en: 'Identity Number', ar: 'رقم الهوية' },
         validation: {
           required: true,
           pattern: '^\\d{10}$',
           errorMessages: {
             required: { en: 'This field is required', ar: 'حقل مطلوب' },
-            pattern: { en: 'Invalid identity number format', ar: 'رقم الهوية غير صحيح برجاء إدخال رقم هوية صحيح' }
+            pattern: { en: 'Invalid ID number format', ar: 'رقم الهوية غير صحيح برجاء إدخال رقم هوية صحيح' }
+          }
+        }
+      },
+      {
+        name: 'JobTitle',
+        type: 'text',
+        label: { en: 'Job Title', ar: 'المهنة/الوظيفية' },
+        required: true,
+        maxLength: 200,
+        validation: {
+          required: true,
+          errorMessages: {
+            required: { en: 'This field is required', ar: 'حقل مطلوب' }
           }
         }
       },
       {
         name: 'MobileNumber',
-        type: 'phone',
+        type: 'text',
         label: { en: 'Mobile Number', ar: 'جوال' },
         required: true,
         maxLength: 10,
-        placeholder: { en: 'Mobile Number', ar: 'جوال' },
         validation: {
           required: true,
           pattern: '^(05)(5|0|3|6|4|9|1|8|7)([0-9]{7})$',
@@ -86,12 +96,23 @@ export class EmploymentComponent {
         }
       },
       {
+        name: 'PhoneNumber',
+        type: 'text',
+        label: { en: 'Phone Number', ar: 'رقم الهاتف' },
+        maxLength: 12,
+        validation: {
+          pattern: '^\\d+$',
+          errorMessages: {
+            pattern: { en: 'Invalid phone number format', ar: 'رقم الهاتف غير صحيح برجاء إدخال رقم هاتف سعودي صحيح' }
+          }
+        }
+      },
+      {
         name: 'Email',
         type: 'email',
         label: { en: 'Email', ar: 'البريد الإلكتروني' },
         required: true,
         maxLength: 250,
-        placeholder: { en: 'Email', ar: 'البريد الإلكتروني' },
         validation: {
           required: true,
           errorMessages: {
@@ -101,12 +122,28 @@ export class EmploymentComponent {
         }
       },
       {
-        name: 'EmploymentType',
-        type: 'select',
-        label: { en: 'Employment Type', ar: 'الوظيفة المراد التقدم عليها' },
+        name: 'OrganizationType',
+        type: 'radio',
+        label: { en: 'Organization Type', ar: 'نوع الجهة' },
         required: true,
-        placeholder: { en: 'Select employment type', ar: 'إختر الوظيفة المراد التقدم عليها' },
-        options: [], // from api - waiting ali / and after get it from api if there are no data hide the form and show a message no jobs available
+        options: [
+          { value: 0, label: { en: 'Government', ar: 'حكومية' } },
+          { value: 1, label: { en: 'Private Sector', ar: 'قطاع خاص' } },
+          { value: 2, label: { en: 'Research/Studies', ar: 'دراسات/أبحاث' } }
+        ],
+        validation: {
+          required: true,
+          errorMessages: {
+            required: { en: 'Please select organization type', ar: 'حقل مطلوب' }
+          }
+        }
+      },
+      {
+        name: 'Organization',
+        type: 'text',
+        label: { en: 'Organization Name', ar: 'إسم الجهة' },
+        required: true,
+        maxLength: 200,
         validation: {
           required: true,
           errorMessages: {
@@ -115,27 +152,44 @@ export class EmploymentComponent {
         }
       },
       {
-        name: 'CvFile',
-        type: 'file',
-        label: { en: 'CV', ar: 'السيرة الذاتية' },
+        name: 'PurposeForRequestingData',
+        type: 'textarea',
+        label: { en: 'Purpose of Data Request', ar: 'الغرض من طلب البيانات' },
         required: true,
-        acceptedFileTypes: '.pdf,.doc,.docx',
-        maxFileSize: 1048576, 
+        maxLength: 400,
         validation: {
           required: true,
+          maxLength: 400,
           errorMessages: {
-            required: { en: 'This field is required', ar: 'حقل مطلوب' }
+            required: { en: 'This field is required', ar: 'حقل مطلوب' },
+            maxLength: { en: 'This field accepts only 400 characters', ar: 'هذا الحقل يقبل فقط 400 حرف' }
+          }
+        }
+      },
+      {
+        name: 'DataType',
+        type: 'textarea',
+        label: { en: 'Data Type', ar: 'نوع البيانات' },
+        required: true,
+        maxLength: 400,
+        validation: {
+          required: true,
+          maxLength: 400,
+          errorMessages: {
+            required: { en: 'This field is required', ar: 'حقل مطلوب' },
+            maxLength: { en: 'This field accepts only 400 characters', ar: 'هذا الحقل يقبل فقط 400 حرف' }
           }
         }
       }
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
-    clearButtonLabel: { en: 'Clear', ar: 'مسح' } 
+    clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
   constructor(private eServicesService: EServicesService) {}
   successMessage: string = '';
   errorMessage: string = '';
+  
   onFormSubmitted(response: any) {
     if (this.formConfig.successMessage) {
       this.successMessage = this.formConfig.successMessage.en;

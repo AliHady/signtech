@@ -22,8 +22,10 @@
         <!-- Logo -->
         <div class="flex items-center">
           <a routerLink="/" [href]="'/' + currentLang">
-            <img src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="greenLogo h-14 lg:h-16" />
-            <img src="/assets/images/newLogoWhite.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="whiteLogo h-14 lg:h-16" />
+            <img *ngIf="environment.useNewIdentity" src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="greenLogo h-14 lg:h-16" />
+            <img *ngIf="environment.useNewIdentity" src="/assets/images/newLogoWhite.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="whiteLogo h-14 lg:h-16" />
+            <img *ngIf="!environment.useNewIdentity" src="/assets/images/NIMICColoredLogoOld.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="greenLogo h-14 lg:h-16" />
+            <img *ngIf="!environment.useNewIdentity" src="/assets/images/NIMICWhiteLogoOld.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="whiteLogo h-14 lg:h-16" />
           </a>
 
         </div>
@@ -95,8 +97,14 @@
         
         <!-- Mobile Menu Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-100">
-          <img src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" class="h-10" />
-          <button (click)="toggleMobileMenu()" class="text-gray-700 hover:text-black bg-transparent border-0 p-3" aria-label="Toggle mobile menu" aria-expanded="false" [attr.aria-expanded]="isMobileMenuOpen">
+          <div class="flex-1">
+            <img *ngIf="environment.useNewIdentity" src="/assets/images/newLogoGreen.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="h-10" />
+            <img *ngIf="environment.useNewIdentity" src="/assets/images/newLogoWhite.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="h-10" />
+            <img *ngIf="!environment.useNewIdentity" src="/assets/images/NIMICColoredLogoOld.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate" class="h-10" />
+            <img *ngIf="!environment.useNewIdentity" src="/assets/images/NIMICWhiteLogoOld.png" [alt]="'GENERAL.NIMIC' | translate" [title]="'GENERAL.NIMIC' | translate"class="h-10" />
+          </div>
+
+          <button (click)="toggleMobileMenu()" class="relative text-gray-700 hover:text-black bg-transparent border-0 p-3" aria-label="Toggle mobile menu" aria-expanded="false" [attr.aria-expanded]="isMobileMenuOpen">
             <span class="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[var(--color-nimicgreen)] transform -translate-x-1/2 -translate-y-1/2 rotate-45"></span>
             <span class="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[var(--color-nimicgreen)] transform -translate-x-1/2 -translate-y-1/2 -rotate-45"></span>
           </button>

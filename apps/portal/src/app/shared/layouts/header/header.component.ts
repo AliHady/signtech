@@ -5,6 +5,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { NavMenu } from '../../models/navmen.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
 
 interface MenuItem {
   id: number;
@@ -34,6 +35,7 @@ export class HeaderComponent implements OnInit {
     services: false,
     media: false
   };
+  environment = environment;  // Make environment available in template
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

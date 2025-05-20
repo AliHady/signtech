@@ -1,6 +1,14 @@
 // Color Foundation
 // Defines the core color palette and semantic color tokens
 
+@mixin nimic-identity-colors {
+  --color-nimicgreen: #344549;
+}
+
+@mixin old-identity-colors {
+  --color-nimicgreen: #2C6565;
+}
+
 :root {
   // Primary Colors
   --color-primary-50: #f0f9ff;
@@ -27,7 +35,7 @@
   --color-neutral-900: #0f172a;
 
   // Brand Colors
-  --color-nimicgreen: #344549;
+  @include old-identity-colors;
 
   // Semantic Colors
   --color-success-50: #f0fdf4;
@@ -73,4 +81,9 @@
   --color-info-700: #1d4ed8;
   --color-info-800: #1e40af;
   --color-info-900: #1e3a8a;
+}
+
+// Apply new identity colors when useNewIdentity is true
+:root[data-identity="new"] {
+  @include nimic-identity-colors;
 } 

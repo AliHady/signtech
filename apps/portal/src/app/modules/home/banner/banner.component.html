@@ -33,7 +33,7 @@
       <div class="flex justify-start space-x-4 space-x-reverse mt-6">
         @for (slide of slides; track slide; let i = $index) {
           <span class="w-4 h-4 -full cursor-pointer transition-colors duration-300 p-2"
-                [ngClass]="{'bg-gray-700': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
+                [ngClass]="{'bg-[var(--color-nimicgreen)]': i === currentSlideIndex, 'bg-gray-300': i !== currentSlideIndex}"
                 (click)="swiper?.slideTo(i)"
                 role="button"
                 [attr.aria-label]="'Go to slide ' + (i + 1)"

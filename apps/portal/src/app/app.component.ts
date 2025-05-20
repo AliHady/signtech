@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ScrollIndicatorComponent } from '@nimic/shared/ui';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
+import { environment } from '../environments/environment';
 
 @Component({
   imports: [
@@ -64,6 +65,14 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translationService.setLanguage(lang);
       }
     });
+    console.log(environment.useNewIdentity);
+
+    // Set the data-identity attribute based on environment.useNewIdentity
+    if (environment.useNewIdentity) {
+      document.documentElement.setAttribute('data-identity', 'new');
+    } else {
+      document.documentElement.removeAttribute('data-identity');
+    }
   }
 
   ngOnDestroy() {

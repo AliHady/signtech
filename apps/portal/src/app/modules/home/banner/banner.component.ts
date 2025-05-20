@@ -1,9 +1,12 @@
-import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
 import { TranslationService, TranslationsModule } from '@nimic/translations';
 import { Subscription } from 'rxjs';
+import { HomeService } from '../services/home.service';
+import { BannerItemDto } from '../models/banner.model';
+import { environment } from '../../../../environments/environment';
 
 interface Slide {
   title: string;
@@ -19,54 +22,30 @@ interface Slide {
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements AfterViewInit, OnDestroy {
+export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
   public swiper: Swiper | undefined;
   currentSlideIndex = 0;
   private languageSubscription: Subscription;
-
-  slides: Slide[] = [
-    {
-      title: 'المركز الوطني للمعلومات الصناعية والتعدينية',
-      description: 'يهدف المركز إلى أن يكون المرجع الموثوق للمعلومات الصناعية والتعدينية في المملكة، من خلال توحيد البيانات، وضبط جودة المنتجات وفق الأنظمة العالمية، وتقديم الإحصائيات والتقارير، وتوطين المنتجات وتسويقها محلياً ودولياً.',
-      imageUrl: 'https://picsum.photos/800/400?random=1',
-      link: '/about'
-    },
-    {
-      title: 'تطوير القطاع الصناعي والتعديني',
-      description: 'نعمل على تطوير القطاع الصناعي والتعديني في المملكة من خلال توفير المعلومات الدقيقة والتحليلات المتخصصة التي تساعد في اتخاذ القرارات الاستراتيجية.',
-      imageUrl: 'https://picsum.photos/800/400?random=2',
-      link: '/services'
-    },
-    {
-      title: 'الابتكار في الصناعة',
-      description: 'نسعى لتعزيز الابتكار في القطاع الصناعي من خلال دعم المشاريع الناشئة وتوفير الموارد اللازمة لتطوير الأفكار المبتكرة.',
-      imageUrl: 'https://picsum.photos/800/400?random=3',
-      link: '/innovation'
-    },
-    {
-      title: 'الاستدامة الصناعية',
-      description: 'نركز على تعزيز الاستدامة في القطاع الصناعي من خلال تطبيق أفضل الممارسات البيئية وتشجيع استخدام الطاقة المتجددة.',
-      imageUrl: 'https://picsum.photos/800/400?random=4',
-      link: '/sustainability'
-    },
-    {
-      title: 'التدريب والتطوير',
-      description: 'نقدم برامج تدريبية متخصصة لتطوير المهارات في القطاع الصناعي والتعديني، بما يضمن مواكبة أحدث التطورات التقنية.',
-      imageUrl: 'https://picsum.photos/800/400?random=5',
-      link: '/training'
-    }
-  ];
+  slides: Slide[] = [];
+  loading = true;
+  error = '';
+  portalUrl = environment.portalUrl;
 
   constructor(
     private translationService: TranslationService,
+    private homeService: HomeService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
       register();
     }
     this.languageSubscription = this.translationService.currentLang$.subscribe(() => {
-      this.updateSlidesContent();
+      this.loadBanners();
     });
+  }
+
+  ngOnInit(): void {
+    this.loadBanners();
   }
 
   ngAfterViewInit() {
@@ -84,7 +63,49 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private loadBanners(): void {
+    this.loading = true;
+    this.error = '';
+    this.slides = [];
+
+    this.homeService.getBanners().subscribe({
+      next: (response) => {
+        if (Array.isArray(response)) {
+          this.slides = response
+            .filter(item => item.ShowInHome)
+            .sort((a, b) => a.SortOrder - b.SortOrder)
+            .map(item => ({
+              title: item.Title || '',
+              description: item.ContentSummary || '',
+              imageUrl: item.BannerImage ? this.portalUrl + item.BannerImage : '',
+              link: item.BannerLink || ''
+            }));
+        }
+        this.loading = false;
+        
+        // Reinitialize swiper after content update
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            if (this.swiper) {
+              this.swiper.destroy();
+            }
+            if (this.slides.length > 0) {
+              this.initializeSwiper();
+            }
+          }, 0);
+        }
+      },
+      error: (err) => {
+        this.error = 'Failed to load banners. Please try again later.';
+        this.loading = false;
+        console.error('Error loading banners:', err);
+      }
+    });
+  }
+
   private initializeSwiper() {
+    if (!this.slides.length) return;
+
     this.swiper = new Swiper('.banner-swiper', {
       loop: true,
       effect: 'fade',
@@ -111,28 +132,5 @@ export class BannerComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
-  }
-
-  private updateSlidesContent() {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
-    // Destroy the current swiper instance
-    if (this.swiper) {
-      this.swiper.destroy();
-    }
-
-    // Update slides content based on current language
-    // You can add your translation logic here
-    // For example:
-    // this.slides = this.languageService.getTranslatedSlides();
-
-    // Reinitialize swiper after content update
-    setTimeout(() => {
-      if (isPlatformBrowser(this.platformId)) {
-        this.initializeSwiper();
-      }
-    }, 0);
   }
 } 

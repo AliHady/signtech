@@ -1,34 +1,183 @@
 <div class="bg-[var(--color-nimicgreen)] white-text marsadTheme">
 
   <app-header></app-header>
-  <div class="main-container">
+  <section id="marsad-home-banner">
+    <div class="container mx-auto px-1 py-8 text-center">
+      <h1 class="marsadTitle text-4xl md:text-5xl font-extrabold tracking-wide">
+        {{ 'MARSAD.TITLE' | translate }}
+      </h1>
 
+      <h2 class="marsadSubTitle">
+        {{ 'MARSAD.SUBTITLE' | translate }}
+      </h2>
+
+      <a [routerLink]="['/', currentLang, 'marsad']" (click)="scrollToTop()" 
+        class="marsadLink inline-block bg-white font-semibold px-6 py-3 -md shadow hover:bg-gray-50 transition">
+        {{ 'MARSAD.MORE' | translate }}
+      </a>
+      
+    </div>
+  </section>
+  <section id="marsad-home-navigation" class="sticky top-0 z-10 shadow-md">
+    <div class="container mx-auto px-1 py-4 relative">
+      <button #prevBtn class="carousel-nav-btn prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full z-20" (click)="onPrevClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <div #carouselContainer class="carousel-container overflow-hidden">
+        <ul #carouselList class="flex flex-nowrap gap-4 transition-transform duration-300 ease-in-out">
+          <li class="whitespace-nowrap">
+            <a (click)="scrollToSection($event, 'total-employment')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.TOTAL_EMPLOYMENT' | translate }}</a>
+          </li>
+          <li class="whitespace-nowrap">
+            <a (click)="scrollToSection($event, 'investment-volume')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.INVESTMENT_VOLUME' | translate }}</a>
+          </li>
+          <li class="whitespace-nowrap">
+            <a (click)="scrollToSection($event, 'total-licenses')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.TOTAL_LICENSES' | translate }}</a>
+          </li>
+          <li class="whitespace-nowrap">
+            <a (click)="scrollToSection($event, 'establishments-count')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.ESTABLISHMENTS_COUNT' | translate }}</a>
+          </li>
+          <li class="whitespace-nowrap">
+            <a (click)="scrollToSection($event, 'non-oil-exports')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.NON_OIL_EXPORTS' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+      <button #nextBtn class="carousel-nav-btn next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full z-20" (click)="onNextClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </section>
+  <div class="main-container">
+    
     <main class="main-content" [@routeAnimations]>
       <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-      <section class="container mx-auto px-1 py-8">
-        <h1>My First Heading</h1>
-        <p>My first paragraph.</p>
-        <h1>My First Heading</h1>
-        <p>My first paragraph.</p>
+      <section id="total-employment" class="container mx-auto px-1 py-8">
+        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.TOTAL_EMPLOYMENT' | translate }}</h2>
+        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="totalEmploymentData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [autoScale]="autoScale"
+            [roundDomains]="roundDomains"
+            [curve]="curve"
+            [rangeFillOpacity]="0.2"
+            [animations]="true">
+          </ngx-charts-line-chart>
+        </div>
+      </section>
 
-        <h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p><h1>My First Heading</h1>
-        <p>My first paragraph.</p>
+      <section id="investment-volume" class="container mx-auto px-1 py-8">
+        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.INVESTMENT_VOLUME' | translate }}</h2>
+        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="investmentVolumeData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [autoScale]="autoScale"
+            [roundDomains]="roundDomains"
+            [curve]="curve"
+            [rangeFillOpacity]="0.2"
+            [animations]="true">
+          </ngx-charts-line-chart>
+        </div>
+      </section>
+
+      <section id="total-licenses" class="container mx-auto px-1 py-8">
+        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.TOTAL_LICENSES' | translate }}</h2>
+        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="miningLicensesData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [autoScale]="autoScale"
+            [roundDomains]="roundDomains"
+            [curve]="curve"
+            [rangeFillOpacity]="0.2"
+            [animations]="true">
+          </ngx-charts-line-chart>
+        </div>
+      </section>
+
+      <section id="establishments-count" class="container mx-auto px-1 py-8">
+        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.ESTABLISHMENTS_COUNT' | translate }}</h2>
+        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="establishmentsCountData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [autoScale]="autoScale"
+            [roundDomains]="roundDomains"
+            [curve]="curve"
+            [rangeFillOpacity]="0.2"
+            [animations]="true">
+          </ngx-charts-line-chart>
+        </div>
+      </section>
+
+      <section id="non-oil-exports" class="container mx-auto px-1 py-8">
+        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.NON_OIL_EXPORTS' | translate }}</h2>
+        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="nonOilExportsData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [autoScale]="autoScale"
+            [roundDomains]="roundDomains"
+            [curve]="curve"
+            [rangeFillOpacity]="0.2"
+            [animations]="true">
+          </ngx-charts-line-chart>
+        </div>
       </section>
     </main>
   </div>

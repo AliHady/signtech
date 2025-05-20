@@ -14,23 +14,18 @@ export class FooterService {
   private partnersCache = new BehaviorSubject<Partners | null>(null);
   private importantLinksCache = new BehaviorSubject<ImportantLinks | null>(null);
 
-  constructor(private cmsDataService: CmsDataService) {}  
+  constructor(private cmsDataService: CmsDataService) { }
 
   getPartners(): Observable<Partners> {
-    return this.cmsDataService.getCmsPaginatedData<Partners>(
+    return this.cmsDataService.getCmsData<Partners>(
       this.partnersApiUrl,
-      undefined,
       undefined,
       this.partnersCache
     );
   }
 
-  getImportantLinks(): Observable<ImportantLinks> {
-    return this.cmsDataService.getCmsPaginatedData<ImportantLinks>(
-      this.importantLinksApiUrl,
-      undefined,
-      undefined,
-      this.importantLinksCache
-    );
+  getImportantLinks(showInHome?: boolean): Observable<ImportantLinks> {
+    return this.cmsDataService.getCmsData<ImportantLinks>(
+      this.importantLinksApiUrl, showInHome ? { showInHome: showInHome } : {}, this.importantLinksCache);
   }
 } 

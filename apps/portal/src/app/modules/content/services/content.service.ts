@@ -23,20 +23,10 @@ export class ContentService {
   };
   private apiUrlContent = `${environment.contentUrl}/content`;
 
-  private latestNewsCache = new BehaviorSubject<NewsResponse | null>(null);
-
   constructor(private cmsDataService: CmsDataService) { }
 
-  private getPaginatedData<T>(
-    endpoint: keyof typeof this.apiEndpoints,
-    pageNumber = 1,
-    pageSize = 9
-  ): Observable<T> {
-    return this.cmsDataService.getCmsPaginatedData<T>(
-      this.apiEndpoints[endpoint],
-      pageNumber,
-      pageSize
-    );
+  private getPaginatedData<T>(endpoint: keyof typeof this.apiEndpoints, pageNumber = 1, pageSize = 9): Observable<T> {
+    return this.cmsDataService.getCmsData<T>(this.apiEndpoints[endpoint], { pageNumber: pageNumber, pageSize: pageSize });
   }
 
   getAllNews(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
@@ -45,12 +35,10 @@ export class ContentService {
   getAllEvents(pageNumber = 1, pageSize = 9): Observable<EventsResponse> {
     return this.getPaginatedData<EventsResponse>('events', pageNumber, pageSize);
   }
-  
 
   getAllVideos(pageNumber = 1, pageSize = 9): Observable<VideoResponse> {
     return this.getPaginatedData<VideoResponse>('videos', pageNumber, pageSize);
   }
-
 
   getAllImages(pageNumber = 1, pageSize = 9): Observable<ImageGalleryResponse> {
     return this.getPaginatedData<ImageGalleryResponse>('photos', pageNumber, pageSize);
@@ -61,9 +49,6 @@ export class ContentService {
   }
 
   getContent(route: string): Observable<Content> {
-    return this.cmsDataService.getPageContent<Content>(
-      this.apiUrlContent,
-      route
-    );
+    return this.cmsDataService.getCmsData<Content>(this.apiUrlContent, { route: route });
   }
 } 

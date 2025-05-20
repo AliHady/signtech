@@ -23,9 +23,8 @@ export class HeaderService {
   constructor(private cmsDataService: CmsDataService) {}
 
   getNavigationMenu(): Observable<NavMenu> {
-    return this.cmsDataService.getCmsPaginatedData<NavMenu>(
+    return this.cmsDataService.getCmsData<NavMenu>(
       this.apiUrl,
-      undefined,
       undefined,
       this.menuCache
     ).pipe(

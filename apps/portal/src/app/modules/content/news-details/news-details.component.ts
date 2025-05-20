@@ -49,7 +49,7 @@ export class NewsDetailsComponent implements OnInit {
 
   private loadNewsDetails(newsId: number): void {
     const endpoint = `${environment.contentUrl}/news/details/${newsId}`;
-    this.cmsDataService.getCmsPaginatedData(endpoint).subscribe({
+    this.cmsDataService.getCmsData(endpoint).subscribe({
       next: (response) => {
         this.newsDetails = response;
        // console.log(response);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of, switchMap, tap } from 'rxjs';
+import { Observable, BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TranslationService } from '@nimic/translations';
 
 @Injectable({
@@ -15,15 +15,13 @@ export class CmsDataService {
   /**
    * Generic method to fetch CMS data with pagination and language support
    * @param endpoint The CMS API endpoint to fetch data from
-   * @param pageNumber The page number to fetch (optional)
-   * @param pageSize The number of items per page (optional)
+   * @param queryParams The query Params to fetch (optional)
    * @param cache Optional cache to store the response
    * @returns Observable of the paginated CMS response
    */
-  getCmsPaginatedData<T>(
+  getCmsData<T>(
     endpoint: string,
-    pageNumber?: number,
-    pageSize?: number,
+    queryParams?: { [key: string]: any },
     cache?: BehaviorSubject<T | null>
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
@@ -36,54 +34,17 @@ export class CmsDataService {
         let url = `${endpoint}/${currentLang}`;
         const params: string[] = [];
 
-        if (pageNumber !== undefined) {
-          params.push(`pageNumber=${pageNumber}`);
-        }
-        if (pageSize !== undefined) {
-          params.push(`pageSize=${pageSize}`);
-        }
-
-        if (params.length > 0) {
-          url += `/?${params.join('&')}`;
-        }
-
-        return this.http.get<T>(url).pipe(
-          tap(response => {
-            if (cache) {
-              cache.next(response);
+        // Dynamically add query parameters
+        if (queryParams) {
+          for (const key in queryParams) {
+            if (queryParams[key] !== undefined && queryParams[key] !== null) {
+              params.push(`${encodeURIComponent(key)}=${encodeURIComponent(queryParams[key])}`);
             }
-          })
-        );
-      })
-    );
-  }
-
-  getPageContent<T>(
-    endpoint: string,
-    route: string,
-    cache?: BehaviorSubject<T | null>
-  ): Observable<T> {
-    return this.translationService.currentLang$.pipe(
-      switchMap(currentLang => {
-        if (cache) {
-          const cachedData = cache.value;
-          if (cachedData) {
-            return of(cachedData);
           }
         }
 
-        let url = `${endpoint}`;
-        const params: string[] = [];
-
-        if (route !== undefined) {
-          params.push(`route=${route}`);
-        }
-
-        params.push(`lang=${currentLang}`);
-
-
         if (params.length > 0) {
-          url += `/?${params.join('&')}`;
+          url += `?${params.join('&')}`;
         }
 
         return this.http.get<T>(url).pipe(

@@ -14,21 +14,19 @@ export class HomeService {
   private latestNewsCache = new BehaviorSubject<NewsResponse | null>(null);
   private bannerCache = new BehaviorSubject<BannerItemDto[] | null>(null);
 
-  constructor(private cmsDataService: CmsDataService) {}
+  constructor(private cmsDataService: CmsDataService) { }
 
   getLatestNews(): Observable<NewsResponse> {
-    return this.cmsDataService.getCmsPaginatedData<NewsResponse>(
+    return this.cmsDataService.getCmsData<NewsResponse>(
       this.newsApiUrl,
-      1,
-      3,
+      { pageNumber: 1, pageSize: 3 },
       this.latestNewsCache
     );
   }
 
   getBanners(): Observable<BannerItemDto[]> {
-    return this.cmsDataService.getCmsPaginatedData<BannerItemDto[]>(
+    return this.cmsDataService.getCmsData<BannerItemDto[]>(
       this.bannerApiUrl,
-      undefined,
       undefined,
       this.bannerCache
     );

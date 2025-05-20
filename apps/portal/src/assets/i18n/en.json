@@ -71,7 +71,9 @@
     "BULLETIN": "Bulletins",
     "MONTHLYBULLETIN": "Monthly Bulletin"
   },
-  
+  "ESERVICES": {
+    "REQUESTCODE": "Request NCAGE Code"
+  },
   "MEDIA_CENTER": {
     "CARDS": {
       "CARD1": {

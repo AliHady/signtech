@@ -73,6 +73,9 @@
     "QUARTERLYBULLETIN": "النشرة الربعية",
     "REPORT": "التقارير"
   },
+  "ESERVICES": {
+    "REQUESTCODE": "طلب رمز الجهة الحكومية/المنشأة التجارية (NCAGE)"
+  },
   "MEDIA_CENTER": {
     "CARDS": {
       "CARD1": {

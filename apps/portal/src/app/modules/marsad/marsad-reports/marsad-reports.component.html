@@ -9,6 +9,17 @@
           <h2 class="text-3xl font-bold text-right text-gray-800">{{ selectedCategoryTitle }} ({{ filteredReports.length }})</h2>
           
         </div>
+        
+        <div class="w-full md:w-1/3">
+          <app-text-input
+            [label]="'بحث'"
+            [placeholder]="'ابحث عن تقرير...'"
+            [(ngModel)]="searchQuery"
+            [name]="'search'"
+            class="mb-4">
+          </app-text-input>
+        </div>
+        
         <div class="w-full md:w-1/3">
           <app-select-search
             id="categoryFilter"

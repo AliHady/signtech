@@ -9,7 +9,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { FormsModule } from '@angular/forms';
-import { SelectSearchComponent } from '@nimic/shared/ui';
+import { SelectSearchComponent, TextInputComponent } from '@nimic/shared/ui';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 
@@ -35,7 +35,7 @@ interface Category {
 @Component({
   selector: 'app-marsad-reports',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, TranslateModule, RouterModule, NgxChartsModule, BreadcrumbsComponent, FormsModule, SelectSearchComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, TranslateModule, RouterModule, NgxChartsModule, BreadcrumbsComponent, FormsModule, SelectSearchComponent, TextInputComponent],
   templateUrl: './marsad-reports.component.html',
   styleUrls: ['./marsad-reports.component.scss'],
   animations: [
@@ -60,11 +60,27 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
   selectedReport: Report | null = null;
   isMaximized = true;
   safeUrl: SafeResourceUrl | null = null;
+  searchQuery: string = '';
 
   get filteredReports() {
-    if (!this.selectedCategory) return this.allReports;
-    const category = this.rawCategories.find(c => c.Id === this.selectedCategory);
-    return category ? category.Reports : [];
+    let reports = this.allReports;
+    
+    // Filter by category if selected
+    if (this.selectedCategory) {
+      const category = this.rawCategories.find(c => c.Id === this.selectedCategory);
+      reports = category ? category.Reports : [];
+    }
+    
+    // Filter by search query
+    if (this.searchQuery) {
+      const query = this.searchQuery.toLowerCase();
+      reports = reports.filter(report => 
+        report.ReportTitle.toLowerCase().includes(query) || 
+        (report.ReportDesc && report.ReportDesc.toLowerCase().includes(query))
+      );
+    }
+    
+    return reports;
   }
 
   get selectedCategoryTitle(): string {

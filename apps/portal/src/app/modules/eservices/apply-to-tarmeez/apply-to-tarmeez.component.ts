@@ -111,7 +111,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'CR File', ar: 'ملف السجل التجاري' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -125,7 +125,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Tax File', ar: 'ملف الضريبة' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -139,7 +139,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'GOSI File', ar: 'ملف التأمينات' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -153,7 +153,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Financial Statements File', ar: 'ملف البيانات المالية' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -167,7 +167,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Investment License File', ar: 'ملف رخصة الاستثمار' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -181,7 +181,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Chamber of Commerce Certificate File', ar: 'ملف شهادة الغرفة التجارية' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -195,7 +195,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Business Classification Certificate File', ar: 'ملف شهادة تصنيف الأعمال' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -209,7 +209,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Certificate to the Saudi Council of Engineers File', ar: 'ملف شهادة الهيئة السعودية للمهندسين' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -223,7 +223,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Certificate of Achieving the Regular Percentage File', ar: 'ملف شهادة تحقيق النسبة النظامية' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -237,7 +237,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Certificate of Experience File', ar: 'ملف شهادة الخبرة' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -251,7 +251,7 @@ export class ApplyToTarmeezComponent {
         label: { en: 'Price Offer', ar: 'عرض السعر' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx,.jpg,.jpeg,.png',
-        maxFileSize: 10485760,
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {

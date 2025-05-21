@@ -52,7 +52,7 @@ import { TranslateModule } from '@ngx-translate/core';
               <p class="pl-1">{{ 'GENERAL.OR-DRAG-DROP' | translate }}</p>
             </div>
             <p class="text-xs text-gray-500 mt-2 text-center">
-              {{ 'GENERAL.FILE-TYPES' | translate }}
+            {{acceptedFileTypes}}
             </p>
           </div>
         }
@@ -111,7 +111,7 @@ import { TranslateModule } from '@ngx-translate/core';
       <!-- Error Message -->
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600 text-center">
-          {{ errorMessage }}
+          {{ errorMessage | translate }}
         </div>
       }
     </div>
@@ -137,7 +137,7 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   @Input() control: AbstractControl | null = null;
   @Input() formSubmitted = false;
   @Input() acceptedFileTypes = 'image/*,.pdf';
-  @Input() maxFileSize = 10 * 1024 * 1024; // 10MB default
+  @Input() maxFileSize = 1; // 1MB default
   @Input() required = false;
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
@@ -228,8 +228,9 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   }
 
   private validateFile(file: File): boolean {
-    // Check file size
-    if (file.size > this.maxFileSize) {
+    // Check file size (convert maxFileSize from MB to bytes)
+    const maxSizeInBytes = this.maxFileSize * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
       this.errorMessage = 'GENERAL.FILE-SIZE-ERROR';
       return false;
     }

@@ -18,9 +18,7 @@ export class HomeService {
 
   getLatestNews(): Observable<NewsResponse> {
     return this.cmsDataService.getCmsData<NewsResponse>(
-      this.newsApiUrl,
-      { pageNumber: 1, pageSize: 3 },
-      this.latestNewsCache
+      this.newsApiUrl, { pageNumber: 1, pageSize: 3, showInHome: true }, this.latestNewsCache
     );
   }
 

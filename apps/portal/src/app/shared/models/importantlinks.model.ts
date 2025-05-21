@@ -4,7 +4,6 @@ export interface ImportantLink {
     LinkTarget: string;
     SortOrder: number;
     RollupImage: string | null;
-    ShowInHome: boolean;
 }
 
 export interface ImportantLinks {

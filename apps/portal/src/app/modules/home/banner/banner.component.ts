@@ -72,8 +72,6 @@ export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (response) => {
         if (Array.isArray(response)) {
           this.slides = response
-            .filter(item => item.ShowInHome)
-            .sort((a, b) => a.SortOrder - b.SortOrder)
             .map(item => ({
               title: item.Title || '',
               description: item.ContentSummary || '',
@@ -82,7 +80,7 @@ export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
             }));
         }
         this.loading = false;
-        
+
         // Reinitialize swiper after content update
         if (isPlatformBrowser(this.platformId)) {
           setTimeout(() => {

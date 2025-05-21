@@ -4,7 +4,6 @@ export interface EServiceLink {
   Image: string | null;
   Link: string;
   SortOrder: number;
-  ShowInHome: boolean;
 }
 
 export interface EServiceLinksResponse {

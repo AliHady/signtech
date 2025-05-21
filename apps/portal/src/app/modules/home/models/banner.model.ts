@@ -5,7 +5,6 @@ export interface BannerItemDto {
   BannerLink: string | null;
   IsOpenInNewTab: boolean;
   SortOrder: number;
-  ShowInHome: boolean;
 }
 
 export interface BannerResponse {

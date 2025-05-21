@@ -20,10 +20,7 @@ export class FeaturedServicesComponent implements OnInit, OnDestroy {
   currentLang: string = 'en';
   private langSubscription: Subscription;
 
-  constructor(
-    private translate: TranslateService,
-    private contentService: ContentService
-  ) {
+  constructor(private translate: TranslateService, private contentService: ContentService) {
     this.currentLang = this.translate.currentLang || 'en';
     this.langSubscription = this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
@@ -42,11 +39,9 @@ export class FeaturedServicesComponent implements OnInit, OnDestroy {
 
   private loadFeaturedServices(): void {
     this.loading = true;
-    // Fetch first page with 6 items for featured services
-    this.contentService.getAllEservices(1, 6).subscribe({
+    this.contentService.getAllEservices(1, 6, true).subscribe({
       next: (response) => {
-        // Filter services that should be shown in home
-        this.services = response.Items.filter(service => service.ShowInHome);
+        this.services = response.Items;
         this.loading = false;
       },
       error: (err) => {
@@ -63,6 +58,6 @@ export class FeaturedServicesComponent implements OnInit, OnDestroy {
         top: 0,
         behavior: 'smooth'
       });
-    }, 100); // Small delay to ensure navigation has started
+    }, 100);
   }
 } 

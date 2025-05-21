@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
+import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { CmsDataService } from '@nimic/shared/utils';
 import { NewsResponse } from '../models/news.model';
@@ -25,8 +24,10 @@ export class ContentService {
 
   constructor(private cmsDataService: CmsDataService) { }
 
-  private getPaginatedData<T>(endpoint: keyof typeof this.apiEndpoints, pageNumber = 1, pageSize = 9): Observable<T> {
-    return this.cmsDataService.getCmsData<T>(this.apiEndpoints[endpoint], { pageNumber: pageNumber, pageSize: pageSize });
+  private getPaginatedData<T>(endpoint: keyof typeof this.apiEndpoints, pageNumber = 1, pageSize = 9, showInHome?: boolean): Observable<T> {
+    return this.cmsDataService.getCmsData<T>(this.apiEndpoints[endpoint],
+      showInHome ? { pageNumber: pageNumber, pageSize: pageSize, showInHome: showInHome } :
+        { pageNumber: pageNumber, pageSize: pageSize });
   }
 
   getAllNews(pageNumber = 1, pageSize = 9): Observable<NewsResponse> {
@@ -44,8 +45,8 @@ export class ContentService {
     return this.getPaginatedData<ImageGalleryResponse>('photos', pageNumber, pageSize);
   }
 
-  getAllEservices(pageNumber = 1, pageSize = 9): Observable<EServiceLinksResponse> {
-    return this.getPaginatedData<EServiceLinksResponse>('eservices', pageNumber, pageSize);
+  getAllEservices(pageNumber = 1, pageSize = 9, showInHome?: boolean): Observable<EServiceLinksResponse> {
+    return this.getPaginatedData<EServiceLinksResponse>('eservices', pageNumber, pageSize, showInHome);
   }
 
   getContent(route: string): Observable<Content> {

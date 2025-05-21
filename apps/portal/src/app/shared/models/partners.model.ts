@@ -4,7 +4,6 @@ export interface Partner {
     Link: string;
     LinkTarget: string;
     SortOrder: number;
-    ShowInHome: boolean;
 }
 
 export type Partners = Partner[];

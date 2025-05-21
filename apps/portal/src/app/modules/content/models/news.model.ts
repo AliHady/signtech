@@ -10,7 +10,6 @@ export interface News {
   NewsDate: string | null;
   NewsHigriDate: string;
   SortOrder: number;
-  ShowInHome: boolean;
 }
 
 export interface NewsResponse {
@@ -19,6 +18,6 @@ export interface NewsResponse {
   CurrentPage: number;
   PageSize: number;
   Items: News[];
-} 
+}
 
 

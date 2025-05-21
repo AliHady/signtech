@@ -50,10 +50,9 @@ export class LatestNewsComponent implements OnInit {
     });
   }
 
-
-  navigateToNewsDetails(newsItem: News): void { 
+  navigateToNewsDetails(newsItem: News): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.router.navigate(['/' ,this.currentLang,'mediacenter', 'news', newsItem.Title], {
+    this.router.navigate(['/', this.currentLang, 'mediacenter', 'news', newsItem.Title], {
       state: { id: newsItem.Id }
     });
   }

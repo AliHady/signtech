@@ -5,7 +5,10 @@
   <main class="main-content bg-white" [@routeAnimations]>
     <section class="container mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6">
-        <h2 class="text-3xl font-bold text-right text-gray-800">{{ selectedCategoryTitle }} ({{ filteredReports.length }})</h2>
+        <div class="flex flex-col gap-2">
+          <h2 class="text-3xl font-bold text-right text-gray-800">{{ selectedCategoryTitle }} ({{ filteredReports.length }})</h2>
+          
+        </div>
         <div class="w-full md:w-1/3">
           <app-select-search
             id="categoryFilter"
@@ -51,8 +54,12 @@
   @if (showLightbox && selectedReport) {
     <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-75">
       <div class="relative w-full h-full max-w-7xl mx-4 my-8" [class.maximized]="isMaximized">
-    
+       
         <div class=" top-4 right-4 flex gap-2 z-10 justify-end bg-white p-2">
+          
+         
+
+          <p class="text-sm text-gray-600 text-right md:hidden font-medium">{{ 'MARSAD.DESKTOP_EXPERIENCE' | translate }}</p>
           @if (!isMaximized) {
             <button (click)="toggleMaximize()" class="text-white hover:text-gray-300 bg-[#413258] border-0 cursor-pointer p-2 ">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" class="h-6 w-6">

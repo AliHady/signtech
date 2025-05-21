@@ -11,6 +11,7 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { FormsModule } from '@angular/forms';
 import { SelectSearchComponent } from '@nimic/shared/ui';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 interface Report {
   ReportId: string;
@@ -50,6 +51,7 @@ interface Category {
   ]
 })
 export class MarsadReportsComponent implements OnInit, AfterViewInit {
+  environment = environment;
   currentLang: string = 'ar';
   selectedCategory: number | null = null;
   categories: { value: number; label: string }[] = [];
@@ -458,6 +460,10 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    this.translationService.currentLang$.subscribe(lang => {
+      this.currentLang = lang;
+    });
+
     this.categories = [
       { value: 0, label: 'كل الفئات' },
       ...this.rawCategories.map(cat => ({
@@ -466,9 +472,7 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
       }))
     ];
 
-    if (this.rawCategories.length > 0) {
-      this.selectedCategory = this.rawCategories[0].Id;
-    }
+    this.selectedCategory = 0;
 
     this.allReports = this.rawCategories.flatMap(cat => cat.Reports);
   }

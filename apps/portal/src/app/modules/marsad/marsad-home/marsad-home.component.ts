@@ -70,6 +70,9 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
   // Chart data
+  //https://swimlane.gitbook.io/ngx-charts/features   for Chart Types
+
+
   marsadData = {
     totalEmploymentData: [
       {
@@ -79,6 +82,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         summaryEn: '900 Thousand Workers',
         growth: 'نمو عدد العمالة خلال خمس سنوات',
         growthEn: 'Employment Growth Over Five Years',
+        chartType: 'line',
         series: [
           { name: '2020', value: 900000 },
           { name: '2021', value: 950000 },
@@ -96,6 +100,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 1,221 Billion',
         growth: 'نمو حجم الاستثمار خلال خمس سنوات',
         growthEn: 'Investment Growth Over Five Years',
+        chartType: 'line',
         series: [
           { name: '2020', value: 970 },
           { name: '2021', value: 1039 },
@@ -113,6 +118,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         summaryEn: '2,453',
         growth: 'نمو عدد الرخص السارية للخمس سنوات',
         growthEn: 'Growth in Active Licenses Over Five Years',
+        chartType: 'line',
         series: [
           { name: '2020', value: 1451 },
           { name: '2021', value: 1868 },
@@ -130,6 +136,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         summaryEn: '11,988',
         growth: 'نمو عدد المنشأت الصناعية',
         growthEn: 'Growth in Industrial Establishments',
+        chartType: 'line',
         series: [
           { name: '2020', value: 9769 },
           { name: '2021', value: 10373 },
@@ -147,6 +154,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 214 Billion',
         growth: 'نمو عدد الصادرات غير النفطية',
         growthEn: 'Growth in Non-Oil Exports',
+        chartType: 'line',
         series: [
           { name: '2020', value: 151 },
           { name: '2021', value: 233 },

@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@nimic/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 import { Subscription } from 'rxjs';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -35,7 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public translationService: TranslationService,
     private translateService: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
@@ -67,11 +68,13 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     //console.log(environment.useNewIdentity);
 
-    // Set the data-identity attribute based on environment.useNewIdentity
-    if (environment.useNewIdentity) {
-      document.documentElement.setAttribute('data-identity', 'new');
-    } else {
-      document.documentElement.removeAttribute('data-identity');
+    // Only access document in browser environment
+    if (isPlatformBrowser(this.platformId)) {
+      if (environment.useNewIdentity) {
+        document.documentElement.setAttribute('data-identity', 'new');
+      } else {
+        document.documentElement.removeAttribute('data-identity');
+      }
     }
   }
 

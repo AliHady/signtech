@@ -92,8 +92,8 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       {
         name: 'حجم الاستثمار',
         nameEn: 'Investment Volume',
-        summary: '1,221 مليار ريال',
-        summaryEn: '1,221 Billion Riyals',
+        summary: '1,221 مليار <span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> ',
+        summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 1,221 Billion',
         growth: 'نمو حجم الاستثمار خلال خمس سنوات',
         growthEn: 'Investment Growth Over Five Years',
         series: [
@@ -143,8 +143,8 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       {
         name: 'الصادرات غير النفطية',
         nameEn: 'Non-Oil Exports',
-        summary: '214 مليار ريال',
-        summaryEn: '214 Billion Riyals',
+        summary: '214 مليار <span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> ',
+        summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 214 Billion',
         growth: 'نمو عدد الصادرات غير النفطية',
         growthEn: 'Growth in Non-Oil Exports',
         series: [

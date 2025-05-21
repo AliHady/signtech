@@ -119,3 +119,16 @@
   font-style: normal;
   font-display: swap;
 }
+
+
+@font-face {
+  font-family: 'Saudi_Riyal_Symbol';
+  src:  url('/assets/fonts/Saudi_Riyal_Symbol/Saudi_Riyal_Symbol.eot?7ltjku');
+  src:  url('/assets/fonts/Saudi_Riyal_Symbol/Saudi_Riyal_Symbol.eot?7ltjku#iefix') format('embedded-opentype'),
+    url('/assets/fonts/Saudi_Riyal_Symbol/Saudi_Riyal_Symbol.ttf?7ltjku') format('truetype'),
+    url('/assets/fonts/Saudi_Riyal_Symbol/Saudi_Riyal_Symbol.woff?7ltjku') format('woff'),
+    url('/assets/fonts/Saudi_Riyal_Symbol/Saudi_Riyal_Symbol.svg?7ltjku#Saudi_Riyal_Symbol') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

@@ -181,9 +181,11 @@
   },
  "MARSAD": {
     "TITLE": "Marsad",
+    "MARSAD": "Marsad",
+    "MARSAD-REPORTS": "Marsad Reports",
     "SUBTITLE": "Business Intelligence and Decision Support Platform",
     "DESCRIPTION": "Unified industrial and mining indicators that support decision-makers and enhance investment opportunities through dashboards and accurate reports based on a comprehensive national repository.",
-    "MORE": "More ↑",
+    "MORE": "More",
     "NAVIGATION": {
       "TOTAL_EMPLOYMENT": "Total Employment",
       "INVESTMENT_VOLUME": "Investment Volume",

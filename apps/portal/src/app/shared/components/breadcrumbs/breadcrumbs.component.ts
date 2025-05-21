@@ -73,6 +73,7 @@ export class BreadcrumbsComponent implements OnInit {
     });
 
     const isPathFound = this.findPath(data);
+    console.log("isPathFound", isPathFound)
     if (!isPathFound) {
       const lastMatch = this.findNearestMatch(data, this.currentPath);
       if (lastMatch && !this.list.some(x => x.url === lastMatch.url)) {
@@ -86,8 +87,10 @@ export class BreadcrumbsComponent implements OnInit {
     const lastBreadcrumbUrl = this.list[this.list.length - 1]?.url;
     const currentSegments = this.currentPath.split('/').filter(x => x);
     const translationPrefix = currentSegments.length > 0 ? currentSegments[0].toUpperCase() : 'GENERAL';
-
+    //console.log("currentSegments", currentSegments)
+   // console.log(lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl))
     if (lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl)) {
+      console.log("lastBreadcrumbUrl", lastBreadcrumbUrl)
       const remainingPath = this.currentPath.replace(lastBreadcrumbUrl.replace('/' + this.currentLang, ''), '');
       const remainingSegments = remainingPath.split('/').filter(x => x);
 
@@ -109,6 +112,26 @@ export class BreadcrumbsComponent implements OnInit {
                 label: segment
               });
             }
+          }
+        }
+      }
+    }
+    else{
+      //console.log("else", currentSegments)
+      let accumulatedPath = '';
+      for (const segment of currentSegments) {
+        accumulatedPath += '/' + segment;
+        if (!this.list.some(x => x.url === accumulatedPath)) {
+          if (translationPrefix !== 'MEDIACENTER') {
+            this.list.push({
+              url: accumulatedPath,
+              label: this.translate.instant(translationPrefix + '.' + segment.toUpperCase())
+            });
+          } else {
+            this.list.push({
+              url: accumulatedPath,
+              label: segment
+            });
           }
         }
       }

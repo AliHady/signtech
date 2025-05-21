@@ -2,14 +2,10 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../../eservices/services/e-services.service';
-import { ContactUs } from '../models/contact-us';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
-
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { environment } from '../../../../environments/environment';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-us',
@@ -20,10 +16,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     DynamicFormComponent,
     ReactiveFormsModule,
-
     RecaptchaModule,
-    RecaptchaFormsModule,
-    
+    RecaptchaFormsModule
   ],
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
@@ -38,7 +32,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ContactUsComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/api/contact-us',
+    endpoint: '/contact-us',
     method: 'POST',
     successMessage: {
       en: 'Your message has been sent successfully',
@@ -135,7 +129,7 @@ export class ContactUsComponent {
     clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
 
   onFormSubmitted(response: any) {
     console.log('Form submitted successfully:', response);

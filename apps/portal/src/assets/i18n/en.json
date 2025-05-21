@@ -11,7 +11,7 @@
     "IS_REQUIRED": "This field is required",
     "UPLOAD-FILE": "Upload a file",
     "OR-DRAG-DROP": "or drag and drop",
-    "FILE-TYPES": "PNG, JPG, PDF up to 10MB",
+    "FILE-TYPES": "PNG, JPG, PDF up to 1MB",
     "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
     "FILE-TYPE-ERROR": "Invalid file type",
     "REMOVE": "Remove",

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 
@@ -28,7 +27,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class DataRequestComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/data-request',
+    endpoint: '/data-request',
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',
@@ -186,10 +185,10 @@ export class DataRequestComponent {
     clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
   successMessage: string = '';
   errorMessage: string = '';
-  
+
   onFormSubmitted(response: any) {
     if (this.formConfig.successMessage) {
       this.successMessage = this.formConfig.successMessage.en;

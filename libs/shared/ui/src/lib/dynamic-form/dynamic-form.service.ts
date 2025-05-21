@@ -12,11 +12,19 @@ export class DynamicFormService {
 
   submitForm(config: DynamicFormConfig, formData: any, token: any): Observable<any> {
     console.log(config, formData);
-    const headers = new HttpHeaders({
-      'X-Recaptcha-Token': token
-    });
+    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
 
-    return this.http.request(config.method, `${environment.portalUrl}${config.endpoint}`, {
+    return this.http.request(config.method, `${environment.contentUrl}${config.endpoint}`, {
+      headers: headers,
+      body: formData
+    });
+  }
+
+  submitFormData(config: DynamicFormConfig, formData: FormData, token: any): Observable<any> {
+    console.log(config, formData);
+    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
+
+    return this.http.request(config.method, `${environment.contentUrl}${config.endpoint}`, {
       headers: headers,
       body: formData
     });

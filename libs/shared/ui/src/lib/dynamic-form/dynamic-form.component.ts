@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { DynamicFormConfig, FormField, TranslationKey, FormFieldOption, FormFieldLabel } from './dynamic-form.interface';
+import { DynamicFormConfig, FormField, FormFieldOption, FormFieldLabel } from './dynamic-form.interface';
 import { DynamicFormService } from './dynamic-form.service';
 import { TextInputComponent } from '../form-fields/text-input/text-input.component';
 import { EmailInputComponent } from '../form-fields/email-input/email-input.component';
@@ -76,7 +76,6 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onCaptchaResolved(token: string | null): void {
-    console.log(token)
     this.captchaToken = token;
   }
 
@@ -117,12 +116,15 @@ export class DynamicFormComponent implements OnInit {
     if (errors['required']) {
       return this.translate.instant('GENERAL.IS_REQUIRED');
     }
+
     if (errors['email']) {
       return this.translate.instant('GENERAL.INVALID_EMAIL');
     }
+
     if (errors['minlength']) {
       return this.translate.instant('GENERAL.MIN_LENGTH', { length: errors['minlength'].requiredLength });
     }
+
     if (errors['maxlength']) {
       return this.translate.instant('GENERAL.MAX_LENGTH', { length: errors['maxlength'].requiredLength });
     }
@@ -190,12 +192,34 @@ export class DynamicFormComponent implements OnInit {
     if (this.form.valid) {
       this.recaptchaV3Service.execute('your_action_name').subscribe(
         (token) => {
-          console.log(token)
           this.isSubmitting = true;
           this.errorMessage = '';
           this.successMessage = '';
 
-          this.formService.submitForm(this.config, this.form.value, token).subscribe({
+          // Determine if the form should be sent as JSON or FormData
+          const isJsonRequest = !this.config.fields.some(field => field.type === 'file');
+          let formData: any;
+
+          if (isJsonRequest) {
+            formData = this.form.value;
+          } else {
+            formData = new FormData();
+            Object.keys(this.form.value).forEach(key => {
+              const value = this.form.value[key];
+              if (value instanceof File || value instanceof Blob) {
+                formData.append(key, value);
+              } else if (value !== null && value !== undefined) {
+                formData.append(key, value.toString());
+              }
+            });
+          }
+
+          // Call the appropriate service method
+          const submitMethod = isJsonRequest
+            ? this.formService.submitForm(this.config, formData, token)
+            : this.formService.submitFormData(this.config, formData, token);
+
+          submitMethod.subscribe({
             next: (response) => {
               this.isSubmitting = false;
               this.formSubmitted.emit(response);

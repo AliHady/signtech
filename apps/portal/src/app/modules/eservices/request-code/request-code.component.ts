@@ -28,7 +28,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class RequestCodeComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/request-code',
+    endpoint: '/request-code',
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',
@@ -253,13 +253,13 @@ export class RequestCodeComponent {
       }
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
-    clearButtonLabel: { en: 'Clear', ar: 'مسح' } 
+    clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
   successMessage: string = '';
   errorMessage: string = '';
-  
+
   onFormSubmitted(response: any) {
     if (this.formConfig.successMessage) {
       this.successMessage = this.formConfig.successMessage.en;

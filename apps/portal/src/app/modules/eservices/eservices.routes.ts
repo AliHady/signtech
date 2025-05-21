@@ -9,7 +9,7 @@ export const eservicesRoutes: Route[] = [
     path: 'eservices/applytotarmeez',
     loadComponent: () => import('./apply-to-tarmeez/apply-to-tarmeez.component').then(m => m.ApplyToTarmeezComponent)
   },
-  
+
   {
     path: 'eservices/searchforncage',
     loadComponent: () => import('./search-for-ncage/search-for-ncage.component').then(m => m.SearchForNcageComponent)
@@ -28,8 +28,6 @@ export const eservicesRoutes: Route[] = [
   },
   {
     path: 'eservices/:id',
-    loadComponent: () => import('./service-details/service-details.component').then(m => m.ServiceDetailsComponent)
+    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
   }
-  
-  
 ]; 

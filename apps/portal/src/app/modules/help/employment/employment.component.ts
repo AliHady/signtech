@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../../eservices/services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 
@@ -28,7 +27,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class EmploymentComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/employment',
+    endpoint: '/employment',
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',
@@ -120,7 +119,7 @@ export class EmploymentComponent {
         label: { en: 'CV', ar: 'السيرة الذاتية' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx',
-        maxFileSize: 1048576, 
+        maxFileSize: 1048576,
         validation: {
           required: true,
           errorMessages: {
@@ -130,10 +129,10 @@ export class EmploymentComponent {
       }
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
-    clearButtonLabel: { en: 'Clear', ar: 'مسح' } 
+    clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
   successMessage: string = '';
   errorMessage: string = '';
   onFormSubmitted(response: any) {

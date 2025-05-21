@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 
@@ -14,7 +13,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
     SharedModule,
     TranslateModule,
     DynamicFormComponent,
-   
+
   ],
   templateUrl: './search-for-ncage.component.html',
   styleUrls: ['./search-for-ncage.component.scss'],
@@ -29,7 +28,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class SearchForNcageComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/search-for-ncage',
+    endpoint: '/search-for-ncage',
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',
@@ -56,7 +55,7 @@ export class SearchForNcageComponent {
           }
         }
       }
-     
+
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
     clearButtonLabel: { en: 'Clear', ar: 'مسح' }
@@ -65,7 +64,7 @@ export class SearchForNcageComponent {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
 
   onFormSubmitted(response: any) {
     if (this.formConfig.successMessage) {

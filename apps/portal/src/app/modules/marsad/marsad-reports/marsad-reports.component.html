@@ -3,7 +3,84 @@
 
   <app-breadcrumbs></app-breadcrumbs>
   <main class="main-content bg-white" [@routeAnimations]>
-    <section  class="container mx-auto px-1 py-8">aboutcenter</section>
-    </main>
-</div>  
+    <section class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6">
+        <h2 class="text-3xl font-bold text-right text-gray-800">{{ selectedCategoryTitle }} ({{ filteredReports.length }})</h2>
+        <div class="w-full md:w-1/3">
+          <app-select-search
+            id="categoryFilter"
+            [label]="'تصفية حسب الفئة:'"
+            [placeholder]="'كل الفئات'"
+            [options]="categories"
+            [(ngModel)]="selectedCategory"
+            [required]="false">
+          </app-select-search>
+        </div>
+      </div>
+      <div class="flex flex-col gap-6">
+        @for (report of filteredReports; track report.ReportId) {
+          <div class="flex items-center bg-white p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-[#000000]">
+            <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-gray-50 mr-6">
+              <span class="text-3xl text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="32" height="32">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </span>
+            </div>
+            <div class="flex-1 text-right">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xl font-bold text-gray-800">{{report.ReportTitle}}</span>
+               <!--  <span class="text-gray-500 text-sm bg-gray-50 px-2 py-1">#{{report.ReportId}}</span> -->
+              </div>
+              <div class="text-gray-600 mb-2 leading-relaxed">{{report.ReportDesc}}</div>
+            </div>
+            <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-[var(--color-nimicgreen)] shadow-sm">
+              <a (click)="openReport(report)" class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="32" height="32">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+
+  
+  @if (showLightbox && selectedReport) {
+    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-75">
+      <div class="relative w-full h-full max-w-7xl mx-4 my-8" [class.maximized]="isMaximized">
+    
+        <div class=" top-4 right-4 flex gap-2 z-10 justify-end bg-white p-2">
+          @if (!isMaximized) {
+            <button (click)="toggleMaximize()" class="text-white hover:text-gray-300 bg-[#413258] border-0 cursor-pointer p-2 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+              </svg>
+            </button>
+          } @else {
+            <button (click)="toggleMaximize()" class="text-white hover:text-gray-300 bg-[#413258] border-0 cursor-pointer p-2 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5M9 9H4.5M15 9V4.5M15 9H19.5M9 15v4.5M9 15H4.5M15 15v4.5M15 15h4.5" />
+              </svg>
+            </button>
+          }
+          <button (click)="closeLightbox()" class="text-white hover:text-gray-300 bg-[#413258] border-0 cursor-pointer p-2 ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="bg-white overflow-auto w-full h-full transition-all duration-300">
+          <iframe [src]="safeUrl" 
+                  class="w-full h-full border-0"
+                  allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  }
+</div>
 <app-footer></app-footer>

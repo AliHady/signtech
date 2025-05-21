@@ -179,7 +179,7 @@
     "ACCEPT": "Accept",
     "DECLINE": "Decline"
   },
-  "MARSAD": {
+ "MARSAD": {
     "TITLE": "Marsad",
     "SUBTITLE": "Business Intelligence and Decision Support Platform",
     "DESCRIPTION": "Unified industrial and mining indicators that support decision-makers and enhance investment opportunities through dashboards and accurate reports based on a comprehensive national repository.",
@@ -190,7 +190,8 @@
       "TOTAL_LICENSES": "Total Licenses",
       "ESTABLISHMENTS_COUNT": "Number of Establishments",
       "NON_OIL_EXPORTS": "Non-Oil Exports"
-    }
+    },
+    "DESKTOP_EXPERIENCE": "For the best experience, please use a desktop browser"
   },
   "LIST_OF_SERVICES": {
     "TITLE": "List of Services",

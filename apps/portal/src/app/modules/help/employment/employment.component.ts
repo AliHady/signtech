@@ -119,7 +119,7 @@ export class EmploymentComponent {
         label: { en: 'CV', ar: 'السيرة الذاتية' },
         required: true,
         acceptedFileTypes: '.pdf,.doc,.docx',
-        maxFileSize: 1048576,
+        maxFileSize: 1, 
         validation: {
           required: true,
           errorMessages: {

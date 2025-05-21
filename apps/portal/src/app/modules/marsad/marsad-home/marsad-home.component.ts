@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 import { curveMonotoneX } from 'd3-shape';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-marsad',
@@ -28,7 +29,7 @@ import { curveMonotoneX } from 'd3-shape';
     ])
   ]
 })
-export class MarsadHomeComponent implements OnInit, AfterViewInit {
+export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
   @ViewChild('carouselList') carouselList!: ElementRef;
   @ViewChild('prevBtn') prevBtn!: ElementRef;
@@ -48,7 +49,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit {
   showXAxis = true;
   showYAxis = true;
   gradient = true;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
   showYAxisLabel = true;
   xAxisLabel = 'السنة';
@@ -64,76 +65,111 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit {
     group: ScaleType.Ordinal,
     domain: ['#00E676', '#00B0FF', '#651FFF', '#FF9100', '#FF1744']
   };
+  rangeFillOpacity = 0.35;
 
   @ViewChild('chartContainer') chartContainer!: ElementRef;
 
   // Chart data
-  totalEmploymentData = [
-    {
-      name: 'عدد العمالة',
-      series: [
-        { name: '2020', value: 577224 },
-        { name: '2021', value: 663951 },
-        { name: '2022', value: 755989 },
-        { name: '2023', value: 840983 },
-        { name: '2024', value: 923729 }
-      ]
-    }
-  ];
+  //https://swimlane.gitbook.io/ngx-charts/features   for Chart Types
 
-  investmentVolumeData = [
-    {
-      name: 'حجم الاستثمار بالمليار',
-      series: [
-        { name: '2020', value: 970 },
-        { name: '2021', value: 1039 },
-        { name: '2022', value: 1062 },
-        { name: '2023', value: 1152 },
-        { name: '2024', value: 1219 }
-      ]
-    }
-  ];
 
-  miningLicensesData = [
-    {
-      name: 'الرخص التعدينية السارية',
-      series: [
-        { name: '2020', value: 1451 },
-        { name: '2021', value: 1868 },
-        { name: '2022', value: 2179 },
-        { name: '2023', value: 2375 },
-        { name: '2024', value: 2311 }
-      ]
-    }
-  ];
+  marsadData = {
+    totalEmploymentData: [
+      {
+        name: 'إجمالي العمالة',
+        nameEn: 'Total Employment',
+        summary: '900 الف عامل',
+        summaryEn: '900 Thousand Workers',
+        growth: 'نمو عدد العمالة خلال خمس سنوات',
+        growthEn: 'Employment Growth Over Five Years',
+        chartType: 'line',
+        series: [
+          { name: '2020', value: 900000 },
+          { name: '2021', value: 950000 },
+          { name: '2022', value: 1000000 },
+          { name: '2023', value: 1050000 },
+          { name: '2024', value: 1100000 }
+        ]
+      }
+    ],
+    investmentVolumeData: [
+      {
+        name: 'حجم الاستثمار',
+        nameEn: 'Investment Volume',
+        summary: '1,221 مليار <span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> ',
+        summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 1,221 Billion',
+        growth: 'نمو حجم الاستثمار خلال خمس سنوات',
+        growthEn: 'Investment Growth Over Five Years',
+        chartType: 'line',
+        series: [
+          { name: '2020', value: 970 },
+          { name: '2021', value: 1039 },
+          { name: '2022', value: 1062 },
+          { name: '2023', value: 1152 },
+          { name: '2024', value: 1221 }
+        ]
+      }
+    ],
+    miningLicensesData: [
+      {
+        name: 'إجمالي الرخص التعدينية السارية',
+        nameEn: 'Total Mining Licenses',
+        summary: '2453',
+        summaryEn: '2,453',
+        growth: 'نمو عدد الرخص السارية للخمس سنوات',
+        growthEn: 'Growth in Active Licenses Over Five Years',
+        chartType: 'line',
+        series: [
+          { name: '2020', value: 1451 },
+          { name: '2021', value: 1868 },
+          { name: '2022', value: 2179 },
+          { name: '2023', value: 2375 },
+          { name: '2024', value: 2453 }
+        ]
+      }
+    ],
+    establishmentsCountData: [
+      {
+        name: 'عدد المنشآت الصناعية',
+        nameEn: 'Industrial Establishments',
+        summary: '11,988',
+        summaryEn: '11,988',
+        growth: 'نمو عدد المنشأت الصناعية',
+        growthEn: 'Growth in Industrial Establishments',
+        chartType: 'line',
+        series: [
+          { name: '2020', value: 9769 },
+          { name: '2021', value: 10373 },
+          { name: '2022', value: 10602 },
+          { name: '2023', value: 11628 },
+          { name: '2024', value: 11988 }
+        ]
+      }
+    ],
+    nonOilExportsData: [
+      {
+        name: 'الصادرات غير النفطية',
+        nameEn: 'Non-Oil Exports',
+        summary: '214 مليار <span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> ',
+        summaryEn: '<span class="icon-Saudi_Riyal_Symbol summeryIcon"></span> 214 Billion',
+        growth: 'نمو عدد الصادرات غير النفطية',
+        growthEn: 'Growth in Non-Oil Exports',
+        chartType: 'line',
+        series: [
+          { name: '2020', value: 151 },
+          { name: '2021', value: 233 },
+          { name: '2022', value: 263 },
+          { name: '2023', value: 212 },
+          { name: '2024', value: 214 }
+        ]
+      }
+    ]
+  };
 
-  establishmentsCountData = [
-    {
-      name: 'عدد المنشآت الصناعية',
-      series: [
-        { name: '2020', value: 9769 },
-        { name: '2021', value: 10373 },
-        { name: '2022', value: 10602 },
-        { name: '2023', value: 11628 },
-        { name: '2024', value: 11742 }
-      ]
-    }
-  ];
-
-  nonOilExportsData = [
-    {
-      name: 'عدد الصادرات غير البترولية',
-      series: [
-        { name: '2020', value: 151 },
-        { name: '2021', value: 233 },
-        { name: '2022', value: 263 },
-        { name: '2023', value: 212 },
-        { name: '2024', value: 214 }
-      ]
-    }
-  ];
-
-  constructor(private translationService: TranslationService) {
+  constructor(
+    private translationService: TranslationService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.langSubscription = this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
       this.isRTL = lang === 'ar';
@@ -147,6 +183,9 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      document.documentElement.classList.add('marsadTheme');
+    }
     this.isRTL = this.currentLang === 'ar';
     this.updateChartSize();
   }
@@ -300,5 +339,12 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit {
       const height = 400; // Fixed height for better consistency
       this.view = [width, height];
     }
+  }
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      document.documentElement.classList.remove('marsadTheme');
+    }
+    this.langSubscription.unsubscribe();
   }
 } 

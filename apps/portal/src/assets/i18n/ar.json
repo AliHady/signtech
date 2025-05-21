@@ -10,7 +10,7 @@
     "NEWS": "الأخبار",
     "UPLOAD-FILE": "تحميل ملف",
     "OR-DRAG-DROP": "أو اسحب وأفلت",
-    "FILE-TYPES": "PNG، JPG، PDF حتى 1 ميجابايت",
+    "FILE-TYPES": "PNG، JPG، PDF",
     "FILE-SIZE-ERROR": "حجم الملف يتجاوز الحد الأقصى",
     "FILE-TYPE-ERROR": "نوع الملف غير صالح",
     "IS_REQUIRED": "هذا الحقل مطلوب",
@@ -192,7 +192,8 @@
       "TOTAL_LICENSES": "إجمالي الرخص",
       "ESTABLISHMENTS_COUNT": "عدد المنشآت",
       "NON_OIL_EXPORTS": "الصادرات غير البترولية"
-    }
+    },
+    "DESKTOP_EXPERIENCE": "للحصول على أفضل تجربة، يرجى استخدام متصفح سطح المكتب"
   },
   "LIST_OF_SERVICES": {
     "TITLE": "قائمة الخدمات",

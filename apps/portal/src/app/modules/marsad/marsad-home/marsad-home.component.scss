@@ -1,13 +1,16 @@
 section#marsad-home-banner {
   height: 75vh;
-  //background: #413258;
+  background-image: url('../../../../assets/images/marsadShapeHome.svg');
+  background-size: 120%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
   padding: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 section#marsad-home-navigation {
-  background: rgb(0 0 0 / 70%);
+  background: rgb(0 0 0 / 30%);
   ul{
     display: flex;
     justify-content: center;
@@ -157,15 +160,7 @@ section[id] {
     padding-bottom: 1rem;
     margin-bottom: 2rem;
     
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background-color: var(--color-nimicgreen);
-    }
+   
   }
   
   .content {
@@ -173,23 +168,38 @@ section[id] {
   }
 }
 
-// Active navigation link style
-a[href^="#"] {
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: white;
-    transition: width 0.3s ease;
-  }
-  
-  &:hover::after,
-  &:focus::after {
-    width: 100%;
+
+
+// Chart styles
+:host ::ng-deep {
+  .ngx-charts {
+    .x-axis-label, .y-axis-label {
+      fill: white !important;
+    }
+    
+    .x.axis, .y.axis {
+      .tick text {
+        fill: white !important;
+      }
+    }
+    
+    .x.axis-label, .y.axis-label {
+      fill: white !important;
+    }
   }
 }
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  
+  ngx-charts-line-chart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+

@@ -1,13 +1,13 @@
-<div class="bg-[var(--color-nimicgreen)] white-text marsadTheme">
+<div class="bg-[var(--color-nimicgreen)] white-text marsadTheme"> 
 
   <app-header></app-header>
   <section id="marsad-home-banner">
     <div class="container mx-auto px-1 py-8 text-center">
-      <h1 class="marsadTitle text-4xl md:text-5xl font-extrabold tracking-wide">
+      <h1 class="marsadTitle text-4xl md:text-8xl font-extrabold tracking-wide text-white font-lyon-arabic">
         {{ 'MARSAD.TITLE' | translate }}
       </h1>
 
-      <h2 class="marsadSubTitle">
+      <h2 class="marsadSubTitle text-white font-lyon-arabic">
         {{ 'MARSAD.SUBTITLE' | translate }}
       </h2>
 
@@ -19,7 +19,7 @@
     </div>
   </section>
   <section id="marsad-home-navigation" class="sticky top-0 z-10 shadow-md">
-    <div class="container mx-auto px-1 py-4 relative">
+    <div class="container mx-auto px-1 py-2 relative">
       <button #prevBtn class="carousel-nav-btn prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full z-20" (click)="onPrevClick()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -27,21 +27,17 @@
       </button>
       <div #carouselContainer class="carousel-container overflow-hidden">
         <ul #carouselList class="flex flex-nowrap gap-4 transition-transform duration-300 ease-in-out">
-          <li class="whitespace-nowrap">
-            <a (click)="scrollToSection($event, 'total-employment')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.TOTAL_EMPLOYMENT' | translate }}</a>
-          </li>
-          <li class="whitespace-nowrap">
-            <a (click)="scrollToSection($event, 'investment-volume')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.INVESTMENT_VOLUME' | translate }}</a>
-          </li>
-          <li class="whitespace-nowrap">
-            <a (click)="scrollToSection($event, 'total-licenses')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.TOTAL_LICENSES' | translate }}</a>
-          </li>
-          <li class="whitespace-nowrap">
-            <a (click)="scrollToSection($event, 'establishments-count')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.ESTABLISHMENTS_COUNT' | translate }}</a>
-          </li>
-          <li class="whitespace-nowrap">
-            <a (click)="scrollToSection($event, 'non-oil-exports')" class="text-white hover:text-gray-200 transition-colors cursor-pointer">{{ 'MARSAD.NAVIGATION.NON_OIL_EXPORTS' | translate }}</a>
-          </li>
+          @for (data of marsadData | keyvalue; track data.key) {
+            <li class="whitespace-nowrap">
+              <a (click)="scrollToSection($event, data.key)" class="text-white hover:text-gray-200 transition-colors cursor-pointer">
+                @if (currentLang === 'ar') {
+                  {{ data.value[0].name }}
+                } @else {
+                  {{ data.value[0].nameEn }}
+                }
+              </a>
+            </li>
+          }
         </ul>
       </div>
       <button #nextBtn class="carousel-nav-btn next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full z-20" (click)="onNextClick()">
@@ -52,133 +48,63 @@
     </div>
   </section>
   <div class="main-container">
-    
     <main class="main-content" [@routeAnimations]>
-      <!-- NEWS GRID — Arabic content, so the whole section is RTL -->
-      <section id="total-employment" class="container mx-auto px-1 py-8">
-        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.TOTAL_EMPLOYMENT' | translate }}</h2>
-        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="totalEmploymentData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [autoScale]="autoScale"
-            [roundDomains]="roundDomains"
-            [curve]="curve"
-            [rangeFillOpacity]="0.2"
-            [animations]="true">
-          </ngx-charts-line-chart>
-        </div>
-      </section>
-
-      <section id="investment-volume" class="container mx-auto px-1 py-8">
-        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.INVESTMENT_VOLUME' | translate }}</h2>
-        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="investmentVolumeData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [autoScale]="autoScale"
-            [roundDomains]="roundDomains"
-            [curve]="curve"
-            [rangeFillOpacity]="0.2"
-            [animations]="true">
-          </ngx-charts-line-chart>
-        </div>
-      </section>
-
-      <section id="total-licenses" class="container mx-auto px-1 py-8">
-        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.TOTAL_LICENSES' | translate }}</h2>
-        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="miningLicensesData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [autoScale]="autoScale"
-            [roundDomains]="roundDomains"
-            [curve]="curve"
-            [rangeFillOpacity]="0.2"
-            [animations]="true">
-          </ngx-charts-line-chart>
-        </div>
-      </section>
-
-      <section id="establishments-count" class="container mx-auto px-1 py-8">
-        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.ESTABLISHMENTS_COUNT' | translate }}</h2>
-        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="establishmentsCountData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [autoScale]="autoScale"
-            [roundDomains]="roundDomains"
-            [curve]="curve"
-            [rangeFillOpacity]="0.2"
-            [animations]="true">
-          </ngx-charts-line-chart>
-        </div>
-      </section>
-
-      <section id="non-oil-exports" class="container mx-auto px-1 py-8">
-        <h2 class="text-2xl font-bold mb-4">{{ 'MARSAD.NAVIGATION.NON_OIL_EXPORTS' | translate }}</h2>
-        <div class="content w-full rounded-lg" #chartContainer [style.background-color]="backgroundColor">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="nonOilExportsData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [autoScale]="autoScale"
-            [roundDomains]="roundDomains"
-            [curve]="curve"
-            [rangeFillOpacity]="0.2"
-            [animations]="true">
-          </ngx-charts-line-chart>
-        </div>
-      </section>
+      <div class="container mx-auto px-1 py-8">
+        @for (data of marsadData | keyvalue; track data.key) {
+          <section [id]="data.key" class="w-full mb-8 p-4 border border-[#2d3c3f] bg-[#2d3c3f]">
+            <div class="flex flex-col items-center justify-center gap-4">
+              <div class="flex items-center justify-center gap-8 w-full">
+                <div class="w-1/4 text-center">
+                  <h2 class="text-2xl font-bold text-white">
+                    @if (currentLang === 'ar') {
+                      {{ data.value[0].name }}
+                    } @else {
+                      {{ data.value[0].nameEn }}
+                    }
+                  </h2>
+                  <div class="mt-2 text-white">
+                    <p class="text-xl font-semibold">
+                      @if (currentLang === 'ar') {
+                        {{ data.value[0].summary }}
+                      } @else {
+                        {{ data.value[0].summaryEn }}
+                      }
+                    </p>
+                    <p class="text-sm mt-1">
+                      @if (currentLang === 'ar') {
+                        {{ data.value[0].growth }}
+                      } @else {
+                        {{ data.value[0].growthEn }}
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div class="content w-3/4 rounded-lg" #chartContainer [style.background-color]="backgroundColor">
+                  <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="data.value"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [timeline]="timeline"
+                    [autoScale]="autoScale"
+                    [roundDomains]="roundDomains"
+                    [curve]="curve"
+                    [rangeFillOpacity]="rangeFillOpacity"
+                    [animations]="true">
+                  </ngx-charts-line-chart>
+                </div>
+              </div>
+            </div>
+          </section>
+        }
+      </div>
     </main>
   </div>
   <app-footer></app-footer>

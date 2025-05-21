@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translationService.setLanguage(lang);
       }
     });
-    console.log(environment.useNewIdentity);
+    //console.log(environment.useNewIdentity);
 
     // Set the data-identity attribute based on environment.useNewIdentity
     if (environment.useNewIdentity) {

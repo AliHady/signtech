@@ -73,7 +73,7 @@ export class BreadcrumbsComponent implements OnInit {
     });
 
     const isPathFound = this.findPath(data);
-    console.log("isPathFound", isPathFound)
+    //console.log("isPathFound", isPathFound)
     if (!isPathFound) {
       const lastMatch = this.findNearestMatch(data, this.currentPath);
       if (lastMatch && !this.list.some(x => x.url === lastMatch.url)) {
@@ -90,7 +90,7 @@ export class BreadcrumbsComponent implements OnInit {
     //console.log("currentSegments", currentSegments)
    // console.log(lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl))
     if (lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl)) {
-      console.log("lastBreadcrumbUrl", lastBreadcrumbUrl)
+     // console.log("lastBreadcrumbUrl", lastBreadcrumbUrl)
       const remainingPath = this.currentPath.replace(lastBreadcrumbUrl.replace('/' + this.currentLang, ''), '');
       const remainingSegments = remainingPath.split('/').filter(x => x);
 

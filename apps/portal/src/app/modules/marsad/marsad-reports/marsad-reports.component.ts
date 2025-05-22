@@ -61,6 +61,7 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
   isMaximized = true;
   safeUrl: SafeResourceUrl | null = null;
   searchQuery: string = '';
+  viewMode: 'list' | 'card' = 'list';
 
   get filteredReports() {
     let reports = this.allReports;
@@ -84,9 +85,9 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
   }
 
   get selectedCategoryTitle(): string {
-    if (!this.selectedCategory) return 'all';
+    if (!this.selectedCategory) return this.currentLang === 'ar' ? 'كل الفئات' : 'All Categories';
     const category = this.rawCategories.find(c => c.Id === this.selectedCategory);
-    return category ? category.Title : 'all';
+    return category ? (this.currentLang === 'ar' ? category.Title : (category.TitleEn || category.Title)) : (this.currentLang === 'ar' ? 'كل الفئات' : 'All Categories');
   }
 
   private rawCategories: Category[] = [
@@ -481,10 +482,10 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
     });
 
     this.categories = [
-      { value: 0, label: 'كل الفئات' },
+      { value: 0, label: this.currentLang === 'ar' ? 'كل الفئات' : 'All Categories' },
       ...this.rawCategories.map(cat => ({
         value: cat.Id,
-        label: cat.Title
+        label: this.currentLang === 'ar' ? cat.Title : (cat.TitleEn || cat.Title)
       }))
     ];
 
@@ -520,5 +521,9 @@ export class MarsadReportsComponent implements OnInit, AfterViewInit {
 
   toggleMaximize(): void {
     this.isMaximized = !this.isMaximized;
+  }
+
+  toggleViewMode(): void {
+    this.viewMode = this.viewMode === 'list' ? 'card' : 'list';
   }
 } 

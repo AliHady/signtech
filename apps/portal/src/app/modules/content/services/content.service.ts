@@ -11,6 +11,7 @@ import { EServiceLinksResponse } from '../../eservices/models/eserviceslinks.mod
 import { Content } from '../models/content.model';
 import { ReportsResponse } from '../../marsad/models/reports.model';
 import { CategoriesResponse } from '../../marsad/models/categories.model';
+import { KpiReportsResponse } from '../../marsad/models/reports-kpi.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class ContentService {
     eservices: `${environment.contentUrl}/eserviceslinks`,
     reports: `${environment.powerPIUrl}/reports/reports-by-category`,
     reportsCategories: `${environment.powerPIUrl}/reports/category-types`,
+    reportsKPI: `${environment.powerPIUrl}/reports/kpi`,
     content: `${environment.contentUrl}/content`
   };
 
@@ -68,5 +70,8 @@ export class ContentService {
   }
   getReportsCategories(): Observable<CategoriesResponse> {
     return this.http.get<CategoriesResponse>(this.apiEndpoints.reportsCategories);
+  }
+  getReportsKPI(): Observable<KpiReportsResponse> {
+    return this.http.get<KpiReportsResponse>(this.apiEndpoints.reportsKPI);
   }
 } 

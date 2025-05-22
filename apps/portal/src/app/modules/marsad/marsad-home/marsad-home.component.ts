@@ -10,6 +10,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 import { curveMonotoneX } from 'd3-shape';
 import { isPlatformBrowser } from '@angular/common';
+import { ContentService } from '../../content/services/content.service';
+import { KpiReportsResponse } from '../models/reports-kpi.model';
 
 @Component({
   selector: 'app-marsad',
@@ -43,7 +45,6 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private totalItems = 0;
   private visibleItems = 0;
   private isRTL = false;
-
   // Chart configurations
   view: [number, number] = [0, 400];
   showXAxis = true;
@@ -168,7 +169,8 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private translationService: TranslationService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private contentService: ContentService
   ) {
     this.langSubscription = this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
@@ -340,7 +342,16 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.view = [width, height];
     }
   }
-
+  fetchReportsKPI() {
+    this.contentService.getReportsKPI().subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error('Error fetching KPI reports:', error);
+      }
+    });
+  }
   ngOnDestroy() {
     if (isPlatformBrowser(this.platformId)) {
       document.documentElement.classList.remove('marsadTheme');

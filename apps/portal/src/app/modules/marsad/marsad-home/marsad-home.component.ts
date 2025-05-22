@@ -189,6 +189,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       document.documentElement.classList.add('marsadTheme');
     }
     this.isRTL = this.currentLang === 'ar';
+    this.fetchReportsKPI();
     this.updateChartSize();
   }
 

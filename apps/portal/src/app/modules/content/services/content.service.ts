@@ -23,9 +23,9 @@ export class ContentService {
     photos: `${environment.contentUrl}/photolibrary`,
     eservices: `${environment.contentUrl}/eserviceslinks`,
     reports: `${environment.powerPIUrl}/reports/reports-by-category`,
-    reportsCategories: `${environment.powerPIUrl}/reports/category-types`
+    reportsCategories: `${environment.powerPIUrl}/reports/category-types`,
+    content: `${environment.contentUrl}/content`
   };
-  private apiUrlContent = `${environment.contentUrl}/content`;
 
   constructor(
     private cmsDataService: CmsDataService,
@@ -58,7 +58,7 @@ export class ContentService {
   }
 
   getContent(route: string): Observable<Content> {
-    return this.cmsDataService.getCmsData<Content>(this.apiUrlContent, { route: route });
+    return this.cmsDataService.getCmsData<Content>(this.apiEndpoints.content, { route: route });
   }
 
 

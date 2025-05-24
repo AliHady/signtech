@@ -173,6 +173,10 @@ section[id] {
 // Chart styles
 :host ::ng-deep {
   .ngx-charts {
+    text {
+      fill: white !important;
+    }
+    
     .x-axis-label, .y-axis-label {
       fill: white !important;
     }
@@ -185,6 +189,10 @@ section[id] {
     
     .x.axis-label, .y.axis-label {
       fill: white !important;
+    }
+    // Set line width for all line chart lines
+    .line-series path.line {
+      stroke-width: 6px !important;
     }
   }
 }

@@ -59,7 +59,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   autoScale = true;
   roundDomains = true;
   curve = curveMonotoneX;
-  backgroundColor = '#2D3C3F';
+  backgroundColor = 'transparent';
   colorScheme: Color = {
     name: 'custom',
     selectable: true,

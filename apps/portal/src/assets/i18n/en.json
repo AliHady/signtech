@@ -179,19 +179,21 @@
     "ACCEPT": "Accept",
     "DECLINE": "Decline"
   },
- "MARSAD": {
+  "MARSAD": {
     "TITLE": "Marsad",
-    "MARSAD": "Marsad",
-    "MARSAD-REPORTS": "Marsad Reports",
     "SUBTITLE": "Business Intelligence and Decision Support Platform",
     "DESCRIPTION": "Unified industrial and mining indicators that support decision-makers and enhance investment opportunities through dashboards and accurate reports based on a comprehensive national repository.",
     "MORE": "More",
+    "MARSAD-REPORTS": "Marsad Reports",
+    "MARSAD": "Marsad",
     "VIEW_REPORT": "View Report",
+    "YEAR": "Year",
+    "VALUE": "Value",
     "NAVIGATION": {
       "TOTAL_EMPLOYMENT": "Total Employment",
       "INVESTMENT_VOLUME": "Investment Volume",
       "TOTAL_LICENSES": "Total Licenses",
-      "ESTABLISHMENTS_COUNT": "Number of Establishments",
+      "ESTABLISHMENTS_COUNT": "Establishments Count",
       "NON_OIL_EXPORTS": "Non-Oil Exports"
     },
     "DESKTOP_EXPERIENCE": "For the best experience, please use a desktop browser"

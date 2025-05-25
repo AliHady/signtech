@@ -9,7 +9,9 @@
       </h1>
 
       <h2 class="marsadSubTitle text-white font-lyon-arabic mb-4">
-        {{ 'MARSAD.DESCRIPTION' | translate }}
+        <ngx-typed-js [strings]="typingConfig.strings" [typeSpeed]="typingConfig.typeSpeed" [backSpeed]="typingConfig.backSpeed" [backDelay]="typingConfig.backDelay" [startDelay]="typingConfig.startDelay" [loop]="typingConfig.loop" [showCursor]="typingConfig.showCursor" [cursorChar]="typingConfig.cursorChar">
+          <span class="typing"></span>
+        </ngx-typed-js>
       </h2>
 
       <a

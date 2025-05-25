@@ -12,11 +12,12 @@ import { curveMonotoneX } from 'd3-shape';
 import { isPlatformBrowser } from '@angular/common';
 import { ContentService } from '../../content/services/content.service';
 import { KpiReportsResponse, KpiReport } from '../models/reports-kpi.model';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 @Component({
   selector: 'app-marsad',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, TranslateModule, RouterModule, NgxChartsModule],
+  imports: [CommonModule, HeaderComponent, FooterComponent, TranslateModule, RouterModule, NgxChartsModule, NgxTypedJsModule],
   templateUrl: './marsad-home.component.html',
   styleUrls: ['./marsad-home.component.scss'],
   animations: [
@@ -75,6 +76,18 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   marsadData: { [key: string]: any[] } = {};
 
+
+  typingConfig = {
+    strings: [''],
+    typeSpeed: 50,
+    backSpeed: 30,
+    backDelay: 2000,
+    startDelay: 500,
+    loop: false,
+    showCursor: true,
+    cursorChar: '|'
+  };
+
   constructor(
     private translationService: TranslationService,
     private translate: TranslateService,
@@ -90,6 +103,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       this.checkCarouselVisibility();
       this.updateAxisLabels();
+      this.updateTypingStrings();
     });
   }
 
@@ -100,6 +114,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isRTL = this.currentLang === 'ar';
     this.updateAxisLabels();
     this.fetchReportsKPI();
+    this.updateTypingStrings();
   }
 
   ngAfterViewInit() {
@@ -320,6 +335,12 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.translate.get('MARSAD.VALUE').subscribe((label: string) => {
       this.yAxisLabel = label;
+    });
+  }
+
+  private updateTypingStrings() {
+    this.translate.get('MARSAD.DESCRIPTION').subscribe((text: string) => {
+      this.typingConfig.strings = [text];
     });
   }
 

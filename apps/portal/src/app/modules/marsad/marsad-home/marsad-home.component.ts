@@ -145,7 +145,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.initializeCarousel();
       this.checkCarouselVisibility();
       this.initializeChartSize();
-    }, 0);
+    }, 100);
   }
 
   @HostListener('window:resize')
@@ -158,14 +158,32 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onPrevClick() {
-    if (this.isRTL ? this.currentPosition > -(this.totalItems - this.visibleItems) * this.itemWidth : this.currentPosition < 0) {
-      this.slide(this.isRTL ? 'next' : 'prev');
+    if (!this.carouselList?.nativeElement) return;
+    
+    const maxPosition = -(this.totalItems - this.visibleItems) * this.itemWidth;
+    if (this.isRTL) {
+      if (this.currentPosition > maxPosition) {
+        this.slide('next');
+      }
+    } else {
+      if (this.currentPosition < 0) {
+        this.slide('prev');
+      }
     }
   }
 
   onNextClick() {
-    if (this.isRTL ? this.currentPosition < 0 : this.currentPosition > -(this.totalItems - this.visibleItems) * this.itemWidth) {
-      this.slide(this.isRTL ? 'prev' : 'next');
+    if (!this.carouselList?.nativeElement) return;
+    
+    const maxPosition = -(this.totalItems - this.visibleItems) * this.itemWidth;
+    if (this.isRTL) {
+      if (this.currentPosition < 0) {
+        this.slide('prev');
+      }
+    } else {
+      if (this.currentPosition > maxPosition) {
+        this.slide('next');
+      }
     }
   }
 
@@ -178,6 +196,11 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.totalItems = this.carouselList.nativeElement.children.length;
     this.updateCarouselDimensions();
     this.updateCarouselDirection();
+    
+    // Reset position when initializing
+    this.currentPosition = 0;
+    this.carouselList.nativeElement.style.transform = 'translateX(0)';
+    this.updateButtonStates();
   }
 
   private updateCarouselDimensions() {
@@ -191,14 +214,17 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.itemWidth = firstItem.offsetWidth + 16; // 16px for gap
+    // Calculate dimensions including margins and padding
+    const itemStyle = window.getComputedStyle(firstItem);
+    const itemMargin = parseFloat(itemStyle.marginLeft) + parseFloat(itemStyle.marginRight);
+    const itemPadding = parseFloat(itemStyle.paddingLeft) + parseFloat(itemStyle.paddingRight);
+    
+    this.itemWidth = firstItem.offsetWidth + itemMargin + itemPadding;
     this.containerWidth = this.carouselContainer.nativeElement.offsetWidth;
     this.visibleItems = Math.floor(this.containerWidth / this.itemWidth);
-    
-  
+
     const totalWidth = this.totalItems * this.itemWidth;
     const needsCarousel = totalWidth > this.containerWidth;
-    
 
     if (this.prevBtn?.nativeElement && this.nextBtn?.nativeElement) {
       if (!needsCarousel) {
@@ -209,6 +235,9 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       } else {
         this.prevBtn.nativeElement.style.display = 'flex';
         this.nextBtn.nativeElement.style.display = 'flex';
+        // Reset position and update button states
+        this.currentPosition = 0;
+        this.carouselList.nativeElement.style.transform = 'translateX(0)';
         this.updateButtonStates();
       }
     }
@@ -226,19 +255,17 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private slide(direction: 'prev' | 'next') {
-    if (!this.carouselList) return;
+    if (!this.carouselList?.nativeElement) return;
 
     const maxPosition = -(this.totalItems - this.visibleItems) * this.itemWidth;
     const step = this.itemWidth;
     
-    if (direction === 'next' && this.currentPosition > maxPosition) {
-      const remainingSpace = Math.abs(this.currentPosition - maxPosition);
-      const moveAmount = Math.min(step, remainingSpace);
-      this.currentPosition -= moveAmount;
-    } else if (direction === 'prev' && this.currentPosition < 0) {
-      const remainingSpace = Math.abs(this.currentPosition);
-      const moveAmount = Math.min(step, remainingSpace);
-      this.currentPosition += moveAmount;
+    if (direction === 'next') {
+      const newPosition = this.currentPosition - step;
+      this.currentPosition = Math.max(newPosition, maxPosition);
+    } else {
+      const newPosition = this.currentPosition + step;
+      this.currentPosition = Math.min(newPosition, 0);
     }
 
     this.carouselList.nativeElement.style.transform = `translateX(${this.currentPosition}px)`;
@@ -246,16 +273,27 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateButtonStates() {
-    if (this.prevBtn && this.nextBtn) {
-      const maxPosition = -(this.totalItems - this.visibleItems) * this.itemWidth;
-      
-     
-      if (this.isRTL) {
-        this.prevBtn.nativeElement.disabled = this.currentPosition <= maxPosition;
-        this.nextBtn.nativeElement.disabled = this.currentPosition >= 0;
-      } else {
-        this.prevBtn.nativeElement.disabled = this.currentPosition >= 0;
-        this.nextBtn.nativeElement.disabled = this.currentPosition <= maxPosition;
+    if (!this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
+    
+    const maxPosition = -(this.totalItems - this.visibleItems) * this.itemWidth;
+    
+    // Remove disabled attribute instead of setting it
+    this.prevBtn.nativeElement.removeAttribute('disabled');
+    this.nextBtn.nativeElement.removeAttribute('disabled');
+    
+    if (this.isRTL) {
+      if (this.currentPosition <= maxPosition) {
+        this.prevBtn.nativeElement.setAttribute('disabled', 'true');
+      }
+      if (this.currentPosition >= 0) {
+        this.nextBtn.nativeElement.setAttribute('disabled', 'true');
+      }
+    } else {
+      if (this.currentPosition >= 0) {
+        this.prevBtn.nativeElement.setAttribute('disabled', 'true');
+      }
+      if (this.currentPosition <= maxPosition) {
+        this.nextBtn.nativeElement.setAttribute('disabled', 'true');
       }
     }
   }

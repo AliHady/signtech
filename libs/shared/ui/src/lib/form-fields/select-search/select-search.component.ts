@@ -62,7 +62,7 @@ export interface SelectOption {
                 type="text"
                 [(ngModel)]="searchText"
                 (ngModelChange)="filterOptions()"
-                [placeholder]="'Search...' | translate"
+                [placeholder]="'GENERAL.SEARCH' | translate"
                 class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-[#1AD9C7] focus:ring-1 focus:ring-[#1AD9C7]"
                 [ngStyle]="{'font-family': 'inherit', 'border-radius': '0'}"
               >

@@ -15,7 +15,8 @@
     "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
     "FILE-TYPE-ERROR": "Invalid file type",
     "REMOVE": "Remove",
-    "MORE": "More"
+    "MORE": "More",
+    "SEARCH": "Search..."
   },
   "AUTH": {
     "LOGIN": "Login",

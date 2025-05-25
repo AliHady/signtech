@@ -67,7 +67,8 @@
           <div class="swiper-wrapper">
             @for (slide of slides; track slide) {
               <div class="swiper-slide">
-                <img [src]="slide.imageUrl" [alt]="slide.title" class="w-full h-full object-cover" />
+                <!-- <img [src]="slide.imageUrl" [alt]="slide.title" class="w-full h-full object-cover" /> -->
+                <img [src]="'/assets/images/banner.jpg'" [alt]="slide.title" class="w-full h-full object-cover" />
               </div>
             }
           </div>

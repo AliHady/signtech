@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { HomeService } from '../services/home.service';
 import { BannerItemDto } from '../models/banner.model';
 import { environment } from '../../../../environments/environment';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 interface Slide {
   title: string;
@@ -18,7 +19,7 @@ interface Slide {
 @Component({
   selector: 'app-banner',
   standalone: true,
-  imports: [CommonModule, TranslationsModule],
+  imports: [CommonModule, TranslationsModule, NgxTypedJsModule],
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
@@ -30,6 +31,17 @@ export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
+
+  typingConfig = {
+    strings: [''],
+    typeSpeed: 30,
+    backSpeed: 20,
+    backDelay: 2000,
+    startDelay: 500,
+    loop: false,
+    showCursor: true,
+    cursorChar: '|'
+  };
 
   constructor(
     private translationService: TranslationService,
@@ -78,6 +90,11 @@ export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
               imageUrl: item.BannerImage ? this.portalUrl + item.BannerImage : '',
               link: item.BannerLink || ''
             }));
+          
+          // Update typing strings when slides are loaded
+          if (this.slides.length > 0) {
+            this.typingConfig.strings = [this.slides[0].description];
+          }
         }
         this.loading = false;
 
@@ -127,6 +144,10 @@ export class BannerComponent implements OnInit, AfterViewInit, OnDestroy {
       on: {
         slideChange: () => {
           this.currentSlideIndex = this.swiper?.realIndex ?? 0;
+          // Update typing strings when slide changes
+          if (this.slides[this.currentSlideIndex]) {
+            this.typingConfig.strings = [this.slides[this.currentSlideIndex].description];
+          }
         }
       }
     });

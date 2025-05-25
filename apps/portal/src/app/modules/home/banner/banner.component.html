@@ -9,7 +9,7 @@
         <div class="animate-spin h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
         <p class="mt-4 text-gray-600">Loading...</p>
       </div>
-    }
+    } 
 
    <!--  @if (error) {
       <div class="banner-error text-center py-8 text-red-600">
@@ -21,9 +21,9 @@
       <h2 class="text-3xl font-bold text-gray-900 mb-4">
         {{ slides[currentSlideIndex].title | translate }}
       </h2>
-      <p class="text-gray-700 mb-6 leading-loose hidden md:block">
-        {{ slides[currentSlideIndex].description }}
-      </p>
+      <ngx-typed-js [strings]="typingConfig.strings" [typeSpeed]="typingConfig.typeSpeed" [backSpeed]="typingConfig.backSpeed" [backDelay]="typingConfig.backDelay" [startDelay]="typingConfig.startDelay" [loop]="typingConfig.loop" [showCursor]="typingConfig.showCursor" [cursorChar]="typingConfig.cursorChar">
+        <span class="typing"></span>
+      </ngx-typed-js>
     <!--   <a [href]="slides[currentSlideIndex].link" 
          class="inline-block bg-[var(--color-nimicgreen)] text-white px-6 py-3 -md hover:bg-gray-800 transition-colors duration-300">
         {{ 'GENERAL.MORE' | translate }}
@@ -46,7 +46,7 @@
   </div>
 
   <!-- Image Section -->
-  <div class="relative w-full md:w-1/2">
+  <div class="relative w-full md:w-1/2 mt-8 md:mt-0">
     <div class="banner-image-container py-3 h-[20rem] md:h-[30rem]">
       @if (loading) {
         <div class="banner-loading">

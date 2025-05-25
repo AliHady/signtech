@@ -11,11 +11,11 @@
       </div>
     }
 
-    @if (error) {
+   <!--  @if (error) {
       <div class="banner-error text-center py-8 text-red-600">
         {{ error }}
       </div>
-    }
+    } -->
 
     @if (!loading && !error && slides.length > 0) {
       <h2 class="text-3xl font-bold text-gray-900 mb-4">
@@ -55,11 +55,11 @@
         </div>
       }
 
-      @if (error) {
+    <!--   @if (error) {
         <div class="banner-error text-center py-8 text-red-600">
           {{ error }}
         </div>
-      }
+      } -->
 
       @if (!loading && !error && slides.length > 0) {
         <div class="swiper banner-swiper">

@@ -185,3 +185,25 @@ article {
 }
 .truncate{font-size: .8rem;}
     
+
+.loginBtn {
+  color: #fff;
+  background-color: var(--color-nimicgreen);
+
+  &:hover {
+    background-color: #413258;
+  }
+}
+
+.marsadTheme{
+  .loginBtn {
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff !important;
+  
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+
+}

@@ -149,7 +149,7 @@
           <!-- Mobile Action Buttons -->
           <div class="pt-6 space-y-4 mt-6 border-t border-gray-100">
             <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'"
-               class="block w-full px-4 py-4 bg-[var(--color-nimicgreen)] text-white text-center no-underline font-medium hover:bg-[#413258] transition-colors duration-200">
+               class="block w-full px-4 py-4  text-center no-underline font-medium transition-colors duration-200 loginBtn">
               {{ 'AUTH.LOGIN' | translate }}
             </a>
             <a [routerLink]="['/', currentLang, 'signup']" [href]="'/' + currentLang + '/signup'"
@@ -162,7 +162,7 @@
 
       <!-- Action Buttons -->
       <div class="hidden lg:flex items-center gap-3 text-sm">
-        <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'" class="bg-[var(--color-nimicgreen)] text-white px-6 py-3 text-base hover:bg-[#413258] transition border-0 font-inherit cursor-pointer no-underline">
+        <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'" class="loginBtn px-6 py-3 text-base  transition border-0 font-inherit cursor-pointer no-underline">
           {{ 'AUTH.LOGIN' | translate }}
         </a>
       </div>

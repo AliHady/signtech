@@ -47,7 +47,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private totalItems = 0;
   private visibleItems = 0;
   private isRTL = false;
-  // Chart configurations
+  // Enhanced chart configurations
   view: [number, number] = [1200, 400];
   showXAxis = true;
   showYAxis = true;
@@ -70,8 +70,24 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   rangeFillOpacity = 0.35;
   textColor = '#FFFFFF';
-  xAxisTickFormatting = (value: any) => value;
-  yAxisTickFormatting = (value: any) => value;
+  animations = true;
+  tooltipDisabled = false;
+  trimXAxisTicks = true;
+  trimYAxisTicks = true;
+  maxXAxisTickLength = 16;
+  maxYAxisTickLength = 16;
+  xAxisTickFormatting = (value: any) => {
+    if (typeof value === 'string' && value.length > 10) {
+      return value.substring(0, 10) + '...';
+    }
+    return value;
+  };
+  yAxisTickFormatting = (value: any) => {
+    if (typeof value === 'number') {
+      return value.toLocaleString();
+    }
+    return value;
+  };
 
   marsadData: { [key: string]: any[] } = {};
 
@@ -91,6 +107,9 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   isChartReady = false;
   private chartInitialized = false;
   private chartContainersInitialized = new Set<string>();
+
+  private chartResizeObservers: any[] = [];
+  private resizeTimeout: any;
 
   constructor(
     private translationService: TranslationService,
@@ -273,21 +292,34 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initializeChartSize() {
+    // Clear existing observers
+    this.chartResizeObservers.forEach(observer => observer.disconnect());
+    this.chartResizeObservers = [];
+
     if (this.chartContainers) {
       this.chartContainers.forEach((container) => {
         const resizeObserver = new (window as any).ResizeObserver(() => {
-          const rect = container.nativeElement.getBoundingClientRect();
-          if (rect.width > 0) {
-            this.view = [rect.width, 400];
-            this.view = [...this.view];
-          }
+          // Debounce resize calculations
+          clearTimeout(this.resizeTimeout);
+          this.resizeTimeout = setTimeout(() => {
+            const rect = container.nativeElement.getBoundingClientRect();
+            if (rect.width > 0) {
+              // Calculate optimal height based on width
+              const height = Math.max(400, Math.min(rect.width * 0.4, 600));
+              this.view = [rect.width, height];
+              this.view = [...this.view];
+            }
+          }, 100);
         });
         
         resizeObserver.observe(container.nativeElement);
+        this.chartResizeObservers.push(resizeObserver);
+
         // Initial size calculation
         const rect = container.nativeElement.getBoundingClientRect();
         if (rect.width > 0) {
-          this.view = [rect.width, 400];
+          const height = Math.max(400, Math.min(rect.width * 0.4, 600));
+          this.view = [rect.width, height];
           this.view = [...this.view];
         }
       });
@@ -337,11 +369,16 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       chartType: 'line',
       series: kpiData.Details?.map(detail => ({
         name: detail.Title,
-        value: detail.Value
+        value: detail.Value,
+        // Add additional metadata for tooltips
+        extra: {
+          formattedValue: typeof detail.Value === 'number' 
+            ? detail.Value.toLocaleString() 
+            : detail.Value
+        }
       })) || []
     };
 
-    console.log('Transformed KPI data:', transformed);
     return transformed;
   }
 
@@ -365,10 +402,9 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       document.documentElement.classList.remove('marsadTheme');
     }
     this.langSubscription.unsubscribe();
-    // Clean up ResizeObserver
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-      this.resizeObserver = null;
-    }
+    // Clean up all resize observers
+    this.chartResizeObservers.forEach(observer => observer.disconnect());
+    this.chartResizeObservers = [];
+    clearTimeout(this.resizeTimeout);
   }
 } 

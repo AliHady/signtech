@@ -132,32 +132,42 @@
                 </div>
               </div>
               <div
-                class="content w-3/4 w-full md:w-3/4"
+                class="content w-3/4 w-full md:w-3/4 relative"
                 #chartContainer
                 [style.background-color]="backgroundColor"
-                style="width: 100%; height: 400px"
+                style="width: 100%; min-height: 400px"
               >
                 @if (data.value && data.value[0] && data.value[0].series && data.value[0].series.length > 0) {
-                  <ngx-charts-line-chart
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="data.value"
-                    [gradient]="gradient"
-                    [xAxis]="showXAxis"
-                    [yAxis]="showYAxis"
-                    [legend]="showLegend"
-                    [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel"
-                    [xAxisLabel]="xAxisLabel"
-                    [yAxisLabel]="yAxisLabel"
-                    [timeline]="timeline"
-                    [autoScale]="autoScale"
-                    [roundDomains]="roundDomains"
-                    [curve]="curve"
-                    [rangeFillOpacity]="rangeFillOpacity"
-                    [animations]="true"
-                  >
-                  </ngx-charts-line-chart>
+                  <div class="chart-wrapper">
+                    <ngx-charts-line-chart
+                      [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="data.value"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [timeline]="timeline"
+                      [autoScale]="autoScale"
+                      [roundDomains]="roundDomains"
+                      [curve]="curve"
+                      [rangeFillOpacity]="rangeFillOpacity"
+                      [animations]="animations"
+                      [tooltipDisabled]="tooltipDisabled"
+                      [trimXAxisTicks]="trimXAxisTicks"
+                      [trimYAxisTicks]="trimYAxisTicks"
+                      [maxXAxisTickLength]="maxXAxisTickLength"
+                      [maxYAxisTickLength]="maxYAxisTickLength"
+                      [xAxisTickFormatting]="xAxisTickFormatting"
+                      [yAxisTickFormatting]="yAxisTickFormatting"
+                      class="chart"
+                    >
+                    </ngx-charts-line-chart>
+                  </div>
                 } @else {
                   <div class="flex items-center justify-center h-full">
                     <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>

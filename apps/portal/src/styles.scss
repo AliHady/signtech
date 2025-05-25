@@ -134,10 +134,24 @@ article {
 }
 
 .marsadTheme {
+.mainNav{
+  li{
+    &:hover{
+      color :rgb(43, 42, 42) !important;
+      a{
+        color :rgb(43, 42, 42) !important;
+      }
+    }
+  }
+}
+
 
   a,
   a.mainMenuItem {
     color: #fff !important;
+    &:hover{
+      color :rgb(43, 42, 42) !important
+    }
   }
 
   .greenLogo {
@@ -150,13 +164,13 @@ article {
 
   .mainNav {
     li {
-      a:hover {
-        color: #413258 !important;
-      }
+     // color: #413258 !important;
+      
     }
 
     ul {
       li {
+        color: #413258 !important;
         a {
           color: #413258 !important;
         }

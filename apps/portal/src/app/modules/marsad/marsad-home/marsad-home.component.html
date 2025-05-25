@@ -137,26 +137,32 @@
                 [style.background-color]="backgroundColor"
                 style="width: 100%; height: 400px"
               >
-                <ngx-charts-line-chart
-                  [view]="view"
-                  [scheme]="colorScheme"
-                  [results]="data.value"
-                  [gradient]="gradient"
-                  [xAxis]="showXAxis"
-                  [yAxis]="showYAxis"
-                  [legend]="showLegend"
-                  [showXAxisLabel]="showXAxisLabel"
-                  [showYAxisLabel]="showYAxisLabel"
-                  [xAxisLabel]="xAxisLabel"
-                  [yAxisLabel]="yAxisLabel"
-                  [timeline]="timeline"
-                  [autoScale]="autoScale"
-                  [roundDomains]="roundDomains"
-                  [curve]="curve"
-                  [rangeFillOpacity]="rangeFillOpacity"
-                  [animations]="true"
-                >
-                </ngx-charts-line-chart>
+                @if (data.value && data.value[0] && data.value[0].series && data.value[0].series.length > 0) {
+                  <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="data.value"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [timeline]="timeline"
+                    [autoScale]="autoScale"
+                    [roundDomains]="roundDomains"
+                    [curve]="curve"
+                    [rangeFillOpacity]="rangeFillOpacity"
+                    [animations]="true"
+                  >
+                  </ngx-charts-line-chart>
+                } @else {
+                  <div class="flex items-center justify-center h-full">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+                  </div>
+                }
               </div>
             </div>
           </div>

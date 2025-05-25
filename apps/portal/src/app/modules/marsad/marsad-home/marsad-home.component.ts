@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewChild, OnDestroy, PLATFORM_ID, Inject, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
@@ -37,6 +37,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('carouselList') carouselList!: ElementRef;
   @ViewChild('prevBtn') prevBtn!: ElementRef;
   @ViewChild('nextBtn') nextBtn!: ElementRef;
+  @ViewChildren('chartContainer') chartContainers!: QueryList<ElementRef>;
 
   currentLang = 'ar';
   private langSubscription: Subscription;
@@ -72,8 +73,6 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   xAxisTickFormatting = (value: any) => value;
   yAxisTickFormatting = (value: any) => value;
 
-  @ViewChild('chartContainer') chartContainer!: ElementRef;
-
   marsadData: { [key: string]: any[] } = {};
 
 
@@ -87,6 +86,11 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     showCursor: true,
     cursorChar: '|'
   };
+
+  private resizeObserver: any = null;
+  isChartReady = false;
+  private chartInitialized = false;
+  private chartContainersInitialized = new Set<string>();
 
   constructor(
     private translationService: TranslationService,
@@ -121,7 +125,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.initializeCarousel();
       this.checkCarouselVisibility();
-      this.updateChartSize();
+      this.initializeChartSize();
     }, 0);
   }
 
@@ -130,7 +134,7 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     clearTimeout((window as any).resizeTimeout);
     (window as any).resizeTimeout = setTimeout(() => {
       this.checkCarouselVisibility();
-      this.updateChartSize();
+      this.initializeChartSize();
     }, 250);
   }
 
@@ -268,21 +272,31 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private updateChartSize() {
-    if (this.chartContainer) {
-      const container = this.chartContainer.nativeElement;
-      const width = container.offsetWidth;
-      const height = 400; 
-      this.view = [width, height];
-      this.view = [...this.view];
+  private initializeChartSize() {
+    if (this.chartContainers) {
+      this.chartContainers.forEach((container) => {
+        const resizeObserver = new (window as any).ResizeObserver(() => {
+          const rect = container.nativeElement.getBoundingClientRect();
+          if (rect.width > 0) {
+            this.view = [rect.width, 400];
+            this.view = [...this.view];
+          }
+        });
+        
+        resizeObserver.observe(container.nativeElement);
+        // Initial size calculation
+        const rect = container.nativeElement.getBoundingClientRect();
+        if (rect.width > 0) {
+          this.view = [rect.width, 400];
+          this.view = [...this.view];
+        }
+      });
     }
   }
 
   fetchReportsKPI() {
     this.contentService.getReportsKPI().subscribe({
       next: (response: any) => {
-       // console.log('API Response:', response);
-        
         if (!response || !Array.isArray(response)) {
           console.error('Invalid response format:', response);
           return;
@@ -296,8 +310,10 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
           nonOilExportsData: [this.transformKpiData(response.find(item => item?.Key === 'TotalExportsChart'))]
         };
 
-   
-       // console.log('Transformed Data:', this.marsadData);
+        // Initialize chart size after data is loaded
+        setTimeout(() => {
+          this.initializeChartSize();
+        }, 100);
       },
       error: (error) => {
         console.error('Error fetching KPI reports:', error);
@@ -349,5 +365,10 @@ export class MarsadHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       document.documentElement.classList.remove('marsadTheme');
     }
     this.langSubscription.unsubscribe();
+    // Clean up ResizeObserver
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
   }
 } 

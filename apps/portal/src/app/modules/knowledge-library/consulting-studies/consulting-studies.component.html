@@ -1,0 +1,13 @@
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs></app-breadcrumbs>
+  <main class="news-content bg-white overflow-hidden">
+    <div class="container mx-auto px-4 py-8 max-w-1xl">
+      <h4 class="mb-6">{{'CONTACT_US.HINT' | translate}}</h4>
+      <app-dynamic-form [config]="formConfig" (formSubmitted)="onFormSubmitted($event)"
+        (formError)="onFormError($event)">
+      </app-dynamic-form>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

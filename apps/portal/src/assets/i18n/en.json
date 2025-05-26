@@ -206,5 +206,14 @@
   },
   "SEARCH_FOR_NCAGE": {
     "DESCRIPTION": "This service provides the investor with the ability to inquire about the global establishment code, enabling them to benefit from the services of the Saudi Indexing and Coding Office"
+  }, 
+  "KNOWLEDGE-LIBRARY": {
+    "TITLE": "Knowledge Library",
+    "SUBTITLE": "Knowledge Library",
+    "DESCRIPTION": "Knowledge Library",
+    "VIEW_DETAILS": "View Details",
+    "ERROR_MESSAGE": "An error occurred while loading services. Please try again later.",
+    "CONSULTING-STUDIES": "Consulting Studies",
+    "KNOWLEDGE-LIBRARY": "Knowledge Library"
   }
 }

@@ -7,6 +7,7 @@ import { marsadRoutes } from './modules/marsad/marsad.routes';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { ServerDownComponent } from './shared/components/server-down/server-down.component';
 import { helpRoutes } from './modules/help/help.routes';
+import { knowledgeLibraryRoutes } from './modules/knowledge-library/knowledge-library.routes';
 
 export const appRoutes: Route[] = [
   {
@@ -23,6 +24,7 @@ export const appRoutes: Route[] = [
       ...authRoutes,
       ...marsadRoutes,
       ...helpRoutes,
+      ...knowledgeLibraryRoutes,
       {
         path: 'server-down',
         component: ServerDownComponent

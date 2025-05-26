@@ -16,7 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/Portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-       "assets": [
+        "assets": [
           {
             "glob": "**/*",
             "input": "apps/Portal/src/assets",
@@ -26,6 +26,16 @@
             "glob": "**/*",
             "input": "apps/Portal/public",
             "output": "."
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared/ui/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared/ui/src/assets/i18n",
+            "output": "assets/i18n"
           }
         ],
         "styles": ["apps/Portal/src/styles.scss"],

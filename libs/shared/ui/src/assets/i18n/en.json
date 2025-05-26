@@ -9,5 +9,11 @@
     "REMOVE": "Remove",
     "SUBMIT": "Submit",
     "CLEAR": "Clear"
+  },
+  "PHONE": {
+    "INVALID_FORMAT": "Only numbers are allowed",
+    "INVALID_PREFIX": "Phone number must start with 0 or 5",
+    "INVALID_LENGTH_0": "Phone number starting with 0 must be 10 digits",
+    "INVALID_LENGTH_5": "Phone number starting with 5 must be 9 digits"
   }
 } 

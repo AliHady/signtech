@@ -10,7 +10,7 @@ export interface FormFieldOption {
 
 export interface FormField {
   name: string;
-  type: 'text' | 'email' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'phone' | 'file';
+  type: 'text' | 'email' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'phone' | 'file' | 'date';
   label: FormFieldLabel;
   required?: boolean;
   options?: FormFieldOption[];
@@ -19,17 +19,23 @@ export interface FormField {
   acceptedFileTypes?: string;
   maxFileSize?: number;
   rows?: number;
+  minDate?: string;
+  maxDate?: string;
   validation?: {
     pattern?: string;
     minLength?: number;
     maxLength?: number;
     required?: boolean;
+    minDate?: string;
+    maxDate?: string;
     errorMessages?: {
       required?: FormFieldLabel;
       pattern?: FormFieldLabel;
       minLength?: FormFieldLabel;
       maxLength?: FormFieldLabel;
       email?: FormFieldLabel;
+      minDate?: FormFieldLabel;
+      maxDate?: FormFieldLabel;
     };
   };
 }

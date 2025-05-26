@@ -90,7 +90,7 @@ export class ConsultingStudiesComponent {
       },
       {
         name: 'StudyDate',
-        type: 'text',
+        type: 'date',
         label: { en: 'Study Documents Date', ar: 'تاريخ إصدار وثائق الدراسة' },
         required: true,
         validation: {

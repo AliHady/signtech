@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DynamicFormConfig, FormField, FormFieldOption, FormFieldLabel } from './dynamic-form.interface';
 import { DynamicFormService } from './dynamic-form.service';
@@ -12,6 +12,7 @@ import { FileUploadComponent } from '../form-fields/file-upload/file-upload.comp
 import { PhoneInputComponent } from '../form-fields/phone-input/phone-input.component';
 import { CheckboxGroupComponent } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectSearchComponent } from '../form-fields/select-search/select-search.component';
+import { DatePickerComponent } from '../form-fields/date-picker/date-picker.component';
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
@@ -32,6 +33,7 @@ import { environment } from 'apps/Portal/src/environments/environment';
     PhoneInputComponent,
     CheckboxGroupComponent,
     SelectSearchComponent,
+    DatePickerComponent,
     RecaptchaModule,
     RecaptchaFormsModule
   ],
@@ -112,6 +114,16 @@ export class DynamicFormComponent implements OnInit {
       return this.getTranslationKey(errorMessages.email);
     }
 
+    // Check for minDate error
+    if (errors['minDate'] && errorMessages.minDate) {
+      return this.getTranslationKey(errorMessages.minDate);
+    }
+
+    // Check for maxDate error
+    if (errors['maxDate'] && errorMessages.maxDate) {
+      return this.getTranslationKey(errorMessages.maxDate);
+    }
+
     // Fallback to default error messages if no custom message is provided
     if (errors['required']) {
       return this.translate.instant('GENERAL.IS_REQUIRED');
@@ -127,6 +139,14 @@ export class DynamicFormComponent implements OnInit {
 
     if (errors['maxlength']) {
       return this.translate.instant('GENERAL.MAX_LENGTH', { length: errors['maxlength'].requiredLength });
+    }
+
+    if (errors['minDate']) {
+      return this.translate.instant('GENERAL.MIN_DATE', { date: field.validation?.minDate });
+    }
+
+    if (errors['maxDate']) {
+      return this.translate.instant('GENERAL.MAX_DATE', { date: field.validation?.maxDate });
     }
 
     return '';
@@ -182,10 +202,37 @@ export class DynamicFormComponent implements OnInit {
         validators.push(Validators.email);
       }
 
+      if (field.type === 'date') {
+        if (validation.minDate) {
+          validators.push(this.minDateValidator(validation.minDate));
+        }
+        if (validation.maxDate) {
+          validators.push(this.maxDateValidator(validation.maxDate));
+        }
+      }
+
       group[field.name] = ['', validators];
     });
 
     this.form = this.fb.group(group);
+  }
+
+  private minDateValidator(minDate: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+      const date = new Date(control.value);
+      const min = new Date(minDate);
+      return date >= min ? null : { minDate: true };
+    };
+  }
+
+  private maxDateValidator(maxDate: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+      const date = new Date(control.value);
+      const max = new Date(maxDate);
+      return date <= max ? null : { maxDate: true };
+    };
   }
 
   onSubmit() {

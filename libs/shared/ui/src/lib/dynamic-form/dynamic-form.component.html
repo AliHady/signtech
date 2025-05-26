@@ -50,6 +50,21 @@
         </app-email-input>
       }
 
+      <!-- Date Picker -->
+      @if (field.type === 'date') {
+        <app-date-picker
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [required]="field.required || false"
+          [minDate]="field.validation?.minDate || field.minDate || ''"
+          [maxDate]="field.validation?.maxDate || field.maxDate || ''"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-date-picker>
+      }
+
       <!-- Radio Group -->
       @if (field.type === 'radio') {
         <app-radio-group

@@ -163,7 +163,7 @@ export class ConsultingStudiesComponent {
       },
       {
         name: 'Keywords',
-        type: 'text',
+        type: 'chips',
         label: { en: 'Keywords', ar: 'الكلمات المفتاحية' },
         required: true,
         maxLength: 100,

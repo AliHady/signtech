@@ -65,6 +65,23 @@
         </app-date-picker>
       }
 
+      <!-- Chips Input -->
+      @if (field.type === 'chips') {
+        <app-chips-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [maxChips]="field.validation?.maxChips || field.maxChips || 0"
+          [allowDuplicates]="field.allowDuplicates || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-chips-input>
+      }
+
       <!-- Radio Group -->
       @if (field.type === 'radio') {
         <app-radio-group

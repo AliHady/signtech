@@ -13,6 +13,7 @@ import { PhoneInputComponent } from '../form-fields/phone-input/phone-input.comp
 import { CheckboxGroupComponent } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectSearchComponent } from '../form-fields/select-search/select-search.component';
 import { DatePickerComponent } from '../form-fields/date-picker/date-picker.component';
+import { ChipsInputComponent } from '../form-fields/chips-input/chips-input.component';
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
@@ -34,6 +35,7 @@ import { environment } from 'apps/Portal/src/environments/environment';
     CheckboxGroupComponent,
     SelectSearchComponent,
     DatePickerComponent,
+    ChipsInputComponent,
     RecaptchaModule,
     RecaptchaFormsModule
   ],
@@ -124,6 +126,11 @@ export class DynamicFormComponent implements OnInit {
       return this.getTranslationKey(errorMessages.maxDate);
     }
 
+    // Check for maxChips error
+    if (errors['maxChips'] && errorMessages.maxChips) {
+      return this.getTranslationKey(errorMessages.maxChips);
+    }
+
     // Fallback to default error messages if no custom message is provided
     if (errors['required']) {
       return this.translate.instant('GENERAL.IS_REQUIRED');
@@ -147,6 +154,10 @@ export class DynamicFormComponent implements OnInit {
 
     if (errors['maxDate']) {
       return this.translate.instant('GENERAL.MAX_DATE', { date: field.validation?.maxDate });
+    }
+
+    if (errors['maxChips']) {
+      return this.translate.instant('GENERAL.MAX_CHIPS', { count: field.validation?.maxChips });
     }
 
     return '';
@@ -211,6 +222,12 @@ export class DynamicFormComponent implements OnInit {
         }
       }
 
+      if (field.type === 'chips') {
+        if (validation.maxChips) {
+          validators.push(this.maxChipsValidator(validation.maxChips));
+        }
+      }
+
       group[field.name] = ['', validators];
     });
 
@@ -232,6 +249,13 @@ export class DynamicFormComponent implements OnInit {
       const date = new Date(control.value);
       const max = new Date(maxDate);
       return date <= max ? null : { maxDate: true };
+    };
+  }
+
+  private maxChipsValidator(maxChips: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+      return control.value.length <= maxChips ? null : { maxChips: true };
     };
   }
 

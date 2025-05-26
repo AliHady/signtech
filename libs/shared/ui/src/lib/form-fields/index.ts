@@ -6,4 +6,5 @@ export * from './file-upload/file-upload.component';
 export { TextareaComponent } from './textarea/textarea.component';
 export * from './select-search/select-search.component';
 export * from './phone-input/phone-input.component';
-export * from './date-picker/date-picker.component'; 
+export * from './date-picker/date-picker.component';
+export * from './chips-input/chips-input.component'; 

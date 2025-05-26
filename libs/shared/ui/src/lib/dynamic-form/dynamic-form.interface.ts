@@ -10,7 +10,7 @@ export interface FormFieldOption {
 
 export interface FormField {
   name: string;
-  type: 'text' | 'email' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'phone' | 'file' | 'date';
+  type: 'text' | 'email' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'phone' | 'file' | 'date' | 'chips';
   label: FormFieldLabel;
   required?: boolean;
   options?: FormFieldOption[];
@@ -21,6 +21,8 @@ export interface FormField {
   rows?: number;
   minDate?: string;
   maxDate?: string;
+  maxChips?: number;
+  allowDuplicates?: boolean;
   validation?: {
     pattern?: string;
     minLength?: number;
@@ -28,6 +30,7 @@ export interface FormField {
     required?: boolean;
     minDate?: string;
     maxDate?: string;
+    maxChips?: number;
     errorMessages?: {
       required?: FormFieldLabel;
       pattern?: FormFieldLabel;
@@ -36,6 +39,7 @@ export interface FormField {
       email?: FormFieldLabel;
       minDate?: FormFieldLabel;
       maxDate?: FormFieldLabel;
+      maxChips?: FormFieldLabel;
     };
   };
 }

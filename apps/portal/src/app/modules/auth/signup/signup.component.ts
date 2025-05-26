@@ -2,82 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
+import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, BreadcrumbsComponent, FooterComponent, HeaderComponent],
   templateUrl: './signup.component.html',
-  styles: [`
-    :host {
-      display: block;
-      padding: 2rem;
-    }
-
-    .signup-container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background-color: white;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-
-    .error-message {
-      color: #dc3545;
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
-    }
-
-    .login-link {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .login-link a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .login-link a:hover {
-      text-decoration: underline;
-    }
-  `]
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
   signupForm: FormGroup;

@@ -34,7 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
           @if (control.errors?.['required']) {
-            {{ 'This field is required' | translate }}
+            {{ 'IS_REQUIRED' | translate }}
           } @else if (control.errors?.['invalidFormat']) {
             {{ 'Only numbers are allowed' | translate }}
           } @else if (control.errors?.['invalidPrefix']) {
@@ -83,9 +83,13 @@ export class PhoneInputComponent implements ControlValueAccessor, Validator {
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    // Only allow numbers
+    // Remove any non-numeric characters immediately
     const value = input.value.replace(/[^0-9]/g, '');
-    this.value = value;
+    // Limit the length to maxLength (10)
+    const truncatedValue = value.slice(0, this.maxLength);
+    // Update the input value directly to prevent any non-numeric characters from appearing
+    input.value = truncatedValue;
+    this.value = truncatedValue;
     this.onChange(this.value);
   }
 

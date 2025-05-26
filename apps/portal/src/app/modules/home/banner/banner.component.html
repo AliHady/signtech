@@ -18,11 +18,11 @@
     } -->
 
     @if (!loading && !error && slides.length > 0) {
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">
+      <h1 class="text-[2rem] md:text-[3rem] leading-[1.2] font-bold text-gray-900 mb-4">
         {{ slides[currentSlideIndex].title | translate }}
-      </h2>
+      </h1>
       <ngx-typed-js [strings]="typingConfig.strings" [typeSpeed]="typingConfig.typeSpeed" [backSpeed]="typingConfig.backSpeed" [backDelay]="typingConfig.backDelay" [startDelay]="typingConfig.startDelay" [loop]="typingConfig.loop" [showCursor]="typingConfig.showCursor" [cursorChar]="typingConfig.cursorChar">
-        <span class="typing"></span>
+        <span class="typing text-[1.5rem]"></span>
       </ngx-typed-js>
     <!--   <a [href]="slides[currentSlideIndex].link" 
          class="inline-block bg-[var(--color-nimicgreen)] text-white px-6 py-3 -md hover:bg-gray-800 transition-colors duration-300">

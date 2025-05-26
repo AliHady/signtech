@@ -3,7 +3,11 @@
     <div class="mb-8 text-start">
       <h2 class="text-3xl font-bold text-white inline-block bg-[rgb(0_0_0_/_40%)] px-4 py-2">{{ 'FEATURED_SERVICES.TITLE' |
         translate }}</h2>
-      <p class="text-white mt-2">{{ 'FEATURED_SERVICES.SUBTITLE' | translate }}</p>
+
+
+      <div class="block">
+        <p class="text-start mb-10 text-white ms-4 p-2 inline-block" style="background: #0000000f !important;">{{ 'FEATURED_SERVICES.SUBTITLE' | translate }}</p>
+      </div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
       @for (service of services; track service.Title) {

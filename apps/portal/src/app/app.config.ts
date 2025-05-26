@@ -25,28 +25,45 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([])),
-    provideAnimations(),
+    provideRouter(appRoutes),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        (req, next) => {
+          // Only modify requests to specific domains that need SSL handling
+          if (req.url.includes('your-api-domain.com')) {
+            const modifiedReq = req.clone({
+              setParams: {
+                rejectUnauthorized: 'false'
+              }
+            });
+            return next(modifiedReq);
+          }
+          return next(req);
+        }
+      ])
+    ),
     importProvidersFrom(
       CoreHttpModule,
       LoadingBarModule,
       LoadingBarRouterModule,
       LoadingBarHttpClientModule,
       TranslateModule.forRoot({
-        defaultLanguage: 'ar',
-        useDefaultLang: true,
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
-        }
+        },
+        defaultLanguage: 'ar',
+        useDefaultLang: true
       })
     ),
+    provideAnimations(),
+    provideRouter([]),
     {
       provide: RECAPTCHA_V3_SITE_KEY,
       useValue: environment.recaptchaSiteKey
     }
-  ]
+  ],
 };

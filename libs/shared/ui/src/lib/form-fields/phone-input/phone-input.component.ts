@@ -34,16 +34,16 @@ import { TranslateModule } from '@ngx-translate/core';
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
           @if (control.errors?.['required']) {
-            {{ 'GENERAL.IS_REQUIRED' | translate }}
+            {{ 'IS_REQUIRED' | translate }}
           } @else if (control.errors?.['invalidFormat']) {
-            {{ 'PHONE.INVALID_FORMAT' | translate }}
+            {{ 'Only numbers are allowed' | translate }}
           } @else if (control.errors?.['invalidPrefix']) {
-            {{ 'PHONE.INVALID_PREFIX' | translate }}
+            {{ 'Phone number must start with 0 or 5' | translate }}
           } @else if (control.errors?.['invalidLength']) {
             @if (value.startsWith('0')) {
-              {{ 'PHONE.INVALID_LENGTH_0' | translate }}
+              {{ 'Phone number starting with 0 must be 10 digits' | translate }}
             } @else {
-              {{ 'PHONE.INVALID_LENGTH_5' | translate }}
+              {{ 'Phone number starting with 5 must be 9 digits' | translate }}
             }
           }
         </div>

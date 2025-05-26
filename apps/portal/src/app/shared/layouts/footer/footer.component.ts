@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '@nimic/translations';
 import { Subscription } from 'rxjs';
 import { TranslationsModule } from '@nimic/translations';
+import { UtilityService } from '../../../shared/services/utility.service';
 
 @Component({
   selector: 'app-footer',
@@ -26,8 +27,8 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   constructor(
     private footerService: FooterService,
-    private translationService: TranslationService
-  ) { }
+    private translationService: TranslationService,
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.loadPartners();
@@ -71,5 +72,11 @@ export class FooterComponent implements OnInit, OnDestroy {
         console.error('Error loading partners:', err);
       }
     });
-  } 
+  }
+
+  navigateToLink(url: string) {
+    this.utilityService.navigate(url, this.currentLanguage, (fullImageUrl: string) => {
+      // Handle displaying the image if needed    ;
+    });
+  }
 } 

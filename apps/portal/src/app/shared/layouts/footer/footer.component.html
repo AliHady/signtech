@@ -1,41 +1,24 @@
 <footer class="bg-[var(--color-nimicgreen)] text-white py-8 px-8">
-
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row justify-between gap-8">
-
       <div class="flex-1 flex flex-col items-center justify-center text-center">
         @if (currentLanguage === 'ar') {
-          <a href="https://mim.gov.sa/" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             aria-label="Ministry of Interior - Saudi Arabia"
-             title="Visit Ministry of Interior Website">
-            <img class="mimFooterLogo" 
-                 src="assets/images/MOI_Gray_ Flat version_AR.svg" 
-                 alt="Ministry of Interior Logo - Arabic"
-                 loading="lazy"
-                 width="200"
-                 height="60">
-          </a>
+        <a href="https://mim.gov.sa/" target="_blank" rel="noopener noreferrer"
+          aria-label="Ministry of Interior - Saudi Arabia" title="Visit Ministry of Interior Website">
+          <img class="mimFooterLogo" src="assets/images/MOI_Gray_ Flat version_AR.svg"
+            alt="Ministry of Interior Logo - Arabic" loading="lazy" width="200" height="60">
+        </a>
         } @else if (currentLanguage === 'en') {
-          <a href="https://mim.gov.sa/en" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             aria-label="Ministry of Interior - Saudi Arabia"
-             title="Visit Ministry of Interior Website">
-            <img class="mimFooterLogo" 
-                 src="assets/images/MOI_Gray_ Flat version_EN.svg" 
-                 alt="Ministry of Interior Logo - English"
-                 loading="lazy"
-                 width="200"
-                 height="60">
-          </a>
+        <a href="https://mim.gov.sa/en" target="_blank" rel="noopener noreferrer"
+          aria-label="Ministry of Interior - Saudi Arabia" title="Visit Ministry of Interior Website">
+          <img class="mimFooterLogo" src="assets/images/MOI_Gray_ Flat version_EN.svg"
+            alt="Ministry of Interior Logo - English" loading="lazy" width="200" height="60">
+        </a>
         }
         <p class="text-xs mt-2">
           {{ 'FOOTER.MIM_COPYRIGHT' | translate }}
         </p>
       </div>
-
       <div class="flex-1">
         <h2 class="text-xl font-bold mb-4">{{ 'FOOTER.PARTNERS' | translate }}</h2>
         <ul class="space-y-2">
@@ -46,20 +29,17 @@
           }
         </ul>
       </div>
-
       <div class="flex-1">
         <h2 class="text-xl font-bold mb-4">{{ 'FOOTER.IMPORTANT_LINKS' | translate }}</h2>
         <ul class="space-y-2">
           @for (importantLink of importantLinks; track importantLink) {
-          <li><a href="{{importantLink.Link}}"
+          <li><a href="#" (click)="navigateToLink(importantLink.Link); $event.preventDefault()"
               class="text-white no-underline hover:text-[#BD9F9D] transition-colors duration-300">{{importantLink.Title}}</a>
           </li>
           }
         </ul>
       </div>
-
     </div>
-
     <div
       class="border-t border-solid border-l-0 border-r-0 border-b-0 border-t-[#41595f] mt-8 pt-4 text-center text-sm">
       {{ 'FOOTER.COPYRIGHT' | translate }}

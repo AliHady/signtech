@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { Content } from '../models/content.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilityService } from '../../../shared/services/utility.service';
 
 @Component({
   selector: 'app-cms-data',
@@ -40,7 +41,8 @@ export class CMSDataComponent implements OnInit {
     private route: ActivatedRoute,
     public translationService: TranslationService,
     public translate: TranslateService,
-    private contentService: ContentService) { }
+    private contentService: ContentService,
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     const fullUrl = this.router.url.split('?')[0];
@@ -84,37 +86,20 @@ export class CMSDataComponent implements OnInit {
   attachLinkHandlers() {
     setTimeout(() => {
       const links: NodeListOf<HTMLAnchorElement> = this.contentContainer.nativeElement.querySelectorAll('a');
-      links.forEach(link => {
-        const href = link.getAttribute('href');
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.navigate(href);
+      if (links) {
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.utilityService.navigate(
+              href,
+              this.currentLang,
+              (url) => this.displayImage(url)
+            );
+          });
         });
-      });
+      }
     }, 500);
-  }
-
-  navigate(url: string | null) {
-    if (!url) return;
-
-    const cleanUrl = url.split('#')[0];
-
-    const isDocumentFile = /\.(pdf|docx?|xlsx?)$/i.test(cleanUrl);
-    const isImageFile = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(cleanUrl);
-
-    if (cleanUrl.startsWith('http')) {
-      const fullUrl = cleanUrl;
-      window.open(fullUrl, '_blank');
-    } else if (isDocumentFile) {
-      const fullUrl = this.portalUrl + cleanUrl.replace('/CMS', '');
-      window.open(fullUrl, '_blank');
-    } else if (isImageFile) {
-      const fullImageUrl = this.portalUrl + cleanUrl.replace('/CMS', '');
-      this.displayImage(fullImageUrl);
-    } else {
-      const route = cleanUrl.replace('CMS', this.currentLang);
-      this.router.navigate([route]);
-    }
   }
 
   displayImage(url: string) {

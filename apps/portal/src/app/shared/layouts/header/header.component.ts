@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationService, TranslationsModule } from '@nimic/translations';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { NavMenu } from '../../models/navmen.model';
 import { TranslateModule } from '@ngx-translate/core';
@@ -45,17 +45,10 @@ export class HeaderComponent implements OnInit {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  constructor(
-    public translationService: TranslationService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private headerService: HeaderService
-  ) {
-    // Subscribe to language changes
+  constructor(public translationService: TranslationService, private router: Router, private headerService: HeaderService) {
     this.translationService.currentLang$.subscribe(lang => {
       if (this.currentLang !== lang) {
         this.currentLang = lang;
-       // console.log("currentLang changed to:", this.currentLang);
         this.fetchMenuItems();
       }
     });
@@ -66,15 +59,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private fetchMenuItems() {
-    //console.log("fetchMenuItems called");
-  
     this.loading = true;
     this.error = '';
-    
     this.headerService.getNavigationMenu().subscribe({
       next: (response: NavMenu) => {
-      
-        
         this.menuItems = response.map(item => ({
           id: item.Id,
           title: item.Text,
@@ -85,12 +73,12 @@ export class HeaderComponent implements OnInit {
             url: child.Url
           }))
         }));
-      /*   console.log(
-          '%c MENU %c %o',
-          'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
-          '',                     
-          this.menuItems       
-        ); */
+        /*   console.log(
+            '%c MENU %c %o',
+            'background:#00A86B;color:#fff;padding:2px 6px;border-radius:4px;font-weight:600',
+            '',                     
+            this.menuItems       
+          ); */
         this.loading = false;
       },
       error: (error: Error) => {
@@ -99,18 +87,10 @@ export class HeaderComponent implements OnInit {
         this.loading = false;
       }
     });
-    
   }
 
-
-  
-  switchLanguage(lang: string) { 
-    //console.log("switchLanguage called with lang:", lang);
-    
-    // Set the language
+  switchLanguage(lang: string) {
     this.translationService.setLanguage(lang);
-    
-    // Update the URL after a small delay to ensure language is set
     setTimeout(() => {
       const currentUrl = this.router.url;
       const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
@@ -136,5 +116,4 @@ export class HeaderComponent implements OnInit {
     const parts = url.split('/').filter(Boolean);
     return ['/', this.currentLang, ...parts.slice(-2)];
   }
-
-} 
+}

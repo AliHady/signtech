@@ -10,9 +10,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpStatusUtil } from '../../utils/http-status.util';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class StatusCodeInterceptor implements HttpInterceptor {
+  constructor(private router: Router) {}
+
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
@@ -49,6 +52,7 @@ export class StatusCodeInterceptor implements HttpInterceptor {
     } else if (HttpStatusUtil.isServerError(status)) {
       // Handle server errors (5xx)
       console.error(`Server error: ${status}`, error);
+      this.router.navigate(['/ar/server-down']);
     }
   }
 } 

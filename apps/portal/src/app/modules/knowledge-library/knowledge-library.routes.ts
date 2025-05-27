@@ -6,7 +6,12 @@ export const knowledgeLibraryRoutes: Route[] = [
    loadComponent: () => import('./knowledge-library-home/knowledge-library-home.component').then(m => m.KnowledgeLibraryHomeComponent)
   },
   {
+    path: 'knowledge-library/consulting-studies/new',
+    loadComponent: () => import('./consulting-studies-new/consulting-studies-new.component').then(m => m.ConsultingStudiesNewComponent)
+  },
+  {
     path: 'knowledge-library/consulting-studies',
-    loadComponent: () => import('./consulting-studies/consulting-studies.component').then(m => m.ConsultingStudiesComponent)
+    loadComponent: () => import('./consulting-studies-list/consulting-studies-list.component').then(m => m.ConsultingStudiesListComponent)
   }
+
 ]; 

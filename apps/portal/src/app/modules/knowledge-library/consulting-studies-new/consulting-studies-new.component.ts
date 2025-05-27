@@ -8,7 +8,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-consulting-studies',
+  selector: 'app-consulting-studies-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -19,8 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecaptchaModule,
     RecaptchaFormsModule
   ],
-  templateUrl: './consulting-studies.component.html',
-  styleUrls: ['./consulting-studies.component.scss'],
+  templateUrl: './consulting-studies-new.component.html',
+  styleUrls: ['./consulting-studies-new.component.scss'],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -30,7 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ])
   ]
 })
-export class ConsultingStudiesComponent {
+export class ConsultingStudiesNewComponent {
   formConfig: DynamicFormConfig = {
     endpoint: '/consulting-studies',
     method: 'POST',

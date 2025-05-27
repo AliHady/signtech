@@ -214,6 +214,7 @@
     "VIEW_DETAILS": "View Details",
     "ERROR_MESSAGE": "An error occurred while loading services. Please try again later.",
     "CONSULTING-STUDIES": "Consulting Studies",
-    "KNOWLEDGE-LIBRARY": "Knowledge Library"
+    "KNOWLEDGE-LIBRARY": "Knowledge Library",
+    "NEW": "New Consulting Study"
   }
 }

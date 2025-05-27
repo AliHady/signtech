@@ -43,3 +43,8 @@ export const serverRoutes: ServerRoute[] = [
     }
   }
 ];
+
+// Helper function to get the base href from environment or default to '/'
+export function getBaseHref(): string {
+  return process.env['BASE_HREF'] || '/';
+}

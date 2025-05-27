@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import {
@@ -18,9 +18,17 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from '../environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+export function HttpLoaderFactory(http: HttpClient, platformId: Object) {
+  let baseHref = '/';
+  if (isPlatformBrowser(platformId)) {
+    baseHref = document.querySelector('base')?.href || '/';
+  } else {
+    // For server-side rendering, use the environment variable or default
+    baseHref = process.env['BASE_HREF'] || '/';
+  }
+  return new TranslateHttpLoader(http, `${baseHref}assets/i18n/`, '.json');
 }
 
 export const appConfig: ApplicationConfig = {
@@ -53,7 +61,7 @@ export const appConfig: ApplicationConfig = {
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+          deps: [HttpClient, PLATFORM_ID]
         },
         defaultLanguage: 'ar',
         useDefaultLang: true

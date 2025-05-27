@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 import { environment } from 'apps/Portal/src/environments/environment';
@@ -15,7 +14,7 @@ import { environment } from 'apps/Portal/src/environments/environment';
     SharedModule,
     TranslateModule,
     DynamicFormComponent,
-   
+
   ],
   templateUrl: './apply-to-tarmeez.component.html',
   styleUrls: ['./apply-to-tarmeez.component.scss'],
@@ -262,13 +261,13 @@ export class ApplyToTarmeezComponent {
       }
     ],
     submitButtonLabel: { en: 'Submit', ar: 'إرسال' },
-    clearButtonLabel: { en: 'Clear', ar: 'مسح' } 
+    clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private eServicesService: EServicesService) {}
+  constructor() { }
 
   onFormSubmitted(response: any) {
     if (this.formConfig.successMessage) {

@@ -8,9 +8,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApplyToTarmeezComponent } from './apply-to-tarmeez/apply-to-tarmeez.component';
 import { RequestCodeComponent } from './request-code/request-code.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { SenaiComponent } from './senai/senai.component';
 import { EmploymentComponent } from '../help/employment/employment.component';
 import { SearchForNcageComponent } from './search-for-ncage/search-for-ncage.component';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -23,7 +23,6 @@ import { SearchForNcageComponent } from './search-for-ncage/search-for-ncage.com
     ContactUsComponent,
     ApplyToTarmeezComponent,
     RequestCodeComponent,
-    SenaiComponent,
     EmploymentComponent,
     SearchForNcageComponent
   ],
@@ -33,7 +32,6 @@ import { SearchForNcageComponent } from './search-for-ncage/search-for-ncage.com
     ContactUsComponent,
     ApplyToTarmeezComponent,
     RequestCodeComponent,
-    SenaiComponent,
     EmploymentComponent,
     SearchForNcageComponent
   ]

@@ -28,12 +28,12 @@ import { TranslateModule } from '@ngx-translate/core';
         [class.opacity-50]="disabled">
         <div class="flex flex-wrap gap-2">
           @for (chip of value; track chip) {
-            <div class="flex items-center gap-1.5 px-3 py-1.5 bg-[#1AD9C7] bg-opacity-5 text-[#1AD9C7] rounded-full">
+            <div class="flex items-center gap-1.5 px-3 py-1.5 bg-[#e9e9e9]  text-[#1A1A1A] rounded-full">
               <span class="text-sm font-medium">{{ chip }}</span>
               <button 
                 type="button" 
                 (click)="removeChip(chip)"
-                class="text-[#1AD9C7] opacity-60 hover:opacity-100 focus:outline-none transition-all duration-200 flex items-center justify-center"
+                class="text-[#1A1A1A] bg-[#a4a4a4] opacity-60 hover:opacity-100 focus:outline-none transition-all duration-200 flex items-center justify-center rounded-full border-0 p-0.5 cursor-pointer"
                 [disabled]="disabled">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>

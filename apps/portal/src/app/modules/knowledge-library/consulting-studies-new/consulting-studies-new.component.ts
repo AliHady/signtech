@@ -6,6 +6,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-consulting-studies-list',
@@ -32,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ConsultingStudiesNewComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/consulting-studies',
+    endpoint: `${environment.contentUrl}/consulting-studies`,
     method: 'POST',
     successMessage: {
       en: 'Your study has been submitted successfully',

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-search-for-ncage',
@@ -28,7 +29,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class SearchForNcageComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/search-for-ncage',
+    endpoint: `${environment.contentUrl}/search-for-ncage`,
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',

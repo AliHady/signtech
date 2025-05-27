@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-data-request',
@@ -27,7 +28,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class DataRequestComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/data-request',
+    endpoint: `${environment.contentUrl}/data-request`,
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',

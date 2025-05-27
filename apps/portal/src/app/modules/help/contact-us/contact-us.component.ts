@@ -6,6 +6,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-contact-us',
@@ -32,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ContactUsComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/contact-us',
+    endpoint: `${environment.contentUrl}/contact-us`,
     method: 'POST',
     successMessage: {
       en: 'Your message has been sent successfully',

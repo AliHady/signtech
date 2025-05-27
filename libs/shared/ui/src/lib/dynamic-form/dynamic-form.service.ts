@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DynamicFormConfig } from './dynamic-form.interface';
-import { environment } from 'apps/Portal/src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class DynamicFormService {
     console.log(config, formData);
     const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
 
-    return this.http.request(config.method, `${environment.contentUrl}${config.endpoint}`, {
+    return this.http.request(config.method, `${config.endpoint}`, {
       headers: headers,
       body: formData
     });
@@ -24,7 +23,7 @@ export class DynamicFormService {
     console.log(config, formData);
     const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
 
-    return this.http.request(config.method, `${environment.contentUrl}${config.endpoint}`, {
+    return this.http.request(config.method, `${config.endpoint}`, {
       headers: headers,
       body: formData
     });

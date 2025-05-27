@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-apply-to-tarmeez',
@@ -29,7 +30,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class ApplyToTarmeezComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/CMS/api/apply-to-tarmeez',
+    endpoint: `${environment.contentUrl}/apply-to-tarmeez`,
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',

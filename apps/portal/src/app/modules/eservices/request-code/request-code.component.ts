@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EServicesService } from '../services/e-services.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
+import { environment } from 'apps/Portal/src/environments/environment';
 
 @Component({
   selector: 'app-request-code',
@@ -28,7 +29,7 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 })
 export class RequestCodeComponent {
   formConfig: DynamicFormConfig = {
-    endpoint: '/request-code',
+    endpoint: `${environment.contentUrl}/request-code`,
     method: 'POST',
     successMessage: {
       en: 'Your application has been submitted successfully',

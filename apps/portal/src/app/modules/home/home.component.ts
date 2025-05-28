@@ -5,6 +5,7 @@ import { BannerComponent } from './banner/banner.component';
 import { FeaturedServicesComponent } from './featured-services/featured-services.component';
 import { LatestNewsComponent } from './latest-news/latest-news.component';
 import { MarsadComponent } from './marsad/marsad.component';
+import { ChartsComponent } from './charts/charts.component';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { MarsadComponent } from './marsad/marsad.component';
     BannerComponent,
     FeaturedServicesComponent,
     LatestNewsComponent,
-    MarsadComponent
+    MarsadComponent,
+    ChartsComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

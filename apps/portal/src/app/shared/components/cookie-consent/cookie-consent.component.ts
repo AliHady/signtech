@@ -152,7 +152,7 @@ declare const window: Window;
       border: none;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 0.5px;

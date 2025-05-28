@@ -1,17 +1,74 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToggleSwitchComponent } from '@nimic/shared/ui';
+
+interface CookiePreferences {
+  essential: boolean;
+  functional: boolean;
+  analytics: boolean;
+  applicationInsights: boolean;
+}
+
+interface Window {
+  ga?: (command: string, ...args: any[]) => void;
+  appInsights?: {
+    disable: () => void;
+  };
+}
+
+declare const window: Window;
 
 @Component({
   selector: 'app-cookie-consent',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule, ToggleSwitchComponent],
   template: `
     @if (!hasConsent) {
       <div class="cookie-consent">
         <div class="cookie-content">
           <p>{{ 'COOKIE_CONSENT.MESSAGE' | translate }}</p>
+          <div class="cookie-options" *ngIf="showOptions">
+            <div class="cookie-option">
+              <app-toggle-switch
+                [(ngModel)]="cookiePrefs.essential"
+                [disabled]="true"
+                [label]="'COOKIE_CONSENT.ESSENTIAL' | translate"
+              ></app-toggle-switch>
+            </div>
+            <div class="cookie-option">
+              <app-toggle-switch
+                [(ngModel)]="cookiePrefs.functional"
+                [label]="'COOKIE_CONSENT.FUNCTIONAL' | translate"
+              ></app-toggle-switch>
+            </div>
+            <div class="cookie-option">
+              <app-toggle-switch
+                [(ngModel)]="cookiePrefs.analytics"
+                [label]="'COOKIE_CONSENT.ANALYTICS' | translate"
+              ></app-toggle-switch>
+            </div>
+            <div class="cookie-option">
+              <div class="flex items-center gap-2">
+                <app-toggle-switch
+                  [(ngModel)]="cookiePrefs.applicationInsights"
+                  [label]="'COOKIE_CONSENT.APPLICATION_INSIGHTS' | translate"
+                ></app-toggle-switch>
+                <span class="cookie-info" title="{{ 'COOKIE_CONSENT.APPLICATION_INSIGHTS_INFO' | translate }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
           <div class="cookie-buttons">
+            <button (click)="showOptions = !showOptions" class="preferences-btn">
+              {{ 'COOKIE_CONSENT.PREFERENCES' | translate }}
+            </button>
             <button (click)="acceptCookies()" class="accept-btn">
               {{ 'COOKIE_CONSENT.ACCEPT' | translate }}
             </button>
@@ -55,38 +112,39 @@ import { TranslateModule } from '@ngx-translate/core';
 
     .cookie-content {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .cookie-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .cookie-option {
+      display: flex;
       align-items: center;
-      gap: 2rem;
-      animation: fadeIn 0.8s ease-out forwards;
-      animation-delay: 0.2s;
-      opacity: 0;
+      gap: 0.5rem;
     }
 
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    .cookie-content p {
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.5;
+    .cookie-info {
+      display: inline-flex;
+      align-items: center;
       color: var(--color-nimicgreen);
-      font-family: inherit;
+      opacity: 0.7;
+      cursor: help;
+    }
+
+    .cookie-info:hover {
+      opacity: 1;
     }
 
     .cookie-buttons {
       display: flex;
       gap: 1rem;
-      flex-shrink: 0;
-      animation: fadeIn 0.8s ease-out forwards;
-      animation-delay: 0.4s;
-      opacity: 0;
+      flex-wrap: wrap;
     }
 
     button {
@@ -103,20 +161,14 @@ import { TranslateModule } from '@ngx-translate/core';
       overflow: hidden;
     }
 
-    button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+    .preferences-btn {
+      background: transparent;
+      border: 2px solid var(--color-nimicgreen);
+      color: var(--color-nimicgreen);
     }
 
-    button:hover::after {
-      transform: translateX(0);
+    .preferences-btn:hover {
+      background: rgba(52, 69, 73, 0.05);
     }
 
     .accept-btn {
@@ -143,30 +195,31 @@ import { TranslateModule } from '@ngx-translate/core';
 
     @media (max-width: 768px) {
       .cookie-consent {
-        bottom: 1rem;
-        padding: 1.25rem;
-      }
-
-      .cookie-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
       }
 
       .cookie-buttons {
-        width: 100%;
-        justify-content: center;
+        flex-direction: column;
       }
 
       button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.85rem;
+        width: 100%;
       }
     }
   `]
 })
 export class CookieConsentComponent implements OnInit {
   hasConsent = false;
+  showOptions = false;
+  cookiePrefs: CookiePreferences = {
+    essential: true,
+    functional: false,
+    analytics: false,
+    applicationInsights: false
+  };
 
   constructor(private elementRef: ElementRef) {}
 
@@ -188,9 +241,12 @@ export class CookieConsentComponent implements OnInit {
   checkConsent() {
     if (this.isLocalStorageAvailable()) {
       const consent = localStorage.getItem('CookieConsent');
-      this.hasConsent = consent === 'accepted' || consent === 'declined';
-      if (this.hasConsent) {
+      if (consent) {
+        const prefs = JSON.parse(consent);
+        this.cookiePrefs = prefs;
+        this.hasConsent = true;
         this.removeComponent();
+        this.applyCookiePreferences(prefs);
       }
     }
   }
@@ -202,19 +258,95 @@ export class CookieConsentComponent implements OnInit {
     }
   }
 
+  private applyCookiePreferences(prefs: CookiePreferences) {
+    // Handle analytics cookies
+    if (!prefs.analytics) {
+      this.disableAnalyticsCookies();
+    }
+
+    // Handle functional cookies
+    if (!prefs.functional) {
+      this.disableFunctionalCookies();
+    }
+
+    // Handle Application Insights cookies
+    if (!prefs.applicationInsights) {
+      this.disableApplicationInsightsCookies();
+    }
+  }
+
+  private disableAnalyticsCookies() {
+    // Disable Google Analytics if present
+    if (window.ga) {
+      window.ga('set', 'cookieDomain', 'none');
+      window.ga('set', 'allowAdFeatures', false);
+    }
+
+    // Disable other analytics cookies
+    const analyticsCookies = document.cookie.split(';')
+      .filter(cookie => cookie.trim().startsWith('_ga') || 
+                       cookie.trim().startsWith('_gid') || 
+                       cookie.trim().startsWith('_gat'));
+    
+    analyticsCookies.forEach(cookie => {
+      const name = cookie.split('=')[0].trim();
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    });
+  }
+
+  private disableFunctionalCookies() {
+    // Disable functional cookies (like language preferences, etc.)
+    const functionalCookies = document.cookie.split(';')
+      .filter(cookie => !cookie.trim().startsWith('_ga') && 
+                       !cookie.trim().startsWith('_gid') && 
+                       !cookie.trim().startsWith('_gat') &&
+                       !cookie.trim().startsWith('ai_'));
+    
+    functionalCookies.forEach(cookie => {
+      const name = cookie.split('=')[0].trim();
+      if (name !== 'CookieConsent') { // Don't remove the consent cookie
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+      }
+    });
+  }
+
+  private disableApplicationInsightsCookies() {
+    // Disable Application Insights cookies
+    const aiCookies = document.cookie.split(';')
+      .filter(cookie => cookie.trim().startsWith('ai_'));
+    
+    aiCookies.forEach(cookie => {
+      const name = cookie.split('=')[0].trim();
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    });
+
+    // Disable Application Insights tracking
+    if (window['appInsights']) {
+      window['appInsights'].disable();
+    }
+  }
+
   acceptCookies() {
     if (this.isLocalStorageAvailable()) {
-      localStorage.setItem('CookieConsent', 'accepted');
+      localStorage.setItem('CookieConsent', JSON.stringify(this.cookiePrefs));
       this.hasConsent = true;
       this.removeComponent();
+      this.applyCookiePreferences(this.cookiePrefs);
     }
   }
 
   declineCookies() {
     if (this.isLocalStorageAvailable()) {
-      localStorage.setItem('CookieConsent', 'declined');
+      const declinedPrefs: CookiePreferences = {
+        essential: true,
+        functional: false,
+        analytics: false,
+        applicationInsights: false
+      };
+      localStorage.setItem('CookieConsent', JSON.stringify(declinedPrefs));
       this.hasConsent = true;
       this.removeComponent();
+      this.applyCookiePreferences(declinedPrefs);
     }
   }
 } 

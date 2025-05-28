@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TextInputComponent, SelectSearchComponent, SelectOption } from '@nimic/shared/ui';
+import { TextInputComponent } from '@nimic/shared/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from '../../../shared/layouts/header/header.component';
 import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ActivatedRoute } from '@angular/router';
+import { TranslationService } from '@nimic/translations';
+import { ContentService } from '../../content/services/content.service';
+import { ConsultingStudiesItem } from '../models/consulting-studies.model';
 
 interface Study {
   id: number;
@@ -14,6 +18,13 @@ interface Study {
   subject: string;
   description: string;
   category: string;
+}
+
+interface StudiesCache {
+  [key: number]: {
+    data: ConsultingStudiesItem[];
+    timestamp: number;
+  };
 }
 
 @Component({
@@ -32,77 +43,43 @@ interface Study {
 })
 export class ConsultingStudiesListComponent implements OnInit {
   currentLang = 'ar';
+  private studiesCache: StudiesCache = {};
+  private readonly CACHE_DURATION = 5 * 60 * 1000;
 
-  studies: Study[] = [
-    {
-      id: 1,
-      name: 'دراسة تحليلية للاقتصاد المحلي',
-      type: 'دراسة اقتصادية',
-      subject: 'الاقتصاد',
-      description: 'تحليل شامل للوضع الاقتصادي المحلي وتأثيراته',
-      category: 'دراسات اقتصادية'
-    },
-    {
-      id: 2,
-      name: 'دراسة اجتماعية عن التنمية المستدامة',
-      type: 'دراسة اجتماعية',
-      subject: 'التنمية المستدامة',
-      description: 'تحليل للعوامل الاجتماعية المؤثرة على التنمية المستدامة',
-      category: 'دراسات اجتماعية'
-    },
-    {
-      id: 3,
-      name: 'دراسة تنموية للبنية التحتية',
-      type: 'دراسة تنموية',
-      subject: 'البنية التحتية',
-      description: 'تقييم شامل للبنية التحتية وتأثيرها على التنمية',
-      category: 'دراسات تنموية'
-    },
-    {
-      id: 4,
-      name: 'دراسة تحليلية لسوق العمل',
-      type: 'دراسة اقتصادية',
-      subject: 'سوق العمل',
-      description: 'تحليل متعمق لمتطلبات سوق العمل وتحدياته',
-      category: 'دراسات اقتصادية'
-    },
-    {
-      id: 5,
-      name: 'دراسة اجتماعية عن التعليم العالي',
-      type: 'دراسة اجتماعية',
-      subject: 'التعليم العالي',
-      description: 'تقييم جودة التعليم العالي وتأثيره على المجتمع',
-      category: 'دراسات اجتماعية'
-    },
-    {
-      id: 6,
-      name: 'دراسة تنموية للقطاع الصناعي',
-      type: 'دراسة تنموية',
-      subject: 'القطاع الصناعي',
-      description: 'تحليل فرص وتحديات القطاع الصناعي',
-      category: 'دراسات تنموية'
-    },
-    {
-      id: 7,
-      name: 'دراسة اقتصادية للاستثمار الأجنبي',
-      type: 'دراسة اقتصادية',
-      subject: 'الاستثمار الأجنبي',
-      description: 'تقييم تأثير الاستثمار الأجنبي على الاقتصاد المحلي',
-      category: 'دراسات اقتصادية'
-    }
-  ];
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalPages = 0;
+  totalItems = 0;
+  loading = true;
+  error = '';
 
+  studies: ConsultingStudiesItem[] = [];
+  paginatedStudies: ConsultingStudiesItem[] = [];
   filteredStudies: Study[] = [];
 
   // Modal state
   isCertificateModalOpen = false;
   selectedStudy: Study | null = null;
 
+  constructor(
+    private route: ActivatedRoute,
+    public translationService: TranslationService,
+    private contentService: ContentService) { }
+
   ngOnInit() {
-    this.filteredStudies = this.studies;
+    //this.filteredStudies = this.studies;
+
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
+    });
+    this.getAllConsultingStudies();
   }
 
-  openCertificateModal(study: Study) {
+  openCertificateModal(study: any) {
     this.selectedStudy = study;
     this.isCertificateModalOpen = true;
   }
@@ -110,5 +87,46 @@ export class ConsultingStudiesListComponent implements OnInit {
   closeCertificateModal() {
     this.isCertificateModalOpen = false;
     this.selectedStudy = null;
+  }
+
+  private getAllConsultingStudies(): void {
+    if (this.isCacheValid(this.currentPage)) {
+      const cachedData = this.studiesCache[this.currentPage];
+      this.studies = cachedData.data;
+      this.paginatedStudies = this.studies;
+      this.loading = false;
+      return;
+    }
+
+    this.loading = true;
+    this.contentService.getAllConsultingStudies(this.currentPage, this.itemsPerPage).subscribe({
+      next: (response) => {
+        this.studies = response.Items;
+        this.totalItems = response.TotalCount;
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+        this.paginatedStudies = this.studies;
+
+        // Cache the fetched data
+        this.studiesCache[this.currentPage] = {
+          data: this.studies,
+          timestamp: Date.now()
+        };
+
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load studies. Please try again later.';
+        this.loading = false;
+        console.error('Error loading studies:', err);
+      }
+    });
+  }
+
+  private isCacheValid(page: number): boolean {
+    const cachedData = this.studiesCache[page];
+    if (!cachedData) return false;
+
+    const now = Date.now();
+    return (now - cachedData.timestamp) < this.CACHE_DURATION;
   }
 }

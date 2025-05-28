@@ -10,9 +10,7 @@ export class DynamicFormService {
   constructor(private http: HttpClient) { }
 
   submitForm(config: DynamicFormConfig, formData: any, token: any): Observable<any> {
-    console.log(config, formData);
     const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
-
     return this.http.request(config.method, `${config.endpoint}`, {
       headers: headers,
       body: formData
@@ -20,9 +18,7 @@ export class DynamicFormService {
   }
 
   submitFormData(config: DynamicFormConfig, formData: FormData, token: any): Observable<any> {
-    console.log(config, formData);
     const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
-
     return this.http.request(config.method, `${config.endpoint}`, {
       headers: headers,
       body: formData

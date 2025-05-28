@@ -5,17 +5,18 @@
     <div class="container mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-6">
         <div class="flex flex-col md:flex-row items-center gap-4">
-          <button class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] transition-colors duration-200 font-[DiodrumArabic] cursor-pointer border-0">
+          <button
+            class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] transition-colors duration-200 font-[DiodrumArabic] cursor-pointer border-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+              <path fill-rule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clip-rule="evenodd" />
             </svg>
             إضافة دراسة جديدة
           </button>
           <div class="w-full md:w-[300px]">
-            <app-text-input
-              [label]="currentLang === 'ar' ? 'بحث' : 'Search'"
-              [placeholder]="currentLang === 'ar' ? 'ابحث عن دراسة...' : 'Search for a study...'"
-              [name]="'search'"
+            <app-text-input [label]="currentLang === 'ar' ? 'بحث' : 'Search'"
+              [placeholder]="currentLang === 'ar' ? 'ابحث عن دراسة...' : 'Search for a study...'" [name]="'search'"
               class="mb-4">
             </app-text-input>
           </div>
@@ -36,29 +37,30 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            @for (study of studies; track study.id; let i = $index) {
-              <tr [class]="i % 2 === 0 ? 'bg-white hover:bg-gray-50' : 'bg-gray-50 hover:bg-gray-100'"
-                  class="transition-colors duration-200">
-                <td class="px-6 py-4 text-sm text-gray-900 border-l">{{study.name}}</td>
-                <td class="px-6 py-4 text-sm text-gray-600 border-l">{{study.type}}</td>
-                <td class="px-6 py-4 text-sm text-gray-600 border-l">{{study.subject}}</td>
-                <td class="px-6 py-4 text-sm text-gray-600 border-l max-w-xs truncate">{{study.description}}</td>
-                <td class="px-6 py-4 text-sm text-gray-600 border-l">
-                  <span class="px-3 py-1 text-xs font-medium rounded-full" 
-                        [ngClass]="{
-                          'bg-blue-100 text-blue-800': study.category === 'دراسات اقتصادية',
-                          'bg-green-100 text-green-800': study.category === 'دراسات اجتماعية',
-                          'bg-purple-100 text-purple-800': study.category === 'دراسات تنموية'
+            @for (study of studies; track study.Id; let i = $index) {
+            <tr [class]="i % 2 === 0 ? 'bg-white hover:bg-gray-50' : 'bg-gray-50 hover:bg-gray-100'"
+              class="transition-colors duration-200">
+              <td class="px-6 py-4 text-sm text-gray-900 border-l">{{study.NameAr}}</td>
+              <td class="px-6 py-4 text-sm text-gray-600 border-l">{{study.StudyType}}</td>
+              <td class="px-6 py-4 text-sm text-gray-600 border-l">{{study.StudySubject}}</td>
+              <td class="px-6 py-4 text-sm text-gray-600 border-l max-w-xs truncate">{{study.Description}}</td>
+              <td class="px-6 py-4 text-sm text-gray-600 border-l">
+                <span class="px-3 py-1 text-xs font-medium rounded-full" [ngClass]="{
+                          'bg-blue-100 text-blue-800': study.PrivacyType === 'عام',
+                          'bg-green-100 text-green-800': study.PrivacyType === 'مقيد',
+                          'bg-purple-100 text-purple-800': study.PrivacyType === 'دراسات تنموية'
                         }">
-                    {{study.category}}
-                  </span>
-                </td>
-                <td class="px-6 py-4 text-sm text-gray-600 border-l">
-                  <button class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer" (click)="openCertificateModal(study)">
-                    شهادة إيداع
-                  </button>
-                </td>
-              </tr>
+                  {{study.PrivacyType}}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-600 border-l">
+                <button
+                  class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer"
+                  (click)="openCertificateModal(study)">
+                  شهادة إيداع
+                </button>
+              </td>
+            </tr>
             }
           </tbody>
         </table>
@@ -66,34 +68,35 @@
 
       <!-- Mobile Card View -->
       <div class="md:hidden space-y-4">
-        @for (study of studies; track study.id) {
-          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <div class="space-y-3">
-              <div class="flex justify-between items-start">
-                <h3 class="text-sm font-medium text-gray-900">{{study.name}}</h3>
-                <span class="px-3 py-1 text-xs font-medium rounded-full" 
-                      [ngClass]="{
-                        'bg-blue-100 text-blue-800': study.category === 'دراسات اقتصادية',
-                        'bg-green-100 text-green-800': study.category === 'دراسات اجتماعية',
-                        'bg-purple-100 text-purple-800': study.category === 'دراسات تنموية'
+        @for (study of studies; track study.Id) {
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div class="space-y-3">
+            <div class="flex justify-between items-start">
+              <h3 class="text-sm font-medium text-gray-900">{{study.NameAr}}</h3>
+              <span class="px-3 py-1 text-xs font-medium rounded-full" [ngClass]="{
+                        'bg-blue-100 text-blue-800': study.PrivacyType === 'عام',
+                        'bg-green-100 text-green-800': study.PrivacyType === 'مقيد',
+                        'bg-purple-100 text-purple-800': study.PrivacyType === 'دراسات تنموية'
                       }">
-                  {{study.category}}
-                </span>
-              </div>
-              
-              <div class="text-sm text-gray-600">
-                <p class="mb-1"><span class="font-medium">نوع الدراسة:</span> {{study.type}}</p>
-                <p class="mb-1"><span class="font-medium">موضوع الدراسة:</span> {{study.subject}}</p>
-                <p class="mb-1"><span class="font-medium">الوصف:</span> {{study.description}}</p>
-              </div>
+                {{study.PrivacyType}}
+              </span>
+            </div>
 
-              <div class="pt-2">
-                <button class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer" (click)="openCertificateModal(study)">
-                  شهادة إيداع
-                </button>
-              </div>
+            <div class="text-sm text-gray-600">
+              <p class="mb-1"><span class="font-medium">نوع الدراسة:</span> {{study.StudyType}}</p>
+              <p class="mb-1"><span class="font-medium">موضوع الدراسة:</span> {{study.StudySubject}}</p>
+              <p class="mb-1"><span class="font-medium">الوصف:</span> {{study.Description}}</p>
+            </div>
+
+            <div class="pt-2">
+              <button
+                class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer"
+                (click)="openCertificateModal(study)">
+                شهادة إيداع
+              </button>
             </div>
           </div>
+        </div>
         }
       </div>
     </div>
@@ -102,20 +105,22 @@
 <app-footer></app-footer>
 
 @if (isCertificateModalOpen && selectedStudy) {
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-8 relative animate-fade-in">
-      <button (click)="closeCertificateModal()" class="absolute top-2 left-2 text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
-      <h2 class="text-xl font-bold mb-4 text-center">شهادة إيداع رقمي لمخرجات دراسة استشارية</h2>
-      <div class="space-y-2 text-right">
-        <div><span class="font-semibold">اسم الدراسة:</span> {{selectedStudy.name}}</div>
-        <div><span class="font-semibold">نوع الدراسة:</span> {{selectedStudy.type}}</div>
-        <div><span class="font-semibold">موضوع الدراسة:</span> {{selectedStudy.subject}}</div>
-        <div><span class="font-semibold">الوصف:</span> {{selectedStudy.description}}</div>
-        <div><span class="font-semibold">التصنيف:</span> {{selectedStudy.category}}</div>
-      </div>
-      <div class="mt-6 flex justify-center">
-        <button (click)="closeCertificateModal()" class="px-6 py-2 bg-[var(--color-nimicgreen)] text-white rounded hover:bg-[#413258] transition">إغلاق</button>
-      </div>
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-8 relative animate-fade-in">
+    <button (click)="closeCertificateModal()"
+      class="absolute top-2 left-2 text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+    <h2 class="text-xl font-bold mb-4 text-center">شهادة إيداع رقمي لمخرجات دراسة استشارية</h2>
+    <div class="space-y-2 text-right">
+      <div><span class="font-semibold">اسم الدراسة:</span> {{selectedStudy.name}}</div>
+      <div><span class="font-semibold">نوع الدراسة:</span> {{selectedStudy.type}}</div>
+      <div><span class="font-semibold">موضوع الدراسة:</span> {{selectedStudy.subject}}</div>
+      <div><span class="font-semibold">الوصف:</span> {{selectedStudy.description}}</div>
+      <div><span class="font-semibold">التصنيف:</span> {{selectedStudy.category}}</div>
+    </div>
+    <div class="mt-6 flex justify-center">
+      <button (click)="closeCertificateModal()"
+        class="px-6 py-2 bg-[var(--color-nimicgreen)] text-white rounded hover:bg-[#413258] transition">إغلاق</button>
     </div>
   </div>
+</div>
 }

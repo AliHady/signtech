@@ -22,7 +22,8 @@ export class CmsDataService {
   getCmsData<T>(
     endpoint: string,
     queryParams?: { [key: string]: any },
-    cache?: BehaviorSubject<T | null>
+    cache?: BehaviorSubject<T | null>,
+    appendLang: Boolean = true
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
       switchMap(currentLang => {
@@ -31,7 +32,7 @@ export class CmsDataService {
           cache.next(null);
         }
 
-        let url = `${endpoint}/${currentLang}`;
+        let url = appendLang ? `${endpoint}/${currentLang}` : endpoint;
         const params: string[] = [];
 
         // Dynamically add query parameters

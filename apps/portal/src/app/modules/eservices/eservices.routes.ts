@@ -6,10 +6,25 @@ export const eservicesRoutes: Route[] = [
     loadComponent: () => import('./list-of-services/list-of-services.component').then(m => m.ListOfServicesComponent)
   },
   {
+    path: 'eservices/nationalcodingoffice',
+    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
+    path: 'eservices/senai',
+    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
+    path: 'eservices/industrialproductsmarket',
+    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
+    path: 'eservices/productdirectory',
+    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+  },
+  {
     path: 'eservices/applytotarmeez',
     loadComponent: () => import('./apply-to-tarmeez/apply-to-tarmeez.component').then(m => m.ApplyToTarmeezComponent)
   },
-
   {
     path: 'eservices/searchforncage',
     loadComponent: () => import('./search-for-ncage/search-for-ncage.component').then(m => m.SearchForNcageComponent)

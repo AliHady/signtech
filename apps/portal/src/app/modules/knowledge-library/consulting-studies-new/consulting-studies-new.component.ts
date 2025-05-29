@@ -7,6 +7,8 @@ import { DynamicFormComponent, DynamicFormConfig } from '@nimic/shared/ui';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'apps/Portal/src/environments/environment';
+import { ConsultingStudiesService } from '../services/consulting-studies.service';
+import { ConsultingStudiesLookups } from '../models/consulting-studies-lookups.model';
 
 @Component({
   selector: 'app-consulting-studies-list',
@@ -32,6 +34,10 @@ import { environment } from 'apps/Portal/src/environments/environment';
   ]
 })
 export class ConsultingStudiesNewComponent {
+  loading = true;
+  error = '';
+  lookups: ConsultingStudiesLookups | undefined;
+
   formConfig: DynamicFormConfig = {
     endpoint: `${environment.contentUrl}/consulting-studies`,
     method: 'POST',
@@ -108,12 +114,7 @@ export class ConsultingStudiesNewComponent {
         type: 'select',
         label: { en: 'Sector', ar: 'القطاع' },
         required: true,
-        options: [
-          { value: 1, label: { en: 'Governance', ar: 'حوكمة' } },
-          { value: 2, label: { en: 'Procedures', ar: 'إجراءات' } },
-          { value: 3, label: { en: 'Strategy', ar: 'إستراتيجية' } },
-          { value: 4, label: { en: 'Use Case', ar: 'حالة استخدام' } }
-        ],
+        options: [],
         validation: {
           required: true,
           errorMessages: {
@@ -126,19 +127,7 @@ export class ConsultingStudiesNewComponent {
         type: 'select',
         label: { en: 'Study Type', ar: 'نوع الدراسة' },
         required: true,
-        options: [
-          { value: 1, label: { en: 'Ministry of Industry and Mineral Resources', ar: 'وزارة الصناعة والثروة المعدنية' } },
-          { value: 2, label: { en: 'Industrial Center', ar: 'المركز الصناعي' } },
-          { value: 3, label: { en: 'Saudi Export Development Authority', ar: 'هيئة تنمية الصادرات السعودية' } },
-          { value: 4, label: { en: 'Saudi Geological Survey', ar: 'هيئة المساحة الجيولوجية السعودية' } },
-          { value: 5, label: { en: 'Saudi Export-Import Bank', ar: 'بنك التصدير والاستيراد السعودي' } },
-          { value: 6, label: { en: 'National Industrial Development and Logistics Program', ar: 'برنامج تطوير الصناعة الوطنية والخدمات اللوجستية' } },
-          { value: 7, label: { en: 'Royal Commission for Jubail and Yanbu', ar: 'الهيئة الملكية للجبيل وينبع' } },
-          { value: 8, label: { en: 'Local Content and Government Procurement Authority', ar: 'هيئة المحتوى المحلي والمشتريات الحكومية' } },
-          { value: 9, label: { en: 'Saudi Industrial Development Fund', ar: 'صندوق التنمية الصناعية السعودي' } },
-          { value: 10, label: { en: 'Saudi Authority for Industrial Cities and Technology Zones', ar: 'الهيئة السعودية للمدن الصناعية ومناطق التقنية' } },
-          { value: 11, label: { en: 'National Center for Industrial and Mining Information', ar: 'المركز الوطني للمعلومات الصناعية والتعدينية' } }
-        ],
+        options: [],
         validation: {
           required: true,
           errorMessages: {
@@ -151,10 +140,7 @@ export class ConsultingStudiesNewComponent {
         type: 'select',
         label: { en: 'Main Study Axis', ar: 'المحور الرئيسي للدراسة' },
         required: true,
-        options: [
-          { value: 1, label: { en: 'Main Axis 1', ar: 'المحور الرئيسي1' } },
-          { value: 2, label: { en: 'Main Axis 2', ar: 'المحور الرئيسي2' } }
-        ],
+        options: [],
         validation: {
           required: true,
           errorMessages: {
@@ -226,10 +212,7 @@ export class ConsultingStudiesNewComponent {
         type: 'radio',
         label: { en: 'Access Permission', ar: 'صلاحية الوصول' },
         required: true,
-        options: [
-          { value: 1, label: { en: 'Public', ar: 'عام' } },
-          { value: 3, label: { en: 'Restricted', ar: 'مقيد' } }
-        ],
+        options: [],
         validation: {
           required: true,
           errorMessages: {
@@ -242,10 +225,7 @@ export class ConsultingStudiesNewComponent {
         type: 'radio',
         label: { en: 'Confidentiality Classification', ar: 'تصنيف السرية' },
         required: true,
-        options: [
-          { value: 1, label: { en: 'Public', ar: 'عام' } },
-          { value: 2, label: { en: 'Confidential', ar: 'سري' } }
-        ],
+        options: [],
         validation: {
           required: true,
           errorMessages: {
@@ -259,7 +239,7 @@ export class ConsultingStudiesNewComponent {
         label: { en: 'Attach File', ar: 'إرفاق الملف' },
         required: true,
         acceptedFileTypes: '.docx,.pdf',
-        maxFileSize: 1, 
+        maxFileSize: 1,
         validation: {
           required: true,
           errorMessages: {
@@ -272,7 +252,70 @@ export class ConsultingStudiesNewComponent {
     clearButtonLabel: { en: 'Clear', ar: 'مسح' }
   };
 
-  constructor() { }
+  constructor(private consultingStudiesService: ConsultingStudiesService) { }
+
+  ngOnInit() {
+    this.getConsultingStudiesLookups();
+  }
+
+  getConsultingStudiesLookups() {
+    this.loading = true;
+    this.consultingStudiesService.getConsultingStudiesLookups().subscribe({
+      next: (response) => {
+        this.lookups = response;
+        this.bindLookupsToFormConfig();
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load studies. Please try again later.';
+        this.loading = false;
+        console.error('Error loading studies:', err);
+      }
+    });
+  }
+
+  bindLookupsToFormConfig() {
+    if (!this.lookups) return;
+    const studyTypeField = this.formConfig.fields.find(f => f.name === 'StudyTypeId');
+    if (studyTypeField) {
+      studyTypeField.options = this.lookups.StudyTypes.map(item => ({
+        value: Number(item.Id),
+        label: { en: item.TitleEn || item.Title, ar: item.Title }
+      }));
+    }
+
+    const studySubjectField = this.formConfig.fields.find(f => f.name === 'StudySubjectId');
+    if (studySubjectField) {
+      studySubjectField.options = this.lookups.StudySubjects.map(item => ({
+        value: Number(item.Id),
+        label: { en: item.TitleEn || item.Title, ar: item.Title }
+      }));
+    }
+
+    const studyPrivacyTypeField = this.formConfig.fields.find(f => f.name === 'StudyPrivacyTypeId');
+    if (studyPrivacyTypeField) {
+      studyPrivacyTypeField.options = this.lookups.StudyPrivacyTypes.map(item => ({
+        value: Number(item.Id),
+        label: { en: item.TitleEn || item.Title, ar: item.Title }
+      }));
+    }
+
+    const mainSubjectIdField = this.formConfig.fields.find(f => f.name === 'MainSubjectId');
+    if (mainSubjectIdField) {
+      mainSubjectIdField.options = this.lookups.MainSubjects.map(item => ({
+        value: Number(item.Id),
+        label: { en: item.TitleEn || item.Title, ar: item.Title }
+      }));
+    }
+
+    const privacyTypeField = this.formConfig.fields.find(f => f.name === 'PrivacyTypeId');
+    if (privacyTypeField) {
+      privacyTypeField.options = this.lookups.StudyPrivacyTypes.map(item => ({
+        value: Number(item.Id),
+        label: { en: item.TitleEn || item.Title, ar: item.Title }
+      }));
+    }
+  }
 
   onFormSubmitted(response: any) {
     console.log('Form submitted successfully:', response);

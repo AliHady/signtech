@@ -12,7 +12,6 @@ import { Content } from '../models/content.model';
 import { ReportsResponse } from '../../marsad/models/reports.model';
 import { CategoriesResponse } from '../../marsad/models/categories.model';
 import { KpiReportsResponse } from '../../marsad/models/reports-kpi.model';
-import { ConsultingStudiesResponse } from '../../knowledge-library/models/consulting-studies.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +26,7 @@ export class ContentService {
     reports: `${environment.powerPIUrl}/reports/reports-by-category`,
     reportsCategories: `${environment.powerPIUrl}/reports/category-types`,
     reportsKPI: `${environment.powerPIUrl}/reports/kpi`,
-    content: `${environment.contentUrl}/content`,
-    consultingStudies: `${environment.consultingStudiesUrl}/consulting-studies`
+    content: `${environment.contentUrl}/content`
   };
 
   constructor(
@@ -75,10 +73,5 @@ export class ContentService {
   }
   getReportsKPI(): Observable<KpiReportsResponse> {
     return this.http.get<KpiReportsResponse>(this.apiEndpoints.reportsKPI);
-  }
-
-  getAllConsultingStudies(pageNumber = 1, pageSize = 10): Observable<ConsultingStudiesResponse> {
-    return this.cmsDataService.getCmsData<ConsultingStudiesResponse>(this.apiEndpoints['consultingStudies'],
-      { pageNumber: pageNumber, pageSize: pageSize }, undefined, false);
   }
 } 

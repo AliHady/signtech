@@ -9,16 +9,8 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@nimic/translations';
 import { ContentService } from '../../content/services/content.service';
-import { ConsultingStudiesItem } from '../models/consulting-studies.model';
-
-interface Study {
-  id: number;
-  name: string;
-  type: string;
-  subject: string;
-  description: string;
-  category: string;
-}
+import { ConsultingStudiesItem, ConsultingStudyResponse } from '../models/consulting-studies.model';
+import { ConsultingStudiesService } from '../services/consulting-studies.service';
 
 interface StudiesCache {
   [key: number]: {
@@ -55,16 +47,16 @@ export class ConsultingStudiesListComponent implements OnInit {
 
   studies: ConsultingStudiesItem[] = [];
   paginatedStudies: ConsultingStudiesItem[] = [];
-  filteredStudies: Study[] = [];
+  filteredStudies: ConsultingStudyResponse[] = [];
 
   // Modal state
   isCertificateModalOpen = false;
-  selectedStudy: Study | null = null;
+  selectedStudy: ConsultingStudyResponse | null = null;
 
   constructor(
     private route: ActivatedRoute,
     public translationService: TranslationService,
-    private contentService: ContentService) { }
+    private consultingStudiesService: ConsultingStudiesService) { }
 
   ngOnInit() {
     //this.filteredStudies = this.studies;
@@ -79,9 +71,46 @@ export class ConsultingStudiesListComponent implements OnInit {
     this.getAllConsultingStudies();
   }
 
-  openCertificateModal(study: any) {
-    this.selectedStudy = study;
-    this.isCertificateModalOpen = true;
+  openCertificateModal(id: number) {
+    this.loading = true;
+    this.consultingStudiesService.getConsultingStudy(id).subscribe({
+      next: (response) => {
+        this.selectedStudy = response;
+        this.selectedStudy.Id = id;
+        this.isCertificateModalOpen = true;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load studies. Please try again later.';
+        this.loading = false;
+        console.error('Error loading studies:', err);
+      }
+    });
+  }
+
+  downloadStudy() {
+    if (!this.selectedStudy) {
+      this.error = 'No study selected for download.';
+      return;
+    }
+
+    this.loading = true;
+    this.consultingStudiesService.downloadConsultingStudy(this.selectedStudy.Id).subscribe({
+      next: (response) => {
+        const url = window.URL.createObjectURL(response);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'attachments.zip';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load studies. Please try again later.';
+        this.loading = false;
+        console.error('Error loading studies:', err);
+      }
+    });
   }
 
   closeCertificateModal() {
@@ -99,7 +128,7 @@ export class ConsultingStudiesListComponent implements OnInit {
     }
 
     this.loading = true;
-    this.contentService.getAllConsultingStudies(this.currentPage, this.itemsPerPage).subscribe({
+    this.consultingStudiesService.getAllConsultingStudies(this.currentPage, this.itemsPerPage).subscribe({
       next: (response) => {
         this.studies = response.Items;
         this.totalItems = response.TotalCount;

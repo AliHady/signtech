@@ -58,4 +58,10 @@ export class CmsDataService {
       })
     );
   }
+
+  downloadFile(endpoint: string): Observable<Blob> {
+    return this.http.get(endpoint, {
+      responseType: 'blob'
+    });
+  }
 } 

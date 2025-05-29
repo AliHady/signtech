@@ -12,12 +12,11 @@
                 d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                 clip-rule="evenodd" />
             </svg>
-            إضافة دراسة جديدة
+            {{ 'CONSULTING_STUDIES.ADD_NEW' | translate }}
           </button>
           <div class="w-full md:w-[300px]">
-            <app-text-input [label]="currentLang === 'ar' ? 'بحث' : 'Search'"
-              [placeholder]="currentLang === 'ar' ? 'ابحث عن دراسة...' : 'Search for a study...'" [name]="'search'"
-              class="mb-4">
+            <app-text-input [label]="'CONSULTING_STUDIES.SEARCH' | translate"
+              [placeholder]="'CONSULTING_STUDIES.SEARCH_PLACEHOLDER' | translate" [name]="'search'" class="mb-4">
             </app-text-input>
           </div>
         </div>
@@ -28,12 +27,18 @@
         <table class="min-w-full bg-white border border-gray-200">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">اسم الدراسة</th>
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">نوع الدراسة</th>
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">موضوع الدراسة</th>
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">الوصف</th>
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">التصنيف</th>
-              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">خيارات</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{ 'CONSULTING_STUDIES.NAME'
+                | translate }}</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{ 'CONSULTING_STUDIES.TYPE'
+                | translate }}</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{
+                'CONSULTING_STUDIES.SUBJECT' | translate }}</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{
+                'CONSULTING_STUDIES.DESCRIPTION' | translate }}</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{
+                'CONSULTING_STUDIES.CATEGORY' | translate }}</th>
+              <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600 border-l">{{
+                'CONSULTING_STUDIES.OPTIONS' | translate }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -56,8 +61,8 @@
               <td class="px-6 py-4 text-sm text-gray-600 border-l">
                 <button
                   class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer"
-                  (click)="openCertificateModal(study)">
-                  شهادة إيداع
+                  (click)="openCertificateModal(study.Id)">
+                  {{ 'CONSULTING_STUDIES.DEPOSIT_CERTIFICATE' | translate }}
                 </button>
               </td>
             </tr>
@@ -83,16 +88,19 @@
             </div>
 
             <div class="text-sm text-gray-600">
-              <p class="mb-1"><span class="font-medium">نوع الدراسة:</span> {{study.StudyType}}</p>
-              <p class="mb-1"><span class="font-medium">موضوع الدراسة:</span> {{study.StudySubject}}</p>
-              <p class="mb-1"><span class="font-medium">الوصف:</span> {{study.Description}}</p>
+              <p class="mb-1"><span class="font-medium">{{ 'CONSULTING_STUDIES.TYPE' | translate }}:</span>
+                {{study.StudyType}}</p>
+              <p class="mb-1"><span class="font-medium">{{ 'CONSULTING_STUDIES.SUBJECT' | translate }}:</span>
+                {{study.StudySubject}}</p>
+              <p class="mb-1"><span class="font-medium">{{ 'CONSULTING_STUDIES.DESCRIPTION' | translate }}:</span>
+                {{study.Description}}</p>
             </div>
 
             <div class="pt-2">
               <button
                 class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-[var(--color-nimicgreen)] bg-transparent hover:bg-[var(--color-nimicgreen)]/5 rounded-md transition-colors duration-200 font-[DiodrumArabic] border border-[var(--color-nimicgreen)] cursor-pointer"
-                (click)="openCertificateModal(study)">
-                شهادة إيداع
+                (click)="openCertificateModal(study.Id)">
+                {{ 'CONSULTING_STUDIES.DEPOSIT_CERTIFICATE' | translate }}
               </button>
             </div>
           </div>
@@ -109,17 +117,44 @@
   <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-8 relative animate-fade-in">
     <button (click)="closeCertificateModal()"
       class="absolute top-2 left-2 text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
-    <h2 class="text-xl font-bold mb-4 text-center">شهادة إيداع رقمي لمخرجات دراسة استشارية</h2>
+    <h2 class="text-xl font-bold mb-4 text-center">{{ 'CONSULTING_STUDIES.CERTIFICATE_MODAL_TITLE' | translate }}</h2>
     <div class="space-y-2 text-right">
-      <div><span class="font-semibold">اسم الدراسة:</span> {{selectedStudy.name}}</div>
-      <div><span class="font-semibold">نوع الدراسة:</span> {{selectedStudy.type}}</div>
-      <div><span class="font-semibold">موضوع الدراسة:</span> {{selectedStudy.subject}}</div>
-      <div><span class="font-semibold">الوصف:</span> {{selectedStudy.description}}</div>
-      <div><span class="font-semibold">التصنيف:</span> {{selectedStudy.category}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.NAME' | translate }}: </span> {{selectedStudy.NameAr}}
+      </div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.SUBJECT' | translate }}: </span>
+        {{selectedStudy.StudySubject}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.COMPANY_NAME' | translate }}: </span>
+        {{selectedStudy.CompanyName}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.STUDY_DATE' | translate }}: </span>
+        {{selectedStudy.StudyDate}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.SECTOR' | translate }}: </span> {{selectedStudy.Sector}}
+      </div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.TYPE' | translate }}: </span> {{selectedStudy.StudyType}}
+      </div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.MAIN_SUBJECT' | translate }}: </span>
+        {{selectedStudy.MainSubject}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.KEYWORDS' | translate }}: </span>
+        {{selectedStudy.Keywords}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.PRIVACY_TYPE' | translate }}</span>
+        {{selectedStudy.PrivacyType}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.CONTRACT_NAME' | translate }}: </span>
+        {{selectedStudy.ContractName}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.CONTRACT_NO' | translate }}: </span>
+        {{selectedStudy.ContractNo}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.BUDGET_ITEM_NO' | translate }}: </span>
+        {{selectedStudy.BudgetItemNo}}</div>
+      <div><span class="font-semibold">{{ 'CONSULTING_STUDIES.DESCRIPTION' | translate }}: </span>
+        {{selectedStudy.Description}}</div>
     </div>
     <div class="mt-6 flex justify-center">
+      <button (click)="downloadStudy()"
+        class="px-6 py-2 bg-[var(--color-nimicgreen)] text-white rounded hover:bg-[#413258] transition">
+        {{ 'CONSULTING_STUDIES.DOWNLOAD_STUDY' | translate }}
+      </button>
       <button (click)="closeCertificateModal()"
-        class="px-6 py-2 bg-[var(--color-nimicgreen)] text-white rounded hover:bg-[#413258] transition">إغلاق</button>
+        class="px-6 py-2 bg-[var(--color-nimicgreen)] text-white rounded hover:bg-[#413258] transition">
+        {{ 'CONSULTING_STUDIES.CLOSE' | translate }}
+      </button>
     </div>
   </div>
 </div>

@@ -190,7 +190,7 @@
   },
   "MARSAD": {
     "TITLE": "مرصد",
-    "SUBTITLE": "منصة ذكاء الأعمال ودعم القرار", 
+    "SUBTITLE": "منصة ذكاء الأعمال ودعم القرار",
     "DESCRIPTION": "مؤشرات صناعية وتعدينية موحدة تدعم متخذي القرار وتعزز فرص الاستثمار من خلال لوحات معلومات وتقارير دقيقة مستندة إلى مستودع وطني شامل.",
     "MORE": "المزيد",
     "MARSAD-REPORTS": "تقارير مرصد",
@@ -224,5 +224,32 @@
     "CONSULTING-STUDIES": "دراسات الاستشارات",
     "KNOWLEDGE-LIBRARY": "مكتبة المعرفة",
     "NEW": "دراسة استشارية جديدة"
+  },
+  "CONSULTING_STUDIES": {
+    "ADD_NEW": "إضافة دراسة جديدة",
+    "SEARCH": "بحث",
+    "SEARCH_PLACEHOLDER": "ابحث عن دراسة...",
+    "NAME": "اسم الدراسة",
+    "TYPE": "نوع الدراسة",
+    "SUBJECT": "موضوع الدراسة",
+    "DESCRIPTION": "الوصف",
+    "CATEGORY": "التصنيف",
+    "OPTIONS": "خيارات",
+    "DEPOSIT_CERTIFICATE": "شهادة إيداع",
+    "CERTIFICATE_MODAL_TITLE": "شهادة إيداع رقمي لمخرجات دراسة استشارية",
+    "COMPANY_NAME": "اسم الشركة المنفذة",
+    "STUDY_DATE": "تاريخ إصدار وثائق الدراسة",
+    "SECTOR": "القطاع",
+    "MAIN_SUBJECT": "المحور الرئيسي للدراسة",
+    "KEYWORDS": "الكلمات المفتاحية",
+    "PRIVACY_TYPE": "نوع السرية",
+    "CONTRACT_NAME": "اسم العقد",
+    "CONTRACT_NO": "رقم العقد",
+    "BUDGET_ITEM_NO": "رقم بند الميزانية",
+    "CLOSE": "إغلاق",
+    "PRIVACY_TYPE_PUBLIC": "عام",
+    "PRIVACY_TYPE_RESTRICTED": "مقيد",
+    "PRIVACY_TYPE_DEVELOPMENTAL": "دراسات تنموية",
+    "DOWNLOAD_STUDY": "تنزيل الدراسة"
   }
 }

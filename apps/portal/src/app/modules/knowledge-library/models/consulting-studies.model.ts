@@ -14,3 +14,13 @@ export interface ConsultingStudiesResponse {
   PageSize: number;
   Items: ConsultingStudiesItem[];
 }
+
+export interface ConsultingStudyResponse extends ConsultingStudiesItem {
+  BudgetItemNo: number;
+  CompanyName: string;
+  ContractName: string;
+  ContractNo: number;
+  Keywords: string;
+  MainSubject: string;
+  Sector: string;
+}

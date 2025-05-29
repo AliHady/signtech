@@ -212,7 +212,7 @@
   },
   "SEARCH_FOR_NCAGE": {
     "DESCRIPTION": "This service provides the investor with the ability to inquire about the global establishment code, enabling them to benefit from the services of the Saudi Indexing and Coding Office"
-  }, 
+  },
   "KNOWLEDGE-LIBRARY": {
     "TITLE": "Knowledge Library",
     "SUBTITLE": "Knowledge Library",
@@ -222,5 +222,32 @@
     "CONSULTING-STUDIES": "Consulting Studies",
     "KNOWLEDGE-LIBRARY": "Knowledge Library",
     "NEW": "New Consulting Study"
+  },
+  "CONSULTING_STUDIES": {
+    "ADD_NEW": "Add New Study",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search for a study...",
+    "NAME": "Study Name",
+    "TYPE": "Study Type",
+    "SUBJECT": "Study Subject",
+    "DESCRIPTION": "Description",
+    "CATEGORY": "Category",
+    "OPTIONS": "Options",
+    "DEPOSIT_CERTIFICATE": "Deposit Certificate",
+    "CERTIFICATE_MODAL_TITLE": "Digital Deposit Certificate for Consulting Study Output",
+    "COMPANY_NAME": "Company Name",
+    "STUDY_DATE": "Study Document Date",
+    "SECTOR": "Sector",
+    "MAIN_SUBJECT": "Main Subject",
+    "KEYWORDS": "Keywords",
+    "PRIVACY_TYPE": "Privacy Type",
+    "CONTRACT_NAME": "Contract Name",
+    "CONTRACT_NO": "Contract Number",
+    "BUDGET_ITEM_NO": "Budget Item Number",
+    "CLOSE": "Close",
+    "PRIVACY_TYPE_PUBLIC": "Public",
+    "PRIVACY_TYPE_RESTRICTED": "Restricted",
+    "PRIVACY_TYPE_DEVELOPMENTAL": "Developmental Studies",
+    "DOWNLOAD_STUDY": "Download Study"
   }
 }

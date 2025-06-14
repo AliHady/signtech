@@ -1,0 +1,137 @@
+<app-header></app-header>
+<div class="min-h-screen " [@routeAnimations]>
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <main class="main-content bg-white overflow-hidden">
+    <div class="container mx-auto px-4 py-8 max-w-1xl">
+    
+
+      <!-- Form Container -->
+      <div class="">
+        <div class="auth-container"> 
+          <div class="auth-card">
+            <h2 class="auth-title">إنشاء حساب جديد</h2>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+              <div class="form-group">
+                <label for="name">الاسم الكامل</label>
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  class="form-control"
+                  [class.is-invalid]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
+                />
+                @if (signupForm.get('name')?.invalid && signupForm.get('name')?.touched) {
+                  <div class="invalid-feedback">
+                    @if (signupForm.get('name')?.errors?.['required']) {
+                      <span>الاسم مطلوب</span>
+                    }
+                  </div>
+                }
+              </div>
+        
+              <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                  [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                />
+                @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+                  <div class="invalid-feedback">
+                    @if (signupForm.get('email')?.errors?.['required']) {
+                      <span>البريد الإلكتروني مطلوب</span>
+                    }
+                    @if (signupForm.get('email')?.errors?.['email']) {
+                      <span>يرجى إدخال بريد إلكتروني صحيح</span>
+                    }
+                  </div>
+                }
+              </div>
+        
+              <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  formControlName="phone"
+                  class="form-control"
+                  [class.is-invalid]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched"
+                />
+                @if (signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched) {
+                  <div class="invalid-feedback">
+                    @if (signupForm.get('phone')?.errors?.['required']) {
+                      <span>رقم الهاتف مطلوب</span>
+                    }
+                    @if (signupForm.get('phone')?.errors?.['pattern']) {
+                      <span>يرجى إدخال رقم هاتف صحيح (10 أرقام)</span>
+                    }
+                  </div>
+                }
+              </div>
+        
+              <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  class="form-control"
+                  [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                />
+                @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+                  <div class="invalid-feedback">
+                    @if (signupForm.get('password')?.errors?.['required']) {
+                      <span>كلمة المرور مطلوبة</span>
+                    }
+                    @if (signupForm.get('password')?.errors?.['minlength']) {
+                      <span>يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
+                    }
+                  </div>
+                }
+              </div>
+        
+              <div class="form-group">
+                <label for="confirmPassword">تأكيد كلمة المرور</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  class="form-control"
+                  [class.is-invalid]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+                />
+                @if (signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched) {
+                  <div class="invalid-feedback">
+                    @if (signupForm.get('confirmPassword')?.errors?.['required']) {
+                      <span>تأكيد كلمة المرور مطلوب</span>
+                    }
+                    @if (signupForm.errors?.['passwordMismatch']) {
+                      <span>كلمات المرور غير متطابقة</span>
+                    }
+                  </div>
+                }
+              </div>
+        
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || isLoading">
+                  @if (isLoading) {
+                    جاري إنشاء الحساب...
+                  } @else {
+                    إنشاء حساب
+                  }
+                </button>
+              </div>
+        
+              <div class="auth-links">
+                <a (click)="navigateToLogin()" class="auth-link">لديك حساب بالفعل؟ تسجيل الدخول</a>
+              </div>
+            </form>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

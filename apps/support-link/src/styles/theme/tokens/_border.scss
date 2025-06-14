@@ -1,0 +1,55 @@
+// Border Tokens
+// Defines border-related tokens that depend on foundation colors and border styles
+
+:root {
+  // Border Colors
+  --border-primary: var(--color-neutral-200);
+  --border-secondary: var(--color-neutral-300);
+  --border-tertiary: var(--color-neutral-400);
+  --border-inverse: var(--color-neutral-700);
+  --border-primary-on-primary: var(--color-neutral-200);
+  --border-secondary-on-primary: var(--color-neutral-300);
+  --border-tertiary-on-primary: var(--color-neutral-400);
+
+  // Border Opacity
+  --border-opacity-0: 0;
+  --border-opacity-5: 0.05;
+  --border-opacity-10: 0.1;
+  --border-opacity-20: 0.2;
+  --border-opacity-25: 0.25;
+  --border-opacity-30: 0.3;
+  --border-opacity-40: 0.4;
+  --border-opacity-50: 0.5;
+  --border-opacity-60: 0.6;
+  --border-opacity-70: 0.7;
+  --border-opacity-75: 0.75;
+  --border-opacity-80: 0.8;
+  --border-opacity-90: 0.9;
+  --border-opacity-95: 0.95;
+  --border-opacity-100: 1;
+
+  // Border Styles
+  --border-style-solid: solid;
+  --border-style-dashed: dashed;
+  --border-style-dotted: dotted;
+  --border-style-double: double;
+  --border-style-none: none;
+
+  // Border Widths
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  // Border Radius
+  --border-radius-none: var(--radius-none);
+  --border-radius-sm: var(--radius-sm);
+  --border-radius: var(--radius);
+  --border-radius-md: var(--radius-md);
+  --border-radius-lg: var(--radius-lg);
+  --border-radius-xl: var(--radius-xl);
+  --border-radius-2xl: var(--radius-2xl);
+  --border-radius-3xl: var(--radius-3xl);
+  --border-radius-full: var(--radius-full);
+} 

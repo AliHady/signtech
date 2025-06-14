@@ -1,0 +1,9 @@
+{
+  "name": "support-link-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/support-link-e2e/src",
+  "implicitDependencies": ["support-link"],
+  "// targets": "to see all targets run: nx show project support-link-e2e --web",
+  "targets": {}
+}

@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="news-details-container" [@routeAnimations]>
+  <app-breadcrumbs></app-breadcrumbs>
+  <main class="main-content bg-white overflow-hidden">
+    <div #contentContainer class="container mx-auto px-1 py-8">
+      @if (imageToDisplay) {
+        <div class="image-modal">
+          <div class="overlay" (click)="imageToDisplay = null"></div>
+          <div class="image-container">
+            <img [src]="imageToDisplay" alt="Preview" />
+            <button (click)="imageToDisplay = null">{{'GENERAL.CLOSE' | translate}}</button>
+          </div>
+        </div>
+      }
+
+      @if (content) {
+        <article class="p-8">
+          <div class="prose max-w-none">
+            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="content.Content"></div>
+          </div>
+        </article>
+      } @else {
+        <div class="space-y-4">
+          <!-- Content Skeleton -->
+          <ngx-skeleton-loader 
+            [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem' }" 
+            [count]="12"
+            appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+      }
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

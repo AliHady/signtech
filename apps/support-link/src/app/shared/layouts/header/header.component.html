@@ -1,0 +1,81 @@
+<header class="header">
+  <div>
+    <div class="text-gray-700 text-sm ">
+      <div class="container mx-auto flex items-center justify-end gap-4 p-4">
+        <a [routerLink]="['/', currentLang, 'help', 'contactus']" [href]="'/' + currentLang + '/help/contactus'"
+          class="topLinks text-[var(--color-support-link-orange)] hover:text-[#413258] transition-colors duration-300 no-underline mt-3 font-[500]">{{
+          'HEADER.CONTACT_US' | translate }}</a>
+        <a [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']" [href]="'/' + (currentLang === 'en' ? 'ar' : 'en')"
+          class="topLinks text-[var(--color-support-link-orange)] hover:text-[#413258] transition-colors duration-300 no-underline cursor-pointer mt-3 font-[500]"
+          (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
+          {{ currentLang === 'en' ? 'عربي' : 'EN' }}
+        </a>
+      </div>
+    </div>
+    <div class="container mx-auto flex items-center justify-between p-4 relative">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center">
+          <a routerLink="/" [href]="'/' + currentLang">
+            <img src="apps/support-link/src/assets/images/supportlink-logo.svg"
+              [alt]="'GENERAL.SUPPORT-LINK' | translate" [title]="'GENERAL.SUPPORT-LINK' | translate"
+              class="greenLogo h-14 lg:h-16" />
+            <img src="assets/images/newLogoWhite.png" [alt]="'GENERAL.SUPPORT-LINK' | translate"
+              [title]="'GENERAL.SUPPORT-LINK' | translate" class="whiteLogo h-14 lg:h-16" />
+          </a>
+        </div>
+        @if (!loading) {
+        <div class="hidden lg:flex items-center gap-8 text-[#1A1A1A] text-base relative mainMenuItems">
+          <ul class="flex items-center gap-2 mainNav">
+            @for (menuItem of menuItems; track menuItem) {
+            <li class="relative hover:bg-white hover:text-gray-800 !important transition-all duration-800 ease-out "
+              (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)">
+              <a [routerLink]="menuItem.url" [href]="'/' + currentLang + menuItem.url"
+                class="mainMenuItem flex items-center transition-all duration-300 ease-out gap-1 text-gray-700 hover:text-gray-900 cursor-pointer no-underline">
+                {{ menuItem.title }}
+                @if (menuItem.subMenus?.length) {
+                <svg class="w-3 h-3 transition-transform duration-300"
+                  [ngClass]="{'rotate-180': submenuOpen[menuItem.title]}" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+                }
+              </a>
+              @if (menuItem.subMenus?.length) {
+              <ul
+                class="subMenuContainer z-[7] absolute bg-white shadow-lg overflow-hidden transition-all duration-300 ease-out border-b border-gray-200"
+                [ngClass]="{'right-0': currentLang === 'ar', 'left-0': currentLang === 'en'}"
+                (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)" [ngClass]="{
+                          'opacity-100 scale-100 visible': submenuOpen[menuItem.title],
+                          'opacity-0 scale-95 invisible': !submenuOpen[menuItem.title],
+                          'w-96': menuItem.subMenus && menuItem.subMenus.length > 5,
+                          'w-48': menuItem.subMenus && menuItem.subMenus.length <= 5
+                        }">
+                <div class="absolute top-0 right-5 -translate-y-1/2 w-3 h-3 bg-white rotate-45 border-t border-r"></div>
+                <div
+                  [ngClass]="menuItem.subMenus">
+                  @for (child of menuItem.subMenus; track child) {
+                  <li>
+                    <a [routerLink]="child.url"
+                      class="block px-4 py-2 text-[#1A1A1A] hover:bg-gray-100 no-underline border-b border-gray-100 last:border-b-0">
+                      {{ child.title }}
+                    </a>
+                  </li>
+                  }
+                </div>
+              </ul>
+              }
+            </li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
+      <div class="hidden lg:flex items-center gap-3 text-sm">
+        <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'"
+          class="loginBtn px-6 py-3 text-base  transition border-0 font-inherit cursor-pointer no-underline">
+          {{ 'AUTH.LOGIN' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

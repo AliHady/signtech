@@ -1,0 +1,87 @@
+// Border Radius Foundation
+// Defines the border radius system
+
+:root {
+  // Border Radius Values
+  --radius-none: 0;
+  --radius-sm: 0.125rem;  // 2px
+  --radius: 0.25rem;      // 4px
+  --radius-md: 0.375rem;  // 6px
+  --radius-lg: 0.5rem;    // 8px
+  --radius-xl: 0.75rem;   // 12px
+  --radius-2xl: 1rem;     // 16px
+  --radius-3xl: 1.5rem;   // 24px
+  --radius-full: 9999px;
+
+  // Border Widths
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  // Border Styles
+  --border-style-solid: solid;
+  --border-style-dashed: dashed;
+  --border-style-dotted: dotted;
+  --border-style-double: double;
+  --border-style-none: none;
+}
+
+// Border Radius Mixins
+@mixin rounded-none {
+  border-radius: var(--radius-none);
+}
+
+@mixin rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+@mixin rounded {
+  border-radius: var(--radius);
+}
+
+@mixin rounded-md {
+  border-radius: var(--radius-md);
+}
+
+@mixin rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+@mixin rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+@mixin rounded-2xl {
+  border-radius: var(--radius-2xl);
+}
+
+@mixin rounded-3xl {
+  border-radius: var(--radius-3xl);
+}
+
+@mixin rounded-full {
+  border-radius: var(--radius-full);
+}
+
+// Border Mixins
+@mixin border-0 {
+  border-width: var(--border-width-0);
+}
+
+@mixin border {
+  border-width: var(--border-width-1);
+}
+
+@mixin border-2 {
+  border-width: var(--border-width-2);
+}
+
+@mixin border-4 {
+  border-width: var(--border-width-4);
+}
+
+@mixin border-8 {
+  border-width: var(--border-width-8);
+} 

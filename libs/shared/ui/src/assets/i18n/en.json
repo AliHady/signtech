@@ -1,0 +1,13 @@
+{
+  "GENERAL": {
+    "UPLOAD-FILE": "Upload a file",
+    "OR-DRAG-DROP": "or drag and drop",
+    "FILE-TYPES": "PNG, JPG, PDF up to 10MB",
+    "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
+    "FILE-TYPE-ERROR": "Invalid file type",
+    "IS_REQUIRED": "This field is required",
+    "REMOVE": "Remove",
+    "SUBMIT": "Submit",
+    "CLEAR": "Clear"
+  }
+} 

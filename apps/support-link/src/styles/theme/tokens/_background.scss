@@ -1,0 +1,37 @@
+// Background Tokens
+// Defines background-related tokens that depend on foundation colors
+
+:root {
+  // Background Colors
+  --background-primary: var(--color-neutral-50);
+  --background-secondary: var(--color-neutral-100);
+  --background-tertiary: var(--color-neutral-200);
+  --background-inverse: var(--color-neutral-900);
+
+  // Background Opacity
+  --background-opacity-0: 0;
+  --background-opacity-5: 0.05;
+  --background-opacity-10: 0.1;
+  --background-opacity-20: 0.2;
+  --background-opacity-25: 0.25;
+  --background-opacity-30: 0.3;
+  --background-opacity-40: 0.4;
+  --background-opacity-50: 0.5;
+  --background-opacity-60: 0.6;
+  --background-opacity-70: 0.7;
+  --background-opacity-75: 0.75;
+  --background-opacity-80: 0.8;
+  --background-opacity-90: 0.9;
+  --background-opacity-95: 0.95;
+  --background-opacity-100: 1;
+
+  // Background Blur
+  --backdrop-blur-none: 0;
+  --backdrop-blur-sm: 4px;
+  --backdrop-blur: 8px;
+  --backdrop-blur-md: 12px;
+  --backdrop-blur-lg: 16px;
+  --backdrop-blur-xl: 24px;
+  --backdrop-blur-2xl: 40px;
+  --backdrop-blur-3xl: 64px;
+} 

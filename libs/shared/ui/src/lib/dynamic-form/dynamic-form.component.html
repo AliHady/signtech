@@ -1,0 +1,185 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form">
+  <div class="mb-4">
+    @if (successMessage) {
+      <div class="success-message mt-4 p-4 bg-green-50 border-solid border border-green-200 flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span class="text-green-700 font-medium">{{ successMessage | translate }}</span>
+      </div>
+    }
+  
+    @if (errorMessage) {
+      <div class="error-message mt-4 p-4 bg-red-50 border-solid border border-red-200 flex items-center">
+        <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-red-700 font-medium">{{ errorMessage | translate }}</span>
+      </div>
+    }
+  </div>
+  <div class="form-fields grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (field of config.fields; track field.name) {
+      <!-- Text Input -->
+      @if (field.type === 'text') {
+        <app-text-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-text-input>
+      }
+
+      <!-- Email Input -->
+      @if (field.type === 'email') {
+        <app-email-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-email-input>
+      }
+
+      <!-- Date Picker -->
+      @if (field.type === 'date') {
+        <app-date-picker
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [required]="field.required || false"
+          [minDate]="field.validation?.minDate || field.minDate || ''"
+          [maxDate]="field.validation?.maxDate || field.maxDate || ''"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-date-picker>
+      }
+
+      <!-- Chips Input -->
+      @if (field.type === 'chips') {
+        <app-chips-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [maxChips]="field.validation?.maxChips || field.maxChips || 0"
+          [allowDuplicates]="field.allowDuplicates || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-chips-input>
+      }
+
+      <!-- Radio Group -->
+      @if (field.type === 'radio') {
+        <app-radio-group
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [options]="field.options ? transformToRadioOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-radio-group>
+      }
+      
+
+      <!-- Textarea -->
+      @if (field.type === 'textarea') {
+        <app-textarea
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-textarea>
+      }
+
+      <!-- Phone Input -->
+      @if (field.type === 'phone') {
+        <app-phone-input
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [required]="field.required || false"
+          [maxLength]="field.maxLength || 0"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-phone-input>
+      }
+
+      <!-- File Upload -->
+      @if (field.type === 'file') {
+        <app-file-upload
+          [formControlName]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))"
+          [acceptedFileTypes]="field.acceptedFileTypes || '.pdf,.doc,.docx,.jpg,.jpeg,.png'"
+          [maxFileSize]="field.maxFileSize || 1048576">
+        </app-file-upload>
+      }
+
+      <!-- Checkbox Group -->
+      @if (field.type === 'checkbox') {
+        <app-checkbox-group
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [options]="field.options ? transformToCheckboxOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-checkbox-group>
+      }
+
+      <!-- Select Search -->
+      @if (field.type === 'select') {
+        <app-select-search
+          [formControlName]="field.name"
+          [name]="field.name"
+          [label]="getTranslationKey(field.label)"
+          [placeholder]="field.placeholder ? getTranslationKey(field.placeholder) : ''"
+          [options]="field.options ? transformToSelectOptions(field.options) : []"
+          [required]="field.required || false"
+          [control]="form.get(field.name)"
+          [formSubmitted]="isSubmitting"
+          [errorMessage]="getErrorMessage(field, form.get(field.name))">
+        </app-select-search>
+      }
+    }
+  </div>
+
+  <div class="form-actions mt-6 flex gap-4 justify-end">
+    <button type="submit" class="px-8 py-3 text-white bg-[var(--color-support-link-orange)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']" [disabled]="isSubmitting || !form.valid">
+      {{ config.submitButtonLabel ? getTranslationKey(config.submitButtonLabel) : ('GENERAL.SUBMIT' | translate) }}
+    </button>
+    <button type="button"  class="px-8 py-3 text-[var(--color-support-link-orange)] bg-transparent hover:bg-[#413258] hover:text-white border border-[var(--color-support-link-orange)] font-medium font-inherit font-['DiodrumArabic']" (click)="onClear()">
+      {{ config.clearButtonLabel ? getTranslationKey(config.clearButtonLabel) : ('GENERAL.CLEAR' | translate) }}
+    </button>
+  </div>
+
+  
+</form>

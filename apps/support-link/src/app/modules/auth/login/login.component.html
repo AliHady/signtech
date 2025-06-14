@@ -1,0 +1,64 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">تسجيل الدخول</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        />
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <div class="invalid-feedback">
+            @if (loginForm.get('email')?.errors?.['required']) {
+              <span>البريد الإلكتروني مطلوب</span>
+            }
+            @if (loginForm.get('email')?.errors?.['email']) {
+              <span>يرجى إدخال بريد إلكتروني صحيح</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        />
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="invalid-feedback">
+            @if (loginForm.get('password')?.errors?.['required']) {
+              <span>كلمة المرور مطلوبة</span>
+            }
+            @if (loginForm.get('password')?.errors?.['minlength']) {
+              <span>يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || isLoading">
+          @if (isLoading) {
+            جاري تسجيل الدخول...
+          } @else {
+            تسجيل الدخول
+          }
+        </button>
+      </div>
+
+      <div class="auth-links">
+        <a (click)="navigateToPasswordReset()" class="auth-link">نسيت كلمة المرور؟</a>
+        <span class="auth-separator">|</span>
+        <a (click)="navigateToSignup()" class="auth-link">إنشاء حساب جديد</a>
+      </div>
+    </form>
+  </div>
+</div> 

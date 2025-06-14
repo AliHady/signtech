@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /help/
+Allow: /mediacenter/
+
+# Disallow sensitive areas
+Disallow: /login
+Disallow: /signup
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://support-link.com/sitemap.xml 

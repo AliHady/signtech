@@ -1,0 +1,72 @@
+{
+  "GENERAL": {
+    "WELCOME": "Welcome",
+    "HOME": "Home",
+    "ABOUT": "About",
+    "CLOSE": "Close",
+    "SUPPORT-LINK": "Support Link",
+    "READ_MORE": "Read More",
+    "IS_REQUIRED": "This field is required",
+    "UPLOAD-FILE": "Upload a file",
+    "OR-DRAG-DROP": "or drag and drop",
+    "FILE-TYPES": "PNG, JPG, PDF up to 1MB",
+    "FILE-SIZE-ERROR": "File size exceeds the maximum limit",
+    "FILE-TYPE-ERROR": "Invalid file type",
+    "REMOVE": "Remove",
+    "MORE": "More",
+    "SEARCH": "Search..."
+  },
+  "AUTH": {
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "EMAIL": "Email",
+    "PASSWORD": "Password"
+  },
+  "LANGUAGE": {
+    "EN": "EN",
+    "AR": "عربي"
+  },
+  "HEADER": {
+    "CONTACT_US": "Contact Us"
+  },
+  "LOADING": {
+    "LOADING": "Loading"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "© 2025 All rights reserved to Support Link"
+  },
+  "SITE_MAP": {
+    "TITLE": "Site Map",
+    "COMMUNICATION_HELP": "Communication & Help"
+  },
+  "NOT_FOUND": {
+    "TITLE": "404",
+    "HEADING": "Page Not Found",
+    "DESCRIPTION": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "HOME_BUTTON": "Return Home"
+  },
+  "SERVER_DOWN": {
+    "TITLE": "500",
+    "HEADING": "Server Error",
+    "DESCRIPTION": "We're experiencing technical difficulties. Our team has been notified and is working to resolve the issue.",
+    "RETRY_BUTTON": "Try Again",
+    "HOME_BUTTON": "Return Home"
+  },
+  "EMAIL": {
+    "REQUIRED": "Email is required"
+  },
+  "MESSAGE": {
+    "REQUIRED": "Message is required"
+  },
+  "COOKIE_CONSENT": {
+    "MESSAGE": "We use cookies to enhance your experience on our website. Some cookies are essential for the website to function, while others help us improve your experience. By continuing to use our site, you agree to our use of cookies.",
+    "ACCEPT": "Accept All",
+    "DECLINE": "Decline All",
+    "PREFERENCES": "Cookie Preferences",
+    "ESSENTIAL": "Essential Cookies (Required)",
+    "FUNCTIONAL": "Functional Cookies",
+    "ANALYTICS": "Analytics Cookies",
+    "APPLICATION_INSIGHTS": "Application Insights Cookies",
+    "APPLICATION_INSIGHTS_INFO": "These cookies help us monitor and improve the performance of our website. They collect anonymous information about how visitors use our site."
+  }
+}

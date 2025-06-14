@@ -49,11 +49,11 @@ export class StatusCodeInterceptor implements HttpInterceptor {
     if (HttpStatusUtil.isClientError(status)) {
       // Handle client errors (4xx)
       console.error(`Client error: ${status}`, error);
-      this.router.navigate(['/ar/server-down']);
+     // this.router.navigate(['/ar/server-down']);
     } else if (HttpStatusUtil.isServerError(status)) {
       // Handle server errors (5xx)
       console.error(`Server error: ${status}`, error);
-      this.router.navigate(['/ar/server-down']);
+     // this.router.navigate(['/ar/server-down']);
     }
   }
 } 

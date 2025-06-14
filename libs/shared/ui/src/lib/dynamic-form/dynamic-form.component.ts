@@ -17,7 +17,7 @@ import { ChipsInputComponent } from '../form-fields/chips-input/chips-input.comp
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'apps/Portal/src/environments/environment';
+import { environment } from 'apps/support-link/src/environments/environment';
 
 @Component({
   selector: 'app-dynamic-form',

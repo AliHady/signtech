@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, switchMap, tap } from 'rxjs';
-import { TranslationService } from '@nimic/translations';
+import { TranslationService } from '@support-link/translations';
 
 @Injectable({
   providedIn: 'root'

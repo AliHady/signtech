@@ -173,10 +173,10 @@
   </div>
 
   <div class="form-actions mt-6 flex gap-4 justify-end">
-    <button type="submit" class="px-8 py-3 text-white bg-[var(--color-nimicgreen)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']" [disabled]="isSubmitting || !form.valid">
+    <button type="submit" class="px-8 py-3 text-white bg-[var(--color-support-link-orange)] hover:bg-[#413258] disabled:opacity-50 disabled:cursor-not-allowed border-0 font-medium font-inherit font-['DiodrumArabic']" [disabled]="isSubmitting || !form.valid">
       {{ config.submitButtonLabel ? getTranslationKey(config.submitButtonLabel) : ('GENERAL.SUBMIT' | translate) }}
     </button>
-    <button type="button"  class="px-8 py-3 text-[var(--color-nimicgreen)] bg-transparent hover:bg-[#413258] hover:text-white border border-[var(--color-nimicgreen)] font-medium font-inherit font-['DiodrumArabic']" (click)="onClear()">
+    <button type="button"  class="px-8 py-3 text-[var(--color-support-link-orange)] bg-transparent hover:bg-[#413258] hover:text-white border border-[var(--color-support-link-orange)] font-medium font-inherit font-['DiodrumArabic']" (click)="onClear()">
       {{ config.clearButtonLabel ? getTranslationKey(config.clearButtonLabel) : ('GENERAL.CLEAR' | translate) }}
     </button>
   </div>

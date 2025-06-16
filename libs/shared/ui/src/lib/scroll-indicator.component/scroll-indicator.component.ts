@@ -46,7 +46,6 @@ export class ScrollIndicatorComponent {
   }
 
   getBackgroundColor(): string {
-    if (!isPlatformBrowser(this.platformId)) return '#413258';
-    return document.documentElement.classList.contains('marsadTheme') ? '#6c757d' : '#413258';
+  return '#413258';
   }
 }

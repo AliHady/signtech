@@ -28,36 +28,35 @@
           <ul class="flex items-center gap-2 mainNav">
             @for (menuItem of menuItems; track menuItem) {
             <li class="relative hover:bg-white hover:text-gray-800 !important transition-all duration-800 ease-out "
-              (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)">
-              <a [routerLink]="menuItem.url" [href]="'/' + currentLang + menuItem.url"
+              (mouseenter)="openSubmenu(menuItem.Title)" (mouseleave)="closeSubmenu(menuItem.Title)">
+              <a [routerLink]="menuItem.Url" [href]="'/' + currentLang + menuItem.Url"
                 class="mainMenuItem flex items-center transition-all duration-300 ease-out gap-1 text-gray-700 hover:text-gray-900 cursor-pointer no-underline">
-                {{ menuItem.title }}
-                @if (menuItem.subMenus?.length) {
+                {{ menuItem.Title }}
+                @if (menuItem.SubMenus?.length) {
                 <svg class="w-3 h-3 transition-transform duration-300"
-                  [ngClass]="{'rotate-180': submenuOpen[menuItem.title]}" fill="none" stroke="currentColor"
+                  [ngClass]="{'rotate-180': submenuOpen[menuItem.Title]}" fill="none" stroke="currentColor"
                   viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
                 }
               </a>
-              @if (menuItem.subMenus?.length) {
+              @if (menuItem.SubMenus?.length) {
               <ul
                 class="subMenuContainer z-[7] absolute bg-white shadow-lg overflow-hidden transition-all duration-300 ease-out border-b border-gray-200"
                 [ngClass]="{'right-0': currentLang === 'ar', 'left-0': currentLang === 'en'}"
-                (mouseenter)="openSubmenu(menuItem.title)" (mouseleave)="closeSubmenu(menuItem.title)" [ngClass]="{
-                          'opacity-100 scale-100 visible': submenuOpen[menuItem.title],
-                          'opacity-0 scale-95 invisible': !submenuOpen[menuItem.title],
-                          'w-96': menuItem.subMenus && menuItem.subMenus.length > 5,
-                          'w-48': menuItem.subMenus && menuItem.subMenus.length <= 5
+                (mouseenter)="openSubmenu(menuItem.Title)" (mouseleave)="closeSubmenu(menuItem.Title)" [ngClass]="{
+                          'opacity-100 scale-100 visible': submenuOpen[menuItem.Title],
+                          'opacity-0 scale-95 invisible': !submenuOpen[menuItem.Title],
+                          'w-96': menuItem.SubMenus && menuItem.SubMenus.length > 5,
+                          'w-48': menuItem.SubMenus && menuItem.SubMenus.length <= 5
                         }">
                 <div class="absolute top-0 right-5 -translate-y-1/2 w-3 h-3 bg-white rotate-45 border-t border-r"></div>
-                <div
-                  [ngClass]="menuItem.subMenus">
-                  @for (child of menuItem.subMenus; track child) {
+                <div [ngClass]="menuItem.SubMenus">
+                  @for (child of menuItem.SubMenus; track child) {
                   <li>
-                    <a [routerLink]="child.url"
+                    <a [routerLink]="child.Url"
                       class="block px-4 py-2 text-[#1A1A1A] hover:bg-gray-100 no-underline border-b border-gray-100 last:border-b-0">
-                      {{ child.title }}
+                      {{ currentLang === 'en' ? child.TitleEn : child.Title }}
                     </a>
                   </li>
                   }

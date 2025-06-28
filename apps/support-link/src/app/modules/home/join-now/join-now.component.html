@@ -1,0 +1,78 @@
+<div class="w-full bg-white py-16 flex items-center justify-center relative" style="min-height: 600px;">
+  <!-- Illustration absolutely layered on top of the map/content -->
+  <div class="absolute left-0 -translate-y-1/2 z-20 w-[425px] h-[798px] pointer-events-none">
+    <div class="relative h-[798px]">
+      <div class="absolute w-[425px] h-[798px] top-0 left-0">
+        <img class="absolute w-[167px] h-[110px] top-[626px] left-[258px]" alt="Vector"
+          src="assets/images/vector-92.svg" />
+        <img class="absolute w-[217px] h-[154px] top-[644px] left-[85px]" alt="Vector"
+          src="assets/images/vector-52.svg" />
+        <img class="absolute w-[123px] h-[65px] top-[731px] left-[71px]" alt="Vector"
+          src="assets/images/vector-91.svg" />
+        <img class="absolute w-3.5 h-[5px] top-[533px] left-[196px]" alt="Vector" src="assets/images/vector-79.svg" />
+        <div class="absolute w-[43px] h-[31px] top-[644px] left-[178px] bg-[#cf0606] rounded-[21.73px/15.48px]"></div>
+        <img class="absolute w-9 h-[41px] top-[628px] left-[181px]" alt="Vector" src="assets/images/vector-83.svg" />
+        <img class="absolute w-9 h-[41px] top-[628px] left-[181px]" alt="Mask group"
+          src="assets/images/mask-group.png" />
+        <img class="absolute w-[67px] h-[82px] top-[559px] left-[167px]" alt="Vector"
+          src="assets/images/vector-77.svg" />
+        <img class="absolute w-2.5 h-2 top-[597px] left-[226px]" alt="Vector" src="assets/images/vector-89.svg" />
+        <img class="absolute w-2.5 h-2 top-[596px] left-[165px]" alt="Vector" src="assets/images/vector-90.svg" />
+        <img class="absolute w-[83px] h-[65px] top-[536px] left-40" alt="Vector" src="assets/images/vector-78.svg" />
+        <img class="absolute w-[156px] h-[116px] top-[511px] left-[123px]" alt="Vector"
+          src="assets/images/vector-80.svg" />
+        <div
+          class="absolute w-[5px] h-[18px] top-[595px] left-[244px] bg-[#24c28a] rounded-[40px] rotate-[10.05deg] shadow-[0px_4px_34px_#09101a21]">
+        </div>
+        <div
+          class="absolute w-3.5 h-[37px] top-[584px] left-[232px] bg-white rounded-[40px] rotate-[10.05deg] shadow-[0px_4px_34px_#09101a21]">
+        </div>
+        <div
+          class="absolute w-[5px] h-[18px] top-[595px] left-[151px] bg-[#24c28a] rounded-[40px] rotate-[169.95deg] shadow-[0px_4px_34px_#09101a21]">
+        </div>
+        <div
+          class="absolute w-3.5 h-[37px] top-[584px] left-[153px] bg-white rounded-[40px] rotate-[169.95deg] shadow-[0px_4px_34px_#09101a21]">
+        </div>
+        <img class="absolute w-8 h-[42px] top-[580px] left-[150px]" alt="Mask group"
+          src="assets/images/mask-group-1.png" />
+        <img class="absolute w-[31px] h-[42px] top-[580px] left-[218px]" alt="Mask group"
+          src="assets/images/mask-group-2.png" />
+        <img class="absolute w-[17px] h-4 top-[595px] left-[177px]" alt="Vector" src="assets/images/vector-87.svg" />
+        <img class="absolute w-[17px] h-4 top-[595px] left-[206px]" alt="Vector" src="assets/images/vector-88.svg" />
+        <img class="absolute w-[55px] h-[19px] top-[593px] left-[173px]" alt="Subtract"
+          src="assets/images/subtract.svg" />
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <h2
+        class="font-['Rubik',Helvetica] font-medium text-[#0b132a] text-[35px] leading-[50px] [text-shadow:0px_1px_3px_1px_#00000026] shadow-m3-elevation-light-1">
+        Join to Global Network with Fastest Supports
+      </h2>
+      <div class="mt-6">
+        <button
+          class="bg-[#085dff] hover:bg-[#085dff]/90 text-[#f8fafd] rounded-[50px] px-8 py-3 font-['Rubik',Helvetica] font-medium">
+          Join Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Map and Content Section (background layer) -->
+  <div class="flex flex-col items-center justify-center w-full z-10">
+    <div class="w-[1060px] h-[538px] mx-auto relative"
+      style="background: url('assets/images/vector-3.svg') 100% 100% no-repeat;">
+      <ng-container *ngFor="let dot of networkDots">
+        <div class="absolute bg-white rounded-[10.48px] shadow-[0px_5.92px_5.92px_#86868624]" [ngStyle]="{
+            width: dot.size,
+            height: dot.size,
+            top: dot.top,
+            left: dot.left
+          }">
+          <div
+            class="relative w-[85%] h-[85%] top-0.5 left-0.5 bg-white rounded-[8.63px] border-[1.48px] border-solid border-[#f53737]">
+            <div class="w-[40%] h-[40%] top-[15%] left-[15%] rounded-[3.78px] relative bg-[#f53737]"></div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

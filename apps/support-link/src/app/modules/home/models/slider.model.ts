@@ -1,14 +1,14 @@
 export interface SliderItemDto {
+  Id: number;
+  Image: string; 
   Title: string;
-  ContentSummary: string;
-  SliderImage: string | null;
-  SliderLink: string | null;
-  IsOpenInNewTab: boolean;
-  SortOrder: number; 
+  Description: string;
+  Link: string;
+  DisplayOrder: number;
 }
 
 export interface SliderResponse {
   Items: SliderItemDto[];
   TotalItems: number;
   TotalPages: number;
-} 
+}

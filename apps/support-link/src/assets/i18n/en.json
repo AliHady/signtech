@@ -20,7 +20,8 @@
     "LOGIN": "Login",
     "REGISTER": "Register",
     "EMAIL": "Email",
-    "PASSWORD": "Password"
+    "PASSWORD": "Password",
+    "SIGNUP": "Sign Up"
   },
   "LANGUAGE": {
     "EN": "EN",

@@ -1,5 +1,30 @@
-<footer class="bg-[var(--color-support-link-orange)] text-white py-8 px-8">
-  <div class="container mx-auto px-4">
-  footer
+<footer class="w-full bg-[#4e5664] py-16">
+  <div class="container mx-auto px-4 flex flex-wrap justify-between">
+    <div class="w-full md:w-1/4 mb-8 md:mb-0">
+      <div class="flex flex-col items-center md:items-start">
+        <img class="w-[298px] h-auto mb-6 object-cover" alt="SupportLink Logo"
+          src="../../../../assets/images/freewhite2png-1.png" />
+        <p class="font-['Rubik',Helvetica] text-[#afb5c0] text-base text-center md:text-left">
+          ©2025 Support <span class="font-bold">Link</span>
+        </p>
+      </div>
+    </div>
+    <ng-container *ngFor="let section of footer">
+      <div class="w-full md:w-1/6 mb-8 md:mb-0">
+        <h3 class="font-['Rubik',Helvetica] font-medium text-[#ff6800] text-lg mb-6">
+          {{ currentLanguage === 'en' ? section.TitleEn : section.Title }}
+        </h3>
+        <nav>
+          <ul class="space-y-4">
+            <li *ngFor="let link of section.SubMenus">
+              <a [href]="link.Url"
+                class="font-['Rubik',Helvetica] font-normal text-[#dae0ed] text-base hover:text-white transition-colors">
+                {{ currentLanguage === 'en' ? link.TitleEn : link.Title }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </ng-container>
   </div>
-</footer> 
+</footer>

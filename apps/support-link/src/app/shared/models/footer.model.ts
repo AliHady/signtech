@@ -1,9 +1,18 @@
-export interface FooterModel {
-    Title: string;
-    Image: string | null;
-    Link: string;
-    LinkTarget: string;
-    SortOrder: number;
+export interface FooterSubMenu {
+  Id: number;
+  Title: string;
+  TitleEn: string;
+  Url: string | null;
+  DisplayOrder: number;
+  FooterMenuId: number;
+  FooterMenu: any;
 }
 
-export type Footer = FooterModel[];
+export interface FooterModel {
+  Id: number;
+  Title: string;
+  TitleEn: string;
+  DisplayOrder: number;
+  footerMenuId: number;
+  SubMenus: FooterSubMenu[];
+}

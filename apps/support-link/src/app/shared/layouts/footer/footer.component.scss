@@ -1,68 +1,31 @@
-:host {
-  display: block;
+a {
+    text-decoration: none;
 }
 
-.footer {
-  font-family: 'Cairo', sans-serif;
-  
-  // Custom styles for links
-  a {
-    @apply text-gray-200;
-    transition: color 0.2s ease-in-out;
-    
-    &:hover {
-      @apply text-white;
-    }
-  }
-
-  // Partner list styling
-  .footer-list {
-    li {
-      @apply mb-2 text-gray-200;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-  }
-
-  // Logo styling
-  .ministry-logo {
-    img {
-      @apply w-auto;
-      max-height: 60px;
-      filter: brightness(0) invert(1);
-    }
-  }
-
-  // Copyright section
-  .copyright {
-    @apply text-sm text-gray-300;
-    font-weight: 300;
-  }
+a:hover {
+    text-decoration: underline;
 }
 
-// RTL specific adjustments
-[dir="rtl"] {
-  .footer {
-    text-align: right;
-  }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
 }
 
-// Responsive styles
-@media (max-width: 768px) {
-  .footer {
-    padding: 2rem 0 1rem;
+a {
+    text-decoration: none;
+}
 
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
 
-    .footer-section {
-      text-align: center;
+li::marker {
+    content: none;
+}
 
-      .social-links {
-        justify-content: center;
-      }
-    }
-  }
-} 
+a {
+    text-decoration: none;
+}

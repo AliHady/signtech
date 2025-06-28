@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { CmsDataService } from '@support-link/shared/utils';
-import { environment } from '../../../environments/environment';
-import { Footer } from '../models/footer.model';
+import { FooterModel } from '../models/footer.model';
+import { Injectable } from '@angular/core';
+import { environment } from 'apps/support-link/src/environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FooterService {
   private footerApiUrl = `${environment.contentUrl}/cms/footer`;
-  private footerCache = new BehaviorSubject<Footer | null>(null);
+  private footerCache = new BehaviorSubject<FooterModel[] | null>(null);
 
   constructor(private cmsDataService: CmsDataService) { }
 
-  getFooter(): Observable<Footer> {
-    return this.cmsDataService.getCmsData<Footer>(
+  getFooter(): Observable<FooterModel[]> {
+    return this.cmsDataService.getCmsData<FooterModel[]>(
       this.footerApiUrl,
       undefined,
       this.footerCache,
       false
     );
   }
-} 
+}

@@ -20,7 +20,8 @@
     "LOGIN": "تسجيل الدخول",
     "REGISTER": "تسجيل",
     "EMAIL": "البريد الإلكتروني",
-    "PASSWORD": "كلمة المرور"
+    "PASSWORD": "كلمة المرور",
+    "SIGNUP": "تسجيل"
   },
   "LANGUAGE": {
     "EN": "EN",

@@ -29,7 +29,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    redirectTo: 'ar/home',  // Default redirect if no lang is provided
+    redirectTo: 'en/home',  // Default redirect if no lang is provided
     pathMatch: 'full'
   },
   {

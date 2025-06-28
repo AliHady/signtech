@@ -1,0 +1,47 @@
+<section class="w-full py-8 overflow-hidden">
+  <div class="mb-16">
+    <h2 class="font-medium text-[35px] text-[#0b132a] text-center leading-[50px] mb-6 max-w-[448px] mx-auto">
+      Trusted by Thousands of Happy Customer
+    </h2>
+    <div class="text-base text-[#4e5664] text-center leading-[30px] max-w-[555px] mx-auto">
+      These are the stories of our customers who have joined us with great
+      pleasure when using this crazy feature.
+    </div>
+  </div>
+  <ng-container *ngIf="reviews && reviews.length > 0">
+    <div class="flex items-center justify-center mb-4">
+      <button (click)="prev()" [disabled]="currentSlide === 0"
+        class="text-2xl px-3 py-1 bg-gray-200 rounded-full mr-4">&lt;</button>
+      <div class="flex w-full">
+        <div *ngFor="let review of visibleReviews" class="w-1/3 px-4 flex-shrink-0" style="box-sizing: border-box;">
+          <div class="bg-white rounded-xl shadow p-6 h-full flex flex-col justify-between">
+            <div class="flex items-center mb-4">
+              <img [src]="utilityService.getImageSrc(review?.Image)" [alt]="review.FullName"
+                class="w-12 h-12 rounded-full mr-4" />
+              <div>
+                <div class="font-semibold text-lg">{{ review.FullName }}</div>
+                <div class="text-sm text-gray-500">{{ review.Country }}, {{review.City}}</div>
+              </div>
+            </div>
+            <div class="flex items-center mb-4">
+              <span class="text-yellow-500 font-bold mr-1">{{ review.Rating }}</span>
+              <svg class="w-4 h-4 text-yellow-500" fill="#FEA250" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            </div>
+            <p class="text-gray-700 flex-1">{{ review.Comment }}</p>
+          </div>
+        </div>
+      </div>
+      <button (click)="next()" [disabled]="currentSlide === totalSlides - 1"
+        class="text-2xl px-3 py-1 bg-gray-200 rounded-full ml-4">&gt;</button>
+    </div>
+    <div class="flex justify-center mt-4 space-x-2">
+      <button *ngFor="let slide of [].constructor(totalSlides); let i = index" (click)="goToSlide(i)"
+        class="w-4 h-4 rounded-full border border-[#ff6800] transition-colors" [ngClass]="{
+        'bg-[#ff6800]': i === currentSlide,
+        'bg-white': i !== currentSlide
+      }"></button>
+    </div>
+  </ng-container>
+</section>

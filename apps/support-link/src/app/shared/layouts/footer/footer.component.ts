@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Footer ,FooterModel} from '../../models/footer.model';
+import { FooterModel } from '../../models/footer.model';
 import { FooterService } from '../../services/footer.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '@support-link/translations';
 import { Subscription } from 'rxjs';
 import { TranslationsModule } from '@support-link/translations';
-import { UtilityService } from '../../../shared/services/utility.service';
 
 @Component({
   selector: 'app-footer',
@@ -25,8 +24,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   constructor(
     private footerService: FooterService,
-    private translationService: TranslationService,
-    private utilityService: UtilityService) { }
+    private translationService: TranslationService) { }
 
   ngOnInit() {
     this.getFooter();

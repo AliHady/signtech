@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Header } from '../models/header.model';
-import { CmsDataService } from '@support-link/shared/utils';
+import { ApiDataService } from '@support-link/shared/utils';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
 
@@ -20,10 +20,10 @@ export class HeaderService {
   private menuCache = new BehaviorSubject<Header | null>(null);
   private menuItemsSubject = new BehaviorSubject<MenuItem[]>([]);
 
-  constructor(private cmsDataService: CmsDataService) {}
+  constructor(private apiDataService: ApiDataService,) { }
 
   getHeader(): Observable<Header> {
-    return this.cmsDataService.getCmsData<Header>(
+    return this.apiDataService.getCmsData<Header>(
       this.apiUrl,
       undefined,
       this.menuCache,

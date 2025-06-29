@@ -6,12 +6,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { JoinNowComponent } from './join-now/join-now.component';
-
-interface MenuItem {
-  label: string;
-  link?: string;
-  children?: MenuItem[];
-}
+import { HeaderComponent } from '../../shared/layouts/header/header.component';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +16,11 @@ interface MenuItem {
     SharedModule,
     SliderComponent,
     JoinNowComponent,
+    HeaderComponent,
     SubscriptionComponent,
     OurServicesComponent,
     ReviewsComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

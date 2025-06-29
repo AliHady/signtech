@@ -14,7 +14,7 @@
   line-height: var(--line-height-normal);
   color: var(--text-primary);
   background-color: var(--background-primary);
-
+  --main-color: #ff6800;
   --image-placeholder: rgba(227, 227, 227, 1);
   --body-base-font-family: "Inter", Helvetica;
   --body-base-font-weight: 400;
@@ -189,7 +189,7 @@ article {
   background-color: var(--color-support-link-orange);
 
   &:hover {
-    background-color: #ff6800;
+    background-color: var(--main-color);
     color: #fff;
   }
 }
@@ -246,7 +246,7 @@ article {
   left: 0;
   font-family: "Rubik", Helvetica;
   font-weight: 500;
-  color: #ff6800;
+  color: var(--main-color);
   font-size: 18px;
   letter-spacing: 0;
   line-height: 30px;
@@ -1275,7 +1275,7 @@ article {
   background-color: #ffffff;
   border-radius: 10px;
   border: 2px solid;
-  border-color: #ff6800;
+  border-color: var(--main-color);
 }
 
 .landingpage .group-34 {
@@ -1612,7 +1612,7 @@ article {
   left: 1000px;
   border-radius: 30px;
   border: 2px solid;
-  border-color: #ff6800;
+  border-color: var(--main-color);
 }
 
 .landingpage .eva-arrow-back-fill {
@@ -1629,7 +1629,7 @@ article {
   height: 60px;
   top: 2561px;
   left: 1080px;
-  background-color: #ff6800;
+  background-color: var(--main-color);
   border-radius: 30px;
   box-shadow: 0px 14px 44px #0e132214;
 }
@@ -1720,7 +1720,7 @@ article {
   height: 60px;
   top: 0;
   left: 0;
-  background-color: #ff6800;
+  background-color: var(--main-color);
   border-radius: 10px;
 }
 
@@ -1799,7 +1799,7 @@ article {
 }
 
 .landingpage .text-wrapper-26 {
-  color: #ff6800;
+  color: var(--main-color);
 }
 
 .landingpage .text-wrapper-27 {
@@ -1909,7 +1909,7 @@ article {
   position: relative;
   width: 150px;
   height: 45px;
-  background-color: #ff6800;
+  background-color: var(--main-color);
   border-radius: 50px;
   border: 1px solid;
   border-color: #fff7f1;
@@ -1918,7 +1918,7 @@ article {
 .landingpage .text-wrapper-34 {
   left: 44px;
   -webkit-text-stroke: 1px #fff7f1;
-  color: #ff6800;
+  color: var(--main-color);
   position: absolute;
   top: 12px;
   font-family: "Rubik", Helvetica;
@@ -1980,7 +1980,7 @@ article {
 }
 
 .landingpage .text-wrapper-37 {
-  color: #ff6800;
+  color: var(--main-color);
   line-height: 70px;
 }
 
@@ -2828,7 +2828,7 @@ article {
   margin-right: -0.48px;
   font-family: var(--body-strong-font-family);
   font-weight: var(--body-strong-font-weight);
-  color: #ff6800;
+  color: var(--main-color);
   font-size: var(--body-strong-font-size);
   letter-spacing: var(--body-strong-letter-spacing);
   line-height: var(--body-strong-line-height);

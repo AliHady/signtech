@@ -6,7 +6,7 @@ import { TranslationService } from '@support-link/translations';
 @Injectable({
   providedIn: 'root'
 })
-export class CmsDataService {
+export class ApiDataService {
   constructor(
     private http: HttpClient,
     private translationService: TranslationService

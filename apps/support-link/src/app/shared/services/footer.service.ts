@@ -1,4 +1,4 @@
-import { CmsDataService } from '@support-link/shared/utils';
+import { ApiDataService } from '@support-link/shared/utils';
 import { FooterModel } from '../models/footer.model';
 import { Injectable } from '@angular/core';
 import { environment } from 'apps/support-link/src/environments/environment';
@@ -11,10 +11,10 @@ export class FooterService {
   private footerApiUrl = `${environment.contentUrl}/cms/footer`;
   private footerCache = new BehaviorSubject<FooterModel[] | null>(null);
 
-  constructor(private cmsDataService: CmsDataService) { }
+  constructor(private apiDataService: ApiDataService,) { }
 
   getFooter(): Observable<FooterModel[]> {
-    return this.cmsDataService.getCmsData<FooterModel[]>(
+    return this.apiDataService.getCmsData<FooterModel[]>(
       this.footerApiUrl,
       undefined,
       this.footerCache,

@@ -4,6 +4,7 @@ import { contentRoutes } from './modules/content/content.routes';
 import { authRoutes } from './modules/auth/auth.routes';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { ServerDownComponent } from './shared/components/server-down/server-down.component';
+import { servicesRoutes } from './modules/services/services.routes';
 
 export const appRoutes: Route[] = [
   {
@@ -16,6 +17,7 @@ export const appRoutes: Route[] = [
       },
       ...homeRoutes,
       ...contentRoutes,
+      ...servicesRoutes,
       ...authRoutes,
       {
         path: 'server-down',

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationService, TranslationsModule } from '@support-link/translations';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { Header, HeaderItem } from '../../models/header.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -15,30 +14,16 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isMenuOpen = false;
   currentLang = 'ar';
-  isMobileMenuOpen = false;
   menuItems: HeaderItem[] = [];
   loading = true;
   error = '';
-  mobileSubmenuOpen: { [key: string]: boolean } = {
-    about: false,
-    initiatives: false,
-    products: false,
-    services: false,
-    media: false
-  };
-  environment = environment;  // Make environment available in template
+  openIndex: number | null = null;
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  }
-
-  constructor(public translationService: TranslationService, private router: Router, private headerService: HeaderService) {
+  constructor(
+    public translationService: TranslationService,
+    private headerService: HeaderService,
+    private router: Router) {
     this.translationService.currentLang$.subscribe(lang => {
       if (this.currentLang !== lang) {
         this.currentLang = lang;
@@ -76,17 +61,12 @@ export class HeaderComponent implements OnInit {
     }, 100);
   }
 
-  submenuOpen: { [key: string]: boolean } = {};
-
-  openSubmenu(menuName: string) {
-    this.submenuOpen[menuName] = true;
-  }
-
-  closeSubmenu(menuName: string) {
-    this.submenuOpen[menuName] = false;
-  }
-
-  toggleMobileSubmenu(key: string) {
-    this.mobileSubmenuOpen[key] = !this.mobileSubmenuOpen[key];
+  toggleDropdown(idx: number, url: string) {
+    if (url) {
+      return ['/', this.currentLang, url];
+    } else {
+      this.openIndex = this.openIndex === idx ? null : idx;
+      return null;
+    }
   }
 }

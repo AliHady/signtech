@@ -7,15 +7,15 @@
                 <h1
                     class="font-['DM_Serif_Display',Helvetica] text-4xl md:text-5xl lg:text-[50px] font-normal leading-tight md:leading-[70px] max-w-[555px]">
                     <span class="text-[#0b132a]">{{ sliderItems[currentSlide].Title }}</span>
-                    <span class="text-[#ff6800]">{{ sliderItems[currentSlide].Description }}</span>
+                    <span class="text-[var(--main-color)]">{{ sliderItems[currentSlide].Description }}</span>
                     <span class="text-[#ffb47f]">.</span>
                 </h1>
             </div>
         </div>
         <div class="flex justify-center mt-6 space-x-2">
             <button *ngFor="let item of sliderItems; let i = index" (click)="goToSlide(i)"
-                class="w-4 h-4 rounded-full border border-[#ff6800] transition-colors" [ngClass]="{
-          'bg-[#ff6800]': i === currentSlide,
+                class="w-4 h-4 rounded-full border border-[var(--main-color)] transition-colors" [ngClass]="{
+          'bg-[var(--main-color)]': i === currentSlide,
           'bg-white': i !== currentSlide
         }"></button>
         </div>

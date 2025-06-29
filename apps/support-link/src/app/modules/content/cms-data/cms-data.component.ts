@@ -33,6 +33,7 @@ export class CMSDataComponent implements OnInit {
   content: Content | undefined;
   loading = true;
   error = '';
+  portalUrl = environment.portalUrl;
   imageToDisplay: string | null = null;
 
   constructor(
@@ -55,14 +56,19 @@ export class CMSDataComponent implements OnInit {
       }
     });
 
-    this.loadContent("/CMS/" + parts.slice(1).join('/') + "/");
+    this.loadContent(parts.slice(1).join('/'));
   }
 
   private loadContent(route: string): void {
     this.loading = true;
-    this.contentService.getContent(route).subscribe({
+    this.contentService.getContent(route, this.currentLang).subscribe({
       next: (response) => {
         this.content = response;
+        if (this.content?.Content) {
+          this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
+          //  this.content.Content = this.content.Content.replace(/href="\/CMS/g, `href="${this.currentLang}`);
+        }
+
         this.loading = false;
       },
       error: (err) => {
@@ -74,6 +80,26 @@ export class CMSDataComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.attachLinkHandlers();
+  }
+
+  attachLinkHandlers() {
+    setTimeout(() => {
+      const links: NodeListOf<HTMLAnchorElement> = this.contentContainer.nativeElement.querySelectorAll('a');
+      if (links) {
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.utilityService.navigate(
+              href,
+              this.currentLang,
+              (url) => this.displayImage(url)
+            );
+          });
+        });
+      }
+    }, 500);
   }
 
   displayImage(url: string) {

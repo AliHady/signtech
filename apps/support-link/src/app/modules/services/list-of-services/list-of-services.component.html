@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="main-container">
+  <app-breadcrumbs></app-breadcrumbs>
+  <main class="main-content bg-white" [@routeAnimations]>
+    <section class="container mx-auto px-1 py-8">
+      <div class="list-of-services">
+        <h2 class="text-2xl font-bold mb-8 ">{{ 'LIST_OF_SERVICES.TITLE' | translate }}</h2>
+        @if (loading) {
+        <div class="services-grid">
+          @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="service-card skeleton">
+            <div class="skeleton-image"></div>
+            <div class="skeleton-title"></div>
+            <div class="skeleton-description"></div>
+          </div>
+          }
+        </div>
+        }
+        @if (error) {
+        <div class="error-message text-red-500 text-center p-4">
+          {{ 'LIST_OF_SERVICES.ERROR_MESSAGE' | translate }}
+        </div>
+        }
+        @if (!loading && !error) {
+        <div class="services-grid">
+          @for (service of paginatedServices; track service) {
+          <div
+            class="rounded-[15px] border border-solid border-[#d9d9d9] shadow-[0px_1px_3px_#00000040] overflow-hidden">
+            <div class="relative">
+              <img class="w-full h-[219px] object-cover" [alt]="service.Title + ' thumbnail'"
+                [src]="utilityService.getImageSrc(service.Image)" />
+              <div class="absolute top-4 right-4">
+                <span
+                  class="bg-[#9b989542] text-[#fbfaf6] border border-solid border-white rounded-[50px] px-3 py-0.5 text-xs">
+                  IT Supports
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="mt-4 font-serif font-normal text-[#1e1e1e] text-xl leading-7">
+                {{ service.Title }}
+              </h3>
+              <p class="mt-4 font-sans font-normal text-[#7a7a7a] text-[15px] leading-[21px]">
+                {{ service.Description }}
+              </p>
+              <div class="flex justify-between items-center mt-8">
+                <div class="flex items-center">
+                  <img class="w-3.5 h-4 mr-2" alt="Price icon" src="../../../../assets/images/riyal.png" />
+                  <span class="font-bold text-[#1e1e1e] text-base">
+                    {{ service.Price }}
+                  </span>
+                </div>
+                <button type="button"
+                  class="font-bold text-[var(--main-color)] text-base p-0 bg-transparent border-none hover:underline">
+                  Get it now!
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        }
+        @if (totalPages > 1) {
+        <div class="pagination mt-8 flex justify-center gap-2">
+          @for (page of getPages(); track page) {
+          <button (click)="onPageChange(page)" [class.bg-[var(--color-nimicgreen)]]="currentPage === page"
+            [class.text-white]="currentPage === page" [class.border-[var(--color-nimicgreen)]]="currentPage === page"
+            [class.pointer-events-none]="currentPage === page"
+            class="px-4 py-2 hover:bg-gray-100 transition-all duration-300 min-w-[40px] border border-transparent mx-1.5 cursor-pointer"
+            [attr.aria-current]="currentPage === page ? 'page' : null">
+            {{ page }}
+          </button>
+          }
+        </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>
+<app-footer></app-footer>

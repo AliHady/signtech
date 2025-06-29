@@ -5,13 +5,13 @@
         <img class="w-[298px] h-auto mb-6 object-cover" alt="SupportLink Logo"
           src="../../../../assets/images/freewhite2png-1.png" />
         <p class="font-['Rubik',Helvetica] text-[#afb5c0] text-base text-center md:text-left">
-          ©2025 Support <span class="font-bold">Link</span>
+          ©{{ currentYear }} Support <span class="font-bold">Link</span>
         </p>
       </div>
     </div>
     <ng-container *ngFor="let section of footer">
       <div class="w-full md:w-1/6 mb-8 md:mb-0">
-        <h3 class="font-['Rubik',Helvetica] font-medium text-[#ff6800] text-lg mb-6">
+        <h3 class="font-['Rubik',Helvetica] font-medium text-[var(--main-color)] text-lg mb-6">
           {{ currentLanguage === 'en' ? section.TitleEn : section.Title }}
         </h3>
         <nav>

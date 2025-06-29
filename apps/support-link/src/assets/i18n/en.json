@@ -69,5 +69,14 @@
     "ANALYTICS": "Analytics Cookies",
     "APPLICATION_INSIGHTS": "Application Insights Cookies",
     "APPLICATION_INSIGHTS_INFO": "These cookies help us monitor and improve the performance of our website. They collect anonymous information about how visitors use our site."
+  },
+  "ABOUT-US": {
+    "ABOUT-US": "About Us"
+  },
+  "SERVICES": {
+    "SERVICES": "Our Services"
+  },
+  "LIST_OF_SERVICES": {
+    "TITLE": "Our Services"
   }
 }

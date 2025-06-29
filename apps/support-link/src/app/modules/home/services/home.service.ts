@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SliderItemDto } from '../models/slider.model';
 import { environment } from '../../../../environments/environment';
-import { CmsDataService } from '@support-link/shared/utils';
+import { ApiDataService } from '@support-link/shared/utils';
 import { ServiceItemDto } from '../models/our-services.model';
 import { ReviewsResponse } from '../models/reviews.model';
 
@@ -17,10 +17,10 @@ export class HomeService {
   private reviewsApiUrl = `${environment.contentUrl}/customer/reviews`;
   private reviewsCache = new BehaviorSubject<ReviewsResponse[] | null>(null);
 
-  constructor(private cmsDataService: CmsDataService) { }
+  constructor(private apiDataService: ApiDataService,) { }
 
   getSliders(): Observable<SliderItemDto[]> {
-    return this.cmsDataService.getCmsData<SliderItemDto[]>(
+    return this.apiDataService.getCmsData<SliderItemDto[]>(
       this.sliderApiUrl,
       undefined,
       this.sliderCache,
@@ -29,7 +29,7 @@ export class HomeService {
   }
 
   getOurServices(): Observable<ServiceItemDto[]> {
-    return this.cmsDataService.getCmsData<ServiceItemDto[]>(
+    return this.apiDataService.getCmsData<ServiceItemDto[]>(
       this.servicesApiUrl,
       undefined,
       this.servicesCache,
@@ -37,8 +37,8 @@ export class HomeService {
     );
   }
 
-   getReviews(): Observable<ReviewsResponse[]> {
-    return this.cmsDataService.getCmsData<ReviewsResponse[]>(
+  getReviews(): Observable<ReviewsResponse[]> {
+    return this.apiDataService.getCmsData<ReviewsResponse[]>(
       this.reviewsApiUrl,
       undefined,
       this.reviewsCache,

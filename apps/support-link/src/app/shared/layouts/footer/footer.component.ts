@@ -19,6 +19,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   footer: FooterModel[] = [];
   loading = true;
   error = '';
+  currentYear = new Date().getFullYear();
   currentLanguage: string = 'ar';
   private langSubscription: Subscription = new Subscription();
 

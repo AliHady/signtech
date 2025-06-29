@@ -38,8 +38,8 @@
     </div>
     <div class="flex justify-center mt-4 space-x-2">
       <button *ngFor="let slide of [].constructor(totalSlides); let i = index" (click)="goToSlide(i)"
-        class="w-4 h-4 rounded-full border border-[#ff6800] transition-colors" [ngClass]="{
-        'bg-[#ff6800]': i === currentSlide,
+        class="w-4 h-4 rounded-full border border-[var(--main-color)] transition-colors" [ngClass]="{
+        'bg-[var(--main-color)]': i === currentSlide,
         'bg-white': i !== currentSlide
       }"></button>
     </div>

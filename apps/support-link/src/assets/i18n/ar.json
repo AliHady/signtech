@@ -1,6 +1,9 @@
 {
   "GENERAL": {
     "WELCOME": "مرحباً",
+    "SUPPORT_LINK": "SupportLink",
+    "SUPPORT": "Support",
+    "LINK": "Link",
     "HOME": "الرئيسية",
     "ABOUT": "من نحن",
     "CLOSE": "إغلاق",
@@ -14,7 +17,9 @@
     "IS_REQUIRED": "هذا الحقل مطلوب",
     "REMOVE": "حذف",
     "MORE": "المزيد",
-    "SEARCH": "بحث..."
+    "SEARCH": "بحث...",
+    "LANG_AR": "عربي",
+    "LANG_EN": "EN"
   },
   "AUTH": {
     "LOGIN": "تسجيل الدخول",
@@ -74,9 +79,63 @@
     "ABOUT-US": "عنا"
   },
   "SERVICES": {
-    "SERVICES": "خدمتنا"
+    "SERVICES": "خدمتنا",
+    "MORE_SERVICES": "خدمات أكثر"
   },
   "LIST_OF_SERVICES": {
-    "TITLE": "خدمتنا"
+    "TITLE": "خدمتنا",
+    "GET_IT_NOW": "احصل عليه الآن!"
+  },
+  "SERVICE_DETAILS": {
+    "WHAT_WE_OFFER": "ماذا نقدم:",
+    "WHO_IS_THIS_FOR": "لمن هذه الخدمة؟",
+    "DELIVERY": "التسليم:",
+    "ENSURE": "تأكد من أن عملية الفوترة الخاصة بك مضمونة ومتوافقة تمامًا مع اللوائح السعودية — احجز جلستك اليوم.",
+    "BACK": "رجوع",
+    "REQUEST_SUPPORT": "طلب دعم",
+    "LOGIN_REQUIRED_TITLE": "يجب عليك تسجيل الدخول أولاً لتتمكن من طلب الدعم",
+    "CLOSE": "إغلاق",
+    "LOGIN_NOW": "تسجيل الدخول الآن"
+  },
+  "LOGIN": {
+    "WELCOME_BACK": "مرحبًا بعودتك!",
+    "LOGIN_TO_YOUR_ACCOUNT": "سجّل الدخول إلى حسابك",
+    "EMAIL_LABEL": "البريد الإلكتروني",
+    "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+    "EMAIL_INVALID": "يرجى إدخال بريد إلكتروني صحيح",
+    "PASSWORD_LABEL": "كلمة المرور",
+    "PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
+    "PASSWORD_MINLENGTH": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "RECOVER_PASSWORD": "استعادة كلمة المرور",
+    "NO_ACCOUNT": "ليس لديك حساب؟",
+    "SIGN_UP": "إنشاء حساب",
+    "LOGIN_BUTTON": "تسجيل الدخول",
+    "LOGGING_IN": "جاري تسجيل الدخول..."
+  },
+  "OTP": {
+    "GET_STARTED": "ابدأ مع",
+    "CREATE_ACCOUNT": "أنشئ حسابك المجاني",
+    "ENTER_OTP": "أدخل رمز التحقق",
+    "OTP_REQUIRED": "رمز التحقق مطلوب",
+    "OTP_MINLENGTH": "يجب أن يكون رمز التحقق 6 أرقام",
+    "RECAPTCHA_REQUIRED": "يرجى التحقق من أنك لست روبوتًا",
+    "NEXT": "التالي",
+    "VERIFYING": "جاري التحقق..."
+  },
+  "SIGNUP": {
+    "GET_STARTED": "ابدأ مع",
+    "CREATE_ACCOUNT": "أنشئ حسابك المجاني",
+    "EMAIL_LABEL": "البريد الإلكتروني",
+    "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+    "EMAIL_INVALID": "يرجى إدخال بريد إلكتروني صحيح",
+    "PASSWORD_LABEL": "أنشئ كلمة مرور قوية",
+    "PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
+    "PASSWORD_MINLENGTH": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "PASSWORD_PATTERN": "يجب أن تحتوي كلمة المرور على حرف كبير ورقم وحرف خاص",
+    "PASSWORD_HINT": "يجب أن تكون كلمة المرور <b>8 أحرف</b> على الأقل ويجب أن تحتوي على <b>حرف كبير</b> و<b>رقم</b> و<b>حرف خاص</b>.",
+    "ALREADY_HAVE_ACCOUNT": "لديك حساب بالفعل؟",
+    "LOGIN": "تسجيل الدخول",
+    "NEXT": "التالي",
+    "CREATING": "جاري الإنشاء..."
   }
 }

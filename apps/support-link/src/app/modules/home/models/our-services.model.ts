@@ -14,4 +14,20 @@ export interface ServiceItemDto {
   IsActive: boolean;
   DisplayOrder: number;
   Price: number | null;
+  Offers: string;
+  OffersEn: string;
+  Targets: string;
+  TargetsEn: string;
+  Delivery: string;
+  DeliveryEn: string;
+  Ensure: string;
+  EnsureEn: string;
+}
+
+export interface ServicesResponse {
+  TotalItems: number;
+  TotalPages: number;
+  CurrentPage: number;
+  PageSize: number;
+  Items: ServiceItemDto[];
 }

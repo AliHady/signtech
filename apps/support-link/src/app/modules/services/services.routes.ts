@@ -7,6 +7,6 @@ export const servicesRoutes: Route[] = [
   },
   {
     path: 'services/:id',
-    loadComponent: () => import('../content/cms-data/cms-data.component').then(m => m.CMSDataComponent)
+    loadComponent: () => import('./service-details/service-details.component').then(m => m.ServiceDetailsComponent)
   }
 ]; 

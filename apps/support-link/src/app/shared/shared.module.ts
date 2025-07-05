@@ -5,6 +5,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     HeaderComponent,
     FooterComponent,
     LoadingOverlayComponent,
-    BreadcrumbsComponent,
+    PopupComponent,
+    BreadcrumbsComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
+    PopupComponent,
     LoadingOverlayComponent
   ]
 })

@@ -14,7 +14,7 @@ export class FooterService {
   constructor(private apiDataService: ApiDataService,) { }
 
   getFooter(): Observable<FooterModel[]> {
-    return this.apiDataService.getCmsData<FooterModel[]>(
+    return this.apiDataService.getData<FooterModel[]>(
       this.footerApiUrl,
       undefined,
       this.footerCache,

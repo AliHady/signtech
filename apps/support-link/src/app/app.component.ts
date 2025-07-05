@@ -9,12 +9,14 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ScrollIndicatorComponent } from '@support-link/shared/ui';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @Component({
   imports: [
     RouterModule, 
     TranslateModule, 
     CommonModule,
+    SharedModule,
     LoadingOverlayComponent,
     LoadingBarModule,
     ScrollIndicatorComponent,

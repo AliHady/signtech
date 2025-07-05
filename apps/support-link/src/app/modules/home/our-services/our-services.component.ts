@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslationsModule } from '@support-link/translations';
+import { TranslationService, TranslationsModule } from '@support-link/translations';
 import { ServiceItemDto } from '../models/our-services.model';
-import { HomeService } from '../services/home.service';
 import { UtilityService } from '../../../shared/services/utility.service';
+import { OurServicesService } from '../../services/services/our-services.service';
 
 @Component({
   selector: 'app-our-services',
@@ -17,12 +17,24 @@ import { UtilityService } from '../../../shared/services/utility.service';
 export class OurServicesComponent implements OnInit {
   currentSlide = 0;
   services: ServiceItemDto[] = [];
-
-  constructor(private homeService: HomeService, public utilityService: UtilityService) { }
+  currentLang = 'ar';
+  constructor(
+    private ourServicesService: OurServicesService,
+    private route: ActivatedRoute,
+    public translationService: TranslationService,
+    public utilityService: UtilityService) { }
 
   ngOnInit() {
-    this.homeService.getOurServices().subscribe(data => {
-      this.services = data;
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
+    });
+
+    this.ourServicesService.getOurServices().subscribe(data => {
+      this.services = data.Items;
     });
   }
 }

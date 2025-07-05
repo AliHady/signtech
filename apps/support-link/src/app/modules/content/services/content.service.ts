@@ -18,12 +18,12 @@ export class ContentService {
     private http: HttpClient) { }
 
   private getPaginatedData<T>(endpoint: keyof typeof this.apiEndpoints, pageNumber = 1, pageSize = 9, showInHome?: boolean): Observable<T> {
-    return this.apiDataService.getCmsData<T>(this.apiEndpoints[endpoint],
+    return this.apiDataService.getData<T>(this.apiEndpoints[endpoint],
       showInHome ? { pageNumber: pageNumber, pageSize: pageSize, showInHome: showInHome } :
         { pageNumber: pageNumber, pageSize: pageSize });
   }
 
   getContent(route: string, lang: string): Observable<Content> {
-    return this.apiDataService.getCmsData<Content>(this.apiEndpoints.content, { route: route, lang: lang }, undefined, false);
+    return this.apiDataService.getData<Content>(this.apiEndpoints.content, { route: route, lang: lang }, undefined, false);
   }
 } 

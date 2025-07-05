@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { HeaderComponent } from '../../../shared/layouts/header/header.component';
-import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationsModule } from '@support-link/translations';
@@ -22,8 +20,6 @@ interface MenuItem {
   imports: [
     CommonModule,
     RouterModule,
-    HeaderComponent,
-    FooterComponent,
     BreadcrumbsComponent,
     TranslateModule,
     TranslationsModule
@@ -63,7 +59,7 @@ export class CMSHeaderMenuComponent implements OnInit {
         if (headerMenu && headerMenu.children) {
           this.submenuItems = headerMenu.children;
         }
-        
+
         this.loading = false;
       },
       error: (error) => {

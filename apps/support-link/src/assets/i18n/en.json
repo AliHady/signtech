@@ -1,6 +1,9 @@
 {
   "GENERAL": {
     "WELCOME": "Welcome",
+    "SUPPORT_LINK": "SupportLink",
+    "SUPPORT": "Support",
+    "LINK": "Link",
     "HOME": "Home",
     "ABOUT": "About",
     "CLOSE": "Close",
@@ -14,7 +17,9 @@
     "FILE-TYPE-ERROR": "Invalid file type",
     "REMOVE": "Remove",
     "MORE": "More",
-    "SEARCH": "Search..."
+    "SEARCH": "Search...",
+    "LANG_AR": "عربي",
+    "LANG_EN": "EN"
   },
   "AUTH": {
     "LOGIN": "Login",
@@ -74,9 +79,63 @@
     "ABOUT-US": "About Us"
   },
   "SERVICES": {
-    "SERVICES": "Our Services"
+    "SERVICES": "Our Services",
+    "MORE_SERVICES": "More Services"
   },
   "LIST_OF_SERVICES": {
-    "TITLE": "Our Services"
+    "TITLE": "Our Services",
+    "GET_IT_NOW": "Get it now!"
+  },
+  "SERVICE_DETAILS": {
+    "WHAT_WE_OFFER": "What We Offer:",
+    "WHO_IS_THIS_FOR": "Who Is This For?",
+    "DELIVERY": "Delivery:",
+    "ENSURE": "Ensure your invoicing process is future-proof and fully compliant with Saudi regulations—book your session today.",
+    "BACK": "Back",
+    "REQUEST_SUPPORT": "Request Support",
+    "LOGIN_REQUIRED_TITLE": "You should login first to be able to request supports",
+    "CLOSE": "Close",
+    "LOGIN_NOW": "Login Now"
+  },
+  "LOGIN": {
+    "WELCOME_BACK": "Welcome back!",
+    "LOGIN_TO_YOUR_ACCOUNT": "Login to your account",
+    "EMAIL_LABEL": "Email Address",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_MINLENGTH": "Password must be at least 6 characters",
+    "RECOVER_PASSWORD": "Recover Password",
+    "NO_ACCOUNT": "Don't have an account?",
+    "SIGN_UP": "Sign Up",
+    "LOGIN_BUTTON": "Login",
+    "LOGGING_IN": "Logging in..."
+  },
+  "OTP": {
+    "GET_STARTED": "Get Started with",
+    "CREATE_ACCOUNT": "Create your free account",
+    "ENTER_OTP": "Enter OTP",
+    "OTP_REQUIRED": "OTP is required",
+    "OTP_MINLENGTH": "OTP must be 6 digits",
+    "RECAPTCHA_REQUIRED": "Please verify you are not a robot",
+    "NEXT": "Next",
+    "VERIFYING": "Verifying..."
+  },
+  "SIGNUP": {
+    "GET_STARTED": "Get Started with",
+    "CREATE_ACCOUNT": "Create your free account",
+    "EMAIL_LABEL": "Your Email Address",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "PASSWORD_LABEL": "Create a Strong Password",
+    "PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_MINLENGTH": "Password must be at least 8 characters",
+    "PASSWORD_PATTERN": "Password must contain a capital letter, a number, and a special character",
+    "PASSWORD_HINT": "Password must be at least <b>8 Characters</b> and must contain at least a <b>Capital Letter</b>, a <b>Number</b> and a <b>Special Character</b>.",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN": "Login",
+    "NEXT": "Next",
+    "CREATING": "Creating..."
   }
 }

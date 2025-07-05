@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../../shared/services/header.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { HeaderComponent } from '../../../shared/layouts/header/header.component';
-import { FooterComponent } from '../../../shared/layouts/footer/footer.component';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationsModule } from '@support-link/translations';
@@ -22,12 +20,10 @@ interface MenuItem {
   imports: [
     CommonModule,
     RouterModule,
-    HeaderComponent,
-    FooterComponent,
     BreadcrumbsComponent,
     TranslateModule,
     TranslationsModule
-  ],
+],
   templateUrl: './site-map.component.html',
   styleUrls: ['./site-map.component.scss'],
   animations: [

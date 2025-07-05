@@ -3,19 +3,27 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { ApiDataService } from '@support-link/shared/utils';
 import { environment } from '../../../../environments/environment';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { ContentService } from '../../content/services/content.service';
-import { Content } from '../../content/models/content.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { OurServicesService } from '../services/our-services.service';
+import { ServiceItemDto } from '../../home/models/our-services.model';
+import { UtilityService } from '../../../shared/services/utility.service';
+import { TranslationService } from '@support-link/translations';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-service-details',
   templateUrl: './service-details.component.html',
   styleUrls: ['./service-details.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, SharedModule, NgxSkeletonLoaderModule, TranslateModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule,
+    SharedModule,
+    NgxSkeletonLoaderModule,
+    TranslateModule],
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
@@ -26,38 +34,53 @@ import { TranslateModule } from '@ngx-translate/core';
   ]
 })
 export class ServiceDetailsComponent implements OnInit {
-  serviceDetails: any;
+  showPopup = false;
+  currentLang = 'ar';
   loading = true;
   error = '';
   portalUrl = environment.portalUrl;
-  content: Content | undefined;
+  serviceDetails: ServiceItemDto | undefined;
   imageToDisplay: string | null = null;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private apiDataService: ApiDataService,
-    private contentService: ContentService,
-  ) { }
+    public utilityService: UtilityService,
+    public translationService: TranslationService,
+    private ourServicesService: OurServicesService,
+    private location: Location) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const serviceId = history.state.id;
+      if (serviceId) {
+        this.loadServiceDetails(serviceId);
+      } else {
+        this.error = 'Event ID not found';
+        this.loading = false;
+      }
+    });
+
     const fullUrl = this.router.url.split('?')[0];
     const parts = fullUrl.split('/').filter(Boolean);
     this.route.paramMap.subscribe(params => {
       const serviceTitle = history.state.title;
-      this.loadServiceDetails("/CMS/" + parts.slice(1).join('/') + "/");
     });
   }
 
-  private loadServiceDetails(serviceTitle: string): void {
+  private loadServiceDetails(serviceId: number): void {
     this.loading = true;
-    this.apiDataService.getCmsData(serviceTitle).subscribe({
+    this.ourServicesService.getServiceDetails(serviceId).subscribe({
       next: (response) => {
-        // this.content = response;
-        // if (this.content?.Content) {
-        //   this.content.Content = this.content.Content.replace(/src="\/CMS\/media/g, `src="${this.portalUrl}/media`);
-        //   //  this.content.Content = this.content.Content.replace(/href="\/CMS/g, `href="${this.currentLang}`);
-        // }
-
+        this.serviceDetails = response;
+        this.imageToDisplay = this.utilityService.getImageSrc(this.serviceDetails.Image);
         this.loading = false;
       },
       error: (err) => {
@@ -66,5 +89,18 @@ export class ServiceDetailsComponent implements OnInit {
         console.error('Error loading content:', err);
       }
     });
+  }
+
+  openRequestSupport(serviceId: number) {
+    this.showPopup = true;
+  }
+
+  requestSupport() {
+    this.showPopup = false;
+    this.router.navigate(['/', this.currentLang, 'auth', 'login']);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

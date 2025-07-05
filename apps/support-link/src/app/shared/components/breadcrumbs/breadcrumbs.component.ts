@@ -88,9 +88,9 @@ export class BreadcrumbsComponent implements OnInit {
     const currentSegments = this.currentPath.split('/').filter(x => x);
     const translationPrefix = currentSegments.length > 0 ? currentSegments[0].toUpperCase() : 'GENERAL';
     //console.log("currentSegments", currentSegments)
-   // console.log(lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl))
+    // console.log(lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl))
     if (lastBreadcrumbUrl && this.currentPath.startsWith(lastBreadcrumbUrl)) {
-     // console.log("lastBreadcrumbUrl", lastBreadcrumbUrl)
+      // console.log("lastBreadcrumbUrl", lastBreadcrumbUrl)
       const remainingPath = this.currentPath.replace(lastBreadcrumbUrl.replace('/' + this.currentLang, ''), '');
       const remainingSegments = remainingPath.split('/').filter(x => x);
 
@@ -100,7 +100,7 @@ export class BreadcrumbsComponent implements OnInit {
         for (const segment of remainingSegments) {
           accumulatedPath += '/' + segment;
           if (!this.list.some(x => x.url === accumulatedPath)) {
-            if (translationPrefix !== 'MEDIACENTER') {
+            if (translationPrefix !== 'SERVICES') {
               this.list.push({
                 url: accumulatedPath,
                 label: this.translate.instant(translationPrefix + '.' + segment.toUpperCase())
@@ -116,13 +116,13 @@ export class BreadcrumbsComponent implements OnInit {
         }
       }
     }
-    else{
+    else {
       //console.log("else", currentSegments)
       let accumulatedPath = '';
       for (const segment of currentSegments) {
         accumulatedPath += '/' + segment;
         if (!this.list.some(x => x.url === accumulatedPath)) {
-          if (translationPrefix !== 'MEDIACENTER') {
+          if (translationPrefix !== 'SERVICES' || this.list.length == 1) {
             this.list.push({
               url: accumulatedPath,
               label: this.translate.instant(translationPrefix + '.' + segment.toUpperCase())
@@ -157,7 +157,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   private findPath(nodes: any[]): boolean {
     for (const node of nodes) {
-      if (this.currentPath.startsWith(node.url)) { 
+      if (this.currentPath.startsWith(node.url)) {
         this.list.push({
           url: node.url,
           label: node.title

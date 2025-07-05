@@ -9,8 +9,7 @@ import { TranslationService } from '@support-link/translations';
 export class ApiDataService {
   constructor(
     private http: HttpClient,
-    private translationService: TranslationService
-  ) { }
+    private translationService: TranslationService) { }
 
   /**
    * Generic method to fetch CMS data with pagination and language support
@@ -19,11 +18,11 @@ export class ApiDataService {
    * @param cache Optional cache to store the response
    * @returns Observable of the paginated CMS response
    */
-  getCmsData<T>(
+  getData<T>(
     endpoint: string,
     queryParams?: { [key: string]: any },
     cache?: BehaviorSubject<T | null>,
-    appendLang: Boolean = true
+    appendLang: Boolean = false
   ): Observable<T> {
     return this.translationService.currentLang$.pipe(
       switchMap(currentLang => {
@@ -57,6 +56,21 @@ export class ApiDataService {
         );
       })
     );
+  }
+
+  /**
+ * Generic method to POST data to any API endpoint
+ * @param endpoint The API endpoint to post data to
+ * @param body The payload to send
+ * @param options Optional HTTP options (headers, etc.)
+ * @returns Observable of the response
+ */
+  postData<T>(
+    endpoint: string,
+    body: any = null,
+    options?: object
+  ): Observable<T> {
+    return this.http.post<T>(endpoint, body, options);
   }
 
   downloadFile(endpoint: string): Observable<Blob> {

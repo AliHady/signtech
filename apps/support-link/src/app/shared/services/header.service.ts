@@ -23,7 +23,7 @@ export class HeaderService {
   constructor(private apiDataService: ApiDataService,) { }
 
   getHeader(): Observable<Header> {
-    return this.apiDataService.getCmsData<Header>(
+    return this.apiDataService.getData<Header>(
       this.apiUrl,
       undefined,
       this.menuCache,

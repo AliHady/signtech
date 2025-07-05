@@ -1,56 +1,114 @@
-<app-header></app-header>
 <div class="service-details-container" [@routeAnimations]>
   <app-breadcrumbs></app-breadcrumbs>
-
   <main class="main-content bg-white overflow-hidden">
     <div #contentContainer class="container mx-auto px-1 py-8">
-
-      @if (imageToDisplay) {
-        <div class="image-modal">
-          <div class="overlay" (click)="imageToDisplay = null"></div>
-          <div class="image-container">
-            <img [src]="imageToDisplay" alt="Preview" />
-            <button (click)="imageToDisplay = null">{{'GENERAL.CLOSE' | translate}}</button>
+      @if (serviceDetails) {
+      <!-- Title -->
+      <h1 class="text-3xl font-bold mt-4 mb-6 text-[#1e1e1e]">
+        {{ currentLang === 'en' ? serviceDetails.TitleEn : serviceDetails.Title }}
+      </h1>
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Image and price -->
+        <div class="flex-shrink-0">
+          <div class="relative">
+            <img class="rounded-xl w-[320px] h-[180px] object-cover" [alt]="serviceDetails.Title"
+              [src]="imageToDisplay" />
+            <span
+              class="absolute top-3 left-3 bg-white/80 text-[#1e1e1e] font-bold px-3 py-1 rounded-full text-sm flex items-center gap-1">
+              <img src="../../../../assets/images/riyal.png" class="w-4 h-4" alt="Price" />
+              {{ serviceDetails.Price }}
+            </span>
           </div>
         </div>
-      }
 
-      @if (content) {
-        <article class="p-8">
-          <div class="prose max-w-none">
-            <div class="text-gray-700 leading-relaxed space-y-4" [innerHTML]="content.Content"></div>
+        <!-- Description and features -->
+        <div class="flex-1">
+          <div class="text-[#1e1e1e] text-base leading-7 mb-4"
+            [innerHTML]="currentLang === 'en' ? serviceDetails.DescriptionEn : serviceDetails.Description"></div>
+
+          <!-- What We Offer -->
+          <div class="mb-4">
+            <div class="font-bold flex items-center mb-1">
+              <span class="text-green-600 text-xl mr-2">✅</span>
+              {{ 'SERVICE_DETAILS.WHAT_WE_OFFER' | translate }}
+            </div>
+            <div class="mt-6 text-[#1e1e1e]"
+              [innerHTML]="currentLang === 'en' ? serviceDetails.OffersEn : serviceDetails.Offers">
+            </div>
           </div>
-        </article>
+
+          <!-- Who Is This For -->
+          <div class="mb-4">
+            <div class="font-bold flex items-center mb-1">
+              <span class="text-yellow-600 text-xl mr-2">🧑‍💻</span>
+              {{ 'SERVICE_DETAILS.WHO_IS_THIS_FOR' | translate }}
+            </div>
+            <div class="mt-6 text-[#1e1e1e]"
+              [innerHTML]="currentLang === 'en' ? serviceDetails.TargetsEn : serviceDetails.Targets">
+            </div>
+          </div>
+
+          <!-- Delivery -->
+          <div class="mb-4">
+            <div class="font-bold flex items-center mb-1">
+              <span class="text-orange-600 text-xl mr-2">📦</span>
+              {{ 'SERVICE_DETAILS.DELIVERY' | translate }}
+            </div>
+            <div class="mt-6 text-[#1e1e1e]"
+              [innerHTML]="currentLang === 'en' ? serviceDetails.DeliveryEn : serviceDetails.Delivery">
+            </div>
+          </div>
+
+          <div class="mt-6 text-[#1e1e1e]">
+            {{ currentLang === 'en' ? serviceDetails.EnsureEn : serviceDetails.Ensure }}
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex gap-4 mt-8">
+            <button
+              class="px-8 py-2 rounded-full border border-[--main-color] text-[--main-color] bg-white font-bold transition hover:bg-[--main-color] hover:text-white"
+              (click)="goBack()">
+              {{ 'SERVICE_DETAILS.BACK' | translate }}
+            </button>
+            <button class="px-8 py-2 rounded-full bg-[--main-color] text-white font-bold transition hover:bg-[#e65c00]"
+              (click)="openRequestSupport(serviceDetails.Id)">
+              {{ 'SERVICE_DETAILS.REQUEST_SUPPORT' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
       } @else {
-        <div class="space-y-8">
-          <!-- Title Skeleton -->
-          <ngx-skeleton-loader [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem' }" [count]="1"
-            appearance="line">
-          </ngx-skeleton-loader>
+      <div class="space-y-8">
+        <!-- Title Skeleton -->
+        <ngx-skeleton-loader [theme]="{ height: '2.5rem', width: '80%', 'margin-bottom': '1.5rem' }" [count]="1"
+          appearance="line">
+        </ngx-skeleton-loader>
 
-          <!-- Date Skeleton -->
-          <ngx-skeleton-loader [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem' }" [count]="1"
-            appearance="line">
-          </ngx-skeleton-loader>
+        <!-- Date Skeleton -->
+        <ngx-skeleton-loader [theme]="{ height: '1rem', width: '20%', 'margin-bottom': '2rem' }" [count]="1"
+          appearance="line">
+        </ngx-skeleton-loader>
 
-          <!-- Image Skeleton -->
-          <ngx-skeleton-loader
-            [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem' }" [count]="1"
-            appearance="line">
-          </ngx-skeleton-loader>
+        <!-- Image Skeleton -->
+        <ngx-skeleton-loader
+          [theme]="{ height: '400px', width: '100%', 'margin-bottom': '2rem', 'border-radius': '0.75rem' }" [count]="1"
+          appearance="line">
+        </ngx-skeleton-loader>
 
-          <!-- Content Summary Skeleton -->
-          <ngx-skeleton-loader [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem' }" [count]="3"
-            appearance="line">
-          </ngx-skeleton-loader>
+        <!-- Content Summary Skeleton -->
+        <ngx-skeleton-loader [theme]="{ height: '1.5rem', width: '100%', 'margin-bottom': '1rem' }" [count]="3"
+          appearance="line">
+        </ngx-skeleton-loader>
 
-          <!-- Content Skeleton -->
-          <ngx-skeleton-loader [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem' }" [count]="8"
-            appearance="line">
-          </ngx-skeleton-loader>
-        </div>
+        <!-- Content Skeleton -->
+        <ngx-skeleton-loader [theme]="{ height: '1.25rem', width: '100%', 'margin-bottom': '0.5rem' }" [count]="8"
+          appearance="line">
+        </ngx-skeleton-loader>
+      </div>
       }
     </div>
   </main>
 </div>
-<app-footer></app-footer>
+<app-popup [visible]="showPopup" [title]="'SERVICE_DETAILS.LOGIN_REQUIRED_TITLE' | translate"
+  [closeText]="'SERVICE_DETAILS.CLOSE' | translate" [loginText]="'SERVICE_DETAILS.LOGIN_NOW' | translate"
+  (close)="showPopup = false" (subbmit)="requestSupport()"></app-popup>

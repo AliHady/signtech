@@ -1,5 +1,9 @@
-<ngx-loading-bar  color="#1AD9C7" height="0.5rem" [includeSpinner]="false"></ngx-loading-bar>
+<ngx-loading-bar color="#1AD9C7" height="0.5rem" [includeSpinner]="false"></ngx-loading-bar>
 <ui-scroll-indicator></ui-scroll-indicator>
 <app-loading-overlay [isLoading]="isLoading"></app-loading-overlay>
+<header class="w-full bg-white py-4 px-6">
+  <app-header></app-header>
+</header>
 <router-outlet></router-outlet>
 <app-cookie-consent></app-cookie-consent>
+<app-footer></app-footer>

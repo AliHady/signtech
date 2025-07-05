@@ -2,14 +2,14 @@
   <div class="flex items-center max-w-[1135px] mx-auto">
     <a [routerLink]="['/', currentLang]" class="flex items-center cursor-pointer select-none"
       style="text-decoration: none;">
-      <img class="w-[38px] h-[35px] object-cover" alt="SupportLink logo" src="assets/images/new-project-2.png" />
+      <img class="w-[38px] h-[35px] object-cover" alt="SupportLink logo" src="assets/images/logo.png" />
       <div class="ml-2 font-bold text-3xl">
-        <span class="text-[#0f1416]">Support</span>
-        <span class="text-[var(--main-color)]">Link</span>
+        <span class="text-[#0f1416]">{{'GENERAL.SUPPORT' | translate}}</span>
+        <span class="text-[var(--main-color)]">{{'GENERAL.LINK' | translate}}</span>
       </div>
     </a>
     <nav class="ml-8 flex items-center">
-      <ul class="flex flex-1 list-none items-center justify-center space-x-6 m-0 p-0">
+      <ul class="flex flex-1 list-none items-center justify-center space-x-4 m-0 p-0">
         <li *ngFor="let item of menuItems; let i = index" class="relative">
           <a class="no-underline block px-4 text-gray-700 hover:bg-gray-100 cursor-pointer"
             [routerLink]="toggleDropdown(i,item.Url)" [attr.aria-expanded]="openIndex === i"
@@ -35,9 +35,9 @@
       </ul>
       <div class="hidden lg:flex items-center gap-3 text-sm">
         <a [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']" [href]="'/' + (currentLang === 'en' ? 'ar' : 'en')"
-          class="no-underline loginBtn px-6 py-3 text-base  transition border-0 font-inherit cursor-pointer no-underline"
+          class="no-underline loginBtn px-6 py-3 text-base transition border-0 font-inherit cursor-pointer no-underline"
           (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
-          {{ currentLang === 'en' ? 'عربي' : 'EN' }}
+          {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
         </a>
       </div>
       <div class="hidden lg:flex items-center gap-3 text-sm">

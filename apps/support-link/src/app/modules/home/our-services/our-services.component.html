@@ -18,10 +18,10 @@
             </div>
           </div>
           <div class="p-4">
-            <h3 class="mt-4 font-serif font-normal text-[#1e1e1e] text-xl leading-7">
+            <h3 class="mt-4 font-['Rubik',Helvetica]  font-normal text-[#1e1e1e] text-xl leading-7">
               {{ currentLang === 'en' ? service.TitleEn : service.Title }}
             </h3>
-            <p class="mt-4 font-sans font-normal text-[#7a7a7a] text-[15px] leading-[21px]">
+            <p class="mt-4 font-['Rubik',Helvetica]  font-normal text-[#7a7a7a] text-[15px] leading-[21px]">
               {{
               (currentLang === 'en' ? service?.DescriptionEn : service?.Description)
               | slice:0:200
@@ -36,8 +36,8 @@
                   {{ service.Price }}
                 </span>
               </div>
-              <button type="button"
-                class="font-bold text-[var(--main-color)] text-base p-0 bg-transparent border-none hover:underline">
+              <button type="button" (click)="navigateToServiceDetails(service)"
+                class="font-bold text-[var(--main-color)] text-base p-0 bg-transparent border-none cursor-pointer hover:underline">
                 {{ 'LIST_OF_SERVICES.GET_IT_NOW' | translate }}
               </button>
             </div>
@@ -46,7 +46,7 @@
       </div>
       <div class="flex justify-center mt-12">
         <button type="button"
-          class="rounded-[50px] border border-solid border-[#4e5664] text-[#4e5664] px-5 py-3 font-medium text-base bg-transparent cursor-pointer hover:bg-[#4e5664] hover:text-white transition">
+          class="rounded-[50px] border border-solid border-[#4e5664] text-[#4e5664] px-5 py-3 font-medium text-base bg-transparent cursor-pointer hover:bg-[#4e5664] hover:text-white cursor-pointer transition">
           {{'SERVICES.MORE_SERVICES' | translate}}
         </button>
       </div>

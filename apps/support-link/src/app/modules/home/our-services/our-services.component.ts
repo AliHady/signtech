@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService, TranslationsModule } from '@support-link/translations';
 import { ServiceItemDto } from '../models/our-services.model';
@@ -19,6 +19,7 @@ export class OurServicesComponent implements OnInit {
   services: ServiceItemDto[] = [];
   currentLang = 'ar';
   constructor(
+    private router: Router,
     private ourServicesService: OurServicesService,
     private route: ActivatedRoute,
     public translationService: TranslationService,
@@ -35,6 +36,13 @@ export class OurServicesComponent implements OnInit {
 
     this.ourServicesService.getOurServices().subscribe(data => {
       this.services = data.Items;
+    });
+  }
+
+  navigateToServiceDetails(serviceItem: ServiceItemDto): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/', this.currentLang, 'services', this.currentLang === 'en' ? serviceItem.TitleEn : serviceItem.Title], {
+      state: { id: serviceItem.Id }
     });
   }
 }

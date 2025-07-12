@@ -1,23 +1,38 @@
-<section class="w-full py-16 md:py-24">
+<section class="w-full bg-white px-40 pt-0 pb-16">
     <ng-container *ngIf="sliderItems && sliderItems.length > 0">
         <div class="container flex items-center justify-center">
-            <div class="flex items-center">
-                <img [src]="utilityService.getImageSrc(sliderItems[currentSlide]?.Image)" alt="Slider"
-                    class="w-64 h-64 mr-8 object-cover" />
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                <ng-container *ngIf="sliderItems[currentSlide] as item" >
+                <img [src]="utilityService.getImageSrc(item.Image)" alt="Slider" class="mr-8 object-cover ng-star-inserted w-auto max-w-full" />
+                </ng-container>
+                </div>
+                 <!-- Text & Button -->
+                <div class="w-full md:w-1/2 mt-10 md:mt-0 text-center md:text-center">                
                 <h1
-                    class="font-['DM_Serif_Display',Helvetica] text-4xl md:text-5xl lg:text-[50px] font-normal leading-tight md:leading-[70px] max-w-[555px]">
+                    class="font-serif text-4xl md:text-5xl lg:text-[50px] font-normal leading-tight md:leading-[70px] max-w-[555px] md:text-left ">
                     <span class="text-[#0b132a]">{{ sliderItems[currentSlide].Title }}</span>
                     <span class="text-[var(--main-color)]">{{ sliderItems[currentSlide].Description }}</span>
                     <span class="text-[#ffb47f]">.</span>
                 </h1>
+                <p class="mt-4 text-gray-500 max-w-md md:text-left font-serif">
+                           Provide you best ever supports from our best expertise on their fields, get free session now
+                </p>
+                <button class="mt-6 px-8 py-3 bg-gradient-to-r from-[#ff6a00] to-[#ff914d] text-white font-semibold rounded-lg shadow-md transition hover:opacity-90 border-0 cursor-pointer w-lg">
+                    Get Started
+                </button>
+                </div>
             </div>
         </div>
-        <div class="flex justify-center mt-6 space-x-2">
-            <button *ngFor="let item of sliderItems; let i = index" (click)="goToSlide(i)"
-                class="w-4 h-4 rounded-full border border-[var(--main-color)] transition-colors" [ngClass]="{
-          'bg-[var(--main-color)]': i === currentSlide,
-          'bg-white': i !== currentSlide
-        }"></button>
+       
+         <!-- Dots -->
+        <div class="flex justify-center  space-x-3 cursor-pointer ">
+             <span *ngFor="let item of sliderItems; let i = index" (click)="goToSlide(i)"
+                class="w-3 h-3 rounded-full pointer " [ngClass]="{
+          'bg-[var(--main-color)] w-9': i === currentSlide,
+          'bg-gray-300': i !== currentSlide
+        }"></span>
+           
         </div>
     </ng-container>
 </section>

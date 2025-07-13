@@ -46,6 +46,6 @@ export class ScrollIndicatorComponent {
   }
 
   getBackgroundColor(): string {
-  return '#413258';
+  return '#ff6800';
   }
 }

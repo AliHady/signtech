@@ -1,57 +1,152 @@
-<header class="w-full bg-white py-4 px-10">
-  <div class="flex items-center max-w-[1135px] mx-auto">
-    <a [routerLink]="['/', currentLang]" class="flex items-center cursor-pointer select-none"
-      style="text-decoration: none;">
+<header class="w-full bg-white py-4 px-4 sm:px-6 lg:px-10">
+  <div class="flex items-center justify-between max-w-[1135px] mx-auto">
+    <!-- Logo -->
+    <a [routerLink]="['/', currentLang]" class="flex items-center cursor-pointer select-none" style="text-decoration: none;">
       <img class="w-[38px] h-[35px] object-cover" alt="SupportLink logo" src="assets/images/logo.png" />
-      <div class="ml-2 font-bold text-3xl">
-        <span class="text-[#0f1416]">{{'GENERAL.SUPPORT' | translate}}</span>
-        <span class="text-[var(--main-color)]">{{'GENERAL.LINK' | translate}}</span>
+      <div class="ml-2 font-bold text-2xl sm:text-3xl">
+        <span class="text-[#0f1416]">{{ 'GENERAL.SUPPORT' | translate }}</span>
+        <span class="text-[var(--main-color)]">{{ 'GENERAL.LINK' | translate }}</span>
       </div>
     </a>
-    <nav class="ml-8 flex items-center">
-      <ul class="flex flex-1 list-none items-center justify-center space-x-4 m-0 p-0">
+
+    <!-- Mobile menu toggle -->
+    <button
+      aria-label="Toggle menu"
+      (click)="menuOpen = !menuOpen"
+      class="block lg:hidden border-0 focus:outline-none bg-gradient-to-r from-[#ff6a00] to-[#ff914d] text-white p-2 rounded-lg"
+    >
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          *ngIf="!menuOpen"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+        <path
+          *ngIf="menuOpen"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center space-x-6 ml-8">
+      <ul class="flex list-none items-center space-x-4 m-0 p-0">
         <li *ngFor="let item of menuItems; let i = index" class="relative">
-          <a class="no-underline block px-4 text-gray-700 hover:bg-gray-100 cursor-pointer"
-            [routerLink]="toggleDropdown(i,item.Url)" [attr.aria-expanded]="openIndex === i"
-            [attr.aria-haspopup]="item.SubMenus ? 'menu' : null">
+          
+          <a
+            [routerLink]="!item.SubMenus ? item.Url : currentLang + '/' + item.Url "
+            (click)="toggleDropdown(i)"
+            class="block px-2 text-gray-700 hover:bg-gray-100 cursor-pointer no-underline"
+            [attr.aria-expanded]="openIndex === i"
+            [attr.aria-haspopup]="item.SubMenus ? 'menu' : null"
+          >
             {{ currentLang === 'en' ? item.TitleEn : item.Title }}
-            <svg *ngIf="item.SubMenus && item.SubMenus.length > 0"
-              class="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-300"
-              [ngClass]="{'rotate-180': openIndex === i}" fill="none" stroke="currentColor" stroke-width="2"
-              viewBox="0 0 24 24">
+            <svg
+              *ngIf="item.SubMenus?.length"
+              class="ml-1 h-3 w-3 transition-transform duration-300"
+              [ngClass]="{ 'rotate-180': openIndex === i }"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
             </svg>
           </a>
-          <ul *ngIf="item.SubMenus && openIndex === i"
-            class="absolute left-0 top-full mt-2 w-48 rounded-md bg-white shadow-lg z-20">
+          <!-- Submenu -->
+          <ul
+            *ngIf="item.SubMenus && openIndex === i"
+            class="absolute left-0 top-full mt-2 w-48 rounded-md bg-white shadow-lg z-20"
+          >
             <li *ngFor="let child of item.SubMenus">
-              <a [routerLink]="child.Url"
-                class="no-underline block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+              <a
+                [routerLink]="child.Url"
+                (click)="openIndex = null"
+                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
+              >
                 {{ currentLang === 'en' ? child.TitleEn : child.Title }}
               </a>
             </li>
           </ul>
         </li>
       </ul>
-      <div class="hidden lg:flex items-center gap-3 text-sm">
-        <a [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']" [href]="'/' + (currentLang === 'en' ? 'ar' : 'en')"
-          class="no-underline loginBtn px-6 py-3 text-base transition border-0 font-inherit cursor-pointer no-underline"
-          (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')">
-          {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
-        </a>
-      </div>
-      <div class="hidden lg:flex items-center gap-3 text-sm">
-        <a [routerLink]="['/', currentLang, 'login']" [href]="'/' + currentLang + '/login'"
-          class="no-underline loginBtn px-6 py-3 text-base  transition border-0 font-inherit cursor-pointer no-underline">
-          {{ 'AUTH.LOGIN' | translate }}
-        </a>
-      </div>
-      <div class="hidden lg:flex items-center gap-3 text-sm">
-        <a [routerLink]="['/', currentLang, 'signup']" [href]="'/' + currentLang + '/login'"
-          class="no-underline bg-[var(--main-color)] rounded-[10px] signupBtn px-6 py-3 text-base  transition border-0 font-inherit cursor-pointer no-underline">
-          {{ 'AUTH.SIGNUP' | translate }}
-        </a>
-      </div>
+
+      <!-- Language Switch -->
+      <a
+        [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']"
+        class="px-4 py-2 cursor-pointer no-underline"
+        (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')"
+      >
+        {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
+      </a>
+
+      <!-- Auth Buttons -->
+      <a [routerLink]="['/', currentLang, 'login']" class="px-4 py-2 text-base no-underline">
+        {{ 'AUTH.LOGIN' | translate }}
+      </a>
+      <a
+        [routerLink]="['/', currentLang, 'signup']"
+        class="px-4 py-2 text-base bg-[var(--main-color)] rounded-[10px] text-white no-underline"
+      >
+        {{ 'AUTH.SIGNUP' | translate }}
+      </a>
     </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="menuOpen" class="lg:hidden px-4 pt-4 pb-6">
+    <ul class="space-y-2">
+      <li *ngFor="let item of menuItems; let i = index" class="relative list-none">
+        <a
+          [routerLink]="currentLang + '/' + item.Url"
+          (click)="menuOpen = false; openIndex = null"
+          class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
+        >
+          {{ currentLang === 'en' ? item.TitleEn : item.Title }}
+        </a>
+
+        <ul *ngIf="item.SubMenus && openIndex === i" class="ml-4 space-y-1 mt-1">
+          <li *ngFor="let child of item.SubMenus">
+            <a
+              [routerLink]="child.Url"
+              (click)="menuOpen = false; openIndex = null"
+              class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
+            >
+              {{ currentLang === 'en' ? child.TitleEn : child.Title }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Language and Auth (mobile) -->
+    <div class="mt-4 space-y-2">
+      <a
+        [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']"
+        (click)="menuOpen = false; switchLanguage(currentLang === 'en' ? 'ar' : 'en')"
+        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
+      >
+        {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
+      </a>
+      <a
+        [routerLink]="['/', currentLang, 'login']"
+        (click)="menuOpen = false"
+        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
+      >
+        {{ 'AUTH.LOGIN' | translate }}
+      </a>
+      <a
+        [routerLink]="['/', currentLang, 'signup']"
+        (click)="menuOpen = false"
+        class="block px-4 py-2 text-white bg-[var(--main-color)] rounded-[10px] no-underline"
+      >
+        {{ 'AUTH.SIGNUP' | translate }}
+      </a>
+    </div>
   </div>
 </header>

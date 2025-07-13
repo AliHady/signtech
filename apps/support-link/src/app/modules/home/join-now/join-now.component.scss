@@ -1,10 +1,13 @@
 .map {
-    position: absolute;
-    left: 3rem;
+    position: relative;
+    left: 0rem;
     right: 0;
     margin: 0 auto;
     top: 0 !important;
-    margin-top: 34rem;
+    margin-top: 0rem;
+    width: 100% !important;
+    text-align: center;
+    max-width: fit-content;
 }
 .text-layer h2 {
     background: #fdfdfdc7;
@@ -13,6 +16,7 @@
 .person {
     position: absolute;
     z-index: 999;
-    width: 95%;
+    width: 40%;
     margin-top: 0rem;
+        left: 10rem;
 }

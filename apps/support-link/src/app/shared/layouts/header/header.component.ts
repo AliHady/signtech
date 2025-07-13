@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   loading = true;
   error = '';
   openIndex: number | null = null;
+  menuOpen:boolean = false;
 
   constructor(
     public translationService: TranslationService,
@@ -61,12 +62,23 @@ export class HeaderComponent implements OnInit {
     }, 100);
   }
 
-  toggleDropdown(idx: number, url: string) {
-    if (url) {
-      return ['/', this.currentLang, url];
-    } else {
-      this.openIndex = this.openIndex === idx ? null : idx;
-      return null;
-    }
+  // toggleDropdown(idx: number, url: string) {
+  //   if (url) {
+  //     return ['/', this.currentLang, url];
+  //   } else {
+  //     this.openIndex = this.openIndex === idx ? null : idx;
+  //     return null;
+  //   }
+  // }
+
+toggleDropdown(index: number): void {
+  // Only toggle if the menu item has submenus
+  if (this.menuItems[index].SubMenus?.length) {
+    this.openIndex = this.openIndex === index ? null : index;
+  } else {
+    this.openIndex = null;
+    this.menuOpen = false;
   }
+}
+
 }

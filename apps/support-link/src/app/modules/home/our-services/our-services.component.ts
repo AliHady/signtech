@@ -45,4 +45,10 @@ export class OurServicesComponent implements OnInit {
       state: { id: serviceItem.Id }
     });
   }
+
+  navigateToAllServices() {
+    console.log('Navigating to all services');
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/', this.currentLang, 'services']);
+  }
 }

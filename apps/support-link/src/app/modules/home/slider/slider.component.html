@@ -1,10 +1,10 @@
-<section class="w-full bg-white lg:px-40px  pt-0 pb-16">
+<section class="w-full bg-white lg:px-40  pt-0 pb-16">
     <ng-container *ngIf="sliderItems && sliderItems.length > 0">
-        <div class="container flex items-center justify-center">
+        <div class="container flex items-center justify-center mt-20">
             <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
                 <ng-container *ngIf="sliderItems[currentSlide] as item" >
-                <img [src]="utilityService.getImageSrc(item.Image)" alt="Slider" class="mr-8 object-cover ng-star-inserted w-auto max-w-full" />
+                <img   [src]="utilityService.getImageSrc(item.Image)" alt="Slider" class="lg:mr-8 object-cover ng-star-inserted w-auto max-w-full" />
                 </ng-container>
                 </div>
                  <!-- Text & Button -->
@@ -18,7 +18,7 @@
                 <p class="mt-4 text-gray-500 max-w-md md:text-left font-['Rubik',Helvetica] ">
                            Provide you best ever supports from our best expertise on their fields, get free session now
                 </p>
-                <button class="mt-6 px-8 py-3 bg-gradient-to-r from-[#ff6a00] to-[#ff914d] text-white font-semibold rounded-lg shadow-md transition hover:opacity-90 border-0 cursor-pointer w-lg">
+                <button class="mt-6 px-8 py-3 bg-gradient-to-r from-[#ff6a00] to-[#ff914d] text-white font-semibold rounded-lg shadow-md transition hover:opacity-90 border-0 cursor-pointer w-lg" (click)="navigateToLogin()">
                     Get Started
                 </button>
                 </div>

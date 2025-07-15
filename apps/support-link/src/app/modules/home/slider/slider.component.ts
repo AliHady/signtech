@@ -5,6 +5,8 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
 import { SliderItemDto } from '../models/slider.model';
 import { HomeService } from '../services/home.service';
 import { UtilityService } from '../../../shared/services/utility.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TranslationService } from '@support-link/translations';
 
 
 interface SlideItem {
@@ -22,14 +24,23 @@ interface SlideItem {
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-
+  currentLang = 'ar';
   sliderItems: SliderItemDto[] = [];
 
-  constructor(private homeService: HomeService, public utilityService: UtilityService) { }
+  constructor(private homeService: HomeService,public translationService: TranslationService, public utilityService: UtilityService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.homeService.getSliders().subscribe(items => {
       this.sliderItems = items;
+      console.log('Slider items:', this.sliderItems);
+    });
+
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
     });
   }
 
@@ -49,5 +60,10 @@ export class SliderComponent {
     if (this.currentSlide > 0) {
       this.currentSlide--;
     }
+  }
+
+  navigateToLogin() {
+    console.log('Navigating to login');
+    this.router.navigate(['/', this.currentLang, 'auth', 'login']);
   }
 }

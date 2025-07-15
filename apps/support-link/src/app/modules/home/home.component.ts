@@ -16,7 +16,7 @@ import { HeaderComponent } from '../../shared/layouts/header/header.component';
     SharedModule,
     SliderComponent,
     JoinNowComponent,
-    HeaderComponent,
+    //HeaderComponent,
     SubscriptionComponent,
     OurServicesComponent,
     ReviewsComponent

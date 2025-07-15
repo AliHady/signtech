@@ -105,7 +105,7 @@ html[dir='ltr'] body {
     position: absolute;
     top: 0;
     right: 0;
-    width: 30%;
+    width: 0%;
     height: 100%;
     background: #dcdcdc;
     z-index: -1;
@@ -116,7 +116,7 @@ html[dir='ltr'] body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 70%;
+    width: 100%;
     height: 100%;
     background: #E6E6E6;
     z-index: -1;
@@ -2975,4 +2975,18 @@ article {
   top: 110px;
   left: 177px;
   object-fit: cover;
+}
+
+@layer utilities {
+  @variants lg {
+    .person {
+        position: absolute !important;
+        z-index: 40 !important;
+        width:36% !important;
+        margin-top: -42rem !important;
+        left: -27rem !important;
+    }
+
+    
+  }
 }

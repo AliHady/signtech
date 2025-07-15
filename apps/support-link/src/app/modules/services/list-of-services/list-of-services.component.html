@@ -2,12 +2,12 @@
   <app-breadcrumbs></app-breadcrumbs>
   <main class="main-content bg-white" [@routeAnimations]>
     <section class="container mx-auto px-1 py-8">
-      <div class="list-of-services">
-        <h2 class="text-2xl font-bold mb-8 ">{{ 'LIST_OF_SERVICES.TITLE' | translate }}</h2>
+      <div>
+        <!-- <h2 class="text-2xl font-bold mb-8 ">{{ 'LIST_OF_SERVICES.TITLE' | translate }}</h2> -->
         @if (loading) {
         <div class="services-grid">
           @for (i of [1,2,3,4,5,6]; track i) {
-          <div class="service-card skeleton">
+          <div class="service-card skeleton">xddddddwqzz3333333333333333333333333333333333333333333
             <div class="skeleton-image"></div>
             <div class="skeleton-title"></div>
             <div class="skeleton-description"></div>
@@ -21,10 +21,10 @@
         </div>
         }
         @if (!loading && !error) {
-        <div class="services-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           @for (service of paginatedServices; track service) {
           <div
-            class="rounded-[15px] border border-solid border-[#d9d9d9] shadow-[0px_1px_3px_#00000040] overflow-hidden">
+            class="rounded-[15px] border border-solid border-[#d9d9d9] overflow-hidden w-[346px]">
             <div class="relative">
               <img class="w-full h-[219px] object-cover"
                 [alt]=" currentLang === 'en' ? service.TitleEn : service.Title  + ' thumbnail'"
@@ -37,10 +37,10 @@
               </div>
             </div>
             <div class="p-4">
-              <h3 class="mt-4 font-serif font-normal text-[#1e1e1e] text-xl leading-7">
+              <h3 class="mt-4 font-['Rubik',Helvetica] font-normal text-[#1e1e1e] text-xl leading-7 min-h-[3.2rem]">
                 {{ currentLang === 'en' ? service.TitleEn : service.Title }}
               </h3>
-              <p class="mt-4 font-sans font-normal text-[#7a7a7a] text-[15px] leading-[21px]">
+              <p class="mt-4 font-['Rubik',Helvetica] font-normal text-[#7a7a7a] text-[15px] leading-[21px]">
                 {{
                 (currentLang === 'en' ? service?.DescriptionEn : service?.Description)
                 | slice:0:200

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, HostListener } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@support-link/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -81,5 +81,16 @@ export class AppComponent implements OnInit, OnDestroy {
     const currentUrl = this.router.url;
     const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
     this.router.navigateByUrl(newUrl);
+  }
+
+  showBackToTop = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.showBackToTop = window.pageYOffset > 300;
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

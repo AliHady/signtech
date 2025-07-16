@@ -183,8 +183,9 @@ article {
   background-color: var(--color-support-link-orange);
 
   &:hover {
-    background-color: #413258;
+    background-color: #201f20;
     color: #fff;
+    border-radius: 10px;
   }
 }
 
@@ -193,8 +194,9 @@ article {
   background-color: var(--color-support-link-orange);
 
   &:hover {
-    background-color: var(--main-color);
+    background-color: #201f20;
     color: #fff;
+     border-radius: 10px;
   }
 }
 

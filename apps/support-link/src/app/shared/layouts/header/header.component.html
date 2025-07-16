@@ -79,19 +79,19 @@
       <!-- Language Switch -->
       <a
         [routerLink]="['/', currentLang === 'en' ? 'ar' : 'en']"
-        class="px-4 py-2 cursor-pointer no-underline"
+        class="px-4 py-2 cursor-pointer no-underline hover:bg-gray-100"
         (click)="switchLanguage(currentLang === 'en' ? 'ar' : 'en')"
       >
         {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
       </a>
 
       <!-- Auth Buttons -->
-      <a [routerLink]="['/', currentLang,  'auth', 'login']" class="px-4 py-2 text-base no-underline">
+      <a [routerLink]="['/', currentLang,  'auth', 'login']" class="px-4 py-2 text-base no-underline loginBtn">
         {{ 'AUTH.LOGIN' | translate }}
       </a>
       <a
         [routerLink]="['/', currentLang,  'auth', 'signup']"
-        class="px-4 py-2 text-base bg-[var(--main-color)] rounded-[10px] text-white no-underline"
+        class="px-4 py-2 text-base bg-[var(--main-color)] rounded-[10px] text-white no-underline signupBtn"
       >
         {{ 'AUTH.SIGNUP' | translate }}
       </a>

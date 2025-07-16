@@ -86,11 +86,11 @@
       </a>
 
       <!-- Auth Buttons -->
-      <a [routerLink]="['/', currentLang, 'login']" class="px-4 py-2 text-base no-underline">
+      <a [routerLink]="['/', currentLang,  'auth', 'login']" class="px-4 py-2 text-base no-underline">
         {{ 'AUTH.LOGIN' | translate }}
       </a>
       <a
-        [routerLink]="['/', currentLang, 'signup']"
+        [routerLink]="['/', currentLang,  'auth', 'signup']"
         class="px-4 py-2 text-base bg-[var(--main-color)] rounded-[10px] text-white no-underline"
       >
         {{ 'AUTH.SIGNUP' | translate }}
@@ -134,14 +134,14 @@
         {{ currentLang === 'en' ? ('GENERAL.LANG_AR' | translate) : ('GENERAL.LANG_EN' | translate) }}
       </a>
       <a
-        [routerLink]="['/', currentLang, 'login']"
+        [routerLink]="['/', currentLang, 'auth','login']"
         (click)="menuOpen = false"
         class="block px-4 py-2 text-gray-700 hover:bg-gray-100 no-underline"
       >
         {{ 'AUTH.LOGIN' | translate }}
       </a>
       <a
-        [routerLink]="['/', currentLang, 'signup']"
+        [routerLink]="['/', currentLang,  'auth','signup']"
         (click)="menuOpen = false"
         class="block px-4 py-2 text-white bg-[var(--main-color)] rounded-[10px] no-underline"
       >

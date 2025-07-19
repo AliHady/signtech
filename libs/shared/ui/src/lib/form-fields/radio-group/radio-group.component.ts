@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validator
 import { TranslateModule } from '@ngx-translate/core';
 
 export interface RadioOption {
-  value: number;
+  value: string;
   label: string;
 }
 
@@ -123,13 +123,13 @@ export class RadioGroupComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
+  @Input() value: string | null = null;
 
-  value: number | null = null;
   disabled = false;
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
-  writeValue(value: number): void {
+  writeValue(value: string): void {
     this.value = value;
   }
 

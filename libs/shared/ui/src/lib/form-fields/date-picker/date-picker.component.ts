@@ -64,11 +64,11 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   @Input() name = '';
   @Input() minDate = '';
   @Input() maxDate = '';
+  @Input() value = '';
 
-  value = '';
   disabled = false;
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string) => void = () => { };
+  onTouched: () => void = () => { };
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;

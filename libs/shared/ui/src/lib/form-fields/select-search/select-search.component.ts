@@ -119,20 +119,19 @@ export class SelectSearchComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
-
   @ViewChild('dropdown') dropdownRef!: ElementRef;
+  @Input() value: string | number | null = null;
 
-  value: string | number | null = null;
   disabled = false;
   isOpen = false;
   searchText = '';
   filteredOptions: SelectOption[] = [];
   selectedOption: SelectOption | null = null;
 
-  onChange: (value: string | number | null) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string | number | null) => void = () => { };
+  onTouched: () => void = () => { };
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
     this.filteredOptions = [...this.options];

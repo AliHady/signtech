@@ -1,0 +1,92 @@
+<div class="flex min-h-screen bg-[#f7f8fa]">
+  <dashboard-side-bar [active]="'MY-REQUESTS'"></dashboard-side-bar>
+  <main class="flex-1 flex flex-col px-16 py-10">
+    <dashboard-header [title]="'DASHBOARD.MY_REQUESTS' | translate"></dashboard-header>
+    <div class="mb-8">
+      <div class="text-lg font-semibold mb-4">{{ 'DASHBOARD.REQUESTS_SUMMARY' | translate }}</div>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-6 shadow flex flex-col">
+          <div class="flex items-center mb-4">
+            <i class="fa fa-list-alt text-2xl text-orange-500 mr-2"></i>
+            <span class="font-bold">{{ 'DASHBOARD.THIS_WEEK' | translate }}</span>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.ALL_REQUESTS' | translate }}</div>
+              <div class="text-lg font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.PENDING' | translate }}</div>
+              <div class="text-lg font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.COMPLETED' | translate }}</div>
+              <div class="text-lg font-bold">0 <span class="text-green-500 text-xs">+0.00%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow flex flex-col">
+          <div class="flex items-center mb-4">
+            <i class="fa fa-list-alt text-2xl text-orange-500 mr-2"></i>
+            <span class="font-bold">{{ 'DASHBOARD.THIS_WEEK' | translate }}</span>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.ALL_REQUESTS' | translate }}</div>
+              <div class="text-lg font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.PENDING' | translate }}</div>
+              <div class="text-lg font-bold">0</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-400">{{ 'DASHBOARD.COMPLETED' | translate }}</div>
+              <div class="text-lg font-bold">0 <span class="text-green-500 text-xs">+0.00%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto rounded-lg shadow-sm bg-white">
+      <table class="min-w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 border-b border-gray-200">
+            <th class="px-4 py-3"><input type="checkbox" /></th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.TITLE' | translate }}</th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.REQUEST_DATE' | translate }}</th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.CATEGORY' | translate }}</th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.TRACKING_ID' | translate }}</th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.PRICE' | translate }}</th>
+            <th class="px-4 py-3 text-left">{{ 'REQUESTS.STATUS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (request of requests; track request.Id; let i = $index) {
+          <tr [class]="i % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+            <td class="px-4 py-3"><input type="checkbox" /></td>
+            <td class="px-4 py-3">{{ request.Title }}</td>
+            <td class="px-4 py-3">{{ request.RequestDate | date:'dd MMM yyyy - hh:mm a' }}</td>
+            <td class="px-4 py-3">{{ request.Category }}</td>
+            <td class="px-4 py-3 flex items-center gap-2">
+              {{ request.TrackingId }}
+              <button class="text-gray-400 hover:text-gray-600" (click)="copyToClipboard(request.TrackingId)">
+                <i class="fa fa-copy"></i>
+              </button>
+            </td>
+            <td class="px-4 py-3">{{ request.Price | number:'1.2-2' }}</td>
+            <td class="px-4 py-3">
+              <span [ngClass]="{
+                  'bg-green-100 text-green-700': request.Status === 'Completed',
+                  'bg-yellow-100 text-yellow-700': request.Status === 'On Progress',
+                  'bg-red-100 text-red-700': request.Status === 'Cancelled'
+                }" class="px-3 py-1 rounded-full text-xs font-semibold">
+                {{ request.Status | translate }}
+              </span>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

@@ -17,11 +17,13 @@ interface NetworkDot {
   styleUrls: ['./join-now.component.scss']
 })
 export class JoinNowComponent {
-    currentLang = 'ar';
+  currentLang = 'ar';
 
-  constructor(public translationService: TranslationService,private route: ActivatedRoute,  private router: Router) { }
+  constructor(public translationService: TranslationService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
-   ngOnInit() {
+  ngOnInit() {
 
     this.route.params.subscribe(params => {
       const lang = params['lang'];

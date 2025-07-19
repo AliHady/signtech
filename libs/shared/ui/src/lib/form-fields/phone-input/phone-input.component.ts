@@ -75,11 +75,11 @@ export class PhoneInputComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
   @Input() name = '';
+  @Input() value = '';
 
-  value = '';
   disabled = false;
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string) => void = () => { };
+  onTouched: () => void = () => { };
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -115,7 +115,7 @@ export class PhoneInputComponent implements ControlValueAccessor, Validator {
     }
 
     const value = control.value.toString();
-    
+
     // Check if the value contains only numbers
     if (!/^\d+$/.test(value)) {
       return { invalidFormat: true };

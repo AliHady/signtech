@@ -1,19 +1,29 @@
+import { HttpMethod } from "@support-link/core/http";
+import { FormFieldType } from "../enums/form-fieldtype.enum";
+import { InputRestriction } from "../enums/input-restriction.enum";
+
 export interface FormFieldLabel {
   en: string;
   ar: string;
 }
 
 export interface FormFieldOption {
-  value: number;
+  value: string;
   label: FormFieldLabel;
 }
 
 export interface FormField {
   name: string;
-  type: 'text' | 'email' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'phone' | 'file' | 'date' | 'chips';
+  inputRestriction?: InputRestriction;
+  type: FormFieldType;
   label: FormFieldLabel;
   required?: boolean;
   options?: FormFieldOption[];
+  hidden?: boolean;
+  dependsOn?: string;
+  showOnValues?: any[];
+  lookupDomain?: string;
+  lookupName?: string;
   maxLength?: number;
   placeholder?: FormFieldLabel;
   acceptedFileTypes?: string;
@@ -23,6 +33,8 @@ export interface FormField {
   maxDate?: string;
   maxChips?: number;
   allowDuplicates?: boolean;
+  disabled?: boolean;
+  value?: any;
   validation?: {
     pattern?: string;
     minLength?: number;
@@ -46,7 +58,7 @@ export interface FormField {
 
 export interface DynamicFormConfig {
   endpoint: string;
-  method: 'POST' | 'PUT' | 'GET' | 'DELETE';
+  method: HttpMethod;
   fields: FormField[];
   submitButtonLabel?: FormFieldLabel;
   clearButtonLabel?: FormFieldLabel;

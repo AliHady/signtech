@@ -1,21 +1,18 @@
 <ngx-loading-bar color="#1AD9C7" height="0.5rem" [includeSpinner]="false"></ngx-loading-bar>
 <ui-scroll-indicator></ui-scroll-indicator>
 <app-loading-overlay [isLoading]="isLoading"></app-loading-overlay>
-<header class="w-full bg-white py-4 px-6 fixed top-0 z-50 ">
+<header *ngIf="showHeaderAndFooter" class="w-full bg-white py-4 px-6 fixed top-0 z-50 ">
   <app-header></app-header>
 </header>
 <router-outlet></router-outlet>
 <app-cookie-consent></app-cookie-consent>
-<app-footer></app-footer>
+<app-footer *ngIf="showHeaderAndFooter"></app-footer>
 <!-- Back to Top Button -->
 <button
   class="fixed bottom-6 right-6 z-50 hidden md:block px-4 py-3 bg-gradient-to-r from-[#ff6a00] to-[#ff914d] text-white rounded-full shadow-lg hover:opacity-90 transition"
-  title="Back to Top"
-  *ngIf="showBackToTop"
-  (click)="scrollToTop()"
->
+  title="Back to Top" *ngIf="showBackToTop" (click)="scrollToTop()">
   <svg width="30" height="30" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7 4L4 1M4 1L1 4M4 1L4 9" stroke="#FFFFFF"/>
-</svg>
+    <path d="M7 4L4 1M4 1L1 4M4 1L4 9" stroke="#FFFFFF" />
+  </svg>
 
 </button>

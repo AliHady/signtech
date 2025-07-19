@@ -65,11 +65,11 @@ export class TextareaComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
   @Input() name = '';
+  @Input() value = '';
 
-  value = '';
   disabled = false;
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string) => void = () => { };
+  onTouched: () => void = () => { };
 
   onInput(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;

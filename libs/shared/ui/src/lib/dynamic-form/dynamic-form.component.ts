@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DynamicFormConfig, FormField, FormFieldOption, FormFieldLabel } from './dynamic-form.interface';
 import { DynamicFormService } from './dynamic-form.service';
@@ -17,6 +17,9 @@ import { ChipsInputComponent } from '../form-fields/chips-input/chips-input.comp
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
+import { LookupService } from '@support-link/shared/utils';
+import { InputRestriction } from '../enums/input-restriction.enum';
+import { FormFieldType } from '../enums/form-fieldtype.enum';
 import { environment } from 'apps/support-link/src/environments/environment';
 
 @Component({
@@ -50,10 +53,11 @@ import { environment } from 'apps/support-link/src/environments/environment';
   styleUrls: ['./dynamic-form.component.scss']
 })
 export class DynamicFormComponent implements OnInit {
+  public FormFieldType = FormFieldType;
   @Input() config!: DynamicFormConfig;
   @Output() formSubmitted = new EventEmitter<any>();
   @Output() formError = new EventEmitter<any>();
-
+  allowedRestrictions = ['numbers', 'english', 'arabic'];
   captchaToken: string | null = null;
   recaptchaSiteKey = environment.recaptchaSiteKey;
 
@@ -66,16 +70,21 @@ export class DynamicFormComponent implements OnInit {
     private fb: FormBuilder,
     private formService: DynamicFormService,
     private translate: TranslateService,
-    private recaptchaV3Service: ReCaptchaV3Service) { }
+    private recaptchaV3Service: ReCaptchaV3Service,
+    private lookupService: LookupService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.initForm();
   }
 
   getTranslationKey(key: FormFieldLabel | string): string {
+    console.log(typeof key)
     if (typeof key === 'string') {
       return key;
     }
+
     return key[this.translate.currentLang as 'en' | 'ar'] || key.en;
   }
 
@@ -190,29 +199,23 @@ export class DynamicFormComponent implements OnInit {
 
     this.config.fields.forEach(field => {
       const validators: ValidatorFn[] = [];
-
       const validation = field.validation || {};
 
       if (validation.required || field.required) {
         validators.push(Validators.required);
       }
-
       if (validation.pattern) {
         validators.push(Validators.pattern(validation.pattern));
       }
-
       if (validation.minLength) {
         validators.push(Validators.minLength(validation.minLength));
       }
-
       if (validation.maxLength) {
         validators.push(Validators.maxLength(validation.maxLength));
       }
-
       if (field.type === 'email') {
         validators.push(Validators.email);
       }
-
       if (field.type === 'date') {
         if (validation.minDate) {
           validators.push(this.minDateValidator(validation.minDate));
@@ -221,17 +224,68 @@ export class DynamicFormComponent implements OnInit {
           validators.push(this.maxDateValidator(validation.maxDate));
         }
       }
-
       if (field.type === 'chips') {
         if (validation.maxChips) {
           validators.push(this.maxChipsValidator(validation.maxChips));
         }
       }
 
-      group[field.name] = ['', validators];
+      group[field.name] = new FormControl(
+        { value: field.value ?? '', disabled: field.disabled ?? false },
+        validators
+      );
     });
 
     this.form = this.fb.group(group);
+
+    this.config.fields.forEach(field => {
+      if (field.dependsOn) {
+        const dependsOnControl = this.form.get(field.dependsOn);
+        if (dependsOnControl) {
+          // Set initial hidden state
+          if (field.showOnValues) {
+            field.hidden = !field.showOnValues.includes(dependsOnControl.value);
+          } else {
+            field.hidden = !dependsOnControl.value;
+          }
+          if (field.hidden) {
+            this.form.get(field.name)?.disable();
+          }
+
+          dependsOnControl.valueChanges.subscribe(parentValue => {
+            // Determine visibility
+            if (field.showOnValues) {
+              field.hidden = !field.showOnValues.includes(parentValue);
+            } else {
+              field.hidden = !parentValue;
+            }
+
+            if (field.hidden) {
+              field.options = [];
+              this.form.get(field.name)?.reset();
+              this.form.get(field.name)?.disable();
+            } else {
+              // Fetch options if needed
+              if (field.lookupDomain && field.lookupName) {
+                this.lookupService.getLookup(field.lookupDomain, field.lookupName, parentValue).subscribe(options => {
+                  field.options = options.map(o => ({
+                    value: o.Id,
+                    label: { en: o.TitleEn || o.Title, ar: o.Title }
+                  }));
+                  this.form.get(field.name)?.enable();
+                  this.cdr.detectChanges();
+                });
+              } else {
+                this.form.get(field.name)?.enable();
+                this.cdr.detectChanges();
+              }
+            }
+
+            this.cdr.detectChanges();
+          });
+        }
+      }
+    });
   }
 
   private minDateValidator(minDate: string): ValidatorFn {
@@ -277,8 +331,11 @@ export class DynamicFormComponent implements OnInit {
             formData = new FormData();
             Object.keys(this.form.value).forEach(key => {
               const value = this.form.value[key];
+              const field = this.config.fields.find(f => f.name === key);
               if (value instanceof File || value instanceof Blob) {
                 formData.append(key, value);
+              } else if (Array.isArray(value) && field?.type === FormFieldType.Checkbox) {
+                value.forEach((v: any) => formData.append(key, v));
               } else if (value !== null && value !== undefined) {
                 formData.append(key, value.toString());
               }
@@ -330,5 +387,11 @@ export class DynamicFormComponent implements OnInit {
       const control = this.form.get(key);
       control?.markAsUntouched();
     });
+  }
+
+  getInputRestriction(value: string | undefined): InputRestriction | undefined {
+    return Object.values(InputRestriction).includes(value as InputRestriction)
+      ? (value as InputRestriction)
+      : undefined;
   }
 }

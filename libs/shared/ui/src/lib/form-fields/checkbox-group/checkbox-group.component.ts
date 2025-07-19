@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validator
 import { TranslateModule } from '@ngx-translate/core';
 
 export interface CheckboxOption {
-  value: number;
+  value: string;
   label: string;
 }
 
@@ -26,7 +26,7 @@ export interface CheckboxOption {
         </label>
       }
       <div class="flex flex-col gap-2" [ngStyle]="{'border': '1px solid #d1d5db', 'border-radius': '0', 'padding': '0.75rem 1rem'}">
-        @for (option of options; track option.value) {
+        @for (option of options; track $index) {
           <div class="flex items-center">
             <label class="custom-checkbox-label">
               <input
@@ -124,14 +124,18 @@ export class CheckboxGroupComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
+  @Input() value: string[] = [];
 
-  value: number[] = [];
   disabled = false;
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
-  writeValue(value: number[]): void {
-    this.value = value || [];
+  writeValue(value: string[] | string): void {
+    if (typeof value === 'string') {
+      this.value = value ? value.split(',').map(v => v.trim()) : [];
+    } else {
+      this.value = value || [];
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -153,17 +157,18 @@ export class CheckboxGroupComponent implements ControlValueAccessor, Validator {
     return null;
   }
 
-  isChecked(optionValue: number): boolean {
+  isChecked(optionValue: string): boolean {
     return this.value.includes(optionValue);
   }
 
-  onCheckboxChange(optionValue: number, event: Event): void {
+  onCheckboxChange(optionValue: string, event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
     if (checked) {
       this.value = [...this.value, optionValue];
     } else {
       this.value = this.value.filter(v => v !== optionValue);
     }
+
     this.onChange(this.value);
     this.onTouched();
   }

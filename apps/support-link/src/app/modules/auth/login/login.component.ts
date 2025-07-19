@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
 import { environment } from 'apps/support-link/src/environments/environment';
 import { TranslationService } from '@support-link/translations';
+import { AuthService } from '@support-link/core/http';
 
 @Component({
   selector: 'app-login',
@@ -38,13 +39,15 @@ export class LoginComponent {
   showPassword = false;
   showOtpScreen = false;
   recaptchaSiteKey = environment.recaptchaSiteKey;
+  returnUrl: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     public translationService: TranslationService,
-    private recaptchaV3Service: ReCaptchaV3Service
+    private recaptchaV3Service: ReCaptchaV3Service,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,6 +57,8 @@ export class LoginComponent {
     this.otpForm = this.fb.group({
       otp: ['', [Validators.required, Validators.minLength(6)]]
     });
+
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
 
   ngOnInit() {
@@ -83,14 +88,20 @@ export class LoginComponent {
   }
 
   onOtpSubmit() {
-    if (this.otpForm.invalid) {
+    if (this.otpForm.valid) {
       this.recaptchaV3Service.execute('your_action_name').subscribe(
         (token) => {
           this.isLoading = true;
-          setTimeout(() => {
-            this.isLoading = false;
-            this.router.navigate(['/dashboard']);
-          }, 1000);
+          this.authService.setLoggedIn(true);
+
+          let url = this.returnUrl || '/';
+          url = decodeURIComponent(url);
+          if (!url.startsWith('/')) {
+            url = '/' + url;
+          }
+
+          console.log('Redirecting to:', url);
+          this.router.navigateByUrl(url);
         },
         (error) => {
           console.error('reCAPTCHA error:', error);

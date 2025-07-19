@@ -92,12 +92,12 @@ export class ChipsInputComponent implements ControlValueAccessor, Validator {
   @Input() name = '';
   @Input() maxChips = 0; // 0 means unlimited
   @Input() allowDuplicates = false;
+  @Input() value: string[] = [];
 
-  value: string[] = [];
   inputValue = '';
   disabled = false;
-  onChange: (value: string[]) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string[]) => void = () => { };
+  onTouched: () => void = () => { };
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;

@@ -1,0 +1,14 @@
+<div class="flex justify-between items-center mb-8">
+  <h2 class="text-2xl font-bold">{{title}}</h2>
+  <div class="flex items-center space-x-4">
+    <span class="bg-gray-100 px-4 py-2 rounded-full">
+      {{ 'DASHBOARD.WELCOME' | translate:{name: userName} }}
+    </span>
+    <i class="fa fa-bell text-orange-400"></i>
+    <img src="assets/images/user.png" alt="User" class="w-10 h-10 rounded-full" />
+    <button routerLink="/{{currentLang}}/dashboard/requests/new"
+      class="ml-4 px-6 py-2 rounded-full bg-[var(--main-color)] text-white font-semibold hover:bg-orange-600 transition">
+      + {{ 'DASHBOARD.CREATE_NEW_REQUEST' | translate }}
+    </button>
+  </div>
+</div>

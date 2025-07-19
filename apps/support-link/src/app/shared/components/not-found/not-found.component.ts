@@ -19,7 +19,6 @@ export class NotFoundComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private translationService: TranslationService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 

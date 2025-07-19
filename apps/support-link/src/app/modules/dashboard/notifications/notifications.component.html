@@ -1,0 +1,13 @@
+<!-- Example: dashboard.component.html -->
+<div class="flex min-h-screen bg-[#f7f8fa]">
+  <!-- Sidebar -->
+  <dashboard-side-bar [active]="'NOTIFICATIONS'"></dashboard-side-bar>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col px-16 py-10">
+    <dashboard-header [title]="'DASHBOARD.NOTIFICATIONS' | translate"></dashboard-header>
+    <div class="mb-8">
+      Notifications
+    </div>
+  </main>
+</div>

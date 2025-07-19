@@ -6,3 +6,4 @@ export * from './services/error-handling.service';
 export * from './guards/auth.guard';
 export * from './models/jwt-payload.model';
 export * from './utils/http-status.util'; 
+export * from './enums/http-method.enum'; 

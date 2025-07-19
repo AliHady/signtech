@@ -32,7 +32,6 @@ export class SliderComponent {
   ngOnInit() {
     this.homeService.getSliders().subscribe(items => {
       this.sliderItems = items;
-      console.log('Slider items:', this.sliderItems);
     });
 
     this.route.params.subscribe(params => {

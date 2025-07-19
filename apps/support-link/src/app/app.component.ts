@@ -13,8 +13,8 @@ import { SharedModule } from './shared/shared.module';
 
 @Component({
   imports: [
-    RouterModule, 
-    TranslateModule, 
+    RouterModule,
+    TranslateModule,
     CommonModule,
     SharedModule,
     LoadingOverlayComponent,
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'portal';
   currentLang = 'ar';
   isLoading = false;
+  showHeaderAndFooter = true;
   private paramsSubscription: Subscription | undefined;
 
   constructor(
@@ -40,6 +41,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
+    this.checkHeaderAndFooterVisibility(this.router.url);
+    this.router.events.subscribe(() => {
+      this.checkHeaderAndFooterVisibility(this.router.url);
+    });
+
     // Subscribe to language changes
     this.translationService.currentLang$.subscribe(lang => {
       this.currentLang = lang;
@@ -53,9 +59,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event.constructor.name === 'NavigationStart') {
         this.isLoading = true;
-      } else if (event.constructor.name === 'NavigationEnd' || 
-                 event.constructor.name === 'NavigationError' || 
-                 event.constructor.name === 'NavigationCancel') {
+      } else if (event.constructor.name === 'NavigationEnd' ||
+        event.constructor.name === 'NavigationError' ||
+        event.constructor.name === 'NavigationCancel') {
         this.isLoading = false;
       }
     });
@@ -75,7 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.paramsSubscription.unsubscribe();
     }
   }
-  
+
   switchLanguage(lang: string) {
     this.translationService.setLanguage(lang);
     const currentUrl = this.router.url;
@@ -92,5 +98,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  private checkHeaderAndFooterVisibility(url: string) {
+    const regex = /^\/[a-z]{2}\/dashboard/;
+    this.showHeaderAndFooter = !regex.test(url);
   }
 }

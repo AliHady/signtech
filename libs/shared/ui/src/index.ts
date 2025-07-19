@@ -6,3 +6,5 @@ export * from './lib/translation.module';
 export * from './lib/dynamic-form/dynamic-form.component';
 export * from './lib/dynamic-form/dynamic-form.interface';
 export * from './lib/dynamic-form/dynamic-form.service';
+export * from './lib/enums/form-fieldtype.enum';
+export * from './lib/enums/input-restriction.enum';

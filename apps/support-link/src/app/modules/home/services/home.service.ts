@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SliderItemDto } from '../models/slider.model';
 import { environment } from '../../../../environments/environment';
 import { ApiDataService } from '@support-link/shared/utils';
-import { ServiceItemDto, ServicesResponse } from '../models/our-services.model';
 import { ReviewsResponse } from '../models/reviews.model';
 
 @Injectable({

@@ -1,7 +1,8 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validator, NG_VALIDATORS, AbstractControl, ValidationErrors } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputRestriction } from '../../enums/input-restriction.enum';
 
 @Component({
   selector: 'app-text-input',
@@ -21,7 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </label>
       }
       <input
-        type="text"
+        [type]="type"
         [value]="value"
         (input)="onInput($event)"
         (blur)="onTouched()"
@@ -31,6 +32,9 @@ import { TranslateModule } from '@ngx-translate/core';
         class="w-full px-4 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-[#1AD9C7] focus:ring-1 focus:ring-[#1AD9C7]"
         [ngStyle]="{'font-family': 'inherit', 'border-radius': '0', 'border': '1px solid #d1d5db', 'padding': '0.75rem 1rem'}"
         [disabled]="disabled"
+        [attr.pattern]="getPattern(inputRestriction)"
+        [attr.inputmode]="getInputMode(inputRestriction)"
+        (keypress)="onKeyPress($event)"
       >
       @if (control && control.invalid && (control.touched || formSubmitted)) {
         <div class="text-sm text-red-600">
@@ -64,21 +68,25 @@ export class TextInputComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
   @Input() name = '';
-
-  value = '';
+  @Input() inputRestriction: InputRestriction | undefined;
+  @Input() type: string = 'text';
+  @Input() value = '';
+  @Output() valueChange = new EventEmitter<string>();
   disabled = false;
-  onChange: (value: string) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string) => void = () => { };
+  onTouched: () => void = () => { };
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
     this.onChange(this.value);
     this.onTouched();
+    this.valueChange.emit(this.value);
   }
 
   writeValue(value: string): void {
     this.value = value;
+    this.valueChange.emit(this.value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -101,5 +109,31 @@ export class TextInputComponent implements ControlValueAccessor, Validator {
       return { maxlength: true };
     }
     return null;
+  }
+
+  getPattern(restriction: InputRestriction | undefined): string | null {
+    switch (restriction) {
+      case InputRestriction.Numbers: return '[0-9]*';
+      case InputRestriction.English: return '[A-Za-z0-9 ]*';
+      case InputRestriction.Arabic: return '[\u0600-\u06FF ]*';
+      default: return null;
+    }
+  }
+
+  getInputMode(restriction: InputRestriction | undefined): string | null {
+    if (restriction === InputRestriction.Numbers) return 'numeric';
+    return null;
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    if (this.inputRestriction === InputRestriction.Numbers && !/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+    if (this.inputRestriction === InputRestriction.English && !/[A-Za-z0-9 ]/.test(event.key)) {
+      event.preventDefault();
+    }
+    if (this.inputRestriction === InputRestriction.Arabic && !/[\u0600-\u06FF ]/.test(event.key)) {
+      event.preventDefault();
+    }
   }
 } 

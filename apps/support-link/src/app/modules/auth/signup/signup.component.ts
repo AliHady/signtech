@@ -82,7 +82,7 @@ export class SignupComponent {
   }
 
   onOtpSubmit() {
-    if (this.otpForm.invalid) {
+    if (this.otpForm.valid) {
       this.recaptchaV3Service.execute('your_action_name').subscribe(
         (token) => {
           this.isLoading = true;

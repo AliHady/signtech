@@ -4,8 +4,10 @@
     <span class="bg-gray-100 px-4 py-2 rounded-full">
       {{ 'DASHBOARD.WELCOME' | translate:{name: userName} }}
     </span>
-    <i class="fa fa-bell text-orange-400"></i>
-    <img src="assets/images/user.png" alt="User" class="w-10 h-10 rounded-full" />
+    <svg class="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 20c0-4 16-4 16 0" />
+    </svg>
     <button routerLink="/{{currentLang}}/dashboard/requests/new"
       class="ml-4 px-6 py-2 rounded-full bg-[var(--main-color)] text-white font-semibold hover:bg-orange-600 transition">
       + {{ 'DASHBOARD.CREATE_NEW_REQUEST' | translate }}

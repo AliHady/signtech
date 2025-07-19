@@ -2,45 +2,56 @@
   <div class="flex items-center mb-12">
     <img src="assets/images/logo.png" alt="SupportLink logo" class="w-10 h-10" />
     <span class="ml-2 text-2xl font-bold">
-      <span class="text-[#0f1416]">{{ 'GENERAL.SUPPORT' | translate }}</span><span class="text-[var(--main-color)]">{{
-        'GENERAL.LINK' | translate }}</span>
+      <span class="text-[#0f1416]">{{ 'GENERAL.SUPPORT' | translate }}</span><span class="text-[var(--main-color)]">{{ 'GENERAL.LINK' | translate }}</span>
     </span>
   </div>
   <nav class="flex-1">
-    <ul class="space-y-2">
+    <ul class="space-y-6 list-none p-0 m-0">
       <li>
-        <a routerLink="/{{currentLang}}/dashboard" [class.bg-orange-50]="active === 'DASHBOARD'"
-          [class.text-orange-600]="active === 'DASHBOARD'"
-          class="flex items-center px-4 py-3 rounded-lg   font-semibold">
-          <i class="fa fa-th-large mr-2"></i> {{ 'DASHBOARD.TITLE' | translate }}
+        <a routerLink="/{{currentLang}}/dashboard"
+          [ngClass]="{
+            'bg-orange-50 text-orange-600 font-bold': active === 'DASHBOARD',
+            'text-[#23234C] font-semibold': active !== 'DASHBOARD'
+          }"
+          class="flex items-center px-6 py-4 rounded-xl no-underline hover:bg-orange-50 transition-all duration-150 text-base">
+          {{ 'DASHBOARD.TITLE' | translate }}
         </a>
       </li>
       <li>
-        <a routerLink="/{{currentLang}}/dashboard/requests" [class.bg-orange-50]="active === 'MY-REQUESTS'"
-          [class.text-orange-600]="active === 'MY-REQUESTS'"
-          class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100">
-          <i class="fa fa-list mr-2"></i> {{ 'DASHBOARD.MY_REQUESTS' | translate }}
-          <span class="ml-auto bg-orange-500 text-white rounded-full px-2 py-0.5 text-xs">3</span>
+        <a routerLink="/{{currentLang}}/dashboard/requests"
+          [ngClass]="{
+            'bg-orange-50 text-orange-600 font-bold': active === 'MY-REQUESTS',
+            'text-[#23234C] font-semibold': active !== 'MY-REQUESTS'
+          }"
+          class="flex items-center px-6 py-4 rounded-xl no-underline hover:bg-orange-50 transition-all duration-150 text-base relative">
+          {{ 'DASHBOARD.MY_REQUESTS' | translate }}
+          <span class="absolute right-6 bg-orange-500 text-white rounded-full px-3 py-0.5 text-sm font-bold" style="top:50%;transform:translateY(-50%);">{{ 3 }}</span>
         </a>
       </li>
       <li>
-        <a routerLink="/{{currentLang}}/dashboard/notifications" [class.bg-orange-50]="active === 'NOTIFICATIONS'"
-          [class.text-orange-600]="active === 'NOTIFICATIONS'"
-          class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100">
-          <i class="fa fa-bell mr-2"></i> {{ 'DASHBOARD.NOTIFICATIONS' | translate }}
-          <span class="ml-auto bg-orange-500 text-white rounded-full px-2 py-0.5 text-xs">16</span>
+        <a routerLink="/{{currentLang}}/dashboard/notifications"
+          [ngClass]="{
+            'bg-orange-50 text-orange-600 font-bold': active === 'NOTIFICATIONS',
+            'text-[#23234C] font-semibold': active !== 'NOTIFICATIONS'
+          }"
+          class="flex items-center px-6 py-4 rounded-xl no-underline hover:bg-orange-50 transition-all duration-150 text-base relative">
+          {{ 'DASHBOARD.NOTIFICATIONS' | translate }}
+          <span class="absolute right-6 bg-orange-500 text-white rounded-full px-3 py-0.5 text-sm font-bold" style="top:50%;transform:translateY(-50%);">{{ 16 }}</span>
         </a>
       </li>
       <li>
-        <a routerLink="/{{currentLang}}/dashboard/settings" [class.bg-orange-50]="active === 'SETTINGS'"
-          [class.text-orange-600]="active === 'SETTINGS'"
-          class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100">
-          <i class="fa fa-cog mr-2"></i> {{ 'DASHBOARD.SETTINGS' | translate }}
+        <a routerLink="/{{currentLang}}/dashboard/settings"
+          [ngClass]="{
+            'bg-orange-50 text-orange-600 font-bold': active === 'SETTINGS',
+            'text-[#23234C] font-semibold': active !== 'SETTINGS'
+          }"
+          class="flex items-center px-6 py-4 rounded-xl no-underline hover:bg-orange-50 transition-all duration-150 text-base">
+          {{ 'DASHBOARD.SETTINGS' | translate }}
         </a>
       </li>
     </ul>
   </nav>
-  <a class="flex items-center mt-12 text-red-400 hover:text-red-600">
-    <i class="fa fa-sign-out-alt mr-2"></i> {{ 'DASHBOARD.LOGOUT' | translate }}
+  <a class="flex items-center mt-12 text-pink-400 hover:text-pink-600 font-semibold px-6 py-2 no-underline text-base">
+    {{ 'DASHBOARD.LOGOUT' | translate }}
   </a>
 </aside>

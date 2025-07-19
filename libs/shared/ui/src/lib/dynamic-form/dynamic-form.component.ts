@@ -80,7 +80,6 @@ export class DynamicFormComponent implements OnInit {
   }
 
   getTranslationKey(key: FormFieldLabel | string): string {
-    console.log(typeof key)
     if (typeof key === 'string') {
       return key;
     }

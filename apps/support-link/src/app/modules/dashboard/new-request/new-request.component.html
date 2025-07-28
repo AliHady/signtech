@@ -2,7 +2,7 @@
   <dashboard-side-bar [active]="'MY-REQUESTS'"></dashboard-side-bar>
   <main class="flex-1 flex flex-col px-16 py-10">
     <dashboard-header [title]="'DASHBOARD.CREATE_NEW_REQUEST' | translate"></dashboard-header>
-    <div class="container mx-auto px-4 flex flex-wrap justify-between">
+    <div class="container mx-auto px-4 flex flex-wrap justify-between overflow-y-auto max-h-[calc(100vh-10rem)]">
       <div class="w-full md:w-1/2">
         @if(formConfig && servicesLoaded && prioritiesloaded){
         <app-dynamic-form [config]="formConfig" (formSubmitted)="onFormSubmitted($event)"

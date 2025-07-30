@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@support-link/translations';
 import { SharedModule } from '../../../shared/shared.module';
-import { TextInputComponent } from '@support-link/shared/ui';
 import { DashboardHeaderComponent } from "../dashboard-header/dashboard-header.component";
 import { DashboardSideBarComponent } from "../dashboard-side-bar/dashboard-side-bar.component";
 import { RequestsItem } from '../models/requests.model';
@@ -17,7 +16,6 @@ import { RequestsItem } from '../models/requests.model';
   imports: [
     CommonModule,
     SharedModule,
-    TextInputComponent,
     FormsModule,
     TranslateModule,
     DashboardHeaderComponent,

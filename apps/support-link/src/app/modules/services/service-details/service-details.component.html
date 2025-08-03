@@ -15,7 +15,7 @@
               [src]="imageToDisplay" />
             <span
               class="absolute top-3 left-3 bg-white/80 text-[#1e1e1e] font-bold px-3 py-1 rounded-full text-sm flex items-center gap-1">
-              <img src="../../../../assets/images/riyal.png" class="w-4 h-4" alt="Price" />
+              <img src="assets/images/riyal.png" class="w-4 h-4" alt="Price" />
               {{ serviceDetails.Price }}
             </span>
           </div>
@@ -70,7 +70,8 @@
               (click)="goBack()">
               {{ 'SERVICE_DETAILS.BACK' | translate }}
             </button>
-            <button class="px-8 py-2 rounded-full bg-[--main-color] text-white font-bold transition hover:bg-[#e65c00] border-0 cursor-pointer"
+            <button
+              class="px-8 py-2 rounded-full bg-[--main-color] text-white font-bold transition hover:bg-[#e65c00] border-0 cursor-pointer"
               (click)="openRequestSupport(serviceDetails.Id)">
               {{ 'SERVICE_DETAILS.REQUEST_SUPPORT' | translate }}
             </button>

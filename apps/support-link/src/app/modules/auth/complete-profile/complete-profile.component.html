@@ -1,0 +1,14 @@
+<div class="news-details-container font-['Rubik',Helvetica]">
+  <main class="main-content bg-white overflow-hidden">
+    <div class="container mx-auto px-1 pt-32 pb-8">
+      <h2 class="text-[40px] leading-[50px] font-normal text-[#0b132a] mb-1 font-['DM_Serif_Display',Helvetica]">
+        {{'AUTH.COMPLETE-PROFILE' | translate}}
+      </h2>
+      @if(formConfig ){
+      <app-dynamic-form [config]="formConfig" (formSubmitted)="onFormSubmitted($event)"
+        (formError)="onFormError($event)">
+      </app-dynamic-form>
+      }
+    </div>
+  </main>
+</div>

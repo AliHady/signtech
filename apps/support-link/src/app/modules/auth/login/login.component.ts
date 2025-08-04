@@ -40,6 +40,7 @@ export class LoginComponent {
   showOtpScreen = false;
   recaptchaSiteKey = environment.recaptchaSiteKey;
   returnUrl: string | null = null;
+  email: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -71,41 +72,72 @@ export class LoginComponent {
     });
   }
 
+  /**
+   * Handles login form submission.
+   * Executes reCAPTCHA and calls requestOtp API.
+   */
   onSubmit() {
     if (this.loginForm.valid) {
-      this.recaptchaV3Service.execute('your_action_name').subscribe(
-        (token) => {
-          this.isLoading = true;
-          setTimeout(() => {
-            this.isLoading = false;
-            this.showOtpScreen = true;
-          }, 1000);
+      this.isLoading = true;
+      this.recaptchaV3Service.execute('login').subscribe({
+        next: (token) => {
+          this.email = this.loginForm.value.email;
+          this.authService.requestOtp(this.email, token).subscribe({
+            next: () => {
+              this.isLoading = false;
+              this.showOtpScreen = true;
+            },
+            error: (error) => {
+              this.isLoading = false;
+              // Handle error (show message, etc.)
+              console.error('Failed to request OTP:', error);
+            }
+          });
         },
-        (error) => {
+        error: (error) => {
+          this.isLoading = false;
           console.error('reCAPTCHA error:', error);
-        });
+        }
+      });
     }
   }
 
+  /**
+   * Handles OTP form submission.
+   * Executes reCAPTCHA and calls verifyOtp API.
+   */
   onOtpSubmit() {
     if (this.otpForm.valid) {
-      this.recaptchaV3Service.execute('your_action_name').subscribe(
-        (token) => {
-          this.isLoading = true;
-          this.authService.setLoggedIn(true);
-
-          let url = this.returnUrl || '/';
-          url = decodeURIComponent(url);
-          if (!url.startsWith('/')) {
-            url = '/' + url;
-          }
-
-          console.log('Redirecting to:', url);
-          this.router.navigateByUrl(url);
+      this.isLoading = true;
+      this.recaptchaV3Service.execute('verify_otp').subscribe({
+        next: (token) => {
+          const email = this.loginForm.value.email;
+          const otp = this.otpForm.value.otp;
+          this.authService.verifyOtp(email, otp, token).subscribe({
+            next: (response) => {
+              this.isLoading = false;
+              if (response && !response.token) {
+                this.router.navigate([`/${this.currentLang}/auth/complete-profile`], { queryParams: { email: this.email } });
+              } else if (response && response.token) {
+                this.authService.setLoggedIn(true);
+                let url = this.returnUrl || '/dashboard';
+                url = decodeURIComponent(url);
+                if (!url.startsWith('/')) url = '/' + url;
+                this.router.navigate([`/${this.currentLang}${url}`]);
+              }
+            },
+            error: (error) => {
+              this.isLoading = false;
+              // Handle error (show message, etc.)
+              console.error('OTP verification failed:', error);
+            }
+          });
         },
-        (error) => {
+        error: (error) => {
+          this.isLoading = false;
           console.error('reCAPTCHA error:', error);
-        });
+        }
+      });
     }
   }
 

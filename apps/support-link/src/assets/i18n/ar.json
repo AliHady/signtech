@@ -26,7 +26,8 @@
     "REGISTER": "تسجيل",
     "EMAIL": "البريد الإلكتروني",
     "PASSWORD": "كلمة المرور",
-    "SIGNUP": "تسجيل"
+    "SIGNUP": "تسجيل",
+    "COMPLETE-PROFILE": "إكمال الملف الشخصي"
   },
   "LANGUAGE": {
     "EN": "EN",

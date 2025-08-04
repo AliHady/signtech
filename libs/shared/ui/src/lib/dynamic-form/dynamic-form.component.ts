@@ -325,7 +325,7 @@ export class DynamicFormComponent implements OnInit {
           let formData: any;
 
           if (isJsonRequest) {
-            formData = this.form.value;
+            formData = this.form.getRawValue();
           } else {
             formData = new FormData();
             Object.keys(this.form.value).forEach(key => {

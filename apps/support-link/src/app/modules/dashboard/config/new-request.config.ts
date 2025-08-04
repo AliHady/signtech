@@ -45,19 +45,19 @@ export const NEW_REQUEST_CONFIG: DynamicFormConfig = {
       }
     },
     {
-      name: 'SelectedPriorityIds',
-      type: FormFieldType.Checkbox,
+      name: 'PriorityId',
+      type: FormFieldType.Radio,
       label: { en: 'Priority', ar: 'الأولوية' },
-      required: false,
+      required: true,
       options: [],
       lookupDomain: environment.contentUrl,
       showOnValues: [122],
       lookupName: 'Priority'
     },
     {
-      name: 'date',
+      name: 'ContactDate',
       type: FormFieldType.Date,
-      label: { en: 'Date', ar: 'الوقت' },
+      label: { en: 'Preferred Contact Date', ar: 'تاريخ الاتصال المفضل' },
       required: true,
       validation: {
         required: true,
@@ -69,11 +69,21 @@ export const NEW_REQUEST_CONFIG: DynamicFormConfig = {
       }
     },
     {
-      name: 'Files',
+      name: 'ContactTimeId',
+      type: FormFieldType.Select,
+      label: { en: 'Preferred Contact Time', ar: 'وقت الاتصال المفضل' },
+      required: true,
+      options: [],
+      lookupDomain: environment.contentUrl,
+      showOnValues: [122],
+      lookupName: 'ContactTime'
+    },
+    {
+      name: 'Attachments',
       type: FormFieldType.File,
       label: { en: 'Attach File', ar: 'إرفاق الملف' },
       required: true,
-      acceptedFileTypes: '.docx,.pdf',
+      acceptedFileTypes: '.docx,.pdf,.png,.jpg,.jpeg',
       maxFileSize: 1,
       validation: {
         required: true,

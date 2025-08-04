@@ -26,7 +26,8 @@
     "REGISTER": "Register",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "SIGNUP": "Sign Up"
+    "SIGNUP": "Sign Up",
+    "COMPLETE-PROFILE": "Complete Profile"
   },
   "LANGUAGE": {
     "EN": "EN",

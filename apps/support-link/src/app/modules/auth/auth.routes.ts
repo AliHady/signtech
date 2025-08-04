@@ -4,6 +4,10 @@ export const authRoutes: Route[] = [
   {
     path: 'auth/login',
     loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
+  },  
+  {
+    path: 'auth/complete-profile',
+    loadComponent: () => import('./complete-profile/complete-profile.component').then(m => m.CompleteProfileComponent)
   },
   {
     path: 'auth/signup',

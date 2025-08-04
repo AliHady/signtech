@@ -50,7 +50,8 @@ export class NewRequestComponent implements OnInit {
 
   ngOnInit() {
     this.formConfig = NEW_REQUEST_CONFIG;
-    this.getLookup('Priority', 'SelectedPriorityIds');
+    this.getLookup('Priority', 'PriorityId');
+    this.getLookup('ContactTime', 'ContactTimeId');
     this.ourServicesService.getOurServices().subscribe(data => {
       const field = this.formConfig.fields.find(f => f.name === 'ServiceId');
       if (field) {

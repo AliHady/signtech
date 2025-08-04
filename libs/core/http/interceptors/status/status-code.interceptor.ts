@@ -10,11 +10,24 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpStatusUtil } from '../../utils/http-status.util';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationService } from '@support-link/translations';
 
 @Injectable()
 export class StatusCodeInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  currentLang = 'ar';
+
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private translationService: TranslationService) {
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
+    });
+  }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -49,11 +62,11 @@ export class StatusCodeInterceptor implements HttpInterceptor {
     if (HttpStatusUtil.isClientError(status)) {
       // Handle client errors (4xx)
       console.error(`Client error: ${status}`, error);
-      this.router.navigate(['/ar/server-down']);
+      this.router.navigate([`/${this.currentLang}/server-down`]);
     } else if (HttpStatusUtil.isServerError(status)) {
       // Handle server errors (5xx)
       console.error(`Server error: ${status}`, error);
-      this.router.navigate(['/ar/server-down']);
+      this.router.navigate([`/${this.currentLang}/server-down`]);
     }
   }
 } 

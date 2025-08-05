@@ -12,6 +12,7 @@ import { DashboardService } from '../services/dashboard.service';
 import { RequestItem } from '../models/requests.model';
 import { RequestStatusEnum } from '../enums/request-status.enum';
 import { RequestDetails } from '../models/request-details.model';
+import { RequestPriorityEnum } from '../enums/priority.enum';
 
 @Component({
   selector: 'app-my-requests',
@@ -45,6 +46,7 @@ export class MyRequestsComponent implements OnInit {
   loading = true;
   error = '';
   public RequestStatusEnum = RequestStatusEnum
+  public RequestPriorityEnum = RequestPriorityEnum;
 
   constructor(
     private authService: AuthService,

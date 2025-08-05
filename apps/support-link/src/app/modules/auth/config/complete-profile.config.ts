@@ -3,7 +3,7 @@ import { DynamicFormConfig, FormFieldType } from "@support-link/shared/ui";
 import { environment } from "apps/support-link/src/environments/environment";
 
 export const COMPLETE_PROFILE_CONFIG: DynamicFormConfig = {
-  endpoint: `${environment.contentUrl}/customer/complete-profile`,
+  endpoint: `${environment.apiUrl}/customer/complete-profile`,
   method: HttpMethod.POST,
   successMessage: {
     en: 'Your profile has been completed successfully',
@@ -67,6 +67,20 @@ export const COMPLETE_PROFILE_CONFIG: DynamicFormConfig = {
         errorMessages: {
           required: { en: 'This field is required', ar: 'حقل مطلوب' },
           pattern: { en: 'Invalid mobile number format', ar: 'رقم الجوال غير صحيح برجاء إدخال رقم جوال سعودي صحيح' }
+        }
+      }
+    },
+    {
+      name: 'Image',
+      type: FormFieldType.File,
+      label: { en: 'Attach Image', ar: 'إرفاق الصورة' },
+      required: true,
+      acceptedFileTypes: '.png,.jpg,.jpeg',
+      maxFileSize: 1,
+      validation: {
+        required: true,
+        errorMessages: {
+          required: { en: 'File is required', ar: 'هذا الحقل مطلوب' }
         }
       }
     }

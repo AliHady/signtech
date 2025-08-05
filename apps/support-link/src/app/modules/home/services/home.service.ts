@@ -9,9 +9,9 @@ import { ReviewsResponse } from '../models/reviews.model';
   providedIn: 'root'
 })
 export class HomeService {
-  private sliderApiUrl = `${environment.contentUrl}/cms/slider`;
+  private sliderApiUrl = `${environment.apiUrl}/cms/slider`;
   private sliderCache = new BehaviorSubject<SliderItemDto[] | null>(null);
-  private reviewsApiUrl = `${environment.contentUrl}/customer/reviews`;
+  private reviewsApiUrl = `${environment.apiUrl}/customer/reviews`;
   private reviewsCache = new BehaviorSubject<ReviewsResponse[] | null>(null);
 
   constructor(private apiDataService: ApiDataService,) { }

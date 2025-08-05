@@ -16,7 +16,7 @@ interface MenuItem {
   providedIn: 'root'
 })
 export class HeaderService {
-  private apiUrl = `${environment.contentUrl}/cms/header`;
+  private apiUrl = `${environment.apiUrl}/cms/header`;
   private menuCache = new BehaviorSubject<Header | null>(null);
   private menuItemsSubject = new BehaviorSubject<MenuItem[]>([]);
 

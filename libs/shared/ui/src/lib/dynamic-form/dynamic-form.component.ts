@@ -328,12 +328,13 @@ export class DynamicFormComponent implements OnInit {
             formData = this.form.getRawValue();
           } else {
             formData = new FormData();
-            Object.keys(this.form.value).forEach(key => {
-              const value = this.form.value[key];
-              const field = this.config.fields.find(f => f.name === key);
+            const rawValues = this.form.getRawValue();
+            this.config.fields.forEach(field => {
+              const key = field.name;
+              const value = rawValues[key];
               if (value instanceof File || value instanceof Blob) {
                 formData.append(key, value);
-              } else if (Array.isArray(value) && field?.type === FormFieldType.Checkbox) {
+              } else if (Array.isArray(value) && field.type === FormFieldType.Checkbox) {
                 value.forEach((v: any) => formData.append(key, v));
               } else if (value !== null && value !== undefined) {
                 formData.append(key, value.toString());

@@ -177,8 +177,13 @@
     "SEND": "Send Request"
   },
   "REQUESTS": {
+    "STATUS_HISTORY": "Status History",
+    "ATTACHMENTS": "Attachments",
+    "DESCRIPTION":"Description",
     "TITLE": "Title",
     "REQUEST_DATE": "Request Date",
+    "CHANGED_BY": "Changed By",
+    "CHANGED_DATE": "Changed Date",
     "CATEGORY": "Request Category",
     "TRACKING_ID": "Tracking ID",
     "PRICE": "Price",
@@ -186,6 +191,8 @@
     "SEARCH": "Search",
     "FILTER": "Filter",
     "SHARE": "Share",
-    "BULK_ACTION": "Bulk Action"
+    "BULK_ACTION": "Bulk Action",
+    "DETAILS": "Request Details",
+    "DISPLAY":"Display"
   }
 }

@@ -3,7 +3,7 @@ import { DynamicFormConfig, FormFieldType } from "@support-link/shared/ui";
 import { environment } from "apps/support-link/src/environments/environment";
 
 export const NEW_REQUEST_CONFIG: DynamicFormConfig = {
-  endpoint: `${environment.contentUrl}/request`,
+  endpoint: `${environment.apiUrl}/request`,
   method: HttpMethod.POST,
   successMessage: {
     en: 'Your request has been submitted successfully',
@@ -50,7 +50,7 @@ export const NEW_REQUEST_CONFIG: DynamicFormConfig = {
       label: { en: 'Priority', ar: 'الأولوية' },
       required: true,
       options: [],
-      lookupDomain: environment.contentUrl,
+      lookupDomain: environment.apiUrl,
       showOnValues: [122],
       lookupName: 'Priority'
     },
@@ -74,7 +74,7 @@ export const NEW_REQUEST_CONFIG: DynamicFormConfig = {
       label: { en: 'Preferred Contact Time', ar: 'وقت الاتصال المفضل' },
       required: true,
       options: [],
-      lookupDomain: environment.contentUrl,
+      lookupDomain: environment.apiUrl,
       showOnValues: [122],
       lookupName: 'ContactTime'
     },

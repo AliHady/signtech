@@ -123,7 +123,13 @@ export class LoginComponent {
                 let url = this.returnUrl || '/dashboard';
                 url = decodeURIComponent(url);
                 if (!url.startsWith('/')) url = '/' + url;
-                this.router.navigate([`/${this.currentLang}${url}`]);
+
+                // Only add lang if not already present
+                const langRegex = /^\/(en|ar)(\/|$)/;
+                if (!langRegex.test(url)) {
+                  url = `/${this.currentLang}${url}`;
+                }
+                this.router.navigate([url]);
               }
             },
             error: (error) => {

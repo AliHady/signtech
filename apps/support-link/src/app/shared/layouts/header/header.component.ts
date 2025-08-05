@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { Header, HeaderItem } from '../../models/header.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
+import { AuthService, ROLES } from '@support-link/core/http';
 
 @Component({
   selector: 'app-header',
@@ -19,12 +21,28 @@ export class HeaderComponent implements OnInit {
   loading = true;
   error = '';
   openIndex: number | null = null;
-  menuOpen:boolean = false;
+  menuOpen: boolean = false;
+  isLoggedIn = false;
+  fullName = '';
+  userRoles$: Observable<string[]> = of([]); roles = ROLES;
 
   constructor(
     public translationService: TranslationService,
     private headerService: HeaderService,
-    private router: Router) {
+    private router: Router,
+    private authService: AuthService) {
+
+    this.authService.isLoggedIn$.subscribe(async isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      if (isLoggedIn) {
+        this.userRoles$ = this.authService.getRoles$();
+        this.fullName = this.authService.getFullName();
+      } else {
+        this.userRoles$ = of([]);
+        this.fullName = '';
+      }
+    });
+
     this.translationService.currentLang$.subscribe(lang => {
       if (this.currentLang !== lang) {
         this.currentLang = lang;
@@ -71,14 +89,19 @@ export class HeaderComponent implements OnInit {
   //   }
   // }
 
-toggleDropdown(index: number): void {
-  // Only toggle if the menu item has submenus
-  if (this.menuItems[index].SubMenus?.length) {
-    this.openIndex = this.openIndex === index ? null : index;
-  } else {
-    this.openIndex = null;
-    this.menuOpen = false;
+  toggleDropdown(index: number): void {
+    // Only toggle if the menu item has submenus
+    if (this.menuItems[index].SubMenus?.length) {
+      this.openIndex = this.openIndex === index ? null : index;
+    } else {
+      this.openIndex = null;
+      this.menuOpen = false;
+    }
   }
-}
 
+
+  logout() {
+    this.authService.logout();
+    location.reload();
+  }
 }

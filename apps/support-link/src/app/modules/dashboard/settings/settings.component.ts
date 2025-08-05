@@ -7,6 +7,7 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
 import { TranslationService } from '@support-link/translations';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
 import { DashboardSideBarComponent } from '../dashboard-side-bar/dashboard-side-bar.component';
+import { AuthService } from '@support-link/core/http';
 
 @Component({
   selector: 'settings',
@@ -23,15 +24,17 @@ import { DashboardSideBarComponent } from '../dashboard-side-bar/dashboard-side-
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
-  userName: string = 'Adel';
+  userName: string = '';
   currentLang = 'ar';
 
   constructor(
+    private authService: AuthService,
     public translationService: TranslationService,
     private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.userName = this.authService.getFullName();
     this.route.params.subscribe(params => {
       const lang = params['lang'];
       if (lang && (lang === 'en' || lang === 'ar')) {

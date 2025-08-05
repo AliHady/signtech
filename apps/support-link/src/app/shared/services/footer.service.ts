@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FooterService {
-  private footerApiUrl = `${environment.contentUrl}/cms/footer`;
+  private footerApiUrl = `${environment.apiUrl}/cms/footer`;
   private footerCache = new BehaviorSubject<FooterModel[] | null>(null);
 
   constructor(private apiDataService: ApiDataService,) { }

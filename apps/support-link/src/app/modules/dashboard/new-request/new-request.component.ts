@@ -12,6 +12,8 @@ import { environment } from 'apps/support-link/src/environments/environment';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
 import { DashboardSideBarComponent } from '../dashboard-side-bar/dashboard-side-bar.component';
 import { OurServicesService } from '../../services/services/our-services.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationService } from '@support-link/translations';
 
 @Component({
   selector: 'app-new-request',
@@ -43,12 +45,24 @@ export class NewRequestComponent implements OnInit {
   prioritiesloaded = false;
   error = '';
   formConfig!: typeof NEW_REQUEST_CONFIG;
+  currentLang = 'ar';
 
   constructor(
+    public translationService: TranslationService,
     private lookupService: LookupService,
+    private route: ActivatedRoute,
+    private router: Router,
     private ourServicesService: OurServicesService) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const lang = params['lang'];
+      if (lang && (lang === 'en' || lang === 'ar')) {
+        this.currentLang = lang;
+        this.translationService.setLanguage(lang);
+      }
+    });
+
     this.formConfig = NEW_REQUEST_CONFIG;
     this.getLookup('Priority', 'PriorityId');
     this.getLookup('ContactTime', 'ContactTimeId');
@@ -65,7 +79,7 @@ export class NewRequestComponent implements OnInit {
   }
 
   getLookup(lookup: string, filedName: string) {
-    this.lookupService.getLookup(environment.contentUrl, lookup).subscribe({
+    this.lookupService.getLookup(environment.apiUrl, lookup).subscribe({
       next: (response) => {
         const field = this.formConfig.fields.find(f => f.name === filedName);
         if (field) {
@@ -86,6 +100,10 @@ export class NewRequestComponent implements OnInit {
 
   onFormSubmitted(response: any) {
     console.log('Form submitted successfully:', response);
+
+    if (response) {
+      this.router.navigate([`/${this.currentLang}/dashboard/requests`]);
+    }
   }
 
   onFormError(error: any) {

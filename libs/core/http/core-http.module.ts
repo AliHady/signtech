@@ -63,4 +63,4 @@ import { ErrorHandlingService } from './services/error-handling.service';
     }
   ]
 })
-export class CoreHttpModule {} 
+export class CoreHttpModule { } 

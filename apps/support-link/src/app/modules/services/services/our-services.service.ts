@@ -9,7 +9,7 @@ import { environment } from 'apps/support-link/src/environments/environment';
   providedIn: 'root'
 })
 export class OurServicesService {
-  private servicesApiUrl = `${environment.contentUrl}/cms/our-services`;
+  private servicesApiUrl = `${environment.apiUrl}/cms/our-services`;
 
   constructor(private apiDataService: ApiDataService) { }
 

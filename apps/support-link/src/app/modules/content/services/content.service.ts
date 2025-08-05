@@ -10,7 +10,7 @@ import { Content } from '../models/content.model';
 })
 export class ContentService {
   private readonly apiEndpoints = {
-    content: `${environment.contentUrl}/cms/content`
+    content: `${environment.apiUrl}/cms/content`
   };
 
   constructor(

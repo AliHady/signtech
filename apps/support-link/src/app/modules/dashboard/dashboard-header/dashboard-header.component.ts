@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { TranslationService } from '@support-link/translations';
+import { AuthService } from '@support-link/core/http';
 
 @Component({
   selector: 'dashboard-header',
@@ -15,15 +16,17 @@ import { TranslationService } from '@support-link/translations';
 })
 export class DashboardHeaderComponent {
   @Input() title: string = '';
-  userName: string = 'Adel';
+  userName: string = '';
   currentLang = 'ar';
 
   constructor(
+    private authService: AuthService,
     public translationService: TranslationService,
     private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.userName = this.authService.getFullName();
     this.route.params.subscribe(params => {
       const lang = params['lang'];
       if (lang && (lang === 'en' || lang === 'ar')) {

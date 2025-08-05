@@ -177,8 +177,13 @@
     "SEND": "إرسال الطلب"
   },
   "REQUESTS": {
+    "STATUS_HISTORY": "سجل الحالة",
+    "ATTACHMENTS": "المرفقات",
+    "DESCRIPTION":"الوصف",
     "TITLE": "العنوان",
     "REQUEST_DATE": "تاريخ الطلب",
+    "CHANGED_BY": "تم التغيير بواسطة",
+    "CHANGED_DATE": "تاريخ التغيير",
     "CATEGORY": "فئة الطلب",
     "TRACKING_ID": "معرّف التتبع",
     "PRICE": "السعر",
@@ -186,6 +191,8 @@
     "SEARCH": "بحث",
     "FILTER": "الفلترة",
     "SHARE": "مشاركة",
-    "BULK_ACTION": "إجراء مجمع"
+    "BULK_ACTION": "إجراء مجمع",
+    "DETAILS": "تفاصيل الطلب",
+    "DISPLAY":"عرض"
   }
 }

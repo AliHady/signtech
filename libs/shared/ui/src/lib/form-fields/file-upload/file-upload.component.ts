@@ -142,16 +142,16 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   @Input() requiredIndicatorColor = 'text-red-500';
   @Input() requiredIndicatorSize = 'text-sm';
   @Input() requiredIndicatorPosition: 'before' | 'after' = 'after';
-
-  file: File | null = null;
+  @Input() value = '';
+  file: any | null = null;
   previewUrl: string | null = null;
   isDragging = false;
   disabled = false;
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   get isImage(): boolean {
-    return this.file?.type.startsWith('image/') ?? false;
+    return (typeof this.file === 'string' || this.file?.type?.startsWith?.('image/')) ?? false;
   }
 
   writeValue(value: File | null): void {
@@ -257,7 +257,8 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   }
 
   private createPreview(): void {
-    if (this.file && this.isImage) {
+    if (this.file && this.file?.type?.startsWith?.('image/')) {
+      // File object: use FileReader
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.previewUrl = e.target.result;
@@ -266,6 +267,16 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
         this.previewUrl = null;
       };
       reader.readAsDataURL(this.file);
+    } else if (typeof this.file === 'string') {
+      if (this.file.startsWith('data:image')) {
+        this.previewUrl = this.file;
+      } else {
+        this.previewUrl = `data:image/png;base64,${this.file}`;
+      }
+    } else if (this.file && Array.isArray(this.file)) {
+      const byteArray = this.file as unknown as Uint8Array;
+      const base64String = btoa(String.fromCharCode(...byteArray));
+      this.previewUrl = `data:image/png;base64,${base64String}`;
     } else {
       this.previewUrl = null;
     }
@@ -283,10 +294,15 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   }
 
   formatFileSize(bytes: number): string {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    if (bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    else {
+      return "";
+    }
   }
 } 

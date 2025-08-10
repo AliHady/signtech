@@ -4,10 +4,17 @@
     <span class="bg-gray-100 px-4 py-2 rounded-full">
       {{ 'DASHBOARD.WELCOME' | translate:{name: userName} }}
     </span>
-    <svg class="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 20c0-4 16-4 16 0" />
-    </svg>
+    <ng-container *ngIf="profile?.Image; else defaultAvatar">
+      <img [src]="'data:image/png;base64,' +profile?.Image" alt="User Profile"
+        class="rounded-full w-8 h-8 object-cover cursor-pointer" (click)="goToProfile()" />
+    </ng-container>
+    <ng-template #defaultAvatar>
+      <svg class="w-10 h-10 text-gray-400 cursor-pointer" fill="currentColor" viewBox="0 0 24 24"
+        (click)="goToProfile()">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 16-4 16 0" />
+      </svg>
+    </ng-template>
     <button routerLink="/{{currentLang}}/dashboard/requests/new"
       class="ml-4 px-6 py-2 rounded-full bg-[var(--main-color)] text-white font-semibold border-0 hover:bg-orange-600 transition">
       + {{ 'DASHBOARD.CREATE_NEW_REQUEST' | translate }}

@@ -1,0 +1,150 @@
+<div class="flex min-h-screen bg-[#f7f8fa]">
+  <dashboard-side-bar [active]="'MY-REQUESTS'"></dashboard-side-bar>
+  <main class="flex-1 flex flex-col px-16 py-10">
+    <dashboard-header [title]="'DASHBOARD.MY_REQUESTS' | translate"></dashboard-header>
+    <div class="mb-8">
+      <div class="text-lg font-semibold mb-4">{{ 'REQUESTS.DETAILS' | translate }}</div>
+    </div>
+    <div class="overflow-x-auto rounded-lg shadow-sm bg-white">
+      @if (selectedRequest) {
+      <div class="py-4 px-4">
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.TITLE' | translate }}: </span> {{ currentLang ===
+          'en' ?
+          selectedRequest.Service.En : selectedRequest.Service.Ar }}
+        </div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.DESCRIPTION' | translate }}: </span> {{
+          selectedRequest.Description }}
+        </div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.PRIORITY' | translate }}: </span>
+          <span [ngClass]="{
+                  'bg-red-100 text-red-700': selectedRequest.Priority.Id === RequestPriorityEnum.Urgent,
+                  'bg-purple-100 text-purple-700': selectedRequest.Priority.Id === RequestPriorityEnum.High,
+                  'bg-yellow-100 text-yellow-700': selectedRequest.Priority.Id === RequestPriorityEnum.Medium,
+                  'bg-green-100 text-green-700': selectedRequest.Priority.Id === RequestPriorityEnum.Low
+                }" class="px-3 py-1 rounded-full text-xs font-semibold">
+            {{ currentLang === 'en' ? selectedRequest.Priority.En : selectedRequest.Priority.Ar }}
+          </span>
+        </div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.REQUEST_DATE' | translate }}: </span>
+          {{ selectedRequest.ContactDate | date:'dd-MM-yyyy' }}</div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.REQUEST_TIME' | translate }}: </span>
+          {{ currentLang === 'en' ?
+          selectedRequest.ContactTime.En : selectedRequest.ContactTime.Ar }}</div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.CATEGORY' | translate }}: </span>
+          {{ currentLang === 'en' ? selectedRequest.Category.En : selectedRequest.Category.Ar }}</div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.TRACKING_ID' | translate }}: </span>
+          {{selectedRequest.Id}}</div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.PRICE' | translate }}: </span><span
+            class=" text-[#1e1e1e] text-base">
+            {{ selectedRequest.Price }}
+          </span>
+          <img class="w-3.5 h-4 mr-2" alt="Price icon" src="assets/images/riyal.png" />
+        </div>
+        <div class="py-2"><span class="font-semibold">{{ 'REQUESTS.STATUS' | translate }}: </span>
+          <span [ngClass]="{
+                  'bg-green-100 text-green-700': selectedRequest.Status.Id === RequestStatusEnum.Completed,
+                  'bg-yellow-100 text-yellow-700': selectedRequest.Status.Id === RequestStatusEnum.New,
+                  'bg-red-100 text-red-700': selectedRequest.Status.Id === RequestStatusEnum.Cancelled,
+                  'bg-orange-100 text-orange-700': selectedRequest.Status.Id === RequestStatusEnum.Pending,
+                  'bg-purple-100 text-purple-700': selectedRequest.Status.Id === RequestStatusEnum.InProgress
+                }" class="px-3 py-1 rounded-full text-xs font-semibold">
+            {{ currentLang === 'en' ? selectedRequest.Status.En : selectedRequest.Status.Ar }}
+          </span>
+        </div>
+        <!-- Status History Section as Table -->
+        <div class="py-2">
+          <span class="font-semibold">{{ 'REQUESTS.STATUS_HISTORY' | translate }}:</span>
+          <table class="min-w-full mt-2 text-sm border rounded">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="px-3 py-2 text-left">{{ 'REQUESTS.STATUS' | translate }}</th>
+                <th class="px-3 py-2 text-left">{{ 'REQUESTS.CHANGED_BY' | translate }}</th>
+                <th class="px-3 py-2 text-left">{{ 'REQUESTS.CHANGED_DATE' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let history of selectedRequest.StatusHistory">
+                <td class="px-3 py-2 font-semibold">
+                  {{ currentLang === 'en' ? history.Status.En : history.Status.Ar }}
+                </td>
+                <td class="px-3 py-2">
+                  {{ history.ChangedBy }}
+                </td>
+                <td class="px-3 py-2">
+                  {{ history.ChangedDate | date:'dd-MM-yyyy HH:mm' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Attachments Section -->
+        <div class="mt-4">
+          <span class="font-semibold">{{ 'REQUESTS.ATTACHMENTS' | translate }}:</span>
+          <ul class="mt-2 space-y-1 list-none">
+            <li *ngFor="let att of selectedRequest.Attachments">
+              <ng-container [ngSwitch]="true">
+                <!-- Image preview -->
+                <ng-container *ngSwitchCase="att.ContentType.startsWith('image/')">
+                  <img [src]="'data:' + att.ContentType + ';base64,' + att.Content" [alt]="att.FileName"
+                    class="max-h-32 rounded shadow border mb-1" />
+                  <div class="text-xs text-gray-500">{{ att.FileName }}</div>
+                </ng-container>
+                <!-- PDF or Word download link -->
+                <ng-container
+                  *ngSwitchCase="att.ContentType === 'application/pdf' || att.ContentType === 'application/msword' || att.ContentType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+                  <a [href]="'data:' + att.ContentType + ';base64,' + att.Content" [download]="att.FileName"
+                    target="_blank" class="text-blue-600 underline flex items-center gap-1">
+                    <i class="fa fa-file-pdf-o" *ngIf="att.ContentType === 'application/pdf'"></i>
+                    <i class="fa fa-file-word-o" *ngIf="att.ContentType !== 'application/pdf'"></i>
+                    {{ att.FileName }}
+                  </a>
+                  <span class="text-gray-500">({{ att.ContentType }})</span>
+                </ng-container>
+                <!-- Other file types: just show download link -->
+                <ng-container *ngSwitchDefault>
+                  <a [href]="'data:' + att.ContentType + ';base64,' + att.Content" [download]="att.FileName"
+                    target="_blank" class="text-blue-600 underline">
+                    {{ att.FileName }}
+                  </a>
+                  <span class="text-gray-500">({{ att.ContentType }})</span>
+                </ng-container>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="my-6 border-orange-600" />
+        <div class="comments-section">
+          <h3 class="text-lg font-semibold mb-4">{{ 'COMMENTS.TITLE' | translate }}</h3>
+          <div class="add-comment flex items-end gap-2">
+            <textarea [(ngModel)]="newComment" [placeholder]="'COMMENTS.PLACEHOLDER' | translate"
+              class="flex-1 border rounded px-3 py-2 resize-none focus:outline-none focus:ring focus:border-blue-300"></textarea>
+            <button (click)="addComment()" [disabled]="!newComment.trim()"
+              class="ml-4 px-6 py-2 rounded-full bg-[var(--main-color)] text-white font-semibold border-0 hover:bg-orange-600 transition cursor-pointer">
+              <i class="fa fa-paper-plane"></i>
+              <span>{{ 'COMMENTS.SEND' | translate }}</span>
+            </button>
+          </div>
+          <div *ngIf="loading">{{ 'COMMENTS.LOADING' | translate }}</div>
+          <div *ngIf="error" class="error text-red-600 mb-2">{{ error }}</div>
+          <div *ngIf="comments.length === 0 && !loading" class="text-gray-500 mb-2">{{ 'COMMENTS.EMPTY' | translate }}
+          </div>
+          <ul class="space-y-2 list-none mb-4">
+            <li *ngFor="let comment of comments" class="bg-gray-50 rounded p-3">
+              <strong>{{ comment.UserName }}</strong>
+              <span class="text-xs text-gray-400 ml-2">({{ comment.CreatedDate | date:'short' }})</span><br>
+              <span [innerHTML]="comment.Content"></span>
+            </li>
+          </ul>
+          <button *ngIf="hasMoreComments && !loading" (click)="loadMoreComments()"
+            class="mb-4 px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-semibold border-0 hover:bg-gray-300 transition cursor-pointer flex items-center gap-2">
+            <i class="fa fa-arrow-down"></i>
+            <span>{{ 'COMMENTS.LOAD_MORE' | translate }}</span>
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </main>
+</div>

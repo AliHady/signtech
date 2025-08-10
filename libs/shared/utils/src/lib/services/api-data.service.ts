@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TranslationService } from '@support-link/translations';
+import { HttpMethod } from 'libs/core/http/enums/http-method.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -58,24 +59,25 @@ export class ApiDataService {
     );
   }
 
-  /**
- * Generic method to POST data to any API endpoint
- * @param endpoint The API endpoint to post data to
- * @param body The payload to send
- * @param options Optional HTTP options (headers, etc.)
- * @returns Observable of the response
- */
-  postData<T>(
-    endpoint: string,
-    body: any = null,
-    options?: object
-  ): Observable<T> {
-    return this.http.post<T>(endpoint, body, options);
-  }
-
   downloadFile(endpoint: string): Observable<Blob> {
     return this.http.get(endpoint, {
       responseType: 'blob'
+    });
+  }
+
+  submitForm(endpoint: string, data: any, token: any): Observable<any> {
+    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
+    return this.http.request(HttpMethod.POST, `${endpoint}`, {
+      headers: headers,
+      body: data
+    });
+  }
+
+  submitFormData(endpoint: string, formData: FormData, token: any): Observable<any> {
+    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
+    return this.http.request(HttpMethod.POST, `${endpoint}`, {
+      headers: headers,
+      body: formData
     });
   }
 } 

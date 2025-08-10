@@ -5,6 +5,6 @@ export interface JwtPayload {
   firstName: string; // User's first name
   lastName: string; // User's last name
   userId: string; // User ID
-  roles?: string[]; // User roles
+  roleId: string; // User role ID
   [key: string]: any; // Additional claims
 } 

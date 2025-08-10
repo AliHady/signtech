@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
 import { environment } from 'apps/support-link/src/environments/environment';
 import { TranslationService } from '@support-link/translations';
-import { AuthService } from '@support-link/core/http';
+import { AuthService, TokenService } from '@support-link/core/http';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,6 @@ export class LoginComponent {
   loginForm: FormGroup;
   otpForm: FormGroup;
   isLoading = false;
-  showPassword = false;
   showOtpScreen = false;
   recaptchaSiteKey = environment.recaptchaSiteKey;
   returnUrl: string | null = null;
@@ -48,11 +47,12 @@ export class LoginComponent {
     private route: ActivatedRoute,
     public translationService: TranslationService,
     private recaptchaV3Service: ReCaptchaV3Service,
-    private authService: AuthService
+    private authService: AuthService,
+    private tokenService: TokenService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      // password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
     this.otpForm = this.fb.group({
@@ -115,6 +115,7 @@ export class LoginComponent {
           const otp = this.otpForm.value.otp;
           this.authService.verifyOtp(email, otp, token).subscribe({
             next: (response) => {
+              this.tokenService.setToken(response.token);
               this.isLoading = false;
               if (response && !response.token) {
                 this.router.navigate([`/${this.currentLang}/auth/complete-profile`], { queryParams: { email: this.email } });
@@ -147,11 +148,11 @@ export class LoginComponent {
     }
   }
 
-  navigateToSignup() {
-    this.router.navigate([`/${this.currentLang}/auth/signup`]);
-  }
+  // navigateToSignup() {
+  //   this.router.navigate([`/${this.currentLang}/auth/signup`]);
+  // }
 
-  navigateToPasswordReset() {
-    this.router.navigate([`/${this.currentLang}/auth/password-reset`]);
-  }
+  // navigateToPasswordReset() {
+  //   this.router.navigate([`/${this.currentLang}/auth/password-reset`]);
+  // }
 } 

@@ -332,8 +332,10 @@ export class DynamicFormComponent implements OnInit {
             this.config.fields.forEach(field => {
               const key = field.name;
               const value = rawValues[key];
-              if (value instanceof File || value instanceof Blob) {
-                formData.append(key, value);
+              if (field.type === 'file') {
+                if (value instanceof File || value instanceof Blob) {
+                  formData.append(key, value);
+                }
               } else if (Array.isArray(value) && field.type === FormFieldType.Checkbox) {
                 value.forEach((v: any) => formData.append(key, v));
               } else if (value !== null && value !== undefined) {
@@ -350,11 +352,18 @@ export class DynamicFormComponent implements OnInit {
           submitMethod.subscribe({
             next: (response) => {
               this.isSubmitting = false;
-              this.formSubmitted.emit(response);
-              this.successMessage = this.config.successMessage
-                ? this.getTranslationKey(this.config.successMessage)
-                : this.translate.instant('GENERAL.FORM_SUBMIT_SUCCESS');
-              this.form.reset();
+              if (response && response.Success === false) {
+                this.errorMessage = response.Message || this.translate.instant('GENERAL.FORM_SUBMIT_ERROR');
+                this.successMessage = '';
+                this.formError.emit(response);
+              } else {
+                this.formSubmitted.emit(response);
+                this.successMessage = this.config.successMessage
+                  ? this.getTranslationKey(this.config.successMessage)
+                  : this.translate.instant('GENERAL.FORM_SUBMIT_SUCCESS');
+                this.errorMessage = '';
+                this.form.reset();
+              }
             },
             error: (error) => {
               this.isSubmitting = false;

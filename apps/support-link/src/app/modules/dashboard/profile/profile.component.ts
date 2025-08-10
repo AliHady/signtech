@@ -1,39 +1,40 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgxTypedJsModule } from 'ngx-typed-js';
-import { TranslationService } from '@support-link/translations';
-import { AuthService } from '@support-link/core/http';
-import { DashboardService } from '../services/dashboard.service';
+import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
+import { DashboardSideBarComponent } from '../dashboard-side-bar/dashboard-side-bar.component';
 import { ProfileResponse } from '../models/profile.model';
+import { DashboardService } from '../services/dashboard.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationService } from '@support-link/translations';
 
 @Component({
-  selector: 'dashboard-header',
+  selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterModule, NgxChartsModule, NgxTypedJsModule],
-  templateUrl: './dashboard-header.component.html',
-  styleUrls: ['./dashboard-header.component.scss']
+  imports: [
+    CommonModule,
+    TranslateModule,
+    DashboardHeaderComponent,
+    DashboardSideBarComponent
+    ],
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class DashboardHeaderComponent {
-  @Input() title: string = '';
-  userName: string = '';
+export class ProfileComponent {
+  isLoading = false;
   currentLang = 'ar';
   loading = true;
   error = '';
   profile: ProfileResponse | null = null;
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
     public translationService: TranslationService,
     private route: ActivatedRoute,
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    private router: Router) {
   }
 
   ngOnInit() {
-    this.userName = this.authService.getFullName();
     this.route.params.subscribe(params => {
       const lang = params['lang'];
       if (lang && (lang === 'en' || lang === 'ar')) {
@@ -60,7 +61,7 @@ export class DashboardHeaderComponent {
     });
   }
 
-  goToProfile() {
-    this.router.navigate(['/', this.currentLang, 'profile']);
+  goToUpdate() {
+    this.router.navigate(['/', this.currentLang, 'profile', 'update']);
   }
 } 

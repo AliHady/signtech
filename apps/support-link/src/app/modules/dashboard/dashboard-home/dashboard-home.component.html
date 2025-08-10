@@ -17,35 +17,35 @@
           <div class="flex justify-between">
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.ALL_REQUESTS' | translate }}</div>
-              <div class="text-lg font-bold">0</div>
+              <div class="text-lg font-bold">{{statistics?.ThisWeek?.Total}}</div>
             </div> 
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.PENDING' | translate }}</div>
-              <div class="text-lg font-bold">0</div>
+              <div class="text-lg font-bold">{{statistics?.ThisWeek?.Pending}}</div>
             </div>
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.COMPLETED' | translate }}</div>
-              <div class="text-lg font-bold">0 <span class="text-green-500 text-xs">+0.00%</span></div>
+              <div class="text-lg font-bold">{{statistics?.ThisWeek?.Completed}} <span class="text-green-500 text-xs">+0.00%</span></div>
             </div>
           </div>
         </div>
         <div class="bg-white rounded-xl p-6 shadow flex flex-col">
           <div class="flex items-center mb-4">
             <i class="fa fa-list-alt text-2xl text-orange-500 mr-2"></i>
-            <span class="font-bold">{{ 'DASHBOARD.THIS_WEEK' | translate }}</span>
+            <span class="font-bold">{{ 'DASHBOARD.THIS_MONTH' | translate }}</span>
           </div>
           <div class="flex justify-between">
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.ALL_REQUESTS' | translate }}</div>
-              <div class="text-lg font-bold">0</div>
+              <div class="text-lg font-bold">{{statistics?.ThisMonth?.Total}}</div>
             </div>
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.PENDING' | translate }}</div>
-              <div class="text-lg font-bold">0</div>
+              <div class="text-lg font-bold">{{statistics?.ThisMonth?.Pending}}</div>
             </div>
             <div>
               <div class="text-xs text-gray-400">{{ 'DASHBOARD.COMPLETED' | translate }}</div>
-              <div class="text-lg font-bold">0 <span class="text-green-500 text-xs">+0.00%</span></div>
+              <div class="text-lg font-bold">{{statistics?.ThisMonth?.Completed}} <span class="text-green-500 text-xs">+0.00%</span></div>
             </div>
           </div>
         </div>

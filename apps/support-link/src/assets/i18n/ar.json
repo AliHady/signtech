@@ -148,7 +148,9 @@
     "WELCOME": "مرحباً {{name}}",
     "CREATE_NEW_REQUEST": "إنشاء طلب جديد",
     "REQUESTS_SUMMARY": "ملخص الطلبات",
+    "CHOOSE_LANGUAGE": "اختر اللغة",
     "THIS_WEEK": "هذا الأسبوع",
+    "THIS_MONTH": "هذا الشهر",
     "ALL_REQUESTS": "كل الطلبات",
     "PENDING": "قيد الانتظار",
     "COMPLETED": "مكتمل"
@@ -179,7 +181,7 @@
   "REQUESTS": {
     "STATUS_HISTORY": "سجل الحالة",
     "ATTACHMENTS": "المرفقات",
-    "DESCRIPTION":"وصف الطلب",
+    "DESCRIPTION": "وصف الطلب",
     "TITLE": "العنوان",
     "REQUEST_DATE": "تاريخ الاتصال المفضل",
     "REQUEST_TIME": "وقت الاتصال المفضل",
@@ -195,6 +197,36 @@
     "SHARE": "مشاركة",
     "BULK_ACTION": "إجراء مجمع",
     "DETAILS": "تفاصيل الطلب",
-    "DISPLAY":"عرض"
+    "DISPLAY": "عرض"
+  },
+  "PROFILE": {
+    "TITLE": "الملف الشخصي",
+    "EDIT": "تعديل الملف الشخصي",
+    "CANCEL": "إلغاء التعديل",
+    "FIRST_NAME": "الاسم الأول",
+    "FIRST_NAME_REQUIRED": "الاسم الأول مطلوب",
+    "LAST_NAME": "الاسم الأخير",
+    "LAST_NAME_REQUIRED": "الاسم الأخير مطلوب",
+    "EMAIL": "البريد الإلكتروني",
+    "EMAIL_REQUIRED": "البريد الإلكتروني مطلوب",
+    "EMAIL_INVALID": "يرجى إدخال بريد إلكتروني صحيح",
+    "PHONE": "رقم الهاتف",
+    "PHONE_REQUIRED": "رقم الهاتف مطلوب",
+    "PHONE_INVALID": "يرجى إدخال رقم هاتف صحيح (10 أرقام)",
+    "COMPANY": "الشركة",
+    "POSITION": "المنصب",
+    "ADDRESS": "العنوان",
+    "SAVE": "حفظ التغييرات",
+    "SAVING": "جاري الحفظ...",
+    "IMAGE": "الصورة"
+  },
+  "COMMENTS": {
+    "TITLE": "التعليقات",
+    "LOADING": "جاري تحميل التعليقات...",
+    "EMPTY": "لا توجد تعليقات بعد.",
+    "PLACEHOLDER": "أضف تعليقًا",
+    "SEND": "إرسال",
+    "LOAD_MORE": "تحميل المزيد من التعليقات",
+    "LOAD_ERROR": "فشل في تحميل التعليقات."
   }
 }

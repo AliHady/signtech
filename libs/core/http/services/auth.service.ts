@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TokenService } from './token.service';
 import { environment } from 'apps/support-link/src/environments/environment';
 import { JwtPayload } from '../models/jwt-payload.model';
@@ -17,12 +15,8 @@ export interface AuthResponse {
 })
 export class AuthService {
   isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  private userRoles$ = new BehaviorSubject<string[]>([]);
-  loadingRoles = new BehaviorSubject<boolean>(false);
-  rolesError = new BehaviorSubject<string | null>(null);
 
   constructor(
-    private http: HttpClient,
     private tokenService: TokenService,
     private apiDataService: ApiDataService) {
     this.isLoggedIn$.next(this.isAuthenticated());
@@ -33,10 +27,10 @@ export class AuthService {
  * Calls the backend to send an OTP to the user's email.
  */
   requestOtp(email: string, token: any): Observable<any> {
-    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
-    return this.http.post<any>(
+    return this.apiDataService.submitForm(
       `${environment.apiUrl}/customer/request-otp`,
-      { headers: headers, Email: email }
+      { Email: email },
+      token
     );
   }
 
@@ -45,14 +39,34 @@ export class AuthService {
    * Calls the backend to verify the OTP and returns tokens.
    */
   verifyOtp(email: string, otp: string, token: any): Observable<AuthResponse> {
-    const headers = new HttpHeaders({ 'X-Recaptcha-Token': token });
-    return this.http.post<AuthResponse>(
+    return this.apiDataService.submitForm(
       `${environment.apiUrl}/customer/verify-otp`,
-      { headers: headers, Email: email, Otp: otp }
-    ).pipe(
-      tap(response => {
-        this.tokenService.setToken(response.token);
-      })
+      { Email: email, Otp: otp },
+      token
+    );
+  }
+
+  /**
+* Request OTP by email.
+* Calls the backend to send an OTP to the user's email.
+*/
+  sendOtpUpdateProfile(data: FormData, token: any): Observable<any> {
+    return this.apiDataService.submitFormData(
+      `${environment.apiUrl}/customer/send-otp-update-profile`,
+      data,
+      token
+    );
+  }
+
+  /**
+   * Verify OTP and get authentication tokens.
+   * Calls the backend to verify the OTP and returns tokens.
+   */
+  verifyOtpUpdateProfile(email: string, otp: string, token: any): Observable<AuthResponse> {
+    return this.apiDataService.submitForm(
+      `${environment.apiUrl}/customer/verify-otp-update-profile`,
+      { Email: email, Otp: otp },
+      token
     );
   }
 
@@ -82,12 +96,10 @@ export class AuthService {
     return this.getCurrentUser();
   }
 
-  getRoles(): string[] {
-    return this.userRoles$.value;
-  }
-
-  getRoles$(): Observable<string[]> {
-    return this.userRoles$.asObservable();
+  getUserRole(): string {
+    const user: JwtPayload | null = this.getCurrentUserSync();
+    if (!user) return '';
+    return `${user.roleId}`.trim();
   }
 
   getFullName(): string {
@@ -101,25 +113,5 @@ export class AuthService {
   async getUserId(): Promise<string> {
     const user: JwtPayload | null = await this.getCurrentUserSync();
     return user?.sub || '';
-  }
-
-  fetchUserRoles(): void {
-    if (this.loadingRoles.value) return;
-    this.loadingRoles.next(true);
-    this.apiDataService.getData<string[]>(`${environment.apiUrl}/roles/user`, undefined, undefined, false)
-      .pipe(
-        tap(roles => {
-          this.userRoles$.next(roles || []);
-          this.loadingRoles.next(false);
-          this.rolesError.next(null);
-        }),
-        catchError((e) => {
-          console.log(e);
-          this.userRoles$.next([]);
-          this.loadingRoles.next(false);
-          this.rolesError.next('Failed to load roles');
-          return of([]);
-        })
-      ).subscribe();
   }
 } 

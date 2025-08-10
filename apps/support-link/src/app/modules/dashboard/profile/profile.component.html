@@ -1,0 +1,44 @@
+<div class="flex min-h-screen bg-[#f7f8fa]">
+  <dashboard-side-bar [active]="'SETTINGS'"></dashboard-side-bar>
+  <main class="flex-1 flex flex-col px-16 py-10">
+    <dashboard-header [title]="'PROFILE.TITLE' | translate"></dashboard-header>
+    <div class="mb-8">
+      <div class="profile-container">
+        <div class="profile-card">
+          <div class="profile-header">
+            <h2 class="profile-title">{{ 'PROFILE.TITLE' | translate }}</h2>
+            <button
+              class="ml-4 px-6 py-2 rounded-full bg-[var(--main-color)] text-white font-semibold border-0 hover:bg-orange-600 transition cursor-pointer"
+              (click)="goToUpdate()">
+              {{ 'PROFILE.EDIT' | translate }}
+            </button>
+          </div>
+          <div class="profile-details">
+            <div class="form-group">
+              <label>{{ 'PROFILE.FIRST_NAME' | translate }}</label>
+              <span class="form-control-static">{{ profile?.FirstName }}</span>
+            </div>
+            <div class="form-group">
+              <label>{{ 'PROFILE.LAST_NAME' | translate }}</label>
+              <span class="form-control-static">{{ profile?.LastName }}</span>
+            </div>
+            <div class="form-group">
+              <label>{{ 'PROFILE.EMAIL' | translate }}</label>
+              <span class="form-control-static">{{ profile?.Email }}</span>
+            </div>
+            <div class="form-group">
+              <label>{{ 'PROFILE.PHONE' | translate }}</label>
+              <span class="form-control-static">{{ profile?.MobileNumber }}</span>
+            </div>
+            <ng-container *ngIf="profile?.Image">
+              <div class="form-group">
+                <label>{{ 'PROFILE.IMAGE' | translate }}</label>
+                <img [src]="'data:image/png;base64,' + profile?.Image" alt="User Profile" />
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

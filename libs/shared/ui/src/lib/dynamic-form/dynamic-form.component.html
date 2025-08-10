@@ -94,7 +94,7 @@
       [required]="field.required || false" [control]="form.get(field.name)" [formSubmitted]="isSubmitting"
       [errorMessage]="getErrorMessage(field, form.get(field.name))"
       [acceptedFileTypes]="field.acceptedFileTypes || '.pdf,.doc,.docx,.jpg,.jpeg,.png'"
-      [maxFileSize]="field.maxFileSize || 1048576">
+      [maxFileSize]="field.maxFileSize || 1048576" [value]="field.value">
     </app-file-upload>
     }
 

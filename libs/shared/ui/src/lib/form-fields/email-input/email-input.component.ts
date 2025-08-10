@@ -9,35 +9,35 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   template: `
     <div class="space-y-2 mb-6">
-      @if (label) {
-        <label class="block text-sm font-medium text-gray-700">
-          @if (required && requiredIndicatorPosition === 'before') {
-            <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
-          }
-          {{ label | translate }}
-          @if (required && requiredIndicatorPosition === 'after') {
-            <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
-          }
-        </label>
-      }
-      <input
-        type="email"
-        [value]="value"
-        (input)="onInput($event)"
-        (blur)="onTouched()"
-        [placeholder]="placeholder"
-        [attr.maxlength]="maxLength"
-        [name]="name"
-        class="w-full px-4 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-[#1AD9C7] focus:ring-1 focus:ring-[#1AD9C7]"
-        [ngStyle]="{'font-family': 'inherit', 'border-radius': '0', 'border': '1px solid #d1d5db', 'padding': '0.75rem 1rem'}"
-        [disabled]="disabled"
-      >
-      @if (control && control.invalid && (control.touched || formSubmitted)) {
-        <div class="text-sm text-red-600">
-          {{ errorMessage }}
-        </div>
-      }
-    </div>
+    @if (label) {
+      <label [for]="name || 'email-input'" class="block text-sm font-medium text-gray-700">
+        @if (required && requiredIndicatorPosition === 'before') {
+          <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold me-1'">*</span>
+        }
+        {{ label | translate }}
+        @if (required && requiredIndicatorPosition === 'after') {
+          <span [class]="requiredIndicatorColor + ' ' + requiredIndicatorSize + ' font-bold ms-1'">*</span>
+        }
+      </label>
+    }
+    <input
+      id="{{ name || 'email-input' }}"
+      type="email"
+      [value]="value"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+      [placeholder]="placeholder"
+      [attr.maxlength]="maxLength"
+      [name]="name"
+      class="w-full px-4 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-[#1AD9C7] focus:ring-1 focus:ring-[#1AD9C7]"
+      [disabled]="disabled"
+    >
+    @if (control && control.invalid && (control.touched || formSubmitted)) {
+      <div class="text-sm text-red-600">
+        {{ errorMessage }}
+      </div>
+    }
+  </div>
   `,
   providers: [
     {

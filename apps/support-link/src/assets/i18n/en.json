@@ -148,7 +148,9 @@
     "WELCOME": "Welcome {{name}}",
     "CREATE_NEW_REQUEST": "Create New Request",
     "REQUESTS_SUMMARY": "Requests Summary",
+    "CHOOSE_LANGUAGE": "Choose Language",
     "THIS_WEEK": "This Week",
+    "THIS_MONTH": "This Month",
     "ALL_REQUESTS": "All Requests",
     "PENDING": "Pending",
     "COMPLETED": "Completed"
@@ -179,7 +181,7 @@
   "REQUESTS": {
     "STATUS_HISTORY": "Status History",
     "ATTACHMENTS": "Attachments",
-    "DESCRIPTION":"Request Description",
+    "DESCRIPTION": "Request Description",
     "TITLE": "Title",
     "REQUEST_DATE": "Preferred Contact Date",
     "REQUEST_TIME": "Preferred Contact Time",
@@ -195,6 +197,36 @@
     "SHARE": "Share",
     "BULK_ACTION": "Bulk Action",
     "DETAILS": "Request Details",
-    "DISPLAY":"Display"
+    "DISPLAY": "Display"
+  },
+  "PROFILE": {
+    "TITLE": "Profile",
+    "EDIT": "Edit Profile",
+    "CANCEL": "Cancel Edit",
+    "FIRST_NAME": "First Name",
+    "FIRST_NAME_REQUIRED": "First Name is required",
+    "LAST_NAME": "Last Name",
+    "LAST_NAME_REQUIRED": "Last Name is required",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "PHONE": "Phone Number",
+    "PHONE_REQUIRED": "Phone number is required",
+    "PHONE_INVALID": "Please enter a valid phone number (10 digits)",
+    "COMPANY": "Company",
+    "POSITION": "Position",
+    "ADDRESS": "Address",
+    "SAVE": "Save Changes",
+    "SAVING": "Saving...",
+    "IMAGE": "Image"
+  },
+  "COMMENTS": {
+    "TITLE": "Comments",
+    "LOADING": "Loading comments...",
+    "EMPTY": "No comments yet.",
+    "PLACEHOLDER": "Add a comment",
+    "SEND": "Send",
+    "LOAD_MORE": "Load more comments",
+    "LOAD_ERROR": "Failed to load comments."
   }
 }

@@ -5,8 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { HeaderService } from '../../services/header.service';
 import { Header, HeaderItem } from '../../models/header.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { AuthService, ROLES } from '@support-link/core/http';
+import { AuthService } from '@support-link/core/http';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +23,6 @@ export class HeaderComponent implements OnInit {
   menuOpen: boolean = false;
   isLoggedIn = false;
   fullName = '';
-  userRoles$: Observable<string[]> = of([]); roles = ROLES;
 
   constructor(
     public translationService: TranslationService,
@@ -35,10 +33,8 @@ export class HeaderComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe(async isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
-        this.userRoles$ = this.authService.getRoles$();
         this.fullName = this.authService.getFullName();
       } else {
-        this.userRoles$ = of([]);
         this.fullName = '';
       }
     });

@@ -1,0 +1,25 @@
+<div class="flex min-h-screen bg-[#f7f8fa]">
+  <dashboard-side-bar [active]="'SETTINGS'"></dashboard-side-bar>
+  <main class="flex-1 flex flex-col px-16 py-10">
+    <dashboard-header [title]="'PROFILE.TITLE' | translate"></dashboard-header>
+    <div class="mb-8">
+      <div class="profile-container">
+        <div class="profile-card">
+          <div class="profile-header">
+            <h2 class="profile-title">{{ 'PROFILE.EDIT' | translate }}</h2>
+            @if(formConfig && !loading && !otpFormVisible){
+            <app-dynamic-form [config]="formConfig" (formSubmitted)="onFormSubmitted($event)"
+              (formError)="onFormError($event)">
+            </app-dynamic-form>
+            }
+            @else if(otpFormVisible){
+            <app-dynamic-form [config]="otpFormConfig" (formSubmitted)="onOtpFormSubmitted($event)"
+              (formError)="onOtpFormError($event)">
+            </app-dynamic-form>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

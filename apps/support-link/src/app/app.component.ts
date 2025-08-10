@@ -2,13 +2,12 @@ import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, HostListener } from 
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TranslationService } from '@support-link/translations';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 import { Subscription } from 'rxjs';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ScrollIndicatorComponent } from '@support-link/shared/ui';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
-import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
 
 @Component({
@@ -101,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private checkHeaderAndFooterVisibility(url: string) {
-    const regex = /^\/[a-z]{2}\/dashboard/;
+    const regex = /^\/[a-z]{2}\/dashboard|profile/;
     this.showHeaderAndFooter = !regex.test(url);
   }
 }

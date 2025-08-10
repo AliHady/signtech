@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { TranslationService } from '@support-link/translations';
@@ -28,6 +28,8 @@ export class SettingsComponent {
   currentLang = 'ar';
 
   constructor(
+    private router: Router,
+    private translate: TranslateService,
     private authService: AuthService,
     public translationService: TranslationService,
     private route: ActivatedRoute) {
@@ -42,5 +44,18 @@ export class SettingsComponent {
         this.translationService.setLanguage(lang);
       }
     });
+  }
+
+  changeLang(lang: string) {
+    this.translationService.setLanguage(lang);
+    setTimeout(() => {
+      const currentUrl = this.router.url;
+      const newUrl = currentUrl.replace(/^\/[a-z]{2}/, `/${lang}`);
+      this.router.navigateByUrl(newUrl);
+    }, 100);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/', this.translate.currentLang, 'profile']);
   }
 } 

@@ -16,6 +16,10 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server
   },
   {
+    path: ':lang/dashboard/requests/:id',
+    renderMode: RenderMode.Server
+  },
+  {
     path: ':lang/**',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => {

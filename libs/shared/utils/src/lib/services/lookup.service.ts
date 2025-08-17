@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiDataService } from '@support-link/shared/utils';
+import { ApiDataService } from '@signtech/shared/utils';
 import { LookupItem } from '../models/lookup-item.model';
 
 @Injectable({

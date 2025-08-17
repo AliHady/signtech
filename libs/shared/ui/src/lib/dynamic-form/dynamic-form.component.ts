@@ -17,10 +17,10 @@ import { ChipsInputComponent } from '../form-fields/chips-input/chips-input.comp
 import { CheckboxOption } from '../form-fields/checkbox-group/checkbox-group.component';
 import { SelectOption } from '../form-fields/select-search/select-search.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaFormsModule, RecaptchaModule, ReCaptchaV3Service } from 'ng-recaptcha';
-import { LookupService } from '@support-link/shared/utils';
+import { LookupService } from '@signtech/shared/utils';
 import { InputRestriction } from '../enums/input-restriction.enum';
 import { FormFieldType } from '../enums/form-fieldtype.enum';
-import { environment } from 'apps/support-link/src/environments/environment';
+import { environment } from 'apps/signtech/src/environments/environment';
 
 @Component({
   selector: 'app-dynamic-form',

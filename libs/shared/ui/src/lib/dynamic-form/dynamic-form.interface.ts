@@ -1,4 +1,4 @@
-import { HttpMethod } from "@support-link/core/http";
+import { HttpMethod } from "@signtech/core/http";
 import { FormFieldType } from "../enums/form-fieldtype.enum";
 import { InputRestriction } from "../enums/input-restriction.enum";
 

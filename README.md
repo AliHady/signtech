@@ -1,4 +1,4 @@
-# support-link
+# signtech
 
 
 ---
@@ -14,19 +14,19 @@
 To run the dev server for your app, use:
 
 ```sh
-npx nx serve support-link
+npx nx serve signtech
 ```
 
 To create a production bundle:
 
 ```sh
-npx nx build support-link
+npx nx build signtech
 ```
 
 To see all available targets to run for a project, run:
 
 ```sh
-npx nx show project support-link
+npx nx show project signtech
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.

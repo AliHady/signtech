@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, switchMap, tap } from 'rxjs';
-import { TranslationService } from '@support-link/translations';
+import { TranslationService } from '@signtech/translations';
 import { HttpMethod } from 'libs/core/http/enums/http-method.enum';
 
 @Injectable({

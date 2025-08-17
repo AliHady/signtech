@@ -1,0 +1,143 @@
+{
+  "name": "signtech",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/signtech/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/signtech",
+        "index": "apps/signtech/src/index.html",
+        "browser": "apps/signtech/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/signtech/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "baseHref": "/",
+        "deployUrl": "/",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/signtech/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/signtech/public",
+            "output": "."
+          }
+        ],
+        "styles": ["apps/signtech/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/signtech/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/signtech/src/server.ts"
+        },
+        "outputMode": "server"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/signtech/src/environments/environment.ts",
+              "with": "apps/signtech/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/signtech/src/environments/environment.ts",
+              "with": "apps/signtech/src/environments/environment.dev.ts"
+            }
+          ]
+        },
+        "qa": {
+          "optimization": true,
+          "extractLicenses": true,
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/signtech/src/environments/environment.ts",
+              "with": "apps/signtech/src/environments/environment.qa.ts"
+            }
+          ]
+        },
+        "uat": {
+          "optimization": true,
+          "extractLicenses": true,
+          "sourceMap": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/signtech/src/environments/environment.ts",
+              "with": "apps/signtech/src/environments/environment.uat.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "signtech:build:production"
+        },
+        "development": {
+          "buildTarget": "signtech:build:development"
+        },
+        "qa": {
+          "buildTarget": "signtech:build:qa"
+        },
+        "uat": {
+          "buildTarget": "signtech:build:uat"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "signtech:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/signtech/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "signtech:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/signtech/browser",
+        "spa": true
+      }
+    }
+  }
+}

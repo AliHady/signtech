@@ -1,0 +1,16 @@
+// Color Foundation
+// Defines the core color palette and semantic color tokens
+
+@mixin signtech-identity-colors {
+  --color-signtech-orange: #FF7900;
+}
+
+:root {
+  --signtech-orange: #FF7900;
+  --signtech-navy: #181C2A;
+  --signtech-gray: #6B6B6B;
+}
+
+:root[data-identity="new"] {
+  @include signtech-identity-colors;
+}

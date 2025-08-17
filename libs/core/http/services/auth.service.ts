@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TokenService } from './token.service';
-import { environment } from 'apps/support-link/src/environments/environment';
+import { environment } from 'apps/signtech/src/environments/environment';
 import { JwtPayload } from '../models/jwt-payload.model';
-import { ApiDataService } from '@support-link/shared/utils';
+import { ApiDataService } from '@signtech/shared/utils';
 
 export interface AuthResponse {
   token: string;

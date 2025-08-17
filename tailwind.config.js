@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-      './apps/support-link/src/**/*.{html,ts,scss}',
+      './apps/signtech/src/**/*.{html,ts,scss}',
       './libs/**/*.{html,ts,scss}',
     ],
     theme: {

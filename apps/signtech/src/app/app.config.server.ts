@@ -1,6 +1,5 @@
 import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
-import { provideServerRouting } from '@angular/ssr';
+import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { appConfig } from './app.config';
 import { serverRoutes, getBaseHref } from './app.routes.server';
 
@@ -11,8 +10,7 @@ process.env['BASE_HREF'] = baseHref;
 
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering(),
-    provideServerRouting(serverRoutes),
+    provideServerRendering(withRoutes(serverRoutes)),
     {
       provide: 'BASE_HREF',
       useValue: baseHref

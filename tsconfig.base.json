@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@signtech/translations": ["libs/shared/translations/src/index.ts"],
-      "@signtech/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@signtech/core/http": ["libs/core/http/index.ts"],
-      "@signtech/shared/ui": ["libs/shared/ui/src/index.ts"]
+      "@signtech/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@signtech/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "@signtech/translations": ["libs/shared/translations/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
